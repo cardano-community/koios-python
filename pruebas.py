@@ -3,9 +3,11 @@ import sys
 import requests
 
 ########### KOIOS EJEMPLO GET ############################
-koios_get = requests.get("https://api.koios.rest/api/v0/tip")
-koios_get = json.loads(koios_get.content)
-print(koios_get)
+
+def tip():
+    tip = requests.get("https://api.koios.rest/api/v0/tip")
+    tip= json.loads(tip.content)
+    return tip
 ##########################################################
 
 
