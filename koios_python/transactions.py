@@ -5,7 +5,11 @@ import requests
 
 
 def get_tx(tx_hash):
-    """Get Tx data"""
+    """
+    Get Tx data
+    params:
+    return: 
+    """
     tx = {"_tx_hashes":[tx_hash]}
     koios_post = requests.post( "https://api.koios.rest/api/v0/tx_info", json = tx)
     koios_post = json.loads(koios_post.content)[0]
