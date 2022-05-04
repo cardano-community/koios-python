@@ -1,7 +1,7 @@
 # Koios Python ![PyPI - Python Version](https://img.shields.io/badge/python-%3E%3D3.8-blue) 
 
 ## Overview
-**Koios Python** is Python wrapper which allow interacting with all information and parameters stored on the Cardano blockchain using [Koios REST API] (https://api.koios.rest/)
+**Koios Python** is Python wrapper which allow interacting with all information and parameters stored on the Cardano blockchain using [Koios REST API](https://api.koios.rest/)
 
 
 ## What is Koios Python? 
