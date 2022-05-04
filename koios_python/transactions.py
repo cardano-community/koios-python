@@ -38,3 +38,13 @@ def get_tx_metadata(tx_hash):
     tx_metadata = requests.post( "https://api.koios.rest/api/v0/tx_metadata", json = get_format)
     tx_metadata  = json.loads(tx_metadata.content)[0]
     return tx_metadata
+
+def get_tx_metalabels():
+    """
+    Get a list of all transaction metalabels
+    params: None
+    return: list of metalabels transactions
+    """
+    tx_metalabels = requests.get( "https://api.koios.rest/api/v0/tx_metalabels")
+    tx_metalabels  = json.loads(tx_metalabels.content)
+    return tx_metalabels
