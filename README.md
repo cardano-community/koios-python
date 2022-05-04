@@ -9,8 +9,9 @@
 **Koios** is best described as a Decentralized and Elastic RESTful query layer for exploring data on Cardano blockchain to consume within applications/wallets/explorers/etc. <p>
 **Koios** is really useful for developers because resource and maintenance requirements for Cardano blockchain components (e.g. cardano-node, cardano-db-sync) are ever-growing. It also simplifies how to query complex information from the blockchain.
     
-This library allows getting data from the Cardano Blockchain using a simple syntaxis in your Python code. All the querys follow REST operations:
+This library allows getting data from the Cardano Blockchain using a simple syntaxis in your Python code. All the querys follow Koios API REST operations.
 
+## Features
 - Supported REST Services:
     - [x] Network
         - Chain Tip
