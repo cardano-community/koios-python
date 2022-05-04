@@ -39,3 +39,18 @@ def get_address_assets(address):
     info = requests.get("https://api.koios.rest/api/v0/address_assets?_address="+str(address))
     info = json.loads(info.content)
     return info
+
+
+def get_credential_txs(payment_credentials, after_block=0):
+    """
+    Get the transaction hash list of input payment credential array (stake key), optionally 
+    filtering after specified block height (inclusive).
+
+    :param payment_credentials: address payment credential array (stake key)
+    :param after_block: filtering after block (inclusive) defaul is 0, from the beginning
+    :return: hash list of address transactions
+    """
+    get_format = {"_payment_credentials":[payment_credentials], "_after_block_height": after_block}
+    hash_list = requests.post( "https://api.koios.rest/api/v0/credential_txs", json = get_format)
+    hash_list  = json.loads(hash_list.content)
+    return hash_list

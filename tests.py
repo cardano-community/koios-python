@@ -16,6 +16,6 @@ print("\n")
 
 #print(koios_python.get_tx_metalabels())
 
-print(koios_python.get_address_assets("addr1q893649cdrffstcs0xmtnj3kcdw4z9cwe95rjl3lvl7dr889hzc5q00t5p20fy0j0cvph9rzntsf2ve6mdcpgs4s4alq5zld46"))
+print(koios_python.get_credential_txs("645b514c6e1118dd3fe775a6d45da227494bc749f14f0e593bc80385"))
 
 print("\n")
