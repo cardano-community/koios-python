@@ -11,7 +11,7 @@ print("\n")
 print(koios_python.get_block_info("b39e3463fb83c547c2410abb39d92270dee5cda7417b10755303326df09aac86"))
 print("\n")
 
-print(koios_python.get_tx_info("0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94").get("block_hash"))
+print(koios_python.get_tx_metadata("e7560a87f71adcd4b007e765ab432c5310310e036a3a8a7708c21f6dbd8a0400"))
 
 #print(tx.get("block_hash"))
 print("\n")
