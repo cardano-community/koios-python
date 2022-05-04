@@ -8,12 +8,12 @@ params = koios_python.get_epoch_params(336)
 nonce = params.get("nonce")
 print(f"Nonce: {nonce}")
 print("\n")
-print(f"Info de Bloque: ")
-print(koios_python.get_block_info("b39e3463fb83c547c2410abb39d92270dee5cda7417b10755303326df09aac86"))
+print(f"Info Transaccion: ")
+print(koios_python.get_tx_status("4766ec1e951f5ae7b46d3bdc2ea06581c9c73efce96e7b3fd584f1d8027b1513"))
 print("\n")
 
 #print(koios_python.get_tx_metadata("e7560a87f71adcd4b007e765ab432c5310310e036a3a8a7708c21f6dbd8a0400"))
 
-print(koios_python.get_tx_metalabels())
+#print(koios_python.get_tx_metalabels())
 
 print("\n")

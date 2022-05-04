@@ -48,3 +48,26 @@ def get_tx_metalabels():
     tx_metalabels = requests.get( "https://api.koios.rest/api/v0/tx_metalabels")
     tx_metalabels  = json.loads(tx_metalabels.content)
     return tx_metalabels
+
+######## HAY QUE PROBARLA CON UNA TRANSACCION
+def submit_tx(data_binary):
+    """
+    Submit an already serialized transaction to the network.
+    params: Assuming data_binary is a raw binary serialized transaction on the file-system.
+    return: Transaction hash ID
+    """
+    submit_tx = requests.post( "https://api.koios.rest/api/v0/submittx", data = data_binary)
+    submit_tx  = json.loads(submit_tx.content)[0]
+    return submit_tx
+
+
+def get_tx_status(tx_hash):
+    """
+    Get the number of block confirmations for a given transaction hash list
+    params: transaction hash to search and read utxos data
+    return: status of transaction(s)
+    """
+    get_format = {"_tx_hashes":[tx_hash]}
+    tx_status = requests.post( "https://api.koios.rest/api/v0/tx_status", json = get_format)
+    tx_status  = json.loads(tx_status.content)
+    return tx_status
