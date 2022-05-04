@@ -28,14 +28,14 @@ This library allows getting data from the Cardano Blockchain using a simple synt
         - Transaction UTxOs
         - Transaction Metadata
         - Transaction Metadata Labels
-        - Transaction Submission
+        o Transaction Submission
         - Transaction Status (Block Confirmations)
-    - [x] Address
+    - [ ] Address
         - Address Information
         - Address Transactions
         - Transactions from Payment Credentials
         - Address Assets
-    - [x] Account
+    - [ ] Account
         - Account List
         - Account Information
         - Account Rewards
@@ -43,7 +43,7 @@ This library allows getting data from the Cardano Blockchain using a simple synt
         - Account Addresses
         - Account Assets
         - Account History
-    - [x] Asset
+    - [ ] Asset
         - Asset List
         - Asset Address List
         - Asset Information
@@ -51,7 +51,7 @@ This library allows getting data from the Cardano Blockchain using a simple synt
         - Asset Policy Information
         - Asset Summary
         - Asset Transaction History
-    - [x] Pool
+    - [ ] Pool
         - Pool List
         - Pool Information
         - Pool Delegators List
@@ -60,7 +60,7 @@ This library allows getting data from the Cardano Blockchain using a simple synt
         - Pool Updates (History)
         - Pool Relays
         - Pool Metadata
-    - [x] Script
+    - [ ] Script
         - Native Script List
         - Plutus Script List
         - Script Redeemers
