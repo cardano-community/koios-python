@@ -7,5 +7,9 @@ import koios_python
 params = koios_python.get_epoch_params(336)
 nonce = params.get("nonce")
 print(f"Nonce: {nonce}")
-
+print("\n")
 print(koios_python.get_block_info("b39e3463fb83c547c2410abb39d92270dee5cda7417b10755303326df09aac86"))
+print("\n")
+tx = koios_python.get_tx_info("0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94")
+print(tx.get("block_hash"))
+print("\n")

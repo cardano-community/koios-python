@@ -12,5 +12,5 @@ def get_tx_info(tx_hash):
     """
     tx_hash = {"_tx_hashes":[tx_hash]}
     tx_info = requests.post( "https://api.koios.rest/api/v0/tx_info", json = tx_hash)
-    koios_post = json.loads(koios_post.content)[0]
+    tx_info  = json.loads(tx_info.content)[0]
     return tx_info
