@@ -28,7 +28,7 @@ This library allows getting data from the Cardano Blockchain using a simple synt
         - Transaction UTxOs
         - Transaction Metadata
         - Transaction Metadata Labels
-        o Transaction Submission
+        - Transaction Submission (in progress...)
         - Transaction Status (Block Confirmations)
     - [ ] Address
         - Address Information
