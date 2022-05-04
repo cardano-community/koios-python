@@ -69,5 +69,5 @@ def get_tx_status(tx_hash):
     """
     get_format = {"_tx_hashes":[tx_hash]}
     tx_status = requests.post( "https://api.koios.rest/api/v0/tx_status", json = get_format)
-    tx_status  = json.loads(tx_status.content)
+    tx_status  = json.loads(tx_status.content)[0]
     return tx_status
