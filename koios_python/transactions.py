@@ -56,9 +56,9 @@ def submit_tx(data_binary):
     params: Assuming data_binary is a raw binary serialized transaction on the file-system.
     return: Transaction hash ID
     """
-    submit_tx = requests.post( "https://api.koios.rest/api/v0/submittx", data = data_binary)
-    submit_tx  = json.loads(submit_tx.content)[0]
-    return submit_tx
+    submit = requests.post( "https://api.koios.rest/api/v0/submittx", data = data_binary)
+    submit  = json.loads(submit.content)[0]
+    return submit
 
 
 def get_tx_status(tx_hash):
