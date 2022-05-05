@@ -6,7 +6,8 @@ import requests
 
 def get_address_info(address):
     """
-    Get address info - balance, associated stake address (if any) and UTxO set
+    Get address info - balance, associated stake address (if any) and UTxO set.
+    
     param: wallet used public address
     return: list with data of this used public address
     """

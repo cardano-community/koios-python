@@ -13,3 +13,34 @@ def get_account_list():
     address_list = requests.get("https://api.koios.rest/api/v0/account_list")
     address_list = json.loads(address_list.content)
     return address_list
+
+
+def get_account_info(address):
+    """
+    Get the account info of any (payment or staking) address.
+
+    param: staking address in bech32 format (stake1...)
+    return: list with all address data.
+    """
+    info = requests.get("https://api.koios.rest/api/v0/account_info?_address="+str(address))
+    info = json.loads(info.content)
+    return info
+
+
+def get_account_rewards(address, epoch=None):
+    """
+    Get the full rewards history (including MIR) for a stake address, or certain epoch if specified.
+
+    param: Cardano staking address (reward account) in bech32 format (stake1...)
+    param: epoch (optional)
+    return: list with all rewards data.
+    """
+    if epoch is None:
+        info = requests.get("https://api.koios.rest/api/v0/account_rewards?_stake_address=" \
+            +str(address))
+        info = json.loads(info.content)
+    else:
+        info = requests.get("https://api.koios.rest/api/v0/account_rewards?_stake_address=" \
+            +str(address)+"&_epoch_no="+str(epoch))
+        info = json.loads(info.content)
+    return info

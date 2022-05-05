@@ -16,15 +16,16 @@ print("\n")
 
 #print(koios_python.get_tx_metalabels())
 
+print("Rewards Stake key: ")
+print(koios_python.get_account_rewards("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg",334))
+print("\n")
 print("Info Stake key: ")
-print(koios_python.get_credential_txs(["025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52",
-    "13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555"]))
+print(koios_python.get_account_info("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg"))
 
-print("Stake account list: ")
+
+#print("Stake account list: ")
 lista = koios_python.get_account_list()
-
-print(lista)
-
-print("Numero de address: "+len(lista))
-
+#print(lista)
+print("\n")
+print(f"Numero de address:  {len(lista)}")
 print("\n")
