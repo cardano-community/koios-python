@@ -8,14 +8,16 @@ params = koios_python.get_epoch_params(336)
 nonce = params.get("nonce")
 print(f"Nonce: {nonce}")
 print("\n")
-print("Info Transaccion: ")
-print(koios_python.get_tx_status("4766ec1e951f5ae7b46d3bdc2ea06581c9c73efce96e7b3fd584f1d8027b1513"))
+print("Info Billetera: ")
+print(koios_python.get_address_txs(["addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"]))
 print("\n")
 
 #print(koios_python.get_tx_metadata("e7560a87f71adcd4b007e765ab432c5310310e036a3a8a7708c21f6dbd8a0400"))
 
 #print(koios_python.get_tx_metalabels())
 
-print(koios_python.get_credential_txs("645b514c6e1118dd3fe775a6d45da227494bc749f14f0e593bc80385"))
+print("Info Stake key: ")
+print(koios_python.get_credential_txs(["025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52",
+    "13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555"]))
 
 print("\n")
