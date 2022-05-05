@@ -31,12 +31,12 @@ This library allows getting data from the Cardano Blockchain using a simple synt
         - Transaction Metadata Labels
         - Transaction Submission (in progress...)
         - Transaction Status (Block Confirmations)
-    - [ ] Address
+    - [x] Address
         - Address Information
         - Address Transactions
         - Transactions from Payment Credentials
         - Address Assets
-    - [ ] Account
+    - [x] Account
         - Account List
         - Account Information
         - Account Rewards
