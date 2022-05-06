@@ -19,8 +19,8 @@ print("\n")
 print("Rewards Stake key: ")
 print(koios_python.get_account_rewards("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg",334))
 print("\n")
-print("Info Stake key: ")
-print(koios_python.get_account_info("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg"))
+print("Updates Stake key: ")
+print(koios_python.get_account_history("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg"))
 
 
 #print("Stake account list: ")
