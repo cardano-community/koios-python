@@ -22,10 +22,10 @@ print("\n")
 print("Updates Stake key: ")
 #print(koios_python.get_account_history("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg"))
 
-
 #print("Stake account list: ")
-lista = koios_python.get_asset_history("d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff","444f4e545350414d")
+#lista = koios_python.get_asset_txs("d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff","444f4e545350414d")
 #print(lista)
 
+lista = koios_python.get_pool_list()
 print(lista)
-
+print(len(lista))
