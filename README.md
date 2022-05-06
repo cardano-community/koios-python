@@ -11,7 +11,7 @@
     
 This library allows getting data from the Cardano Blockchain using a simple syntaxis in your Python code. All the querys follow Koios API REST operations.
 
-required python modules:
+Required Python Modules:
 --------------
 * https://pypi.python.org/pypi/requests
     
