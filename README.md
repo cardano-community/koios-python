@@ -11,6 +11,11 @@
     
 This library allows getting data from the Cardano Blockchain using a simple syntaxis in your Python code. All the querys follow Koios API REST operations.
 
+Required Python Modules:
+--------------
+* https://pypi.python.org/pypi/requests
+    
+    
 ## Features
 - Supported REST Services:
     - [x] Network
@@ -44,7 +49,7 @@ This library allows getting data from the Cardano Blockchain using a simple synt
         - Account Addresses
         - Account Assets
         - Account History
-    - [ ] Asset
+    - [x] Asset
         - Asset List
         - Asset Address List
         - Asset Information
@@ -65,11 +70,4 @@ This library allows getting data from the Cardano Blockchain using a simple synt
         - Native Script List
         - Plutus Script List
         - Script Redeemers
-
-
-
-
-
-
-
 
