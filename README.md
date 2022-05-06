@@ -57,7 +57,7 @@ Required Python Modules:
         - Asset Policy Information
         - Asset Summary
         - Asset Transaction History
-    - [ ] Pool
+    - [x] Pool
         - Pool List
         - Pool Information
         - Pool Delegators List
