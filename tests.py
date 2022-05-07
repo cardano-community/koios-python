@@ -26,6 +26,6 @@ print("Updates Stake key: ")
 #lista = koios_python.get_asset_txs("d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff","444f4e545350414d")
 #print(lista)
 
-lista = koios_python.get_pool_list()
+lista = koios_python.get_pool_metadata()
 print(lista)
 print(len(lista))

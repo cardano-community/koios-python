@@ -44,7 +44,7 @@ def get_address_assets(address):
 
 def get_credential_txs(payment_credentials, after_block=0):
     """
-    Get the transaction hash list of input payment credential array (stake key), optionally 
+    Get the transaction hash list of input payment credential array (stake key), optionally
     filtering after specified block height (inclusive).
 
     :param payment_credentials: list address payment credential array (stake key)
