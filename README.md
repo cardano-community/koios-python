@@ -66,7 +66,7 @@ Required Python Modules:
         - Pool Updates (History)
         - Pool Relays
         - Pool Metadata
-    - [ ] Script
+    - [x] Script
         - Native Script List
         - Plutus Script List
         - Script Redeemers
