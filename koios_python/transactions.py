@@ -6,9 +6,10 @@ import requests
 
 def get_tx_info(tx_hash):
     """
-    Get detailed information about transaction(s)
-    params: transaction hash to search and read data
-    return: all info about transaction(s)
+    Get detailed information about transaction(s).
+
+    :params: transaction hash to search and read data
+    :return: list of all info about transaction(s)
     """
     get_format = {"_tx_hashes":[tx_hash]}
     tx_info = requests.post( "https://api.koios.rest/api/v0/tx_info", json = get_format)
@@ -19,6 +20,7 @@ def get_tx_info(tx_hash):
 def get_tx_utxos(tx_hash):
     """
     Get UTxO set (inputs/outputs) of transactions.
+
     params: transaction hash to search and read utxos data
     return: all info about utxos in transaction(s)
     """
