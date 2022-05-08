@@ -34,5 +34,6 @@ import koios_python
 #"pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m", \
 #"pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"]))
 
-print(koios_python.get_pool_metadata())
+# List of all redeemers for a given script hash.
+print(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
 

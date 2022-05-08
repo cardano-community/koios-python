@@ -131,10 +131,11 @@ def get_pool_metadata(pool_bech32=None):
     :rtype: list.
     """
     if pool_bech32 is None:
-        pool_list = requests.get("https://api.koios.rest/api/v0/pool_metadata")
+        pool_list = requests.post("https://api.koios.rest/api/v0/pool_metadata")
         pool_list  = json.loads(pool_list.content)
     else:
-        pool_list = requests.get("https://api.koios.rest/api/v0/pool_metadata?_pool_bech32=" \
-        + pool_bech32)
+        get_format = {"_pool_bech32_ids": pool_bech32}
+        pool_list = requests.post("https://api.koios.rest/api/v0/pool_metadata" \
+        , json = get_format)
         pool_list  = json.loads(pool_list.content)
     return pool_list

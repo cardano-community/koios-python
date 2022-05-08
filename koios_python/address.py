@@ -49,8 +49,8 @@ def get_credential_txs(payment_credentials, after_block=0):
     Get the transaction hash list of input payment credential array (stake key), optionally
     filtering after specified block height (inclusive).
 
-    :param str payment_credentials: list address payment credential array (stake key).
-    :param int after_block: filtering after block (inclusive) defaul is 0, from the beginning.
+    :param str payment_credentials: list address payment credential array (stake key)
+    :param int after_block: filtering after block (inclusive) defaul is 0, from the beginning
     :return: hash list of address transactions.
     :rtype: list.
     """
