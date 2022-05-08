@@ -4,8 +4,8 @@
 import koios_python
 
 # con la creacion de diccionarios es fácil la impresion de un campo
-params = koios_python.get_epoch_params(336)
-nonce = params.get("nonce")
+params = koios_python.get_epoch_params()
+nonce = params[40].get("nonce")
 print(f"Nonce: {nonce}")
 print("\n")
 print("Info Billetera: ")
@@ -32,4 +32,4 @@ print("Ultima funcion: ")
 
 #print(koios_python.submit_tx("signed.cbor"))
 
-print(koios_python.get_totals(336))
+print(koios_python.get_epoch_params(337))
