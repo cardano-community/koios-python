@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 import pathlib
-import json
-import requests
 from setuptools import setup, find_packages
 
 HERE = pathlib.Path(__file__).parent
