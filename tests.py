@@ -32,4 +32,4 @@ print("Ultima funcion: ")
 
 #print(koios_python.submit_tx("signed.cbor"))
 
-print(koios_python.get_epoch_params(337))
+print(koios_python.get_epoch_params(338))

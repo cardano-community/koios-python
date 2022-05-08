@@ -8,6 +8,7 @@ def get_tip():
     Get the tip info about the latest block seen by chain.
 
     :return: list of block summary (limit+paginated).
+    :rtype: list.
     """
     tip = requests.get("https://api.koios.rest/api/v0/tip")
     tip = json.loads(tip.content)
@@ -19,6 +20,7 @@ def get_genesis():
     Get the Genesis parameters used to start specific era on chain.
 
     :return: list of genesis parameters used to start each era on chain.
+    :rtype: list.
     """
     genesis = requests.get("https://api.koios.rest/api/v0/genesis")
     genesis = json.loads(genesis.content)
@@ -32,6 +34,7 @@ def get_totals(epoch_no=None):
 
     :param int epoch_no: Epoch Number to fetch details for.
     :return: list of of supply/reserves/utxo/fees/treasury stats.
+    :rtype: list.
     """
     if epoch_no is None:
         totals = requests.get("https://api.koios.rest/api/v0/totals")
