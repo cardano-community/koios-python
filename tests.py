@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 
-#from koios_python import block, epochs #alternative if we just need some functions
+# We need to install and import koios_python library
 import koios_python
+
+#alternative if we just need some functions
+#from koios_python import block, epochs 
 
 
 
@@ -20,4 +23,10 @@ import koios_python
 # Get address info - balance, associated stake address (if any) and UTxO set.
 #print(koios_python.get_address_info("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"))
 
-print(koios_python.
+# Get the full rewards history (including MIR) for a stake address, or certain epoch if specified
+#print(koios_python.get_account_rewards("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg",335))
+
+# Get the mint/burn history of an asset
+#print(koios_python.get_asset_history("d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff","444f4e545350414d"))
+
+print(koios_python.get_asset_txs("d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff","444f4e545350414d"))
