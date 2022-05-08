@@ -1,5 +1,9 @@
+#!/usr/bin/env python3
+
+import pathlib
 import json
 import requests
+from setuptools import setup, find_packages
 
 HERE = pathlib.Path(__file__).parent
 LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf-8')
@@ -7,7 +11,7 @@ LONG_DESC_TYPE = "text/markdown"
 
 setup(
     version = '0.1.0',
-    name = 'koios-pythion',
+    name = 'koios-python',
     author = 'Quixote Stake Pool',
     author_email = 'quixotepool@proton.me',
     url = 'https://github.com/QuixoteSystems',
@@ -28,7 +32,7 @@ setup(
 
         'Topic :: Software Development :: Build Tools',
 
-        'License :: OSI Approved :: License MIT',
+        'License :: OSI Approved :: MIT License',
 
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
