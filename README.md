@@ -14,7 +14,18 @@ This library allows getting data from the Cardano Blockchain using a simple synt
 Required Python Modules:
 --------------
 * https://pypi.python.org/pypi/requests
-    
+
+## Installation [![PyPI Latest Release](https://img.shields.io/pypi/v/koios-python.svg)](https://pypi.org/project/koios-python/)
+```python
+pip install koios_python
+```
+
+## Usage
+
+
+```python
+import koios_python
+```
     
 ## Features
 - Supported REST Services:
