@@ -34,7 +34,7 @@ Required Python Modules:
         - Transaction UTxOs
         - Transaction Metadata
         - Transaction Metadata Labels
-        - Transaction Submission (in progress...)
+        - Transaction Submission
         - Transaction Status (Block Confirmations)
     - [x] Address
         - Address Information
