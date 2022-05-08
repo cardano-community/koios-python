@@ -22,9 +22,9 @@ def get_block_info(block_hash):
     :param: block hash ID
     :return:
     """
-    format = {"_block_hashes":[block_hash]}
-    block = requests.post("https://api.koios.rest/api/v0/block_info", json = format)
-    block = json.loads(block.content)[0]
+    get_format = {"_block_hashes":[block_hash]}
+    block = requests.post("https://api.koios.rest/api/v0/block_info", json = get_format)
+    block = json.loads(block.content)
     return block
 
 
