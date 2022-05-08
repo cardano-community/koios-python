@@ -2,14 +2,13 @@
 
 import json
 import requests
-import cbor
 
 
 def get_tx_info(tx_hash):
     """
     Get detailed information about transaction(s).
 
-    :params: transaction hash to search and read data
+    :param str tx_hash: transaction hash to search and read data
     :return: list of all info about transaction(s)
     """
     get_format = {"_tx_hashes":[tx_hash]}
@@ -22,8 +21,8 @@ def get_tx_utxos(tx_hash):
     """
     Get UTxO set (inputs/outputs) of transactions.
 
-    params: transaction hash to search and read utxos data
-    return: all info about utxos in transaction(s)
+    :param str tx_hash: transaction hash to search and read utxos data
+    :return: all info about utxos in transaction(s)
     """
     get_format = {"_tx_hashes":[tx_hash]}
     tx_utxos = requests.post("https://api.koios.rest/api/v0/tx_utxos", json = get_format)
@@ -33,9 +32,10 @@ def get_tx_utxos(tx_hash):
 
 def get_tx_metadata(tx_hash):
     """
-    Get metadata information (if any) for given transaction(s)
-    params: transaction hash to search and read utxos data
-    return: all info about utxos in transaction(s)
+    Get metadata information (if any) for given transaction(s).
+
+    :param str tx_hash: transaction hash to search and read utxos data
+    :return: list of all info about utxos in transaction(s)
     """
     get_format = {"_tx_hashes":[tx_hash]}
     tx_metadata = requests.post("https://api.koios.rest/api/v0/tx_metadata", json = get_format)
@@ -44,9 +44,10 @@ def get_tx_metadata(tx_hash):
 
 def get_tx_metalabels():
     """
-    Get a list of all transaction metalabels
-    params: None
-    return: list of metalabels transactions
+    Get a list of all transaction metalabels.
+
+    :param: None
+    :return: list of metalabels transactions
     """
     tx_metalabels = requests.get("https://api.koios.rest/api/v0/tx_metalabels")
     tx_metalabels  = json.loads(tx_metalabels.content)
@@ -58,7 +59,7 @@ def submit_tx(file):
     Submit an already serialized transaction to the network. You have to serialized the transaction
     file with: xxd -r -p <<< $(jq .cborHex signed.txt) > signed.cbor
 
-    :params: a file with raw binary serialized transaction on the file-system.
+    :param file: a file with raw binary serialized transaction on the file-system.
     :return: hex transaction ID (if is successful )
     """
     cbor_tx = open(file, "rb")
@@ -73,8 +74,8 @@ def get_tx_status(tx_hash):
     """
     Get the number of block confirmations for a given transaction hash list.
 
-    params: transaction hash to search and read utxos data
-    return: status of transaction(s)
+    :param str tx_hash: transaction hash to search and read utxos data
+    :return: status of transaction(s)
     """
     get_format = {"_tx_hashes":[tx_hash]}
     tx_status = requests.post( "https://api.koios.rest/api/v0/tx_status", json = get_format)
