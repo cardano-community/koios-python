@@ -29,4 +29,10 @@ import koios_python
 # Get the mint/burn history of an asset
 #print(koios_python.get_asset_history("d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff","444f4e545350414d"))
 
-print(koios_python.get_asset_txs("d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff","444f4e545350414d"))
+# Current pool statuses and details for a specified list of pool ids
+#print(koios_python.get_pool_info(["pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp", \
+#"pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m", \
+#"pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"]))
+
+print(koios_python.get_pool_metadata())
+
