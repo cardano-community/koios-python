@@ -17,5 +17,7 @@ import koios_python
 # Get number of confirmations of a list of hash transactions
 #print(koios_python.get_tx_status(["b50d56706c07a3c11f21fbbca3da7a3754398acb38b91a38a36cbea5c895e02f","0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
 
-address = "addr1qx7pv34j2lzt4mwrcs2w0ljpdsj7cqkn2rvxukjtk0yjynh9hzc5q00t5p20fy0j0cvph9rzntsf2ve6mdcpgs4s4alqp2pah2"
-print(koios_python.get_address_info(address))
+# Get address info - balance, associated stake address (if any) and UTxO set.
+#print(koios_python.get_address_info("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"))
+
+print(koios_python.
