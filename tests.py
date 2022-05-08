@@ -30,4 +30,6 @@ print("Ultima funcion: ")
 #print(lista)
 #print(len(lista))
 
-print(koios_python.submit_tx("signed.cbor"))
+#print(koios_python.submit_tx("signed.cbor"))
+
+print(koios_python.get_totals(336))

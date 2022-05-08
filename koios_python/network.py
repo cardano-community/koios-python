@@ -5,34 +5,39 @@ import requests
 
 def get_tip():
     """
-    Get the tip info about the latest block seen by chain
-    :return: Blockchain tip data
+    Get the tip info about the latest block seen by chain.
+
+    :return: list of block summary (limit+paginated).
     """
     tip = requests.get("https://api.koios.rest/api/v0/tip")
-    #confirmar que es correcto codigo 200
-    #tip = tip.json
     tip = json.loads(tip.content)
     return tip
 
 
 def get_genesis():
     """
-    Get the Genesis parameters used to start specific era on chain
-    :return: Genesis block data
+    Get the Genesis parameters used to start specific era on chain.
+
+    :return: list of genesis parameters used to start each era on chain.
     """
     genesis = requests.get("https://api.koios.rest/api/v0/genesis")
     genesis = json.loads(genesis.content)
     return genesis
 
 
-def get_totals(epoch_no):
+def get_totals(epoch_no=None):
     """
-    Get the circulating utxo, treasury, rewards, supply and reserves in lovelace for specified \
-    epoch, all epochs if empty
-     :param stake_address: The stake addresse
-    :return: Blockchain tip data
+    Get the circulating utxo, treasury, rewards, supply and reserves in lovelace for specified
+    epoch, all epochs if empty.
+
+    :param int epoch_no: Epoch Number to fetch details for.
+    :return: list of of supply/reserves/utxo/fees/treasury stats.
     """
-    totals = requests.get("https://api.koios.rest/api/v0/totals?_epoch_no="+str(epoch_no))
-    totals = json.loads(totals.content)[0]
+    if epoch_no is None:
+        totals = requests.get("https://api.koios.rest/api/v0/totals")
+        totals = json.loads(totals.content)
+    else:
+        totals = requests.get("https://api.koios.rest/api/v0/totals?_epoch_no="+str(epoch_no))
+        totals = json.loads(totals.content)
     return totals
     

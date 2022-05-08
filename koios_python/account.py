@@ -50,7 +50,7 @@ def get_account_updates(address):
     """
     Get the account updates (registration, deregistration, delegation and withdrawals).
 
-    param: staking address in bech32 format (stake1...)
+    :param str: staking address in bech32 format (stake1...)
     return: list with all account updates.
     """
     info = requests.get("https://api.koios.rest/api/v0/account_updates?_stake_address="+str(address))
