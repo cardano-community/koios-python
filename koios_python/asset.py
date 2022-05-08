@@ -4,7 +4,7 @@ import json
 import requests
 
 
-def get_address_info():
+def get_asset_info():
     """
     Get the list of all native assets (paginated)
 
