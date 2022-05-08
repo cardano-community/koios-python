@@ -50,7 +50,6 @@ def get_tx_metalabels():
     """
     Get a list of all transaction metalabels.
 
-    :param: None
     :return: list of metalabels transactions
     """
     tx_metalabels = requests.get("https://api.koios.rest/api/v0/tx_metalabels")
@@ -79,10 +78,11 @@ def get_tx_status(tx_hash):
     """
     Get the number of block confirmations for a given transaction hash list.
 
-    :param str tx_hash: transaction hash to search and read utxos data
-    :return: status of transaction(s)
+    :param list tx_hash: list of transaction(s) hash to search and read utxos data.
+    :return: list of all info about utxos in transaction(s)
+    :rtype: list.
     """
-    get_format = {"_tx_hashes":[tx_hash]}
+    get_format = {"_tx_hashes":tx_hash}
     tx_status = requests.post( "https://api.koios.rest/api/v0/tx_status", json = get_format)
-    tx_status  = json.loads(tx_status.content)[0]
+    tx_status  = json.loads(tx_status.content)
     return tx_status

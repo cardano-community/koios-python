@@ -3,32 +3,6 @@
 #from koios_python import block, epochs #alternative if we just need some functions
 import koios_python
 
-# con la creacion de diccionarios es fácil la impresion de un campo
-params = koios_python.get_epoch_params()
-nonce = params[40].get("nonce")
-print(f"Nonce: {nonce}")
-print("\n")
-print("Info Billetera: ")
-print(koios_python.get_address_txs(["addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"]))
-print("\n")
-
-#print(koios_python.get_tx_metadata("e7560a87f71adcd4b007e765ab432c5310310e036a3a8a7708c21f6dbd8a0400"))
-
-#print(koios_python.get_tx_metalabels())
-
-print("Rewards Stake key: ")
-print(koios_python.get_account_rewards("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg",334))
-print("\n")
-print("Ultima funcion: ")
-#print(koios_python.get_account_history("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg"))
-
-#print("Stake account list: ")
-#lista = koios_python.get_asset_txs("d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff","444f4e545350414d")
-#print(lista)
-
-#lista = koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8")
-#print(lista)
-#print(len(lista))
 
 
 # Get info of epoch number 338:
@@ -38,5 +12,10 @@ print("Ultima funcion: ")
 #print(koios_python.get_tx_metadata(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e","0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
 
 # Submit an already serialized transaction to the network from a binay file-system
-print(koios_python.submit_tx("signed.cbor"))
+#print(koios_python.submit_tx("signed.cbor"))
 
+# Get number of confirmations of a list of hash transactions
+#print(koios_python.get_tx_status(["b50d56706c07a3c11f21fbbca3da7a3754398acb38b91a38a36cbea5c895e02f","0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
+
+address = "addr1qx7pv34j2lzt4mwrcs2w0ljpdsj7cqkn2rvxukjtk0yjynh9hzc5q00t5p20fy0j0cvph9rzntsf2ve6mdcpgs4s4alqp2pah2"
+print(koios_python.get_address_info(address))

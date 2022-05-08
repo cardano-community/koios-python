@@ -4,14 +4,15 @@ import json
 import requests
 
 
-def get_address_info(address):
+def get_address_info(address1):
     """
     Get address info - balance, associated stake address (if any) and UTxO set.
-    
-    param: wallet used public address
-    return: list with data of this used public address
+
+    :param str address: wallet used public address(es).
+    return: list with data of this used public address.
+    :rtype: list.
     """
-    info = requests.get("https://api.koios.rest/api/v0/address_info?_address="+str(address))
+    info = requests.get("https://api.koios.rest/api/v0/address_info?_address=" + address1)
     info = json.loads(info.content)
     return info
 
@@ -34,10 +35,11 @@ def get_address_assets(address):
     """
     Get the list of all the assets (policy, name and quantity) for a given address.
 
-    param: wallet used public address
+    :param str address: wallet used public address
     return: list of all the assets
+    :rtype: list.
     """
-    info = requests.get("https://api.koios.rest/api/v0/address_assets?_address="+str(address))
+    info = requests.get("https://api.koios.rest/api/v0/address_assets?_address=" + address)
     info = json.loads(info.content)
     return info
 
