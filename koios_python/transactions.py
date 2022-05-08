@@ -2,6 +2,7 @@
 
 import json
 import requests
+import cbor
 
 
 def get_tx_info(tx_hash):
@@ -25,7 +26,7 @@ def get_tx_utxos(tx_hash):
     return: all info about utxos in transaction(s)
     """
     get_format = {"_tx_hashes":[tx_hash]}
-    tx_utxos = requests.post( "https://api.koios.rest/api/v0/tx_utxos", json = get_format)
+    tx_utxos = requests.post("https://api.koios.rest/api/v0/tx_utxos", json = get_format)
     tx_utxos  = json.loads(tx_utxos.content)[0]
     return tx_utxos
 
@@ -37,7 +38,7 @@ def get_tx_metadata(tx_hash):
     return: all info about utxos in transaction(s)
     """
     get_format = {"_tx_hashes":[tx_hash]}
-    tx_metadata = requests.post( "https://api.koios.rest/api/v0/tx_metadata", json = get_format)
+    tx_metadata = requests.post("https://api.koios.rest/api/v0/tx_metadata", json = get_format)
     tx_metadata  = json.loads(tx_metadata.content)[0]
     return tx_metadata
 
@@ -47,25 +48,31 @@ def get_tx_metalabels():
     params: None
     return: list of metalabels transactions
     """
-    tx_metalabels = requests.get( "https://api.koios.rest/api/v0/tx_metalabels")
+    tx_metalabels = requests.get("https://api.koios.rest/api/v0/tx_metalabels")
     tx_metalabels  = json.loads(tx_metalabels.content)
     return tx_metalabels
 
 ######## HAY QUE PROBARLA CON UNA TRANSACCION
-def submit_tx(data_binary):
+def submit_tx(file):
     """
-    Submit an already serialized transaction to the network.
-    params: Assuming data_binary is a raw binary serialized transaction on the file-system.
-    return: Transaction hash ID
+    Submit an already serialized transaction to the network. You have to serialized the transaction
+    file with: xxd -r -p <<< $(jq .cborHex signed.txt) > signed.cbor
+
+    :params: a file with raw binary serialized transaction on the file-system.
+    :return: hex transaction ID (if is successful )
     """
-    submit = requests.post( "https://api.koios.rest/api/v0/submittx", data = data_binary)
-    submit  = json.loads(submit.content)[0]
+    cbor_tx = open(file, "rb")
+    cbor_tx = cbor_tx.read()
+    cbor_header = {'Content-Type': 'application/cbor'}
+    submit = requests.post("https://api.koios.rest/api/v0/submittx", headers = cbor_header, data = cbor_tx)
+    submit  = json.loads(submit.content)
     return submit
 
 
 def get_tx_status(tx_hash):
     """
-    Get the number of block confirmations for a given transaction hash list
+    Get the number of block confirmations for a given transaction hash list.
+
     params: transaction hash to search and read utxos data
     return: status of transaction(s)
     """
