@@ -1,5 +1,5 @@
 from .block import *
-from .epochs import *
+from .epoch import *
 from .network import *
 from .transactions import *
 from .address import *
