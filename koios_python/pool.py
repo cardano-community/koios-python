@@ -24,7 +24,7 @@ def get_pool_info(pool_bech32):
     :return: list of pool information.
     :rtype: list.
     """
-    get_format = {"_pool_bech32_ids":pool_bech32}
+    get_format = {"_pool_bech32_ids": [pool_bech32]}
     pool_list = requests.post( "https://api.koios.rest/api/v0/pool_info", json = get_format)
     pool_list  = json.loads(pool_list.content)
     return pool_list
@@ -134,7 +134,7 @@ def get_pool_metadata(pool_bech32=None):
         pool_list = requests.post("https://api.koios.rest/api/v0/pool_metadata")
         pool_list  = json.loads(pool_list.content)
     else:
-        get_format = {"_pool_bech32_ids": pool_bech32}
+        get_format = {"_pool_bech32_ids": [pool_bech32]}
         pool_list = requests.post("https://api.koios.rest/api/v0/pool_metadata" \
         , json = get_format)
         pool_list  = json.loads(pool_list.content)

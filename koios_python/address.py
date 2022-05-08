@@ -19,13 +19,14 @@ def get_address_info(address):
 
 def get_address_txs(address_tx, after_block=0):
     """
-    Get the number of block confirmations for a given transaction hash list.
+    Get the transaction hash list of input address array, optionally filtering after specified
+    block height (inclusive)
 
     :param tx_hash: list or single transaction hash to search and read utxos data
     :param after_block: filtering after block (inclusive) defaul is 0, from the beginning
     :return: hash list of address transactions
     """
-    get_format = {"_addresses":address_tx, "_after_block_height": after_block}
+    get_format = {"_addresses": [address_tx], "_after_block_height": str(after_block)}
     hash_list = requests.post( "https://api.koios.rest/api/v0/address_txs", json = get_format)
     hash_list  = json.loads(hash_list.content)
     return hash_list

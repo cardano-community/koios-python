@@ -6,7 +6,7 @@ import koios_python
 #alternative if we just need some functions
 #from koios_python import block, epochs 
 
-
+# Some examples:
 
 # Get info of epoch number 338:
 #print(koios_python.get_epoch_params(338))
@@ -35,5 +35,4 @@ import koios_python
 #"pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"]))
 
 # List of all redeemers for a given script hash.
-print(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
-
+#print(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))

@@ -44,7 +44,7 @@ def get_account_rewards(address, epoch=None):
         info = json.loads(info.content)
     else:
         info = requests.get("https://api.koios.rest/api/v0/account_rewards?_stake_address=" \
-            +str(address)+"&_epoch_no="+str(epoch))
+            +str(address)+"&_epoch_no=" + str(epoch))
         info = json.loads(info.content)
     return info
 
