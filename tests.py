@@ -30,6 +30,13 @@ print("Ultima funcion: ")
 #print(lista)
 #print(len(lista))
 
-#print(koios_python.submit_tx("signed.cbor"))
 
-print(koios_python.get_epoch_params(338))
+# Get info of epoch number 338:
+#print(koios_python.get_epoch_params(338))
+
+# Get info of two transactions:
+#print(koios_python.get_tx_metadata(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e","0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
+
+# Submit an already serialized transaction to the network from a binay file-system
+print(koios_python.submit_tx("signed.cbor"))
+
