@@ -2,33 +2,37 @@ import json
 import requests
 
 HERE = pathlib.Path(__file__).parent
-
-VERSION = '0.0.1' 
-PACKAGE_NAME = 'koios-pythion' 
-AUTHOR = 'Quixote Stake Pool'
-AUTHOR_EMAIL = 'quixotepool@proton.me'
-URL = 'https://github.com/QuixoteSystems'
-
-LICENSE = 'MIT'
-DESCRIPTION = 'Aquí debes incluir una descripción corta de la librería' 
 LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf-8')
 LONG_DESC_TYPE = "text/markdown"
 
-INSTALL_REQUIRES = [
-      'listado de librerias'
-      ]
-
 setup(
-    name=PACKAGE_NAME,
-    version=VERSION,
-    description=DESCRIPTION,
-    long_description=LONG_DESCRIPTION,
-    long_description_content_type=LONG_DESC_TYPE,
-    author=AUTHOR,
-    author_email=AUTHOR_EMAIL,
-    url=URL,
-    install_requires=INSTALL_REQUIRES,
-    license=LICENSE,
-    packages=find_packages(),
-    include_package_data=True
+    version = '0.1.0',
+    name = 'koios-pythion',
+    author = 'Quixote Stake Pool',
+    author_email = 'quixotepool@proton.me',
+    url = 'https://github.com/QuixoteSystems',
+    license = 'MIT',
+    description = 'Python wrapper Library using Koios API for accessing information stored on the Cardano Blockchain',
+    keywords = ['koios', 'blockchain', 'cardano', 'API', 'REST', 'RESTful'],
+    include_package_data = True,
+    packages = find_packages(include=['koios_python']),
+    install_requieres = ["requests"],
+    classifiers=[  # Optional
+        # How mature is this project? Common values are
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        'Development Status :: 3 - Alpha',
+
+        'Intended Audience :: Developers',
+
+        'Topic :: Software Development :: Build Tools',
+
+        'License :: OSI Approved :: License MIT',
+
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3 :: Only',
+    ],
 )
