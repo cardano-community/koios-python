@@ -8,7 +8,8 @@ def get_blocks():
     """
     Get summarised details about all blocks (paginated - latest first).
 
-    :return:
+    :return: list of all blocks.
+    :rtype: list
     """
     blocks = requests.get("https://api.koios.rest/api/v0/blocks")
     blocks = json.loads(blocks.content)
@@ -19,8 +20,9 @@ def get_block_info(block_hash):
     """
     Get detailed information about a specific block.
 
-    :param: block hash ID
-    :return:
+    :param str block_hash: block hash ID.
+    :return:  list of detailed block information.
+    :rtype: list
     """
     get_format = {"_block_hashes":[block_hash]}
     block = requests.post("https://api.koios.rest/api/v0/block_info", json = get_format)
@@ -31,8 +33,9 @@ def get_block_info(block_hash):
 def get_block_txs(block_hash):
     """
     Get a list of all transactions included in a provided block
-    param:
-    return:
+    :param str block_hash: block hash ID.
+    :return: list of transactions hashes.
+    :rtype: list
     """
     block = requests.get("https://api.koios.rest/api/v0/block_txs?_block_hash="+str(block_hash))
     block = json.loads(block.content)[0]
