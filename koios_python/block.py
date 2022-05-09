@@ -4,14 +4,16 @@ import json
 import requests
 
 
-def get_blocks():
+def get_blocks(content_range="0-999"):
     """
     Get summarised details about all blocks (paginated - latest first).
 
+    :param str range: paginated content range, up to  1000 records.
     :return: list of all blocks.
     :rtype: list
     """
-    blocks = requests.get("https://api.koios.rest/api/v0/blocks")
+    custom_headers = {"Range": str(content_range)}
+    blocks = requests.get("https://api.koios.rest/api/v0/blocks", headers = custom_headers)
     blocks = json.loads(blocks.content)
     return blocks
 

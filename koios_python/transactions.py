@@ -46,13 +46,16 @@ def get_tx_metadata(tx_hash):
     return tx_metadata
 
 
-def get_tx_metalabels():
+def get_tx_metalabels(content_range="0-999"):
     """
     Get a list of all transaction metalabels.
 
+    :param str range: paginated content range, up to  1000 records.
     :return: list of metalabels transactions
     """
-    tx_metalabels = requests.get("https://api.koios.rest/api/v0/tx_metalabels")
+    custom_headers = {"Range": str(content_range)}
+    tx_metalabels = requests.get("https://api.koios.rest/api/v0/tx_metalabels", headers \
+    = custom_headers)
     tx_metalabels  = json.loads(tx_metalabels.content)
     return tx_metalabels
 

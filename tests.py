@@ -2,9 +2,10 @@
 
 # We need to install and import koios_python library
 import koios_python
+import pprint  # I recommend use pprint.pp to print the querys
 
 #alternative if we just need some functions
-#from koios_python import block, epochs 
+#from koios_python import block, epochs
 
 # Some examples:
 
@@ -34,10 +35,12 @@ import koios_python
 # , "444f4e545350414d"))
 
 # Current pool statuses and details for a specified list of pool ids
-#print(koios_python.get_pool_info(["pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp", \
+#pprint.pp(koios_python.get_pool_info(["pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp", \
 #"pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m", \
 #"pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"]))
 
+# Get the Pool List from the record 2001 to 3000
+#pprint.pp(koios_python.get_pool_list("2001-3000"))
+
 # List of all redeemers for a given script hash.
 #print(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
-

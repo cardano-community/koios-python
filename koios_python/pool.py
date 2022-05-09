@@ -4,14 +4,16 @@ import json
 import requests
 
 
-def get_pool_list():
+def get_pool_list(content_range="0-999"):
     """
     Get a list of all currently registered/retiring (not retired) pools.
 
+    :param str range: paginated content range, up to  1000 records.
     :return: list of all registered/retiring pools.
     :rtype: list.
     """
-    pool_list = requests.get("https://api.koios.rest/api/v0/pool_list")
+    custom_headers = {"Range": str(content_range)}
+    pool_list = requests.get("https://api.koios.rest/api/v0/pool_list", headers = custom_headers)
     pool_list = json.loads(pool_list.content)
     return pool_list
 
@@ -24,7 +26,7 @@ def get_pool_info(pool_bech32):
     :return: list of pool information.
     :rtype: list.
     """
-    get_format = {"_pool_bech32_ids": [pool_bech32]}
+    get_format = {"_pool_bech32_ids": [pool_bech32] }
     pool_list = requests.post( "https://api.koios.rest/api/v0/pool_info", json = get_format)
     pool_list  = json.loads(pool_list.content)
     return pool_list
@@ -110,14 +112,16 @@ def get_pool_updates(pool_bech32=None):
     return pool_list
 
 
-def get_pool_relays():
+def get_pool_relays(content_range="0-999"):
     """
     Get a list of registered relays for all currently registered/retiring (not retired) pools.
 
+    :param str range: paginated content range, up to  1000 records.
     :return: list of pool relay information.
     :rtype: list.
     """
-    pool_list = requests.get("https://api.koios.rest/api/v0/pool_relays")
+    custom_headers = {"Range": str(content_range)}
+    pool_list = requests.get("https://api.koios.rest/api/v0/pool_relays", headers = custom_headers)
     pool_list  = json.loads(pool_list.content)
     return pool_list
 
