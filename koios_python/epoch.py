@@ -5,6 +5,8 @@ Provides all epoch functions
 import json
 import requests
 
+from koios_python.urls import *
+
 
 def get_epoch_info(epoch_no=None):
     """
@@ -15,10 +17,10 @@ def get_epoch_info(epoch_no=None):
     :rtype: list
     """
     if epoch_no is None:
-        info = requests.get("https://api.koios.rest/api/v0/epoch_info")
+        info = requests.get(KOIOS_URL+EPOCH_INFO)
         info = json.loads(info.content)
     else:
-        info = requests.get("https://api.koios.rest/api/v0/epoch_info?_epoch_no="+str(epoch_no))
+        info = requests.get(KOIOS_URL+EPOCH_INFO+"?_epoch_no="+str(epoch_no))
         info = json.loads(info.content)
     return info
 
@@ -33,9 +35,9 @@ def get_epoch_params(epoch_no=None):
     :rtype: list
     """
     if epoch_no is None:
-        info = requests.get("https://api.koios.rest/api/v0/epoch_params")
+        info = requests.get(KOIOS_URL+EPOCH_PARAMS)
         info = json.loads(info.content)
     else:
-        info = requests.get("https://api.koios.rest/api/v0/epoch_params?_epoch_no="+str(epoch_no))
+        info = requests.get(KOIOS_URL+EPOCH_PARAMS+"?_epoch_no="+str(epoch_no))
         info = json.loads(info.content)
     return info

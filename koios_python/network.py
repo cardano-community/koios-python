@@ -4,7 +4,7 @@ Provides all network functions
 """
 import json
 import requests
-from .urls import *
+from .urls import KOIOS_URL, TIP, GENESIS, TOTALS
 
 def get_tip():
     """

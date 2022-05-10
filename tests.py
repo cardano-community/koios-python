@@ -18,6 +18,11 @@ import koios_python # We need to install and import koios_python library
 #pprint.pp(koios_python.get_tx_metadata(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e" \
 # ,"0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
 
+#Get detailed information about a specifics blocks
+#pprint.pp(koios_python.get_block_info(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30", \
+#"60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a", \
+#"c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"]))
+
 # Submit an already serialized transaction to the network from a binay file-system
 #print(koios_python.submit_tx("signed.cbor"))
 
@@ -51,3 +56,4 @@ import koios_python # We need to install and import koios_python library
 #pprint.pp(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
 
 
+#pprint.pp(koios_python.get_block_info())
