@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Provides all urls to use
+Provides all urls used in the library
 """
 
 # Koios Network API URL
@@ -51,3 +51,18 @@ ASSET_HISTORY_URL = KOIOS_URL + "asset_history?_asset_policy="
 ASSET_POLICY_INFO_URL = KOIOS_URL + "asset_policy_info?_asset_policy="
 ASSET_SUMMARY_URL = KOIOS_URL + "asset_summary?_asset_policy="
 ASSET_TXS_URL = KOIOS_URL + "asset_txs?_asset_policy="
+
+# Pool URLs
+POOL_LIST_URL = KOIOS_URL + "pool_list"
+POOL_INFO_URL = KOIOS_URL + "pool_info"
+POOL_DELEGATORS_URL = KOIOS_URL + "pool_delegators?_pool_bech32="
+POOL_BLOCKS_URL = KOIOS_URL + "pool_blocks?_pool_bech32="
+POOL_HISTORY_URL = KOIOS_URL + "pool_history?_pool_bech32="
+POOL_UPDATES_URL = KOIOS_URL + "pool_updates"
+POOL_RELAYS_URL = KOIOS_URL + "pool_relays"
+POOL_METADATA_URL = KOIOS_URL + "pool_metadata"
+
+# Scripts URLs
+NATIVE_SCRIPT_LIST_URL = KOIOS_URL + "native_script_list"
+PLUTUS_SCRIPT_LIST_URL = KOIOS_URL + "plutus_script_list"
+SCRIPT_REDEEMERS_URL = KOIOS_URL + "script_redeemers"

@@ -4,6 +4,7 @@ Provides all scripts functions
 """
 import json
 import requests
+from .urls import NATIVE_SCRIPT_LIST_URL, PLUTUS_SCRIPT_LIST_URL
 
 
 def get_native_script_list(content_range="0-999"):
@@ -15,7 +16,7 @@ def get_native_script_list(content_range="0-999"):
     :rtype: list.
     """
     custom_headers = {"Range": str(content_range)}
-    get_format = requests.post( "https://api.koios.rest/api/v0/native_script_list", headers \
+    get_format = requests.post(NATIVE_SCRIPT_LIST_URL, headers \
     = custom_headers)
     get_format = json.loads(get_format.content)
     return get_format
@@ -30,7 +31,7 @@ def get_plutus_script_list(content_range="0-999"):
     :rtype: list.
     """
     custom_headers = {"Range": str(content_range)}
-    get_format = requests.post( "https://api.koios.rest/api/v0/plutus_script_list", headers \
+    get_format = requests.post(PLUTUS_SCRIPT_LIST_URL, headers \
     = custom_headers)
     get_format = json.loads(get_format.content)
     return get_format

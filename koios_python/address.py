@@ -5,7 +5,8 @@ Provides all address functions
 import json
 import requests
 
-from koios_python.urls import ADDRESS_ASSETS_URL, ADDRESS_INFO_URL, ADDRESS_TXS_URL, CREDENTIAL_TXS_URL
+from koios_python.urls import ADDRESS_ASSETS_URL, ADDRESS_INFO_URL, ADDRESS_TXS_URL, \
+    CREDENTIAL_TXS_URL
 
 def get_address_info(address):
     """

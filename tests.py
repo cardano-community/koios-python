@@ -53,7 +53,7 @@ import koios_python # We need to install and import koios_python library
 #"pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"]))
 
 # Get the Pool List from the record 2001 to 3000
-#print(koios_python.get_pool_list("2001-3000"))
+#pprint.pp(koios_python.get_pool_list("2001-3000"))
 
 # Get all the information for a specified Stake Pool
 #pprint.pp(koios_python.get_pool_info("pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp"))
@@ -61,3 +61,24 @@ import koios_python # We need to install and import koios_python library
 # List of all redeemers for a given script hash.
 #pprint.pp(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
 
+
+
+lista = koios_python.get_pool_list()
+#pprint.pp(lista)
+
+
+num1=0
+num2=999
+while len(lista) == 1000:
+    for i in lista:
+        if i["ticker"] == "PIADA":
+            pprint.pp(i)
+            pool = i["pool_id_bech32"]
+            pprint.pp(koios_python.get_pool_info(pool))
+            break
+
+    num1 += 1000
+    num2 += 1000
+    rango = str(num1)+"-"+str(num2)
+    print("Rango:"+ rango)
+    lista = koios_python.get_pool_list(rango)
