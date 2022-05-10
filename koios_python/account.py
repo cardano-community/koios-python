@@ -4,7 +4,6 @@ Provides all account functions
 """
 import json
 import requests
-from url import *
 
 
 def get_account_list():
@@ -14,7 +13,7 @@ def get_account_list():
     :return: string list of account (stake address: stake1...  bech32 format) IDs.
     :rtype: list.
     """
-    address_list = requests.get(KOIOS_URL+"/account_list")
+    address_list = requests.get("https://api.koios.rest/api/v0/account_list")
     address_list = json.loads(address_list.content)
     return address_list
 
