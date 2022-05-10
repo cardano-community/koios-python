@@ -4,7 +4,7 @@ Provides all network functions
 """
 import json
 import requests
-
+from .urls import *
 
 def get_tip():
     """
@@ -13,7 +13,7 @@ def get_tip():
     :return: list of block summary (limit+paginated).
     :rtype: list.
     """
-    tip = requests.get("https://api.koios.rest/api/v0/tip")
+    tip = requests.get(KOIOS_URL+TIP)
     tip = json.loads(tip.content)
     return tip
 
@@ -25,7 +25,7 @@ def get_genesis():
     :return: list of genesis parameters used to start each era on chain.
     :rtype: list.
     """
-    genesis = requests.get("https://api.koios.rest/api/v0/genesis")
+    genesis = requests.get(KOIOS_URL+GENESIS)
     genesis = json.loads(genesis.content)
     return genesis
 
@@ -40,10 +40,10 @@ def get_totals(epoch_no=None):
     :rtype: list.
     """
     if epoch_no is None:
-        totals = requests.get("https://api.koios.rest/api/v0/totals")
+        totals = requests.get(KOIOS_URL+TOTALS)
         totals = json.loads(totals.content)
     else:
-        totals = requests.get("https://api.koios.rest/api/v0/totals?_epoch_no="+str(epoch_no))
+        totals = requests.get(KOIOS_URL+TOTALS+"?_epoch_no="+str(epoch_no))
         totals = json.loads(totals.content)
     return totals
     

@@ -51,4 +51,3 @@ import koios_python # We need to install and import koios_python library
 #pprint.pp(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
 
 
-pprint.pp(koios_python.get_account_list())
