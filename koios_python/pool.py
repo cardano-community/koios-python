@@ -1,5 +1,7 @@
 #!/usr/bin/env python
-
+"""
+Provides all pool functions
+"""
 import json
 import requests
 
@@ -30,7 +32,7 @@ def get_pool_info(pool_bech32):
     pool_list = requests.post( "https://api.koios.rest/api/v0/pool_info", json = get_format)
     pool_list  = json.loads(pool_list.content)
     return pool_list
-   
+
 
 def get_pool_delegators(pool_bech32, epoch_no="current"):
     """

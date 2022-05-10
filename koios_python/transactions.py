@@ -1,5 +1,7 @@
 #!/usr/bin/env python
-
+"""
+Provides all transactions functions
+"""
 import json
 import requests
 
@@ -89,3 +91,4 @@ def get_tx_status(tx_hash):
     tx_status = requests.post( "https://api.koios.rest/api/v0/tx_status", json = get_format)
     tx_status  = json.loads(tx_status.content)
     return tx_status
+    

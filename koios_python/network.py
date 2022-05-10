@@ -1,7 +1,11 @@
 #!/usr/bin/env python
-
+"""
+Provides all network functions
+"""
 import json
 import requests
+from urls import *
+
 
 def get_tip():
     """
@@ -10,7 +14,7 @@ def get_tip():
     :return: list of block summary (limit+paginated).
     :rtype: list.
     """
-    tip = requests.get("https://api.koios.rest/api/v0/tip")
+    tip = requests.get(KOIOS_URL+TIP)
     tip = json.loads(tip.content)
     return tip
 
@@ -22,7 +26,7 @@ def get_genesis():
     :return: list of genesis parameters used to start each era on chain.
     :rtype: list.
     """
-    genesis = requests.get("https://api.koios.rest/api/v0/genesis")
+    genesis = requests.get(KOIOS_URL+GENESIS)
     genesis = json.loads(genesis.content)
     return genesis
 

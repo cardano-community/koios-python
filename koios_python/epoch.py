@@ -1,5 +1,7 @@
 #!/usr/bin/env python
-
+"""
+Provides all epoch functions
+"""
 import json
 import requests
 

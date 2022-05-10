@@ -1,7 +1,10 @@
 #!/usr/bin/env python
+"""
+Examples to check how works Koios-Python Library
+"""
 
-# We need to install and import koios_python library
-import koios_python
+import pprint # We recommend use pprint library to show your outputs
+import koios_python # We need to install and import koios_python library
 
 #alternative if we just need some functions
 #from koios_python import block, epochs
@@ -9,10 +12,10 @@ import koios_python
 # Some examples:
 
 # Get info of epoch number 338:
-#print(koios_python.get_epoch_params(338))
+#pprint.pp(koios_python.get_epoch_params(338))
 
 # Get info of two transactions:
-#print(koios_python.get_tx_metadata(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e" \
+#pprint.pp(koios_python.get_tx_metadata(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e" \
 # ,"0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
 
 # Submit an already serialized transaction to the network from a binay file-system
@@ -39,7 +42,13 @@ import koios_python
 #"pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"]))
 
 # Get the Pool List from the record 2001 to 3000
-#pprint.pp(koios_python.get_pool_list("2001-3000"))
+#print(koios_python.get_pool_list("2001-3000"))
+
+# Get all the information for a specified Stake Pool
+#pprint.pp(koios_python.get_pool_info("pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp"))
 
 # List of all redeemers for a given script hash.
-#print(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
+#pprint.pp(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
+
+
+pprint.pp(koios_python.get_tip())
