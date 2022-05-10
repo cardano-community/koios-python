@@ -37,6 +37,12 @@ import koios_python # We need to install and import koios_python library
 #print(koios_python.get_account_rewards("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg" \
 # ,335))
 
+# Get account history for a stake address
+#pprint.pp(koios_python.get_account_history("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg"))
+
+# Get the transaction hash list of input payment credential array, optionally filtering after specified block height 
+#pprint.pp(koios_python.get_credential_txs( "025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52", 333333))
+
 # Get the mint/burn history of an asset
 #print(koios_python.get_asset_history("d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff" \
 # , "444f4e545350414d"))
@@ -55,5 +61,3 @@ import koios_python # We need to install and import koios_python library
 # List of all redeemers for a given script hash.
 #pprint.pp(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
 
-
-pprint.pp(koios_python.get_blocks())
