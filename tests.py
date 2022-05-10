@@ -2,7 +2,6 @@
 """
 Examples to check how works Koios-Python Library
 """
-
 import pprint # We recommend use pprint library to show your outputs
 import koios_python # We need to install and import koios_python library
 
@@ -48,7 +47,7 @@ import koios_python # We need to install and import koios_python library
 # , "444f4e545350414d"))
 
 # Current pool statuses and details for a specified list of pool ids
-#print(koios_python.get_pool_info(["pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp", \
+#pprint.pp(koios_python.get_pool_info(["pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp", \
 #"pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m", \
 #"pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"]))
 
@@ -61,24 +60,3 @@ import koios_python # We need to install and import koios_python library
 # List of all redeemers for a given script hash.
 #pprint.pp(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
 
-
-
-lista = koios_python.get_pool_list()
-#pprint.pp(lista)
-
-
-num1=0
-num2=999
-while len(lista) == 1000:
-    for i in lista:
-        if i["ticker"] == "PIADA":
-            pprint.pp(i)
-            pool = i["pool_id_bech32"]
-            pprint.pp(koios_python.get_pool_info(pool))
-            break
-
-    num1 += 1000
-    num2 += 1000
-    rango = str(num1)+"-"+str(num2)
-    print("Rango:"+ rango)
-    lista = koios_python.get_pool_list(rango)
