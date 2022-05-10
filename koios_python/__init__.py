@@ -10,4 +10,4 @@ from .account import *
 from .asset import *
 from .pool import *
 from .scripts import *
-from .url import *
+from .urls import *
