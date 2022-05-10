@@ -3,8 +3,8 @@
 Provides all account functions
 """
 import json
-import pprint
 import requests
+from url import *
 
 
 def get_account_list():
@@ -14,8 +14,8 @@ def get_account_list():
     :return: string list of account (stake address: stake1...  bech32 format) IDs.
     :rtype: list.
     """
-    address_list = requests.get("https://api.koios.rest/api/v0/account_list")
-    address_list = pprint.pformat(json.loads(address_list.content))
+    address_list = requests.get(KOIOS_URL+"/account_list")
+    address_list = json.loads(address_list.content)
     return address_list
 
 
@@ -28,7 +28,7 @@ def get_account_info(address):
     :rtype: list.
     """
     info = requests.get("https://api.koios.rest/api/v0/account_info?_address=" + address)
-    info = pprint.pformat(json.loads(info.content))
+    info = json.loads(info.content)
     return info
 
 
@@ -44,11 +44,11 @@ def get_account_rewards(address, epoch=None):
     if epoch is None:
         info = requests.get("https://api.koios.rest/api/v0/account_rewards?_stake_address=" \
             +str(address))
-        info = pprint.pformat(json.loads(info.content))
+        info = json.loads(info.content)
     else:
         info = requests.get("https://api.koios.rest/api/v0/account_rewards?_stake_address=" \
             +str(address)+"&_epoch_no=" + str(epoch))
-        info = pprint.pformat(json.loads(info.content))
+        info = json.loads(info.content)
     return info
 
 
@@ -61,7 +61,7 @@ def get_account_updates(address):
     :rtype: list.
     """
     info = requests.get("https://api.koios.rest/api/v0/account_updates?_stake_address="+ address)
-    info = pprint.pformat(json.loads(info.content))
+    info = json.loads(info.content)
     return info
 
 
@@ -74,7 +74,7 @@ def get_account_addresses(address):
     :rtype: list.
     """
     info = requests.get("https://api.koios.rest/api/v0/account_addresses?_address="+ address)
-    info = pprint.pformat(json.loads(info.content))
+    info = json.loads(info.content)
     return info
 
 
@@ -87,7 +87,7 @@ def get_account_assets(address):
     :rtype: list.
     """
     info = requests.get("https://api.koios.rest/api/v0/account_assets?_address=" + address)
-    info = pprint.pformat(json.loads(info.content))
+    info = json.loads(info.content)
     return info
 
 
@@ -100,5 +100,5 @@ def get_account_history(address):
     :rtype: list.
     """
     info = requests.get("https://api.koios.rest/api/v0/account_history?_address=" + address)
-    info = pprint.pformat(json.loads(info.content))
+    info = json.loads(info.content)
     return info
