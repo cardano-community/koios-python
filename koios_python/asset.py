@@ -1,6 +1,9 @@
 #!/usr/bin/env python
-
+"""
+Provides all asset functions
+"""
 import json
+import pprint
 import requests
 
 
@@ -12,7 +15,7 @@ def get_asset_list():
     :rtype: list.
     """
     info = requests.get("https://api.koios.rest/api/v0/asset_list")
-    info = json.loads(info.content)
+    info = pprint.pformat(json.loads(info.content))
     return info
 
 
@@ -27,7 +30,7 @@ def get_asset_address_list(asset_policy, asset_name):
     """
     info = requests.get("https://api.koios.rest/api/v0/asset_address_list?_asset_policy=" \
         + asset_policy + "&_asset_name=" + asset_name)
-    info = json.loads(info.content)
+    info = pprint.pformat(json.loads(info.content))
     return info
 
 
@@ -42,7 +45,7 @@ def get_asset_info(asset_policy, asset_name):
     """
     info = requests.get("https://api.koios.rest/api/v0/asset_info?_asset_policy=" \
         + str(asset_policy) + "&_asset_name=" + str(asset_name))
-    info = json.loads(info.content)
+    info = pprint.pformat(json.loads(info.content))
     return info
 
 
@@ -57,7 +60,7 @@ def get_asset_history(asset_policy, asset_name):
     """
     info = requests.get("https://api.koios.rest/api/v0/asset_history?_asset_policy=" \
         + str(asset_policy) + "&_asset_name=" + str(asset_name))
-    info = json.loads(info.content)
+    info = pprint.pformat(json.loads(info.content))
     return info
 
 
@@ -71,7 +74,7 @@ def get_asset_policy_info(asset_policy):
     """
     info = requests.get("https://api.koios.rest/api/v0/asset_policy_info?_asset_policy=" \
     + asset_policy)
-    info = json.loads(info.content)
+    info = pprint.pformat(json.loads(info.content))
     return info
 
 
@@ -87,7 +90,7 @@ def get_asset_summary(asset_policy, asset_name):
     """
     info = requests.get("https://api.koios.rest/api/v0/asset_summary?_asset_policy=" \
         + asset_policy + "&_asset_name=" + asset_name)
-    info = json.loads(info.content)
+    info = pprint.pformat(json.loads(info.content))
     return info
 
 
@@ -102,6 +105,6 @@ def get_asset_txs(asset_policy, asset_name):
     """
     info = requests.get("https://api.koios.rest/api/v0/asset_txs?_asset_policy=" \
         + asset_policy + "&_asset_name=" + asset_name)
-    info = json.loads(info.content)
+    info = pprint.pformat(json.loads(info.content))
     return info
     

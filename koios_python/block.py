@@ -1,6 +1,9 @@
 #!/usr/bin/env python
-
+"""
+Provides all block functions
+"""
 import json
+import pprint
 import requests
 
 
@@ -14,7 +17,7 @@ def get_blocks(content_range="0-999"):
     """
     custom_headers = {"Range": str(content_range)}
     blocks = requests.get("https://api.koios.rest/api/v0/blocks", headers = custom_headers)
-    blocks = json.loads(blocks.content)
+    blocks = pprint.pformat(json.loads(blocks.content))
     return blocks
 
 
@@ -28,17 +31,18 @@ def get_block_info(block_hash):
     """
     get_format = {"_block_hashes":[block_hash]}
     block = requests.post("https://api.koios.rest/api/v0/block_info", json = get_format)
-    block = json.loads(block.content)
+    block = pprint.pformat(json.loads(block.content))
     return block
 
 
 def get_block_txs(block_hash):
     """
-    Get a list of all transactions included in a provided block
+    Get a list of all transactions included in a provided block.
+
     :param str block_hash: block hash ID.
     :return: list of transactions hashes.
     :rtype: list
     """
     block = requests.get("https://api.koios.rest/api/v0/block_txs?_block_hash="+str(block_hash))
-    block = json.loads(block.content)[0]
-    return
+    block = pprint.pformat(json.loads(block.content))
+    return block
