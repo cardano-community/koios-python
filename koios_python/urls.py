@@ -28,3 +28,17 @@ TX_METALABELS_URL = KOIOS_URL + "tx_metalabels"
 SUBMIT_TX_URL = KOIOS_URL + "submittx"
 TX_STATUS_URL = KOIOS_URL + "tx_status"
 
+# Address URLs
+ADDRESS_INFO_URL = KOIOS_URL + "address_info"
+ADDRESS_TXS_URL = KOIOS_URL + "address_txs"
+ADDRESS_ASSETS_URL = KOIOS_URL + "address_assets"
+CREDENTIAL_TXS_URL = KOIOS_URL + "credential_txs"
+
+# Account URLs
+ACCOUNT_LIST_URL = KOIOS_URL + "account_list"
+ACCOUNT_INFO_URL = KOIOS_URL + "account_info?_address="
+ACCOUNT_REWARDS_URL = KOIOS_URL + "account_rewards?_stake_address="
+ACCOUNT_UPDATES_URL = KOIOS_URL + "account_updates?_stake_address="
+ACCOUNT_ADDRESES_URL = KOIOS_URL + "account_addresses?_address="
+ACCOUNT_ASSETS_URL = KOIOS_URL + "account_assets?_address="
+ACCOUNT_HISTORY_URL = KOIOS_URL + "account_history?_address="
