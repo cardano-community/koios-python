@@ -4,8 +4,7 @@ Provides all block functions
 """
 import json
 import requests
-from .urls import BLOCK_TXS, KOIOS_URL, BLOCKS, BLOCK_INFO
-
+from .urls import BLOCK_INFO_URL, BLOCK_TXS_URL, BLOCKS_URL
 
 def get_blocks(content_range="0-999"):
     """
@@ -16,7 +15,7 @@ def get_blocks(content_range="0-999"):
     :rtype: list
     """
     custom_headers = {"Range": str(content_range)}
-    blocks = requests.get(KOIOS_URL + BLOCKS, headers = custom_headers)
+    blocks = requests.get(BLOCKS_URL, headers = custom_headers)
     blocks = json.loads(blocks.content)
     return blocks
 
@@ -30,7 +29,7 @@ def get_block_info(block_hash):
     :rtype: list
     """
     get_format = {"_block_hashes":[block_hash]}
-    block = requests.post(KOIOS_URL + BLOCK_INFO, json = get_format)
+    block = requests.post(BLOCK_INFO_URL, json = get_format)
     block = json.loads(block.content)
     return block
 
@@ -43,6 +42,6 @@ def get_block_txs(block_hash):
     :return: list of transactions hashes.
     :rtype: list
     """
-    block = requests.get(KOIOS_URL + BLOCK_TXS + str(block_hash))
+    block = requests.get(BLOCK_TXS_URL + str(block_hash))
     block = json.loads(block.content)
     return block
