@@ -12,8 +12,8 @@ GENESIS_URL = KOIOS_URL + "genesis"
 TOTALS_URL = KOIOS_URL + "totals"
 
 # Epoch URLs
-EPOCH_INFO = KOIOS_URL + "epoch_info"
-EPOCH_PARAMS = KOIOS_URL + "epoch_params"
+EPOCH_INFO_URL = KOIOS_URL + "epoch_info"
+EPOCH_PARAMS_URL = KOIOS_URL + "epoch_params"
 
 # Block URLs
 BLOCKS_URL = KOIOS_URL + "blocks"
@@ -42,3 +42,12 @@ ACCOUNT_UPDATES_URL = KOIOS_URL + "account_updates?_stake_address="
 ACCOUNT_ADDRESES_URL = KOIOS_URL + "account_addresses?_address="
 ACCOUNT_ASSETS_URL = KOIOS_URL + "account_assets?_address="
 ACCOUNT_HISTORY_URL = KOIOS_URL + "account_history?_address="
+
+# Asset URLs
+ASSET_LIST_URL = KOIOS_URL + "asset_list"
+ASSET_ADDRESS_LIST_URL = KOIOS_URL +  "asset_address_list?_asset_policy="
+ASSET_INFO_URL = KOIOS_URL + "asset_info?_asset_policy="
+ASSET_HISTORY_URL = KOIOS_URL + "asset_history?_asset_policy="
+ASSET_POLICY_INFO_URL = KOIOS_URL + "asset_policy_info?_asset_policy="
+ASSET_SUMMARY_URL = KOIOS_URL + "asset_summary?_asset_policy="
+ASSET_TXS_URL = KOIOS_URL + "asset_txs?_asset_policy="

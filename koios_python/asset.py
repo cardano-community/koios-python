@@ -4,6 +4,8 @@ Provides all asset functions
 """
 import json
 import requests
+from .urls import ASSET_ADDRESS_LIST_URL, ASSET_HISTORY_URL, ASSET_INFO_URL, ASSET_LIST_URL, \
+    ASSET_POLICY_INFO_URL, ASSET_SUMMARY_URL, ASSET_TXS_URL
 
 
 def get_asset_list():
@@ -13,7 +15,7 @@ def get_asset_list():
     :return: list with all asset list.
     :rtype: list.
     """
-    info = requests.get("https://api.koios.rest/api/v0/asset_list")
+    info = requests.get(ASSET_LIST_URL)
     info = json.loads(info.content)
     return info
 
@@ -27,8 +29,7 @@ def get_asset_address_list(asset_policy, asset_name):
     :return: list of all addresses.
     :rtype: list.
     """
-    info = requests.get("https://api.koios.rest/api/v0/asset_address_list?_asset_policy=" \
-        + asset_policy + "&_asset_name=" + asset_name)
+    info = requests.get(ASSET_ADDRESS_LIST_URL + asset_policy + "&_asset_name=" + asset_name)
     info = json.loads(info.content)
     return info
 
@@ -42,8 +43,7 @@ def get_asset_info(asset_policy, asset_name):
     :return: list of all asset info.
     :rtype: list.
     """
-    info = requests.get("https://api.koios.rest/api/v0/asset_info?_asset_policy=" \
-        + str(asset_policy) + "&_asset_name=" + str(asset_name))
+    info = requests.get(ASSET_INFO_URL + str(asset_policy) + "&_asset_name=" + str(asset_name))
     info = json.loads(info.content)
     return info
 
@@ -57,8 +57,7 @@ def get_asset_history(asset_policy, asset_name):
     :return: list of asset mint/burn history.
     :rtype: list.
     """
-    info = requests.get("https://api.koios.rest/api/v0/asset_history?_asset_policy=" \
-        + str(asset_policy) + "&_asset_name=" + str(asset_name))
+    info = requests.get(ASSET_HISTORY_URL + str(asset_policy) + "&_asset_name=" + str(asset_name))
     info = json.loads(info.content)
     return info
 
@@ -71,8 +70,7 @@ def get_asset_policy_info(asset_policy):
     :return: list of all mint/burn transactions for an asset
     :rtype: list.
     """
-    info = requests.get("https://api.koios.rest/api/v0/asset_policy_info?_asset_policy=" \
-    + asset_policy)
+    info = requests.get(ASSET_POLICY_INFO_URL + asset_policy)
     info = json.loads(info.content)
     return info
 
@@ -87,8 +85,7 @@ def get_asset_summary(asset_policy, asset_name):
     :return: list of asset summary information.
     :rtype: list.
     """
-    info = requests.get("https://api.koios.rest/api/v0/asset_summary?_asset_policy=" \
-        + asset_policy + "&_asset_name=" + asset_name)
+    info = requests.get(ASSET_SUMMARY_URL + asset_policy + "&_asset_name=" + asset_name)
     info = json.loads(info.content)
     return info
 
@@ -102,8 +99,7 @@ def get_asset_txs(asset_policy, asset_name):
     :return: list of all asset hashes transactions.
     :rtype: list.
     """
-    info = requests.get("https://api.koios.rest/api/v0/asset_txs?_asset_policy=" \
-        + asset_policy + "&_asset_name=" + asset_name)
+    info = requests.get(ASSET_TXS_URL + asset_policy + "&_asset_name=" + asset_name)
     info = json.loads(info.content)
     return info
     

@@ -11,8 +11,8 @@ import koios_python # We need to install and import koios_python library
 
 # Some examples:
 
-# Get info of epoch number 338:
-#pprint.pp(koios_python.get_epoch_params(338))
+# Get info of epoch number 337:
+#pprint.pp(koios_python.get_epoch_params(337))
 
 # Get info of two transactions:
 #pprint.pp(koios_python.get_tx_metadata(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e" \
@@ -44,7 +44,7 @@ import koios_python # We need to install and import koios_python library
 #pprint.pp(koios_python.get_credential_txs( "025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52", 333333))
 
 # Get the mint/burn history of an asset
-#print(koios_python.get_asset_history("d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff" \
+#pprint.pp(koios_python.get_asset_history("d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff" \
 # , "444f4e545350414d"))
 
 # Current pool statuses and details for a specified list of pool ids
