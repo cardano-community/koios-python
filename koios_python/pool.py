@@ -17,7 +17,7 @@ def get_pool_list(content_range="0-999"):
     :rtype: list.
     """
     custom_headers = {"Range": str(content_range)}
-    pool_list = requests.get(POOL_LIST_URL, headers = custom_headers)
+    pool_list = requests.get(POOL_LIST_URL, headers = custom_headers, timeout=10)
     pool_list = json.loads(pool_list.content)
     return pool_list
 
@@ -31,7 +31,7 @@ def get_pool_info(pool_bech32):
     :rtype: list.
     """
     get_format = {"_pool_bech32_ids": [pool_bech32] }
-    pool_list = requests.post(POOL_INFO_URL, json = get_format)
+    pool_list = requests.post(POOL_INFO_URL, json = get_format, timeout=10)
     pool_list  = json.loads(pool_list.content)
     return pool_list
 
@@ -46,10 +46,10 @@ def get_pool_delegators(pool_bech32, epoch_no="current"):
     :rtype: list.
     """
     if epoch_no == "current":
-        info = requests.get(POOL_DELEGATORS_URL + pool_bech32)
+        info = requests.get(POOL_DELEGATORS_URL + pool_bech32, timeout=10)
         info = json.loads(info.content)
     else:
-        info = requests.get(POOL_DELEGATORS_URL + pool_bech32 + "&_epoch_no=" + str(epoch_no))
+        info = requests.get(POOL_DELEGATORS_URL + pool_bech32 + "&_epoch_no=" + str(epoch_no), timeout=10)
         info = json.loads(info.content)
     return info
 
@@ -65,10 +65,10 @@ def get_pool_blocks(pool_bech32, epoch_no="beginning"):
     :rtype: list.s
     """
     if epoch_no == "beginning":
-        info = requests.get(POOL_BLOCKS_URL + pool_bech32)
+        info = requests.get(POOL_BLOCKS_URL + pool_bech32, timeout=10)
         info = json.loads(info.content)
     else:
-        info = requests.get(POOL_BLOCKS_URL + pool_bech32 + "&_epoch_no=" + str(epoch_no))
+        info = requests.get(POOL_BLOCKS_URL + pool_bech32 + "&_epoch_no=" + str(epoch_no), timeout=10)
         info = json.loads(info.content)
     return info
 
@@ -84,10 +84,10 @@ def get_pool_history(pool_bech32, epoch_no="history"):
     :rtype: list.
     """
     if epoch_no == "history":
-        info = requests.get(POOL_HISTORY_URL + str(pool_bech32))
+        info = requests.get(POOL_HISTORY_URL + str(pool_bech32), timeout=10)
         info = json.loads(info.content)
     else:
-        info = requests.get(POOL_HISTORY_URL + str(pool_bech32) + "&_epoch_no=" + str(epoch_no))
+        info = requests.get(POOL_HISTORY_URL + str(pool_bech32) + "&_epoch_no=" + str(epoch_no), timeout=10)
         info = json.loads(info.content)
     return info
 
@@ -101,10 +101,10 @@ def get_pool_updates(pool_bech32=None):
     :rtype: list.
     """
     if pool_bech32 is None:
-        pool_list = requests.get(POOL_UPDATES_URL)
+        pool_list = requests.get(POOL_UPDATES_URL, timeout=10)
         pool_list  = json.loads(pool_list.content)
     else:
-        pool_list = requests.get(POOL_UPDATES_URL + pool_bech32)
+        pool_list = requests.get(POOL_UPDATES_URL + pool_bech32, timeout=10)
         pool_list  = json.loads(pool_list.content)
     return pool_list
 
@@ -118,7 +118,7 @@ def get_pool_relays(content_range="0-999"):
     :rtype: list.
     """
     custom_headers = {"Range": str(content_range)}
-    pool_list = requests.get(POOL_RELAYS_URL, headers = custom_headers)
+    pool_list = requests.get(POOL_RELAYS_URL, headers = custom_headers, timeout=10)
     pool_list  = json.loads(pool_list.content)
     return pool_list
 
@@ -132,10 +132,10 @@ def get_pool_metadata(pool_bech32=None):
     :rtype: list.
     """
     if pool_bech32 is None:
-        pool_list = requests.post(POOL_METADATA_URL)
+        pool_list = requests.post(POOL_METADATA_URL, timeout=10)
         pool_list  = json.loads(pool_list.content)
     else:
         get_format = {"_pool_bech32_ids": [pool_bech32]}
-        pool_list = requests.post(POOL_METADATA_URL, json = get_format)
+        pool_list = requests.post(POOL_METADATA_URL, json = get_format, timeout=10)
         pool_list  = json.loads(pool_list.content)
     return pool_list

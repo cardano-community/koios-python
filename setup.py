@@ -8,7 +8,7 @@ LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf-8')
 LONG_DESC_TYPE = "text/markdown"
 
 setup(
-    version = '0.2.0',
+    version = '0.3.0',
     name = 'koios-python',
     author = 'Quixote Stake Pool',
     author_email = 'quixotepool@proton.me',

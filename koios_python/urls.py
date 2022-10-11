@@ -36,12 +36,12 @@ CREDENTIAL_TXS_URL = KOIOS_URL + "credential_txs"
 
 # Account URLs
 ACCOUNT_LIST_URL = KOIOS_URL + "account_list"
-ACCOUNT_INFO_URL = KOIOS_URL + "account_info?_address="
-ACCOUNT_REWARDS_URL = KOIOS_URL + "account_rewards?_stake_address="
-ACCOUNT_UPDATES_URL = KOIOS_URL + "account_updates?_stake_address="
-ACCOUNT_ADDRESES_URL = KOIOS_URL + "account_addresses?_address="
-ACCOUNT_ASSETS_URL = KOIOS_URL + "account_assets?_address="
-ACCOUNT_HISTORY_URL = KOIOS_URL + "account_history?_address="
+ACCOUNT_INFO_URL = KOIOS_URL + "account_info"
+ACCOUNT_REWARDS_URL = KOIOS_URL + "account_rewards"
+ACCOUNT_UPDATES_URL = KOIOS_URL + "account_updates"
+ACCOUNT_ADDRESES_URL = KOIOS_URL + "account_addresses"
+ACCOUNT_ASSETS_URL = KOIOS_URL + "account_assets"
+ACCOUNT_HISTORY_URL = KOIOS_URL + "account_history"
 
 # Asset URLs
 ASSET_LIST_URL = KOIOS_URL + "asset_list"

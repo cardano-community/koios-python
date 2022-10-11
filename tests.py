@@ -5,6 +5,7 @@ Examples to check how works Koios-Python Library
 import pprint # We recommend use pprint library to show your outputs
 import koios_python # We need to install and import koios_python library
 
+
 #alternative if we just need some functions
 #from koios_python import block, epochs
 
@@ -26,11 +27,13 @@ import koios_python # We need to install and import koios_python library
 #print(koios_python.submit_tx("signed.cbor"))
 
 # Get number of confirmations of a list of hash transactions
-#print(koios_python.get_tx_status(["b50d56706c07a3c11f21fbbca3da7a3754398acb38b91a38a36cbea5c895e02f" \
+#pprint.pp(koios_python.get_tx_status(["b50d56706c07a3c11f21fbbca3da7a3754398acb38b91a38a36cbea5c895e02f" \
 # ,"0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
 
-# Get address info - balance, associated stake address (if any) and UTxO set.
-#print(koios_python.get_address_info("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"))
+# Get address/es info - balance, associated stake address (if any) and UTxO set.
+#pprint.pp(koios_python.get_address_info("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"))
+#pprint.pp(koios_python.get_address_info("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g", \
+#    "addr1qx6e0rnz0xmpn90d69mg3fvcjdleg30tjkxuwvztkd2m5eh9hzc5q00t5p20fy0j0cvph9rzntsf2ve6mdcpgs4s4alq84zgkh"))
 
 # Get the full rewards history (including MIR) for a stake address, or certain epoch if specified
 #print(koios_python.get_account_rewards("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg" \
@@ -60,3 +63,9 @@ import koios_python # We need to install and import koios_python library
 # List of all redeemers for a given script hash.
 #pprint.pp(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
 
+#pprint.pp(koios_python.get_address_assets("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"))
+
+
+# Get the staking history of given stake addresses (accounts), you can add as last parameter epoch number
+#pprint.pp(koios_python.get_account_history("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",
+#    "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy", 350))
