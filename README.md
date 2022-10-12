@@ -21,14 +21,23 @@ Required Python Modules
 ```python
 pip install koios_python
 ```
-
+    
+## Upgrade Las Version
+```python
+pip --upgrade koios_python
+```
+    
 ## Usage
 
 ```python
 import koios_python
 ```
     
-## Features
+## TODO
+
+    [ ] Adding custom endpoint / network
+    
+## Features  
 - Supported REST Services:
     - [x] Network
         - Chain Tip
