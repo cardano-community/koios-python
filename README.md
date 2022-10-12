@@ -22,20 +22,27 @@ Required Python Modules
 pip install koios_python
 ```
     
-## Upgrade Las Version
+## Upgrade to the last Version
 ```python
 pip --upgrade koios_python
 ```
     
 ## Usage
-
+Import to your python file this library:
+    
 ```python
 import koios_python
 ```
     
+Also you can use this for shorter and faster writing:
+```python
+import koios_python as kp
+```
+    
 ## TODO
 
-    [ ] Adding custom endpoint / network
+- [ ] Adding custom endpoint / network
+    
     
 ## Features  
 - Supported REST Services:
