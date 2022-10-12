@@ -44,6 +44,7 @@ import koios_python as kp
 - [ ] Adding custom endpoint / network
 - [ ] AddingPpagination for all queries where makes sense (At the moment, there are a bunch with this feature)
     - [ ] get_pool_delegators()
+    - [ ] ...
     
 ## Features  
 - Supported REST Services:
