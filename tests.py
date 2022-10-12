@@ -71,6 +71,4 @@ import koios_python # We need to install and import koios_python library
 #    "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy", 350))
 
 
-pprint.pp(koios_python.get_block_txs("fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30",
-    "60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a",
-    "c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"))
+pprint.pp(koios_python.get_totals())

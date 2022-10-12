@@ -16,10 +16,10 @@ def get_epoch_info(epoch_no=None):
     :rtype: list
     """
     if epoch_no is None:
-        info = requests.get(EPOCH_INFO_URL)
+        info = requests.get(EPOCH_INFO_URL, timeout=10)
         info = json.loads(info.content)
     else:
-        info = requests.get(EPOCH_INFO_URL + "?_epoch_no=" + str(epoch_no))
+        info = requests.get(EPOCH_INFO_URL + "?_epoch_no=" + str(epoch_no), timeout=10)
         info = json.loads(info.content)
     return info
 
@@ -34,9 +34,9 @@ def get_epoch_params(epoch_no=None):
     :rtype: list
     """
     if epoch_no is None:
-        info = requests.get(EPOCH_PARAMS_URL)
+        info = requests.get(EPOCH_PARAMS_URL, timeout=10)
         info = json.loads(info.content)
     else:
-        info = requests.get(EPOCH_PARAMS_URL + "?_epoch_no=" + str(epoch_no))
+        info = requests.get(EPOCH_PARAMS_URL + "?_epoch_no=" + str(epoch_no), timeout=10)
         info = json.loads(info.content)
     return info
