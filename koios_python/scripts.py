@@ -17,7 +17,7 @@ def get_native_script_list(content_range="0-999"):
     """
     custom_headers = {"Range": str(content_range)}
     get_format = requests.post(NATIVE_SCRIPT_LIST_URL, headers \
-    = custom_headers)
+    = custom_headers, timeout=25)
     get_format = json.loads(get_format.content)
     return get_format
 
@@ -32,7 +32,7 @@ def get_plutus_script_list(content_range="0-999"):
     """
     custom_headers = {"Range": str(content_range)}
     get_format = requests.post(PLUTUS_SCRIPT_LIST_URL, headers \
-    = custom_headers)
+    = custom_headers, timeout=25)
     get_format = json.loads(get_format.content)
     return get_format
 
@@ -46,6 +46,6 @@ def get_script_redeemers(script_hash):
     :rtype: list.
     """
     query = requests.get( "https://api.koios.rest/api/v0/script_redeemers?_script_hash=" \
-    + script_hash )
+    + script_hash, timeout=25)
     query  = json.loads(query.content)
     return query

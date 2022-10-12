@@ -71,6 +71,4 @@ import koios_python # We need to install and import koios_python library
 #    "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy", 350))
 
 
-pprint.pp(koios_python.get_pool_info("pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp",
-    "pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m",
-    "pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"))
+pprint.pp(koios_python.get_tx_status("f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"))
