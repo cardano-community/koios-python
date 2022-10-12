@@ -15,26 +15,26 @@ def get_blocks(content_range="0-999"):
     :rtype: list
     """
     custom_headers = {"Range": str(content_range)}
-    blocks = requests.get(BLOCKS_URL, headers = custom_headers)
+    blocks = requests.get(BLOCKS_URL, headers = custom_headers, timeout=10)
     blocks = json.loads(blocks.content)
     return blocks
 
 
-def get_block_info(block_hash):
+def get_block_info(*block_hash):
     """
-    Get detailed information about a specific block.
+    Get detailed information about a specific block or blocks
 
-    :param str block_hash: block hash ID.
+    :param str block_hash: block/s hash ID.
     :return:  list of detailed block information.
     :rtype: list
     """
     get_format = {"_block_hashes":[block_hash]}
-    block = requests.post(BLOCK_INFO_URL, json = get_format)
+    block = requests.post(BLOCK_INFO_URL, json = get_format, timeout=10)
     block = json.loads(block.content)
     return block
 
 
-def get_block_txs(block_hash):
+def get_block_txs(*block_hash):
     """
     Get a list of all transactions included in a provided block.
 
@@ -42,6 +42,7 @@ def get_block_txs(block_hash):
     :return: list of transactions hashes.
     :rtype: list
     """
-    block = requests.get(BLOCK_TXS_URL + str(block_hash))
-    block = json.loads(block.content)
-    return block
+    get_format = {"_block_hashes":[block_hash]}
+    txs = requests.post(BLOCK_TXS_URL, json = get_format, timeout=10)
+    txs = json.loads(txs.content)
+    return txs

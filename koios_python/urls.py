@@ -18,7 +18,7 @@ EPOCH_PARAMS_URL = KOIOS_URL + "epoch_params"
 # Block URLs
 BLOCKS_URL = KOIOS_URL + "blocks"
 BLOCK_INFO_URL = KOIOS_URL + "block_info"
-BLOCK_TXS_URL = KOIOS_URL + "block_txs?_block_hash="
+BLOCK_TXS_URL = KOIOS_URL + "block_txs"
 
 # Transactions URLs
 TX_INFO_URL = KOIOS_URL + "tx_info"
