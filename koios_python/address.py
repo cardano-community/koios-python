@@ -17,7 +17,7 @@ def get_address_info(*args):
     :rtype: list.
     """
     get_format = {"_addresses": [args] }
-    addresses = requests.post(ADDRESS_INFO_URL, json= get_format , timeout=10)
+    addresses = requests.post(ADDRESS_INFO_URL, json= get_format, timeout=10)
     addresses = json.loads(addresses.content)
     return addresses
 
