@@ -42,6 +42,7 @@ import koios_python as kp
 ## TODO
 
 - [ ] Adding custom endpoint / network
+- [ ] Adding pagination for all queries where makes sense (At the moment, there are a bunch with this feature)
     
     
 ## Features  
