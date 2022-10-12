@@ -69,6 +69,3 @@ import koios_python # We need to install and import koios_python library
 # Get the staking history of given stake addresses (accounts), you can add as last parameter epoch number
 #pprint.pp(koios_python.get_account_history("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",
 #    "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy", 350))
-
-
-pprint.pp(koios_python.get_tx_status("f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"))
