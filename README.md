@@ -24,7 +24,7 @@ pip install koios_python
     
 ## Upgrade to the last Version
 ```python
-pip --upgrade koios_python
+pip install --upgrade koios_python
 ```
     
 ## Usage
