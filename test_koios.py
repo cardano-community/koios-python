@@ -265,3 +265,64 @@ def test_get_script_redeemers():
         assert 'code' not in script_redeemers[0]
         
 ##############################################################################
+# TRANSACTION FUNCTIONS
+
+# get transaction(s) info
+def test_tx_info():
+        
+        tx_info = koios_python.get_tx_info("0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94")
+        assert 'code' not in tx_info[0]
+        
+        txs_info= koios_python.get_tx_info(["0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94",
+                                            "f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"])
+        assert 'code' not in txs_info[0]
+
+# get transaction(s) utxos
+def test_get_tx_utxos():
+        
+        tx_utxos = koios_python.get_tx_utxos("0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94")
+        assert 'code' not in tx_utxos[0]
+        
+        txs_utxos = koios_python.get_tx_utxos(["0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94",
+                                               "f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"])
+        assert 'code' not in txs_utxos[0]
+
+# get transaction(s) metadata
+def test_get_tx_metadata():
+        
+        tx_metadata = koios_python.get_tx_metadata("0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94")
+        assert 'code' not in tx_metadata[0]
+        
+        txs_metadata = koios_python.get_tx_metadata(["0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94",
+                                                     "f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"])
+        assert 'code' not in txs_metadata[0]
+
+# get transaction(s) metadata labels
+def test_get_tx_metalabels():
+        
+        tx_metalables = koios_python.get_tx_metalabels("0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94")
+        assert 'code' not in tx_metalables[0]
+        
+        txs_metalables = koios_python.get_tx_metalabels(["0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94",
+                                                        "f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"])
+        
+        assert 'code' not in txs_metalables[0]
+
+
+# NOT FINISHED
+# submit_tx signed cbor
+# def test_submit_tx():
+	
+# 	tx_submit = koios_python.submit_tx("file")
+# 	assert 'code' not in tx_submit[0]
+
+# get tx status
+def test_get_tx_status():
+        
+        tx_status = koios_python.get_tx_status("0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94")
+        assert 'code' not in tx_status[0]
+        
+        txs_status = koios_python.get_tx_status(["0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94",
+                                                 "f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"])
+        assert 'code' not in txs_status[0]
+        
