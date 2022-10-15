@@ -1,9 +1,18 @@
 #!/usr/bin/env python
 """
-Examples to check how works Koios-Python Library
+TESTING SCRIPT FOR KOIOS_PYTHON USING PYTEST
+
+To use this script, you must have pytest installed.
+pip install pytest
+
+Change directory to the folder containing this script and run:
+pytest
+
+Watch the terminal for the results of the tests. :)
+
 """
+
 import pytest
-import pprint # We recommend use pprint library to show your outputs
 import koios_python
 from koios_python import address # We need to install and import koios_python library
 
