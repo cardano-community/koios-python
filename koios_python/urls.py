@@ -4,33 +4,20 @@ Provides all urls used in the library
 """
 
 class URLs:
+    # imported like class methods
+    from .epoch import get_epoch_info, get_epoch_params
+
+    def __init__(self, url='https://api.koios.rest/api/v0/', network=None):
+        self.url = url
+        self.network = network
         
-        def __init__(self, url='https://api.koios.rest/api/v0/', network=None):
-                self.url = url
-                self.network = network
-                
-                if self.network != None:
-                        # replace any subdomain with "network" subdomain
-                        self.url = self.url.replace(self.url.split('.')[0], self.network)
-                        
-                        
-        # EPOCH URLs
-        def epoch_info_url(self):
-                
-                return self.url + "epoch_info"
-        
-        def epoch_params_url(self):
-                return self.url + "epoch_params"
-        
-        # Network URLs
-        def tip_url(self):
-                return self.url + "tip"
-        
-        def genesis_url(self):
-                return self.url + "genesis"
-        
-        def totals_url(self):
-                return self.url + "totals"
+        # # Network URLs
+        self.TIP_URL = url + "tip"
+        self.GENESIS_URL = url + "genesis"
+        self.TOTALS_URL = url + "totals"
+        # Epoch URLs
+        self.EPOCH_INFO_URL = url + "epoch_info"
+        self.EPOCH_PARAMS_URL = url + "epoch_params"
         
         # Block URLs
 
