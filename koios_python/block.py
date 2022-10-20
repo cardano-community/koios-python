@@ -4,8 +4,48 @@ Provides all block functions
 """
 import json
 import requests
-from .urls import BLOCK_INFO_URL, BLOCK_TXS_URL, BLOCKS_URL
 
+import json
+import requests
+
+
+def get_epoch_info(self, epoch_no=None):
+        """
+        Get the epoch information, all epochs if no epoch specified.
+
+        :param int epoch_no: epoch number to fetch details for.
+        :return: list of detailed summary for each epoch.
+        :rtype: list
+        """
+        if epoch_no is None:
+            info = requests.get(self.EPOCH_INFO_URL, timeout=10)
+            print(self.EPOCH_INFO_URL)
+            info = json.loads(info.content)
+        else:
+            info = requests.get(self.EPOCH_INFO_URL + "?_epoch_no=" + str(epoch_no), timeout=10)
+            print(self.EPOCH_INFO_URL)
+            info = json.loads(info.content)
+        return info
+
+
+def get_epoch_params(self, epoch_no=None):
+    """
+    Get the protocol parameters for specific epoch, returns information about all epochs
+    if no epoch specified.
+
+    :param int epoch_no: epoch number to fetch details for.
+    :return: list of protocol parameters for each epoch.
+    :rtype: list
+    """
+    if epoch_no is None:
+        info = requests.get(self.EPOCH_PARAMS_URL, timeout=10)
+        info = json.loads(info.content)
+    else:
+        info = requests.get(self.EPOCH_PARAMS_URL + "?_epoch_no=" + str(epoch_no), timeout=10)
+        info = json.loads(info.content)
+    return info
+
+'''
 def get_blocks(content_range="0-999"):
     """
     Get summarised details about all blocks (paginated - latest first).
@@ -46,3 +86,4 @@ def get_block_txs(*block_hash):
     txs = requests.post(BLOCK_TXS_URL, json = get_format, timeout=10)
     txs = json.loads(txs.content)
     return txs
+'''

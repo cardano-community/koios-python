@@ -11,6 +11,10 @@ import koios_python # We need to install and import koios_python library
 
 # Some examples:
 
+kp = koios_python.URLs("https://koios-otg.tosidrop.io/")
+pprint.pp(kp.get_epoch_info(370))
+
+
 # Get info of epoch number 337:
 #pprint.pp(koios_python.get_epoch_params(337))
 
