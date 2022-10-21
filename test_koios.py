@@ -24,48 +24,99 @@ kp_custom_server = kp.URLs(url="https://koios-otg.tosidrop.io/")
 # Koios server switching to testnet default is mainnet and this feature only works for standard Koios rest api server api.koios.rest/api/v0
 kp_testnet_server = kp.URLs( network='testnet')
 
-'''
+
 ##############################################################################
 # ACCOUNT FUNCTIONS
 
 # get account list
 def test_get_account_list():
-	account_list = koios_python.get_account_list()
-	assert 'code' not in account_list[0]
+        account_list_custom = kp_custom_server.get_account_list()
+        assert 'code' not in account_list_custom[0]
+        
+        account_list_mainnet = kp_mainnet_server.get_account_list()
+        assert 'code' not in account_list_mainnet[0]
+        
+        account_list_testnet = kp_testnet_server.get_account_list()
+        assert 'code' not in account_list_testnet[0]
+
 
 # get account info
 def test_get_account_info():
-        account_info = koios_python.get_account_info('stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250')
-        assert 'code' not in account_info[0]
+        account_info_custom = kp_custom_server.get_account_info("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        assert 'code' not in account_info_custom[0]
+        
+        account_info_mainnet = kp_mainnet_server.get_account_info("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        assert 'code' not in account_info_mainnet[0]
+        
+        account_info_testnet = kp_testnet_server.get_account_info("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        assert 'code' not in account_info_testnet[0]
 
 # get account rewards
 def test_get_account_rewards():
-        account_rewards = koios_python.get_account_rewards('stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250')
-        assert 'code' not in account_rewards[0]
+        account_rewards_custom = kp_custom_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        assert 'code' not in account_rewards_custom[0]
         
-# get account rewards by epoch
-def test_get_account_rewards_by_epoch():
-        account_rewards = koios_python.get_account_rewards('stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250', 350)
-        assert 'code' not in account_rewards[0]
+        account_rewards_mainnet = kp_mainnet_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        assert 'code' not in account_rewards_mainnet[0]
+        
+        account_rewards_testnet = kp_testnet_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        assert 'code' not in account_rewards_testnet[0]
+
+        account_rewards_custom = kp_custom_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", 350)
+        assert 'code' not in account_rewards_custom[0]
+        
+        account_rewards_mainnet = kp_mainnet_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", 350)
+        assert 'code' not in account_rewards_mainnet[0]
+        
+        account_rewards_testnet = kp_testnet_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", 350)
+        assert 'code' not in account_rewards_testnet[0]
         
 # get account updates
 def test_get_account_updates():
-        account_updates = koios_python.get_account_updates('stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250')
-        assert 'code' not in account_updates[0]
+        account_updates_custom = kp_custom_server.get_account_updates("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        assert 'code' not in account_updates_custom[0]
+        
+        account_updates_mainnet = kp_mainnet_server.get_account_updates("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        assert 'code' not in account_updates_mainnet[0]
+        
+        account_updates_testnet = kp_testnet_server.get_account_updates("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        assert 'code' not in account_updates_testnet[0]
 
 # get account assets
 def test_get_account_assets():
-        account_assets = koios_python.get_account_assets('stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250')
-        if len(account_assets) > 0:
-                assert 'code' not in account_assets[0]
+        account_assets_custom = kp_custom_server.get_account_assets("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        if len(account_assets_custom) > 0:
+                assert 'code' not in account_assets_custom[0]
+        
+        account_assets_mainnet = kp_mainnet_server.get_account_assets("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        if len(account_assets_mainnet) > 0:
+                assert 'code' not in account_assets_mainnet[0]
+        
+        account_assets_testnet = kp_testnet_server.get_account_assets(["stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj",
+                                                                       "stake_test1uq7g7kqeucnqfweqzgxk3dw34e8zg4swnc7nagysug2mm4cm77jrx"])
+        if len(account_assets_testnet) > 0:
+                assert 'code' not in account_assets_testnet[0]
+
+
         
 # get account history
 def test_get_account_history():
-        account_history = koios_python.get_account_history('stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250')
-        assert 'code' not in account_history[0]
+        account_history_custom = kp_custom_server.get_account_history(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",
+                                                                       "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"])
+        if len(account_history_custom) > 0:
+                assert 'code' not in account_history_custom[0]
         
+        account_history_mainnet = kp_mainnet_server.get_account_history(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",
+                                                                         "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"])
+        if len(account_history_mainnet) > 0:
+                assert 'code' not in account_history_mainnet[0]
+        
+        account_history_testnet = kp_testnet_server.get_account_history(["stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj",
+                                                                         "stake_test1uq7g7kqeucnqfweqzgxk3dw34e8zg4swnc7nagysug2mm4cm77jrx"])
+        if len(account_history_testnet) > 0:
+                assert 'code' not in account_history_testnet[0] 
 
-        
+'''      
 ##############################################################################
 # ADDRESS FUNCTIONS
 
