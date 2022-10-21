@@ -6,13 +6,15 @@ Provides all urls used in the library
 class URLs:
     # imported like class methods
     from .epoch import get_epoch_info, get_epoch_params
+    from .network import get_tip, get_genesis, get_totals
+    from .block import get_blocks, get_block_info, get_block_txs
 
-    def __init__(self, url='https://api.koios.rest/api/v0/', network=None):
+    def __init__(self, url='https://api.koios.rest/api/v0/', network='mainnet'):
         self.url = url
         self.network = network
         
         # change subdomain to network name 
-        if self.network != None:
+        if self.network != 'mainnet':
             # replace any subdomain with "network" subdomain
             self.url = self.url.replace(self.url.split('.')[0], self.network)
         
@@ -44,7 +46,7 @@ class URLs:
         self.ACCOUNT_INFO_URL = url + "account_info"
         self.ACCOUNT_REWARDS_URL = url + "account_rewards"
         self.ACCOUNT_UPDATES_URL = url + "account_updates"
-        self.ACCOUNT_ADDRESES_URL = url + "account_addresses"
+        self.ACCOUNT_ADDRESSES_URL = url + "account_addresses"
         self.ACCOUNT_ASSETS_URL = url + "account_assets"
         self.ACCOUNT_HISTORY_URL = url + "account_history"
         # Asset URLs

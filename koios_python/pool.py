@@ -4,9 +4,7 @@ Provides all pool functions
 """
 import json
 import requests
-from .urls import POOL_BLOCKS_URL, POOL_DELEGATORS_URL, POOL_STAKE_SNAPSHOT, POOL_HISTORY_URL, \
-    POOL_DELEGATORS_HISTORY_URL, POOL_INFO_URL, POOL_LIST_URL, POOL_METADATA_URL, POOL_RELAYS_URL, \
-    POOL_UPDATES_URL
+
 
 
 def get_pool_list(content_range="0-999"):

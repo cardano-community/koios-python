@@ -4,8 +4,7 @@ Provides all transactions functions
 """
 import json
 import requests
-from .urls import SUBMIT_TX_URL, TX_INFO_URL, TX_METADATA_URL, TX_METALABELS_URL, TX_STATUS_URL, \
-TX_UTXOS_URL
+
 
 
 def get_tx_info(*args):

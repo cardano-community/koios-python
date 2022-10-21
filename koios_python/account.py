@@ -76,11 +76,11 @@ def get_account_addresses(self, *args):
     :rtype: list.
     """
     get_format = {"_stake_addresses": [args]}
-    addresses = requests.post(self.ACCOUNT_ADDRESES_URL, json= get_format, timeout=10)
+    addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, timeout=10)
     addresses = json.loads(addresses.content)
     return addresses
 
-def get_account_assets(*args):
+def get_account_assets(self, *args):
     """
     Get the native asset balance of given accounts.
 
@@ -89,7 +89,7 @@ def get_account_assets(*args):
     :rtype: list.
     """
     get_format = {"_stake_addresses": [args]}
-    assets = requests.post(ACCOUNT_ASSETS_URL, json= get_format, timeout=10)
+    assets = requests.post(self.ACCOUNT_ASSETS_URL, json= get_format, timeout=10)
     assets = json.loads(assets.content)
     return assets
 

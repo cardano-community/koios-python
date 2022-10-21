@@ -4,7 +4,6 @@ Provides all scripts functions
 """
 import json
 import requests
-from .urls import NATIVE_SCRIPT_LIST_URL, PLUTUS_SCRIPT_LIST_URL
 
 
 def get_native_script_list(content_range="0-999"):

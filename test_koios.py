@@ -13,11 +13,18 @@ Watch the terminal for the results of the tests. :)
 """
 
 import pytest
-import koios_python
-from koios_python import address # We need to install and import koios_python library
+import koios_python as kp
 
 
+# create a new url object with your own url or use koios.rest url by default
+kp_mainnet_server = kp.URLs()
 
+kp_custom_server = kp.URLs(url="https://koios-otg.tosidrop.io/")
+
+# Koios server switching to testnet default is mainnet and this feature only works for standard Koios rest api server api.koios.rest/api/v0
+kp_testnet_server = kp.URLs( network='testnet')
+
+'''
 ##############################################################################
 # ACCOUNT FUNCTIONS
 
@@ -128,27 +135,53 @@ def test_get_asset_summary():
 def test_get_asset_txs_history():
 	asset_txs_history = koios_python.get_asset_txs('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', '424f4f4b')
 	assert 'code' not in asset_txs_history[0]
-
+'''
 
 ##############################################################################
 # BLOCK FUNCTIONS
 
 # get list of blocks
 def test_get_blocks():
-        blocks = koios_python.get_blocks()
-        assert 'code' not in blocks[0]
+        
+        blocks_custom_server = kp_custom_server.get_blocks()
+        assert 'code' not in blocks_custom_server[0]
+        
+        blocks_mainnet_server = kp_mainnet_server.get_blocks()
+        assert 'code' not in blocks_mainnet_server[0]
+        
+        blocks_testnet_server = kp_testnet_server.get_blocks()
+        assert 'code' not in blocks_testnet_server[0]
         
 # get block info
 def test_get_block_info():
-	block_info = koios_python.get_block_info(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30",
+        
+        block_info_custom = kp_custom_server.get_block_info(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30",
     						"60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a",
     						"c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"])
-	assert 'code' not in block_info[0]
+        assert 'code' not in block_info_custom[0]
+
+        block_info_mainnet = kp_mainnet_server.get_block_info(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30",
+                                                               "60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a",
+                                                               "c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"])
+        assert 'code' not in block_info_mainnet[0]
+        
+        block_info_testnet = kp_testnet_server.get_block_info(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30",
+                                                               "60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a",
+                                                               "c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"])
+        assert 'code' not in block_info_testnet[0]
+
 
 # get block transactions
 def test_get_block_txs():
-        block_txs = koios_python.get_block_txs(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30"])
-        assert 'code' not in block_txs[0]
+        
+        block_txs_custom = kp_custom_server.get_block_txs(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30"])
+        assert 'code' not in block_txs_custom[0]
+        
+        block_txs_mainnet = kp_mainnet_server.get_block_txs(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30"])
+        assert 'code' not in block_txs_mainnet[0]
+        
+        block_txs_testnet = kp_testnet_server.get_block_txs(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30"])
+        assert 'code' not in block_txs_testnet[0]
 
 
 ##############################################################################
@@ -156,13 +189,27 @@ def test_get_block_txs():
 
 # get epoch info
 def test_get_epoch_info():
-	epoch_info = koios_python.get_epoch_info()
-	assert 'code' not in epoch_info[0]
+        
+        epoch_info_custom = kp_custom_server.get_epoch_info()
+        assert 'code' not in epoch_info_custom[0]
+
+        epoch_info_mainnet = kp_mainnet_server.get_epoch_info()
+        assert 'code' not in epoch_info_mainnet[0]
+        
+        epoch_info_testnet = kp_testnet_server.get_epoch_info()
+        assert 'code' not in epoch_info_testnet[0]
  
 # get epoch params
 def test_get_epoch_params():
-	epoch_params = koios_python.get_epoch_params()
-	assert 'code' not in epoch_params[0]
+        
+        epoch_params_custom = kp_custom_server.get_epoch_params()
+        assert 'code' not in epoch_params_custom[0]
+        
+        epoch_params_mainnet = kp_mainnet_server.get_epoch_params()
+        assert 'code' not in epoch_params_mainnet[0]
+        
+        epoch_params_testnet = kp_testnet_server.get_epoch_params()
+        assert 'code' not in epoch_params_testnet[0]
 
 
 
@@ -171,19 +218,41 @@ def test_get_epoch_params():
 
 # check tip
 def test_get_tip():
-        tip = koios_python.get_tip()
-        assert 'code' not in tip[0]
+        
+        tip_custom = kp_custom_server.get_tip()
+        assert 'code' not in tip_custom[0]
+        
+        tip_mainnet = kp_mainnet_server.get_tip()
+        assert 'code' not in tip_mainnet[0]
+        
+        tip_testnet = kp_testnet_server.get_tip()
+        assert 'code' not in tip_testnet[0]
+        
         
 # check genesis info
 def test_get_genesis():
-        genesis_info = koios_python.get_genesis()
-        assert 'code' not in genesis_info[0]
+        
+        genesis_custom = kp_custom_server.get_genesis()
+        assert 'code' not in genesis_custom[0]
+        
+        genesis_mainnet = kp_mainnet_server.get_genesis()
+        assert 'code' not in genesis_mainnet[0]
+        
+        genesis_testnet = kp_testnet_server.get_genesis()
+        assert 'code' not in genesis_testnet[0]
         
 def test_get_totals():
-        epoch_totals = koios_python.get_totals()
-        assert 'code' not in epoch_totals[0]
+        
+        epoch_totals_custom = kp_custom_server.get_totals()
+        assert 'code' not in epoch_totals_custom[0]
+        
+        epoch_totals_mainnet = kp_mainnet_server.get_totals()
+        assert 'code' not in epoch_totals_mainnet[0]
+        
+        epoch_totals_testnet = kp_testnet_server.get_totals()
+        assert 'code' not in epoch_totals_testnet[0]
 
-
+'''
 ##############################################################################
 # POOL FUNCTIONS
 
@@ -334,4 +403,4 @@ def test_get_tx_status():
         txs_status = koios_python.get_tx_status(["0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94",
                                                  "f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"])
         assert 'code' not in txs_status[0]
-        
+'''

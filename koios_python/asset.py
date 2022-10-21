@@ -4,8 +4,7 @@ Provides all asset functions
 """
 import json
 import requests
-from .urls import ASSET_ADDRESS_LIST_URL, ASSET_HISTORY_URL, ASSET_INFO_URL, ASSET_LIST_URL, \
-    ASSET_POLICY_INFO_URL, ASSET_SUMMARY_URL, ASSET_TXS_URL
+
 
 
 def get_asset_list():
