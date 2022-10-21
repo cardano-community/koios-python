@@ -8,7 +8,7 @@ class URLs:
     from .epoch import get_epoch_info, get_epoch_params
     from .network import get_tip, get_genesis, get_totals
     from .block import get_blocks, get_block_info, get_block_txs
-    from .address import get_address_info, get_address_txs
+    from .address import get_address_info, get_address_txs, get_address_assets, get_credential_txs
     from .account import get_account_info, get_account_list, get_account_rewards, get_account_updates, get_account_addresses, get_account_assets, get_account_history
 
     def __init__(self, url='https://api.koios.rest/api/v0/', network='mainnet'):

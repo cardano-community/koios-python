@@ -115,40 +115,81 @@ def test_get_account_history():
                                                                          "stake_test1uq7g7kqeucnqfweqzgxk3dw34e8zg4swnc7nagysug2mm4cm77jrx"])
         if len(account_history_testnet) > 0:
                 assert 'code' not in account_history_testnet[0] 
-
-'''      
+ 
 ##############################################################################
 # ADDRESS FUNCTIONS
 
 # get address info
 def test_get_address_info():
-	address_info = koios_python.get_address_info("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g")
-	assert 'code' not in address_info[0]
+        address_info_custom = kp_custom_server.get_address_info("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g")
+        if len(address_info_custom) > 0:
+                assert 'code' not in address_info_custom[0]
+        
+        address_info_mainnet = kp_mainnet_server.get_address_info("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g")
+        if len(address_info_mainnet) > 0:
+                assert 'code' not in address_info_mainnet[0]
+        
+        address_info_testnet = kp_testnet_server.get_address_info("addr_test1qzx9hu8j4ah3auytk0mwcupd69hpc52t0cw39a65ndrah86djs784u92a3m5w475w3w35tyd6v3qumkze80j8a6h5tuqq5xe8y")
+        if len(address_info_testnet) > 0:
+                assert 'code' not in address_info_testnet[0]
 
 # get address transactions
 def test_get_address_transactions():
-        address_txs = koios_python.get_address_txs("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g")
-        assert 'code' not in address_txs[0]
+        address_txs_custom = kp_custom_server.get_address_txs(["addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g",
+                                                                        "addr1qyfldpcvte8nkfpyv0jdc8e026cz5qedx7tajvupdu2724tlj8sypsq6p90hl40ya97xamkm9fwsppus2ru8zf6j8g9sm578cu"])
+        if len(address_txs_custom) > 0:
+                assert 'code' not in address_txs_custom[0]
+         
+        address_txs_mainnet = kp_mainnet_server.get_address_txs(["addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g",
+                                                                          "addr1qyfldpcvte8nkfpyv0jdc8e026cz5qedx7tajvupdu2724tlj8sypsq6p90hl40ya97xamkm9fwsppus2ru8zf6j8g9sm578cu"])
+        if len(address_txs_mainnet) > 0:
+                assert 'code' not in address_txs_mainnet[0]
         
-        address_txs_after_block = koios_python.get_address_txs("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g",1)
-        assert 'code' not in address_txs_after_block[0]
+        address_txs_testnet = kp_testnet_server.get_address_txs(["addr_test1qzx9hu8j4ah3auytk0mwcupd69hpc52t0cw39a65ndrah86djs784u92a3m5w475w3w35tyd6v3qumkze80j8a6h5tuqq5xe8y",
+                                                                          "addr_test1qrk7920v35zukhcch4kyydy6rxnhqdcvetkvngeqrvtgavw8tpzdklse3kwer7urhrlfg962m9fc8cznfcdpka5pd07sgf8n0w"])
+        if len(address_txs_testnet) > 0:
+                assert 'code' not in address_txs_testnet[0]
+        
+        address_txs_after_block = kp_mainnet_server.get_address_txs("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g",1)
+        if len(address_txs_after_block) > 0:
+                assert 'code' not in address_txs_after_block[0]
 
 # get address assets 
 def test_get_address_assets():
-        address_assets = koios_python.get_address_assets("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g")
-        if len(address_assets) >0:
-                assert 'code' not in address_assets[0]
+        address_assets_custom = kp_custom_server.get_address_assets("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g")
+        if len(address_assets_custom) >0:
+                assert 'code' not in address_assets_custom[0]
+                
+        address_assets_mainnet = kp_mainnet_server.get_address_assets("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g")
+        if len(address_assets_mainnet) >0:
+                assert 'code' not in address_assets_mainnet[0]
+        
+        address_assets_testnet = kp_testnet_server.get_address_assets("addr_test1qrk7920v35zukhcch4kyydy6rxnhqdcvetkvngeqrvtgavw8tpzdklse3kwer7urhrlfg962m9fc8cznfcdpka5pd07sgf8n0w")
+        if len(address_assets_testnet) >0:
+                assert 'code' not in address_assets_testnet[0]
 
 # get payment credentials hash
 def test_get_credentials():
+        credentials_custom = kp_custom_server.get_credential_txs("025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52")
+        if len(credentials_custom) > 0:
+                assert 'code' not in credentials_custom[0]
         
-        credentials = koios_python.get_credential_txs('025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52')
-        assert 'code' not in credentials[0]
+        credentials_mainnet = kp_mainnet_server.get_credential_txs('025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52')
+        if len(credentials_mainnet) > 0:
+                assert 'code' not in credentials_mainnet[0]
         
-        credentials_after_block = koios_python.get_credential_txs('025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52',6238675)
-        assert 'code' not in credentials_after_block[0]
+        credentials_testnet = kp_testnet_server.get_credential_txs('00003fac863dc2267d0cd90768c4af653572d719a79ca3b01957fa79')
+        if len(credentials_testnet) > 0:
+                assert 'code' not in credentials_testnet[0]
+        
+        credentials_after_block = kp_mainnet_server.get_credential_txs('025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52',6238675)
+        if len(credentials_after_block) > 0:
+                assert 'code' not in credentials_after_block[0]
 
-
+        credentials_after_block_testnet = kp_testnet_server.get_credential_txs('00003fac863dc2267d0cd90768c4af653572d719a79ca3b01957fa79',2342661)
+        if len(credentials_after_block_testnet) > 0:
+                assert 'code' not in credentials_after_block_testnet[0]
+'''
 ##############################################################################
 # ASSET FUNCTIONS
 
