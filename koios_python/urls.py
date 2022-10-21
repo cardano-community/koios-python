@@ -11,75 +11,63 @@ class URLs:
         self.url = url
         self.network = network
         
-        # # Network URLs
+        # change subdomain to network name 
+        if self.network != None:
+            # replace any subdomain with "network" subdomain
+            self.url = self.url.replace(self.url.split('.')[0], self.network)
+        
+        # Network URLs
         self.TIP_URL = url + "tip"
         self.GENESIS_URL = url + "genesis"
         self.TOTALS_URL = url + "totals"
         # Epoch URLs
         self.EPOCH_INFO_URL = url + "epoch_info"
         self.EPOCH_PARAMS_URL = url + "epoch_params"
-        
         # Block URLs
+        self.BLOCKS_URL = url + "blocks"
+        self.BLOCK_INFO_URL = url + "block_info"
+        self.BLOCK_TXS_URL = url + "block_txs"
+        # Transaction URLs
+        self.TX_INFO_URL = url + "tx_info"
+        self.TX_UTXOS_URL = url + "tx_utxos"
+        self.TX_METADATA_URL = url + "tx_metadata"
+        self.TX_METALABELS_URL = url + "tx_metalabels"
+        self.SUBMIT_TX_URL = url + "submittx"
+        self.TX_STATUS_URL = url + "tx_status"
+        # Address URLs
+        self.ADDRESS_INFO_URL = url + "address_info"
+        self.ADDRESS_TXS_URL = url + "address_txs"
+        self.ADDRESS_ASSETS_URL = url + "address_assets"
+        self.CREDENTIAL_TXS_URL = url + "credential_txs"
+        # Account URLs
+        self.ACCOUNT_LIST_URL = url + "account_list"
+        self.ACCOUNT_INFO_URL = url + "account_info"
+        self.ACCOUNT_REWARDS_URL = url + "account_rewards"
+        self.ACCOUNT_UPDATES_URL = url + "account_updates"
+        self.ACCOUNT_ADDRESES_URL = url + "account_addresses"
+        self.ACCOUNT_ASSETS_URL = url + "account_assets"
+        self.ACCOUNT_HISTORY_URL = url + "account_history"
+        # Asset URLs
+        self.ASSET_LIST_URL = url + "asset_list"
+        self.ASSET_ADDRESS_LIST_URL = url +  "asset_address_list?_asset_policy="
+        self.ASSET_INFO_URL = url + "asset_info?_asset_policy="
+        self.ASSET_HISTORY_URL = url + "asset_history?_asset_policy="
+        self.ASSET_POLICY_INFO_URL = url + "asset_policy_info?_asset_policy="
+        self.ASSET_SUMMARY_URL = url + "asset_summary?_asset_policy="
+        self.ASSET_TXS_URL = url + "asset_txs?_asset_policy="
+        # Pool URLs
+        self.POOL_LIST_URL = url + "pool_list"
+        self.POOL_INFO_URL = url + "pool_info"
+        self.POOL_STAKE_SNAPSHOT = url + "pool_stake_snapshot?_pool_bech32="
+        self.POOL_DELEGATORS_URL = url + "pool_delegators?_pool_bech32="
+        self.POOL_DELEGATORS_HISTORY_URL = url + "pool_delegators_history?_pool_bech32="
+        self.POOL_BLOCKS_URL = url + "pool_blocks?_pool_bech32="
+        self.POOL_HISTORY_URL = url + "pool_history?_pool_bech32="
+        self.POOL_UPDATES_URL = url + "pool_updates"
+        self.POOL_RELAYS_URL = url + "pool_relays"
+        self.POOL_METADATA_URL = url + "pool_metadata"
 
-# # Network URLs
-# TIP_URL = KOIOS_URL + "tip"
-# GENESIS_URL = KOIOS_URL + "genesis"
-# TOTALS_URL = KOIOS_URL + "totals"
-
-# Epoch URLs
-# EPOCH_INFO_URL = KOIOS_URL + "epoch_info"
-# EPOCH_PARAMS_URL = KOIOS_URL + "epoch_params"
-
-# # Block URLs
-# BLOCKS_URL = KOIOS_URL + "blocks"
-# BLOCK_INFO_URL = KOIOS_URL + "block_info"
-# BLOCK_TXS_URL = KOIOS_URL + "block_txs"
-
-# # Transactions URLs
-# TX_INFO_URL = KOIOS_URL + "tx_info"
-# TX_UTXOS_URL = KOIOS_URL + "tx_utxos"
-# TX_METADATA_URL = KOIOS_URL + "tx_metadata"
-# TX_METALABELS_URL = KOIOS_URL + "tx_metalabels"
-# SUBMIT_TX_URL = KOIOS_URL + "submittx"
-# TX_STATUS_URL = KOIOS_URL + "tx_status"
-
-# # Address URLs
-# ADDRESS_INFO_URL = KOIOS_URL + "address_info"
-# ADDRESS_TXS_URL = KOIOS_URL + "address_txs"
-# ADDRESS_ASSETS_URL = KOIOS_URL + "address_assets"
-# CREDENTIAL_TXS_URL = KOIOS_URL + "credential_txs"
-
-# # Account URLs
-# ACCOUNT_LIST_URL = KOIOS_URL + "account_list"
-# ACCOUNT_INFO_URL = KOIOS_URL + "account_info"
-# ACCOUNT_REWARDS_URL = KOIOS_URL + "account_rewards"
-# ACCOUNT_UPDATES_URL = KOIOS_URL + "account_updates"
-# ACCOUNT_ADDRESES_URL = KOIOS_URL + "account_addresses"
-# ACCOUNT_ASSETS_URL = KOIOS_URL + "account_assets"
-# ACCOUNT_HISTORY_URL = KOIOS_URL + "account_history"
-
-# # Asset URLs
-# ASSET_LIST_URL = KOIOS_URL + "asset_list"
-# ASSET_ADDRESS_LIST_URL = KOIOS_URL +  "asset_address_list?_asset_policy="
-# ASSET_INFO_URL = KOIOS_URL + "asset_info?_asset_policy="
-# ASSET_HISTORY_URL = KOIOS_URL + "asset_history?_asset_policy="
-# ASSET_POLICY_INFO_URL = KOIOS_URL + "asset_policy_info?_asset_policy="
-# ASSET_SUMMARY_URL = KOIOS_URL + "asset_summary?_asset_policy="
-# ASSET_TXS_URL = KOIOS_URL + "asset_txs?_asset_policy="
-
-# # Pool URLs
-# POOL_LIST_URL = KOIOS_URL + "pool_list"
-# POOL_INFO_URL = KOIOS_URL + "pool_info"
-# POOL_STAKE_SNAPSHOT = KOIOS_URL + "pool_stake_snapshot?_pool_bech32="
-# POOL_DELEGATORS_URL = KOIOS_URL + "pool_delegators?_pool_bech32="
-# POOL_DELEGATORS_HISTORY_URL = KOIOS_URL + "pool_delegators_history?_pool_bech32="
-# POOL_BLOCKS_URL = KOIOS_URL + "pool_blocks?_pool_bech32="
-# POOL_HISTORY_URL = KOIOS_URL + "pool_history?_pool_bech32="
-# POOL_UPDATES_URL = KOIOS_URL + "pool_updates"
-# POOL_RELAYS_URL = KOIOS_URL + "pool_relays"
-# POOL_METADATA_URL = KOIOS_URL + "pool_metadata"
-
-# # Scripts URLs
-# NATIVE_SCRIPT_LIST_URL = KOIOS_URL + "native_script_list"
-# PLUTUS_SCRIPT_LIST_URL = KOIOS_URL + "plutus_script_list"
-# SCRIPT_REDEEMERS_URL = KOIOS_URL + "script_redeemers"
+        # Scripts URLs
+        self.NATIVE_SCRIPT_LIST_URL = url + "native_script_list"
+        self.PLUTUS_SCRIPT_LIST_URL = url + "plutus_script_list"
+        self.SCRIPT_REDEEMERS_URL = url + "script_redeemers"

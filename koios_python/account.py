@@ -4,22 +4,20 @@ Provides all account functions
 """
 import json
 import requests
-from .urls import ACCOUNT_ADDRESES_URL, ACCOUNT_ASSETS_URL, ACCOUNT_HISTORY_URL, \
-    ACCOUNT_INFO_URL, ACCOUNT_LIST_URL, ACCOUNT_REWARDS_URL, ACCOUNT_UPDATES_URL
 
-def get_account_list():
+def get_account_list(self):
     """
     Get a list of all accounts.
 
     :return: string list of account (stake address: stake1...  bech32 format) IDs.
     :rtype: list.
     """
-    address_list = requests.get(ACCOUNT_LIST_URL, timeout=10)
+    address_list = requests.get(self.ACCOUNT_LIST_URL, timeout=10)
     address_list = json.loads(address_list.content)
     return address_list
 
 
-def get_account_info(*args):
+def get_account_info(self, *args):
     """
     Get the account information for given stake addresses (accounts).
 
@@ -28,11 +26,11 @@ def get_account_info(*args):
     :rtype: list.
     """
     get_format = {"_stake_addresses": [args] }
-    accounts_info = requests.post(ACCOUNT_INFO_URL, json= get_format , timeout=10)
+    accounts_info = requests.post(self.ACCOUNT_INFO_URL, json= get_format , timeout=10)
     accounts_info = json.loads(accounts_info.content)
     return accounts_info
 
-def get_account_rewards(*args):
+def get_account_rewards(self, *args):
     """
     Get the full rewards history (including MIR) for given stake addresses (accounts).
 
@@ -45,16 +43,16 @@ def get_account_rewards(*args):
 
     if not isinstance(epoch, int):
         get_format = {"_stake_addresses": [args] }
-        rewards = requests.post(ACCOUNT_REWARDS_URL, json= get_format , timeout=10)
+        rewards = requests.post(self.ACCOUNT_REWARDS_URL, json= get_format , timeout=10)
         rewards = json.loads(rewards.content)
     else:
         get_format = {"_stake_addresses": [args], "_epoch_no": epoch}
-        rewards = requests.post(ACCOUNT_REWARDS_URL, json= get_format , timeout=10)
+        rewards = requests.post(self.ACCOUNT_REWARDS_URL, json= get_format , timeout=10)
         rewards = json.loads(rewards.content)
     return rewards
 
 
-def get_account_updates(*args):
+def get_account_updates(self, *args):
     """
     Get the account updates (registration, deregistration, delegation and withdrawals) for given \
     stake addresses (accounts)
@@ -64,12 +62,12 @@ def get_account_updates(*args):
     :rtype: list.
     """
     get_format = {"_stake_addresses": [args]}
-    updates = requests.post(ACCOUNT_UPDATES_URL, json= get_format, timeout=10)
+    updates = requests.post(self.ACCOUNT_UPDATES_URL, json= get_format, timeout=10)
     updates = json.loads(updates.content)
     return updates
 
 
-def get_account_addresses(*args):
+def get_account_addresses(self, *args):
     """
     Get all addresses associated with given staking accounts.
 
@@ -78,7 +76,7 @@ def get_account_addresses(*args):
     :rtype: list.
     """
     get_format = {"_stake_addresses": [args]}
-    addresses = requests.post(ACCOUNT_ADDRESES_URL, json= get_format, timeout=10)
+    addresses = requests.post(self.ACCOUNT_ADDRESES_URL, json= get_format, timeout=10)
     addresses = json.loads(addresses.content)
     return addresses
 
@@ -96,7 +94,7 @@ def get_account_assets(*args):
     return assets
 
 
-def get_account_history(*args):
+def get_account_history(self, *args):
     """
     Get the staking history of given stake addresses (accounts).
 
@@ -108,10 +106,10 @@ def get_account_history(*args):
 
     if not isinstance(epoch, int):
         get_format = {"_stake_addresses": [args] }
-        history = requests.post(ACCOUNT_HISTORY_URL, json= get_format , timeout=10)
+        history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format , timeout=10)
         history = json.loads(history.content)
     else:
         get_format = {"_stake_addresses": [args], "_epoch_no": epoch}
-        history = requests.post(ACCOUNT_HISTORY_URL, json= get_format , timeout=10)
+        history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format , timeout=10)
         history = json.loads(history.content)
     return history
