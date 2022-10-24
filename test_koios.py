@@ -24,6 +24,12 @@ kp_custom_server = kp.URLs(url="https://koios-otg.tosidrop.io/")
 # Koios server switching to testnet default is mainnet and this feature only works for standard Koios rest api server api.koios.rest/api/v0
 kp_testnet_server = kp.URLs( network='testnet')
 
+# try to switch back to mainnet
+# def test_network_switch():
+#         kp_testnet_server.network = 'mainnet'
+#         account_list_testnet = kp_testnet_server.get_account_list()
+#         assert 'code' not in account_list_testnet[0]
+
 
 ##############################################################################
 # ACCOUNT FUNCTIONS
@@ -189,47 +195,58 @@ def test_get_credentials():
         credentials_after_block_testnet = kp_testnet_server.get_credential_txs('00003fac863dc2267d0cd90768c4af653572d719a79ca3b01957fa79',2342661)
         if len(credentials_after_block_testnet) > 0:
                 assert 'code' not in credentials_after_block_testnet[0]
-'''
+
 ##############################################################################
 # ASSET FUNCTIONS
 
 # get asset list of all native tokens
 def test_get_asset_list():
-	asset_list = koios_python.get_asset_list()
-	assert 'code' not in asset_list[0]
+        asset_list_custom = kp_custom_server.get_asset_list()
+        if len(asset_list_custom) > 0:
+                assert 'code' not in asset_list_custom[0]
+        
+        asset_list_mainnet = kp_mainnet_server.get_asset_list()
+        if len(asset_list_mainnet) > 0:
+                assert 'code' not in asset_list_mainnet[0]
+        
+        asset_list_testnet = kp_testnet_server.get_asset_list()
+        if len(asset_list_testnet) > 0:
+                assert 'code' not in asset_list_testnet[0]
+
 
 # get asset address list
-def test_get_asset_address_list():
-        asset_address_list = koios_python.get_asset_address_list('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b')
-        assert 'code' not in asset_address_list[0]
+# def test_get_asset_address_list():
+#         asset_address_list = koios_python.get_asset_address_list('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b')
+#         assert 'code' not in asset_address_list[0]
 
-# get asset info
-def test_get_asset_info():
-        asset_info = koios_python.get_asset_info('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b')
-        assert 'code' not in asset_info[0]
+# # get asset info
+# def test_get_asset_info():
+#         asset_info = koios_python.get_asset_info('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b')
+#         assert 'code' not in asset_info[0]
         
-# get asset history
-def test_get_asset_history():
-	asset_history = koios_python.get_asset_history('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b')
-	assert 'code' not in asset_history[0]
+# # get asset history
+# def test_get_asset_history():
+# 	asset_history = koios_python.get_asset_history('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b')
+# 	assert 'code' not in asset_history[0]
  
-# get asset policy info
-def test_get_asset_policy_info():
-        asset_policy_info = koios_python.get_asset_policy_info('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501')
-        assert 'code' not in asset_policy_info[0]
+# # get asset policy info
+# def test_get_asset_policy_info():
+#         asset_policy_info = koios_python.get_asset_policy_info('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501')
+#         assert 'code' not in asset_policy_info[0]
 
-# get asset summary
-def test_get_asset_summary():
-        asset_summary = koios_python.get_asset_summary('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', '424f4f4b')
-        assert 'code' not in asset_summary[0]
+# # get asset summary
+# def test_get_asset_summary():
+#         asset_summary = koios_python.get_asset_summary('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', '424f4f4b')
+#         assert 'code' not in asset_summary[0]
 
-# get asset transaction history
-def test_get_asset_txs_history():
-	asset_txs_history = koios_python.get_asset_txs('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', '424f4f4b')
-	assert 'code' not in asset_txs_history[0]
-'''
+# # get asset transaction history
+# def test_get_asset_txs_history():
+# 	asset_txs_history = koios_python.get_asset_txs('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', '424f4f4b')
+# 	assert 'code' not in asset_txs_history[0]
+
 
 ##############################################################################
+
 # BLOCK FUNCTIONS
 
 # get list of blocks

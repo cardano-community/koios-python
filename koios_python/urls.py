@@ -10,7 +10,11 @@ class URLs:
     from .block import get_blocks, get_block_info, get_block_txs
     from .address import get_address_info, get_address_txs, get_address_assets, get_credential_txs
     from .account import get_account_info, get_account_list, get_account_rewards, get_account_updates, get_account_addresses, get_account_assets, get_account_history
-
+    from .asset import get_asset_list, get_asset_address_list, get_asset_info, get_asset_history, get_asset_policy_info, get_asset_summary, get_asset_txs
+    
+    
+    
+    
     def __init__(self, url='https://api.koios.rest/api/v0/', network='mainnet'):
         self.url = url
         self.network = network
