@@ -11,8 +11,6 @@ pytest
 Watch the terminal for the results of the tests. :)
 
 """
-
-from re import L
 import pytest
 import koios_python as kp
 
