@@ -11,7 +11,7 @@ class URLs:
     from .address import get_address_info, get_address_txs, get_address_assets, get_credential_txs
     from .account import get_account_info, get_account_list, get_account_rewards, get_account_updates, get_account_addresses, get_account_assets, get_account_history
     from .asset import get_asset_list, get_asset_address_list, get_asset_info, get_asset_history, get_asset_policy_info, get_asset_summary, get_asset_txs
-    
+    from .pool import get_pool_list, get_pool_info, get_pool_stake_snapshot, get_pool_delegators, get_pool_delegators_history, get_pool_blocks, get_pool_history, get_pool_updates, get_pool_relays, get_pool_metadata 
     
     
     

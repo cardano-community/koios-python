@@ -12,6 +12,7 @@ Watch the terminal for the results of the tests. :)
 
 """
 
+from re import L
 import pytest
 import koios_python as kp
 
@@ -30,7 +31,7 @@ kp_testnet_server = kp.URLs( network='testnet')
 #         account_list_testnet = kp_testnet_server.get_account_list()
 #         assert 'code' not in account_list_testnet[0]
 
-
+'''
 ##############################################################################
 # ACCOUNT FUNCTIONS
 
@@ -215,35 +216,90 @@ def test_get_asset_list():
 
 
 # get asset address list
-# def test_get_asset_address_list():
-#         asset_address_list = koios_python.get_asset_address_list('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b')
-#         assert 'code' not in asset_address_list[0]
-
-# # get asset info
-# def test_get_asset_info():
-#         asset_info = koios_python.get_asset_info('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b')
-#         assert 'code' not in asset_info[0]
+def test_get_asset_address_list():
+        asset_addr_list_custom = kp_custom_server.get_asset_address_list("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b")
+        if len(asset_addr_list_custom) > 0:
+                assert 'code' not in asset_addr_list_custom[0]
         
-# # get asset history
-# def test_get_asset_history():
-# 	asset_history = koios_python.get_asset_history('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b')
-# 	assert 'code' not in asset_history[0]
- 
-# # get asset policy info
-# def test_get_asset_policy_info():
-#         asset_policy_info = koios_python.get_asset_policy_info('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501')
-#         assert 'code' not in asset_policy_info[0]
+        asset_addr_list_mainnet = kp_mainnet_server.get_asset_address_list("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b")
+        if len(asset_addr_list_mainnet) > 0:
+                assert 'code' not in asset_addr_list_mainnet[0]
+        
+        asset_addr_list_testnet = kp_testnet_server.get_asset_address_list("000327a9e427a3a3256eb6212ae26b7f53f7969b8e62d37ea9138a7b",54735465737431)
+        if len(asset_addr_list_testnet) > 0:
+                assert 'code' not in asset_addr_list_testnet[0]
+        
 
-# # get asset summary
-# def test_get_asset_summary():
-#         asset_summary = koios_python.get_asset_summary('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', '424f4f4b')
-#         assert 'code' not in asset_summary[0]
+# get asset info
+def test_get_asset_info():
+        asset_info_custom = kp_custom_server.get_asset_info("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b")
+        if len(asset_info_custom) > 0:
+                assert 'code' not in asset_info_custom[0]
+        
+        asset_info_mainnet = kp_mainnet_server.get_asset_info("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b")
+        if len(asset_info_mainnet) > 0:
+                assert 'code' not in asset_info_mainnet[0]
+        
+        asset_info_testnet = kp_testnet_server.get_asset_info("000327a9e427a3a3256eb6212ae26b7f53f7969b8e62d37ea9138a7b",54735465737431)
+        if len(asset_info_testnet) > 0:
+                assert 'code' not in asset_info_testnet[0]
+        
+# get asset history
+def test_get_asset_history():
+        asset_history_custom = kp_custom_server.get_asset_history("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b")
+        if len(asset_history_custom) > 0:
+                assert 'code' not in asset_history_custom[0]
+        
+        asset_history_mainnet = kp_mainnet_server.get_asset_history("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b")
+        if len(asset_history_mainnet) > 0:
+                assert 'code' not in asset_history_mainnet[0]
+        
+        asset_history_testnet = kp_testnet_server.get_asset_history("000327a9e427a3a3256eb6212ae26b7f53f7969b8e62d37ea9138a7b",54735465737431)
+        if len(asset_history_testnet) > 0:
+                assert 'code' not in asset_history_testnet[0]
 
-# # get asset transaction history
-# def test_get_asset_txs_history():
-# 	asset_txs_history = koios_python.get_asset_txs('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', '424f4f4b')
-# 	assert 'code' not in asset_txs_history[0]
+# get asset policy info
+def test_get_asset_policy_info():
+        asset_policy_info_custom = kp_custom_server.get_asset_policy_info("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501")
+        if len(asset_policy_info_custom) > 0:
+                assert 'code' not in asset_policy_info_custom[0]
+                
+        
+        asset_policy_info_mainnet = kp_mainnet_server.get_asset_policy_info("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501")
+        if len(asset_policy_info_mainnet) > 0:
+                assert 'code' not in asset_policy_info_mainnet[0]
+        
+        asset_policy_info_testnet = kp_testnet_server.get_asset_policy_info("000327a9e427a3a3256eb6212ae26b7f53f7969b8e62d37ea9138a7b")
+        if len(asset_policy_info_testnet) > 0:
+                assert 'code' not in asset_policy_info_testnet[0]
+        
+# get asset summary
+def test_get_asset_summary():
+        asset_summary_custom = kp_custom_server.get_asset_summary("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b")
+        if len(asset_summary_custom) > 0:
+                assert 'code' not in asset_summary_custom[0]        
+        
+        asset_summary_mainnet = kp_mainnet_server.get_asset_summary('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', '424f4f4b')
+        if len(asset_summary_mainnet) > 0:
+                assert 'code' not in asset_summary_mainnet[0]
 
+        asset_summary_testnet = kp_testnet_server.get_asset_summary("000327a9e427a3a3256eb6212ae26b7f53f7969b8e62d37ea9138a7b",54735465737431)
+        if len(asset_summary_testnet) > 0:
+                assert 'code' not in asset_summary_testnet[0]
+
+# get asset transaction history
+def test_get_asset_txs_history():
+        asset_txs_history_custom = kp_custom_server.get_asset_txs('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b')
+        if len(asset_txs_history_custom) > 0:
+                assert 'code' not in asset_txs_history_custom[0]
+                
+        asset_txs_history_mainnet = kp_mainnet_server.get_asset_txs('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b')
+        if len(asset_txs_history_mainnet) > 0:
+                assert 'code' not in asset_txs_history_mainnet[0]
+        
+        asset_txs_history_testnet = kp_testnet_server.get_asset_txs('000327a9e427a3a3256eb6212ae26b7f53f7969b8e62d37ea9138a7b',54735465737431)
+        if len(asset_txs_history_testnet) > 0:
+                assert 'code' not in asset_txs_history_testnet[0]
 
 ##############################################################################
 
@@ -267,31 +323,38 @@ def test_get_block_info():
         block_info_custom = kp_custom_server.get_block_info(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30",
     						"60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a",
     						"c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"])
-        assert 'code' not in block_info_custom[0]
+        if len(block_info_custom) > 0:
+                assert 'code' not in block_info_custom[0]
 
         block_info_mainnet = kp_mainnet_server.get_block_info(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30",
                                                                "60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a",
                                                                "c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"])
-        assert 'code' not in block_info_mainnet[0]
+        if len(block_info_mainnet) > 0:
+                assert 'code' not in block_info_mainnet[0]
         
-        block_info_testnet = kp_testnet_server.get_block_info(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30",
-                                                               "60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a",
-                                                               "c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"])
-        assert 'code' not in block_info_testnet[0]
+        block_info_testnet = kp_testnet_server.get_block_info(["f75fea40852ed7d7f539d008e45255725daef8553ae7162750836f279570813a",
+                                                               "ff9f0c7fb1136de2cd6f10c9a140af2887f1d3614cc949bfeb262266d4c202b7",
+                                                               "5ef645ee519cde94a82f0aa880048c37978374f248f11e408ac0571a9054d9d3"])
+        if len(block_info_testnet) > 0:
+                assert 'code' not in block_info_testnet[0]
 
 
 # get block transactions
 def test_get_block_txs():
         
         block_txs_custom = kp_custom_server.get_block_txs(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30"])
-        assert 'code' not in block_txs_custom[0]
+        if len(block_txs_custom) > 0:
+                assert 'code' not in block_txs_custom[0]
         
         block_txs_mainnet = kp_mainnet_server.get_block_txs(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30"])
-        assert 'code' not in block_txs_mainnet[0]
+        if len(block_txs_mainnet) > 0:
+                assert 'code' not in block_txs_mainnet[0]
         
-        block_txs_testnet = kp_testnet_server.get_block_txs(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30"])
-        assert 'code' not in block_txs_testnet[0]
-
+        block_txs_testnet = kp_testnet_server.get_block_txs(["f75fea40852ed7d7f539d008e45255725daef8553ae7162750836f279570813a",
+                                                             "ff9f0c7fb1136de2cd6f10c9a140af2887f1d3614cc949bfeb262266d4c202b7",
+                                                             "5ef645ee519cde94a82f0aa880048c37978374f248f11e408ac0571a9054d9d3"])
+        if len(block_txs_testnet) > 0:
+                assert 'code' not in block_txs_testnet[0]
 
 ##############################################################################
 # EPOCH FUNCTIONS
@@ -360,79 +423,129 @@ def test_get_totals():
         
         epoch_totals_testnet = kp_testnet_server.get_totals()
         assert 'code' not in epoch_totals_testnet[0]
-
 '''
 ##############################################################################
 # POOL FUNCTIONS
 
 # get list of pools on the network
 def test_get_pool_list():
-	pool_list = koios_python.get_pool_list('0-10')
-	assert 'code' not in pool_list[0]
+        pool_list_custom = kp_custom_server.get_pool_list()
+        pool_list_custom_range = kp_custom_server.get_pool_list('0-10')
+        if len(pool_list_custom) > 0 and len(pool_list_custom_range) > 0:
+                assert 'code' not in pool_list_custom[0] and 'code' not in pool_list_custom_range[0]
+                
+        pool_list_mainnet = kp_mainnet_server.get_pool_list()
+        pool_list_mainnet_range = kp_mainnet_server.get_pool_list('0-10')
+        if len(pool_list_mainnet) > 0 and len(pool_list_mainnet_range) > 0:
+                assert 'code' not in pool_list_mainnet[0] and 'code' not in pool_list_mainnet_range[0]
+                
+        pool_list_testnet = kp_testnet_server.get_pool_list()
+        pool_list_testnet_range = kp_testnet_server.get_pool_list('0-10')
+        if len(pool_list_testnet) > 0 and len(pool_list_testnet_range) > 0:
+                assert 'code' not in pool_list_testnet[0] and 'code' not in pool_list_testnet_range[0]
+
  
 # get pool info
 def test_get_pool_info():
-        pool_info = koios_python.get_pool_info(["pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp",
+        pool_info_custom = kp_custom_server.get_pool_info(["pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp",
     						"pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m",
     						"pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"])
-        assert 'code' not in pool_info[0]
+        if len(pool_info_custom) > 0:
+                assert 'code' not in pool_info_custom[0]
+        
+        pool_info_mainnet = kp_mainnet_server.get_pool_info(["pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp",
+                                                             "pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m",
+                                                             "pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"])
+        if len(pool_info_mainnet) > 0:
+                assert 'code' not in pool_info_mainnet[0]
+        assert 'code' not in pool_info_mainnet[0]
+        
+        pool_info_testnet = kp_testnet_server.get_pool_info(["pool102llj7e7a0mmxssjvjkv2d6lppuh6cz6q9xwc3tsksn0jqwz9eh",
+                                                             "pool102x86jz7uus6p6mlw02fdw2s805kng7g6ujs6s342t5msk36tch",
+                                                             "pool103qt58f9xlsr7y9anz3lnyq6cph4xh2yr4qrrtc356ldzz6ktqz"])
+        if len(pool_info_testnet) > 0:
+                assert 'code' not in pool_info_testnet[0]
         
         
 # get pool stake snapshot
 def test_get_pool_stake_snapshot():
-        stake_snapshot = koios_python.get_pool_stake_snapshot("pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp")
-        assert 'code' not in stake_snapshot[0]    
-
+        # stake_snapshot_custom = kp_custom_server.get_pool_stake_snapshot("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc")
+        # if len(stake_snapshot_custom) > 0:
+        #         assert 'code' not in stake_snapshot_custom[0]
         
+        stake_snapshot_mainnet = kp_mainnet_server.get_pool_stake_snapshot("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc")
+        if len(stake_snapshot_mainnet) > 0:
+                assert 'code' not in stake_snapshot_mainnet[0]
+        
+        stake_snapshot_testnet = kp_testnet_server.get_pool_stake_snapshot("pool102llj7e7a0mmxssjvjkv2d6lppuh6cz6q9xwc3tsksn0jqwz9eh")
+        if len(stake_snapshot_testnet) > 0:
+                assert 'code' not in stake_snapshot_testnet[0]
+
 # get pool delegator information
 def test_get_pool_delegators():
-        delegator_info = koios_python.get_pool_delegators("pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp")
-        assert 'code' not in delegator_info[0]
+        delegator_info_custom = kp_custom_server.get_pool_delegators("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc")
+        if len(delegator_info_custom) > 0:
+                assert 'code' not in delegator_info_custom[0]
+        
+        delegator_info_mainnet = kp_mainnet_server.get_pool_delegators("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc")
+        if len(delegator_info_mainnet) > 0:
+                assert 'code' not in delegator_info_mainnet[0]
+                
+        delegator_info_testnet = kp_testnet_server.get_pool_delegators("pool102llj7e7a0mmxssjvjkv2d6lppuh6cz6q9xwc3tsksn0jqwz9eh")
+        if len(delegator_info_testnet) > 0:
+                assert 'code' not in delegator_info_testnet[0]
+
         
 # get pool delegator history
 def test_get_pool_delegators_history():
         
-	delegator_history = koios_python.get_pool_delegators_history("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc")
-	assert 'code' not in delegator_history[0]
+        delegator_history_custom = kp_custom_server.get_pool_delegators_history("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc")
+        if len(delegator_history_custom) > 0:
+                assert 'code' not in delegator_history_custom[0]
+                
+        delegator_history_mainnet = kp_mainnet_server.get_pool_delegators_history("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc")
+        if len(delegator_history_mainnet) > 0:
+                assert 'code' not in delegator_history_mainnet[0]
+        
+        delegator_history_testnet = kp_testnet_server.get_pool_delegators_history("pool102llj7e7a0mmxssjvjkv2d6lppuh6cz6q9xwc3tsksn0jqwz9eh")
+        if len(delegator_history_testnet) > 0:
+                assert 'code' not in delegator_history_testnet[0]
 
-	delegator_history_epoch = koios_python.get_pool_delegators_history("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", 320)
-	assert 'code' not in delegator_history_epoch[0]
+# # get pool blocks
+# def test_get_pool_blocks():
+# 	pool_blocks = koios_python.get_pool_blocks("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc")
+# 	assert 'code' not in pool_blocks[0]
 
-# get pool blocks
-def test_get_pool_blocks():
-	pool_blocks = koios_python.get_pool_blocks("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc")
-	assert 'code' not in pool_blocks[0]
-
-	pool_blocks_epoch = koios_python.get_pool_blocks("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", 320)
-	assert 'code' not in pool_blocks_epoch[0]
+# 	pool_blocks_epoch = koios_python.get_pool_blocks("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", 320)
+# 	assert 'code' not in pool_blocks_epoch[0]
 
         
-# get pool history
-def test_get_pool_history():
-	pool_history = koios_python.get_pool_history("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc")
-	assert 'code' not in pool_history[0]
+# # get pool history
+# def test_get_pool_history():
+# 	pool_history = koios_python.get_pool_history("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc")
+# 	assert 'code' not in pool_history[0]
 
-	pool_history_epoch = koios_python.get_pool_history("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", 320)
-	assert 'code' not in pool_history_epoch[0]
+# 	pool_history_epoch = koios_python.get_pool_history("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", 320)
+# 	assert 'code' not in pool_history_epoch[0]
 
-# get pool updates
-def test_get_pool_updates():
-	pool_updates = koios_python.get_pool_updates()
-	assert 'code' not in pool_updates[0]
+# # get pool updates
+# def test_get_pool_updates():
+# 	pool_updates = koios_python.get_pool_updates()
+# 	assert 'code' not in pool_updates[0]
 
-# get pool relays
-def test_get_pool_relays():
-	pool_relays = koios_python.get_pool_relays('0-10')
-	assert 'code' not in pool_relays[0]
+# # get pool relays
+# def test_get_pool_relays():
+# 	pool_relays = koios_python.get_pool_relays('0-10')
+# 	assert 'code' not in pool_relays[0]
  
-# get pool metadata
-def test_get_pool_metadata():
-	pool_metadata = koios_python.get_pool_metadata()
-	assert 'code' not in pool_metadata[0]
+# # get pool metadata
+# def test_get_pool_metadata():
+# 	pool_metadata = koios_python.get_pool_metadata()
+# 	assert 'code' not in pool_metadata[0]
  
-	pool_metadata_id = koios_python.get_pool_metadata(["pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", "pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m"])
-	assert 'code' not in pool_metadata_id[0]
-
+# 	pool_metadata_id = koios_python.get_pool_metadata(["pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", "pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m"])
+# 	assert 'code' not in pool_metadata_id[0]
+'''
 ##############################################################################
 # SCRIPT FUNCTIONS
 

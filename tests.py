@@ -12,13 +12,16 @@ import koios_python # We need to install and import koios_python library
 # Some examples:
 
 kp = koios_python.URLs("https://koios-otg.tosidrop.io/")
+kp_mainnet = koios_python.URLs()
 # pprint.pp(kp.get_epoch_info(370))
 
 # pprint.pp(kp.get_epoch_params(370))
 
-pprint.pp(kp.get_genesis())
+# pprint.pp(kp.get_genesis())
 
+# pprint.pp(kp.get_asset_history("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"))
 
+pprint.pp(kp_mainnet.get_pool_stake_snapshot("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc"))
 
 # Get info of epoch number 337:
 #pprint.pp(koios_python.get_epoch_params(337))
@@ -28,9 +31,9 @@ pprint.pp(kp.get_genesis())
 # ,"0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
 
 #Get detailed information about a specifics blocks
-#pprint.pp(koios_python.get_block_info(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30", \
-#"60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a", \
-#"c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"]))
+# pprint.pp(kp.get_block_info(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30", \
+# "60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a", \
+# "c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"]))
 
 # Submit an already serialized transaction to the network from a binay file-system
 #print(koios_python.submit_tx("signed.cbor"))
@@ -40,7 +43,7 @@ pprint.pp(kp.get_genesis())
 # ,"0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
 
 # Get address/es info - balance, associated stake address (if any) and UTxO set.
-#pprint.pp(koios_python.get_address_info("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"))
+# pprint.pp(kp.get_address_info("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"))
 #pprint.pp(koios_python.get_address_info("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g", \
 #    "addr1qx6e0rnz0xmpn90d69mg3fvcjdleg30tjkxuwvztkd2m5eh9hzc5q00t5p20fy0j0cvph9rzntsf2ve6mdcpgs4s4alq84zgkh"))
 
@@ -52,7 +55,7 @@ pprint.pp(kp.get_genesis())
 #pprint.pp(koios_python.get_account_history("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg"))
 
 # Get the transaction hash list of input payment credential array, optionally filtering after specified block height 
-#pprint.pp(koios_python.get_credential_txs( "025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52", 333333))
+# pprint.pp(kp.get_credential_txs( "025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52", 333333))
 
 # Get the mint/burn history of an asset
 #pprint.pp(koios_python.get_asset_history("d3501d9531fcc25e3ca4b6429318c2cc374dbdbcf5e99c1c1e5da1ff" \
