@@ -23,16 +23,24 @@ kp_custom_server = kp.URLs(url="https://koios-otg.tosidrop.io/")
 # Koios server switching to testnet default is mainnet and this feature only works for standard Koios rest api server api.koios.rest/api/v0
 kp_testnet_server = kp.URLs( network='testnet')
 
-# try to switch back to mainnet
+##############################################################################
+def check_custom_url():
+        # check if custom url is working
+        assert kp_custom_server.url == "https://koios-otg.tosidrop.io/"
+
+
+
+
+# test network switching by trying to switch back to mainnet
 def test_network_switch():
         kp_test = kp.URLs(network='testnet')
         genesis_info_testnet = kp_test.get_genesis()
         assert genesis_info_testnet[0]['networkid'] == 'Testnet'
-        # kp_test.network = 'mainnet'
-        # genesis_info_mainnet = kp_test.get_genesis()
-        # assert genesis_info_mainnet[0]['networkid'] != 'Mainnet'
+        kp_test.network = 'mainnet'
+        genesis_info_mainnet = kp_test.get_genesis()
+        assert genesis_info_mainnet[0]['networkid'] != 'Mainnet'
 
-'''
+
 ##############################################################################
 # ACCOUNT FUNCTIONS
 
@@ -800,4 +808,3 @@ def test_get_tx_status():
                                                                   'c7e96e4cd6aa9e3afbc7b32d1e8023daf4197931f1ea61d2bdfc7a2e5e017cf1'])
         if len(tx_status_testnet) > 0 and len(tx_status_testnet_list) > 0:
                 assert 'code' not in tx_status_testnet[0] and 'code' not in tx_status_testnet_list[0]
-'''
