@@ -89,7 +89,7 @@ def get_asset_summary(self, asset_policy, asset_name):
     :rtype: list.
     """
     summary = requests.get("{}{}&_asset_name={}".format(self.ASSET_SUMMARY_URL, asset_policy, asset_name), timeout=10)
-    summary = requests.get(self.ASSET_SUMMARY_URL + asset_policy + "&_asset_name=" + asset_name, timeout=10)
+    # summary = requests.get(self.ASSET_SUMMARY_URL + asset_policy + "&_asset_name=" + asset_name, timeout=10)
     summary = json.loads(summary.content)
     return summary
 

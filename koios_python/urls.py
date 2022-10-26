@@ -11,9 +11,10 @@ class URLs:
     from .address import get_address_info, get_address_txs, get_address_assets, get_credential_txs
     from .account import get_account_info, get_account_list, get_account_rewards, get_account_updates, get_account_addresses, get_account_assets, get_account_history
     from .asset import get_asset_list, get_asset_address_list, get_asset_info, get_asset_history, get_asset_policy_info, get_asset_summary, get_asset_txs
-    from .pool import get_pool_list, get_pool_info, get_pool_stake_snapshot, get_pool_delegators, get_pool_delegators_history, get_pool_blocks, get_pool_history, get_pool_updates, get_pool_relays, get_pool_metadata 
-    
-    
+    from .pool import get_pool_list, get_pool_info, get_pool_stake_snapshot, get_pool_delegators, get_pool_delegators_history, get_pool_blocks, get_pool_history, get_pool_updates, get_pool_relays, get_pool_metadata
+    from .scripts import get_native_script_list, get_plutus_script_list, get_script_redeemers
+    from .transactions import get_tx_info, get_tx_utxos, get_tx_metadata, get_tx_metalabels, submit_tx, get_tx_status
+ 
     
     def __init__(self, url='https://api.koios.rest/api/v0/', network='mainnet'):
         self.url = url
@@ -78,4 +79,4 @@ class URLs:
         # Scripts URLs
         self.NATIVE_SCRIPT_LIST_URL = url + "native_script_list"
         self.PLUTUS_SCRIPT_LIST_URL = url + "plutus_script_list"
-        self.SCRIPT_REDEEMERS_URL = url + "script_redeemers"
+        self.SCRIPT_REDEEMERS_URL = url + "script_redeemers?_script_hash="
