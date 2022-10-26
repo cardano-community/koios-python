@@ -12,7 +12,25 @@ import koios_python # We need to install and import koios_python library
 # Some examples:
 
 kp = koios_python.URLs("https://koios-otg.tosidrop.io/")
+print(kp.url)
+
 kp_mainnet = koios_python.URLs()
+print(kp_mainnet.url)
+
+kp_test = koios_python.URLs(network="testnet")
+print(kp_test.GENESIS_URL)
+print(kp_test.url, kp_test.network)
+print(kp_test.get_genesis())
+
+kp_test = koios_python.URLs(network="mainnet")
+print(kp_test.GENESIS_URL)
+print(kp_test.url, kp_test.network)
+print(kp_test.get_genesis())
+
+# print(genesis_info_testnet)
+
+# assert genesis_info_testnet[0]['networkid'] == 'Testnet'
+
 # pprint.pp(kp.get_epoch_info(370))
 
 # pprint.pp(kp.get_epoch_params(370))
@@ -21,7 +39,7 @@ kp_mainnet = koios_python.URLs()
 
 # pprint.pp(kp.get_asset_history("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"))
 
-pprint.pp(kp_mainnet.get_pool_stake_snapshot("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc"))
+# pprint.pp(kp_mainnet.get_pool_stake_snapshot("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc"))
 
 # Get info of epoch number 337:
 #pprint.pp(koios_python.get_epoch_params(337))

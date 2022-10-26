@@ -17,17 +17,24 @@ class URLs:
  
     
     def __init__(self, url='https://api.koios.rest/api/v0/', network='mainnet'):
+        
         self.url = url
         self.network = network
         
-        # change subdomain to network name 
-        if self.network != 'mainnet':
+        # change subdomain to network name then change the rest of urls to use the new subdomain
+        if self.network == 'testnet':
             # replace any subdomain with "network" subdomain
             self.url = self.url.replace(self.url.split('.')[0], self.network)
+            # add https:// to the url
+            self.url = 'https://' + self.url
+        elif self.network == 'mainnet':
+            self.url = url
+        
+
         
         # Network URLs
-        self.TIP_URL = url + "tip"
-        self.GENESIS_URL = url + "genesis"
+        self.TIP_URL = self.url + "tip"
+        self.GENESIS_URL = self.url + "genesis"
         self.TOTALS_URL = url + "totals"
         # Epoch URLs
         self.EPOCH_INFO_URL = url + "epoch_info"
@@ -80,3 +87,11 @@ class URLs:
         self.NATIVE_SCRIPT_LIST_URL = url + "native_script_list"
         self.PLUTUS_SCRIPT_LIST_URL = url + "plutus_script_list"
         self.SCRIPT_REDEEMERS_URL = url + "script_redeemers?_script_hash="
+        
+        # def switch_network(self, network):
+        #     self.network = network
+        #     if network == 'mainnet':
+        #         self.url = self.url.replace(self.url.split('.')[0], 'api')
+        #     self.url = self.url.replace(self.url.split('.')[0], self.network)
+        #     self.__init__(self.url, self.network)
+

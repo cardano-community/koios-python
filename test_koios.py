@@ -11,7 +11,7 @@ pytest
 Watch the terminal for the results of the tests. :)
 
 """
-from re import A
+
 import pytest
 import koios_python as kp
 
@@ -24,12 +24,15 @@ kp_custom_server = kp.URLs(url="https://koios-otg.tosidrop.io/")
 kp_testnet_server = kp.URLs( network='testnet')
 
 # try to switch back to mainnet
-# def test_network_switch():
-#         kp_testnet_server.network = 'mainnet'
-#         account_list_testnet = kp_testnet_server.get_account_list()
-#         assert 'code' not in account_list_testnet[0]
+def test_network_switch():
+        kp_test = kp.URLs(network='testnet')
+        genesis_info_testnet = kp_test.get_genesis()
+        assert genesis_info_testnet[0]['networkid'] == 'Testnet'
+        # kp_test.network = 'mainnet'
+        # genesis_info_mainnet = kp_test.get_genesis()
+        # assert genesis_info_mainnet[0]['networkid'] != 'Mainnet'
 
-
+'''
 ##############################################################################
 # ACCOUNT FUNCTIONS
 
@@ -55,7 +58,7 @@ def test_get_account_info():
         account_info_mainnet = kp_mainnet_server.get_account_info("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
         assert 'code' not in account_info_mainnet[0]
         
-        account_info_testnet = kp_testnet_server.get_account_info("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        account_info_testnet = kp_testnet_server.get_account_info("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj")
         assert 'code' not in account_info_testnet[0]
 
 # get account rewards
@@ -67,7 +70,7 @@ def test_get_account_rewards():
         account_rewards_mainnet = kp_mainnet_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
         assert 'code' not in account_rewards_mainnet[0]
         
-        account_rewards_testnet = kp_testnet_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        account_rewards_testnet = kp_testnet_server.get_account_rewards("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj")
         assert 'code' not in account_rewards_testnet[0]
 
         account_rewards_custom = kp_custom_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", 350)
@@ -76,7 +79,7 @@ def test_get_account_rewards():
         account_rewards_mainnet = kp_mainnet_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", 350)
         assert 'code' not in account_rewards_mainnet[0]
         
-        account_rewards_testnet = kp_testnet_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", 350)
+        account_rewards_testnet = kp_testnet_server.get_account_rewards("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj", 180)
         assert 'code' not in account_rewards_testnet[0]
         
 # get account updates
@@ -88,7 +91,7 @@ def test_get_account_updates():
         account_updates_mainnet = kp_mainnet_server.get_account_updates("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
         assert 'code' not in account_updates_mainnet[0]
         
-        account_updates_testnet = kp_testnet_server.get_account_updates("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        account_updates_testnet = kp_testnet_server.get_account_updates("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj")
         assert 'code' not in account_updates_testnet[0]
 
 # get account assets
@@ -681,67 +684,120 @@ def test_get_script_redeemers():
         script_redeemers_testnet = kp_testnet_server.get_script_redeemers('9a3910acc1e1d49a25eb5798d987739a63f65eb48a78462ffae21e6f')
         if len(script_redeemers_testnet) > 0:
                 assert 'code' not in script_redeemers_testnet[0]
-        
-'''
+      
+
 ##############################################################################
 # TRANSACTION FUNCTIONS
 
 # get transaction(s) info
 def test_tx_info():
         
-        tx_info = koios_python.get_tx_info("0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94")
-        assert 'code' not in tx_info[0]
-        
-        txs_info= koios_python.get_tx_info(["0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94",
-                                            "f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"])
-        assert 'code' not in txs_info[0]
+        tx_info_custom = kp_custom_server.get_tx_info('0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94')
+        tx_info_custom_list = kp_custom_server.get_tx_info(['0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94',
+                                                            'f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e'])
+        if len(tx_info_custom) > 0 and len(tx_info_custom_list) > 0:
+                assert 'code' not in tx_info_custom[0] and 'code' not in tx_info_custom_list[0]
+                
+        tx_info_mainnet = kp_mainnet_server.get_tx_info('0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94')
+        tx_info_mainnet_list = kp_mainnet_server.get_tx_info(['0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94',
+                                                              'f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e'])
+        if len(tx_info_mainnet) > 0 and len(tx_info_mainnet_list) > 0:
+                assert 'code' not in tx_info_mainnet[0] and 'code' not in tx_info_mainnet_list[0]
+                
+        tx_info_testnet = kp_testnet_server.get_tx_info('928052b80bfc23801da525a6bf8f805da36f22fa0fd5fec2198b0746eb82b72b')
+        tx_info_testnet_list = kp_testnet_server.get_tx_info(['928052b80bfc23801da525a6bf8f805da36f22fa0fd5fec2198b0746eb82b72b',
+                                                              'c7e96e4cd6aa9e3afbc7b32d1e8023daf4197931f1ea61d2bdfc7a2e5e017cf1'])
+        if len(tx_info_testnet) > 0 and len(tx_info_testnet_list) > 0:
+                assert 'code' not in tx_info_testnet[0] and 'code' not in tx_info_testnet_list[0]
 
 # get transaction(s) utxos
 def test_get_tx_utxos():
         
-        tx_utxos = koios_python.get_tx_utxos("0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94")
-        assert 'code' not in tx_utxos[0]
+        tx_utxos_custom = kp_custom_server.get_tx_utxos('0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94')
+        tx_utxos_custom_list = kp_custom_server.get_tx_utxos(['0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94',
+                                                              'f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e'])
+        if len(tx_utxos_custom) > 0 and len(tx_utxos_custom_list) > 0:
+                assert 'code' not in tx_utxos_custom[0] and 'code' not in tx_utxos_custom_list[0]
         
-        txs_utxos = koios_python.get_tx_utxos(["0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94",
-                                               "f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"])
-        assert 'code' not in txs_utxos[0]
+        tx_utxo_mainnet = kp_mainnet_server.get_tx_utxos('0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94')
+        tx_utxo_mainnet_list = kp_mainnet_server.get_tx_utxos(['0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94',
+                                                               'f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e'])
+        if len(tx_utxo_mainnet) > 0 and len(tx_utxo_mainnet_list) > 0:
+                assert 'code' not in tx_utxo_mainnet[0] and 'code' not in tx_utxo_mainnet_list[0]
+        
+        tx_utxo_testnet = kp_testnet_server.get_tx_utxos('928052b80bfc23801da525a6bf8f805da36f22fa0fd5fec2198b0746eb82b72b')
+        tx_utxo_testnet_list = kp_testnet_server.get_tx_utxos(['928052b80bfc23801da525a6bf8f805da36f22fa0fd5fec2198b0746eb82b72b',
+                                                               'c7e96e4cd6aa9e3afbc7b32d1e8023daf4197931f1ea61d2bdfc7a2e5e017cf1'])
+        if len(tx_utxo_testnet) > 0 and len(tx_utxo_testnet_list) > 0:
+                assert 'code' not in tx_utxo_testnet[0] and 'code' not in tx_utxo_testnet_list[0]
 
 # get transaction(s) metadata
 def test_get_tx_metadata():
         
-        tx_metadata = koios_python.get_tx_metadata("0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94")
-        assert 'code' not in tx_metadata[0]
-        
-        txs_metadata = koios_python.get_tx_metadata(["0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94",
-                                                     "f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"])
-        assert 'code' not in txs_metadata[0]
+        tx_metadata_custom = kp_custom_server.get_tx_metadata('0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94')
+        tx_metadata_custom_list = kp_custom_server.get_tx_metadata(['0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94',
+                                                                    'f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e'])
+        if len(tx_metadata_custom) > 0 and len(tx_metadata_custom_list) > 0:
+                assert 'code' not in tx_metadata_custom[0] and 'code' not in tx_metadata_custom_list[0]
+                
+        tx_metadata_mainnet = kp_mainnet_server.get_tx_metadata('0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94')
+        tx_metadata_mainnet_list = kp_mainnet_server.get_tx_metadata(['0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94',
+                                                                      'f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e'])
+        if len(tx_metadata_mainnet) > 0 and len(tx_metadata_mainnet_list) > 0:
+                assert 'code' not in tx_metadata_mainnet[0] and 'code' not in tx_metadata_mainnet_list[0]
+                
+        tx_metadata_testnet = kp_testnet_server.get_tx_metadata('928052b80bfc23801da525a6bf8f805da36f22fa0fd5fec2198b0746eb82b72b')
+        tx_metadata_testnet_list = kp_testnet_server.get_tx_metadata(['928052b80bfc23801da525a6bf8f805da36f22fa0fd5fec2198b0746eb82b72b',
+                                                                      'c7e96e4cd6aa9e3afbc7b32d1e8023daf4197931f1ea61d2bdfc7a2e5e017cf1'])
+        if len(tx_metadata_testnet) > 0 and len(tx_metadata_testnet_list) > 0:
+                assert 'code' not in tx_metadata_testnet[0] and 'code' not in tx_metadata_testnet_list[0]
 
 # get transaction(s) metadata labels
 def test_get_tx_metalabels():
         
-        tx_metalables = koios_python.get_tx_metalabels("0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94")
-        assert 'code' not in tx_metalables[0]
-        
-        txs_metalables = koios_python.get_tx_metalabels(["0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94",
-                                                        "f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"])
-        
-        assert 'code' not in txs_metalables[0]
+        tx_metalables_custom = kp_custom_server.get_tx_metalabels('0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94')
+        tx_metalables_custom_list = kp_custom_server.get_tx_metalabels(['0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94',
+                                                                        'f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e'])
+        if len(tx_metalables_custom) > 0 and len(tx_metalables_custom_list) > 0:
+                assert 'code' not in tx_metalables_custom[0] and 'code' not in tx_metalables_custom_list[0]
+                
+        tx_metalables_mainnet = kp_mainnet_server.get_tx_metalabels('0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94')
+        tx_metalables_mainnet_list = kp_mainnet_server.get_tx_metalabels(['0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94',
+                                                                          'f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e'])
+        if len(tx_metalables_mainnet) > 0 and len(tx_metalables_mainnet_list) > 0:
+                assert 'code' not in tx_metalables_mainnet[0] and 'code' not in tx_metalables_mainnet_list[0]
+                
+        tx_metalables_testnet = kp_testnet_server.get_tx_metalabels('928052b80bfc23801da525a6bf8f805da36f22fa0fd5fec2198b0746eb82b72b')
+        tx_metalables_testnet_list = kp_testnet_server.get_tx_metalabels(['928052b80bfc23801da525a6bf8f805da36f22fa0fd5fec2198b0746eb82b72b',
+                                                                          'c7e96e4cd6aa9e3afbc7b32d1e8023daf4197931f1ea61d2bdfc7a2e5e017cf1'])
+        if len(tx_metalables_testnet) > 0 and len(tx_metalables_testnet_list) > 0:
+                assert 'code' not in tx_metalables_testnet[0] and 'code' not in tx_metalables_testnet_list[0]
 
-
-# NOT FINISHED
-# submit_tx signed cbor
-# def test_submit_tx():
+# # NOT FINISHED
+# # submit_tx signed cbor
+# # def test_submit_tx():
 	
-# 	tx_submit = koios_python.submit_tx("file")
-# 	assert 'code' not in tx_submit[0]
+# # 	tx_submit = koios_python.submit_tx("file")
+# # 	assert 'code' not in tx_submit[0]
 
 # get tx status
 def test_get_tx_status():
         
-        tx_status = koios_python.get_tx_status("0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94")
-        assert 'code' not in tx_status[0]
-        
-        txs_status = koios_python.get_tx_status(["0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94",
-                                                 "f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"])
-        assert 'code' not in txs_status[0]
+        tx_status_custom = kp_custom_server.get_tx_status('0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94')
+        tx_status_custom_list = kp_custom_server.get_tx_status(['0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94',
+                                                                'f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e'])
+        if len(tx_status_custom) > 0 and len(tx_status_custom_list) > 0:
+                assert 'code' not in tx_status_custom[0] and 'code' not in tx_status_custom_list[0]
+                
+        tx_status_mainnet = kp_mainnet_server.get_tx_status('0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94')
+        tx_status_mainnet_list = kp_mainnet_server.get_tx_status(['0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94',
+                                                                  'f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e'])
+        if len(tx_status_mainnet) > 0 and len(tx_status_mainnet_list) > 0:
+                assert 'code' not in tx_status_mainnet[0] and 'code' not in tx_status_mainnet_list[0]
+                
+        tx_status_testnet = kp_testnet_server.get_tx_status('928052b80bfc23801da525a6bf8f805da36f22fa0fd5fec2198b0746eb82b72b')
+        tx_status_testnet_list = kp_testnet_server.get_tx_status(['928052b80bfc23801da525a6bf8f805da36f22fa0fd5fec2198b0746eb82b72b',
+                                                                  'c7e96e4cd6aa9e3afbc7b32d1e8023daf4197931f1ea61d2bdfc7a2e5e017cf1'])
+        if len(tx_status_testnet) > 0 and len(tx_status_testnet_list) > 0:
+                assert 'code' not in tx_status_testnet[0] and 'code' not in tx_status_testnet_list[0]
 '''
