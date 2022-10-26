@@ -23,7 +23,7 @@ class URLs:
         
         # change subdomain to network name then change the rest of urls to use the new subdomain
         if self.network == 'testnet':
-            # replace any subdomain with "network" subdomain
+            # replace mainnet subdomain with "testnet" subdomain
             self.url = self.url.replace(self.url.split('.')[0], self.network)
             # add https:// to the url
             self.url = 'https://' + self.url
@@ -35,63 +35,55 @@ class URLs:
         # Network URLs
         self.TIP_URL = self.url + "tip"
         self.GENESIS_URL = self.url + "genesis"
-        self.TOTALS_URL = url + "totals"
+        self.TOTALS_URL = self.url + "totals"
         # Epoch URLs
-        self.EPOCH_INFO_URL = url + "epoch_info"
-        self.EPOCH_PARAMS_URL = url + "epoch_params"
+        self.EPOCH_INFO_URL = self.url + "epoch_info"
+        self.EPOCH_PARAMS_URL = self.url + "epoch_params"
         # Block URLs
-        self.BLOCKS_URL = url + "blocks"
-        self.BLOCK_INFO_URL = url + "block_info"
-        self.BLOCK_TXS_URL = url + "block_txs"
+        self.BLOCKS_URL = self.url + "blocks"
+        self.BLOCK_INFO_URL = self.url + "block_info"
+        self.BLOCK_TXS_URL = self.url + "block_txs"
         # Transaction URLs
-        self.TX_INFO_URL = url + "tx_info"
-        self.TX_UTXOS_URL = url + "tx_utxos"
-        self.TX_METADATA_URL = url + "tx_metadata"
-        self.TX_METALABELS_URL = url + "tx_metalabels"
-        self.SUBMIT_TX_URL = url + "submittx"
-        self.TX_STATUS_URL = url + "tx_status"
+        self.TX_INFO_URL = self.url + "tx_info"
+        self.TX_UTXOS_URL = self.url + "tx_utxos"
+        self.TX_METADATA_URL = self.url + "tx_metadata"
+        self.TX_METALABELS_URL = self.url + "tx_metalabels"
+        self.SUBMIT_TX_URL = self.url + "submittx"
+        self.TX_STATUS_URL = self.url + "tx_status"
         # Address URLs
-        self.ADDRESS_INFO_URL = url + "address_info"
-        self.ADDRESS_TXS_URL = url + "address_txs"
-        self.ADDRESS_ASSETS_URL = url + "address_assets"
-        self.CREDENTIAL_TXS_URL = url + "credential_txs"
+        self.ADDRESS_INFO_URL = self.url + "address_info"
+        self.ADDRESS_TXS_URL = self.url + "address_txs"
+        self.ADDRESS_ASSETS_URL = self.url + "address_assets"
+        self.CREDENTIAL_TXS_URL = self.url + "credential_txs"
         # Account URLs
-        self.ACCOUNT_LIST_URL = url + "account_list"
-        self.ACCOUNT_INFO_URL = url + "account_info"
-        self.ACCOUNT_REWARDS_URL = url + "account_rewards"
-        self.ACCOUNT_UPDATES_URL = url + "account_updates"
-        self.ACCOUNT_ADDRESSES_URL = url + "account_addresses"
-        self.ACCOUNT_ASSETS_URL = url + "account_assets"
-        self.ACCOUNT_HISTORY_URL = url + "account_history"
+        self.ACCOUNT_LIST_URL = self.url + "account_list"
+        self.ACCOUNT_INFO_URL = self.url + "account_info"
+        self.ACCOUNT_REWARDS_URL = self.url + "account_rewards"
+        self.ACCOUNT_UPDATES_URL = self.url + "account_updates"
+        self.ACCOUNT_ADDRESSES_URL = self.url + "account_addresses"
+        self.ACCOUNT_ASSETS_URL = self.url + "account_assets"
+        self.ACCOUNT_HISTORY_URL = self.url + "account_history"
         # Asset URLs
-        self.ASSET_LIST_URL = url + "asset_list"
-        self.ASSET_ADDRESS_LIST_URL = url +  "asset_address_list?_asset_policy="
-        self.ASSET_INFO_URL = url + "asset_info?_asset_policy="
-        self.ASSET_HISTORY_URL = url + "asset_history?_asset_policy="
-        self.ASSET_POLICY_INFO_URL = url + "asset_policy_info?_asset_policy="
-        self.ASSET_SUMMARY_URL = url + "asset_summary?_asset_policy="
-        self.ASSET_TXS_URL = url + "asset_txs?_asset_policy="
+        self.ASSET_LIST_URL = self.url + "asset_list"
+        self.ASSET_ADDRESS_LIST_URL = self.url +  "asset_address_list?_asset_policy="
+        self.ASSET_INFO_URL = self.url + "asset_info?_asset_policy="
+        self.ASSET_HISTORY_URL = self.url + "asset_history?_asset_policy="
+        self.ASSET_POLICY_INFO_URL = self.url + "asset_policy_info?_asset_policy="
+        self.ASSET_SUMMARY_URL = self.url + "asset_summary?_asset_policy="
+        self.ASSET_TXS_URL = self.url + "asset_txs?_asset_policy="
         # Pool URLs
-        self.POOL_LIST_URL = url + "pool_list"
-        self.POOL_INFO_URL = url + "pool_info"
-        self.POOL_STAKE_SNAPSHOT = url + "pool_stake_snapshot?_pool_bech32="
-        self.POOL_DELEGATORS_URL = url + "pool_delegators?_pool_bech32="
-        self.POOL_DELEGATORS_HISTORY_URL = url + "pool_delegators_history?_pool_bech32="
-        self.POOL_BLOCKS_URL = url + "pool_blocks?_pool_bech32="
-        self.POOL_HISTORY_URL = url + "pool_history?_pool_bech32="
-        self.POOL_UPDATES_URL = url + "pool_updates"
-        self.POOL_RELAYS_URL = url + "pool_relays"
-        self.POOL_METADATA_URL = url + "pool_metadata"
+        self.POOL_LIST_URL = self.url + "pool_list"
+        self.POOL_INFO_URL = self.url + "pool_info"
+        self.POOL_STAKE_SNAPSHOT = self.url + "pool_stake_snapshot?_pool_bech32="
+        self.POOL_DELEGATORS_URL = self.url + "pool_delegators?_pool_bech32="
+        self.POOL_DELEGATORS_HISTORY_URL = self.url + "pool_delegators_history?_pool_bech32="
+        self.POOL_BLOCKS_URL = self.url + "pool_blocks?_pool_bech32="
+        self.POOL_HISTORY_URL = self.url + "pool_history?_pool_bech32="
+        self.POOL_UPDATES_URL = self.url + "pool_updates"
+        self.POOL_RELAYS_URL = self.url + "pool_relays"
+        self.POOL_METADATA_URL = self.url + "pool_metadata"
 
         # Scripts URLs
-        self.NATIVE_SCRIPT_LIST_URL = url + "native_script_list"
-        self.PLUTUS_SCRIPT_LIST_URL = url + "plutus_script_list"
-        self.SCRIPT_REDEEMERS_URL = url + "script_redeemers?_script_hash="
-        
-        # def switch_network(self, network):
-        #     self.network = network
-        #     if network == 'mainnet':
-        #         self.url = self.url.replace(self.url.split('.')[0], 'api')
-        #     self.url = self.url.replace(self.url.split('.')[0], self.network)
-        #     self.__init__(self.url, self.network)
-
+        self.NATIVE_SCRIPT_LIST_URL = self.url + "native_script_list"
+        self.PLUTUS_SCRIPT_LIST_URL = self.url + "plutus_script_list"
+        self.SCRIPT_REDEEMERS_URL = self.url + "script_redeemers?_script_hash="
