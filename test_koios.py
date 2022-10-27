@@ -2,10 +2,20 @@
 """
 TESTING SCRIPT FOR KOIOS_PYTHON USING PYTEST
 
+Main purpose of this script is to ensure basic functionality of the koios-python library and
+its features are working with the current version of the Koios REST API.
+
+It will help test basic edge cases and ensure that the library is working as expected.
+
 To use this script, you must have pytest installed.
+
+You can install pytest using pip:
 pip install pytest
 
-Change directory to the folder containing this script and run:
+After you have downloaded/cloned this repo and installed pytest, you can run this script
+First change directory to the folder containing this repo and script then simply run the
+following command in your terminal:
+
 pytest
 
 Watch the terminal for the results of the tests. :)
@@ -18,27 +28,33 @@ import koios_python as kp
 # create a new url object with your own url or use koios.rest url by default
 kp_mainnet_server = kp.URLs()
 
-kp_custom_server = kp.URLs(url="https://koios-otg.tosidrop.io/")
+kp_custom_server = kp.URLs(url="https://koios-otg.tosidrop.io/api/v0/")
 
 # Koios server switching to testnet default is mainnet and this feature only works for standard Koios rest api server api.koios.rest/api/v0
 kp_testnet_server = kp.URLs( network='testnet')
 
+
+# START OF TESTS FOR KOIOS_PYTHON
 ##############################################################################
-def check_custom_url():
+def test_check_custom_url():
         # check if custom url is working
-        assert kp_custom_server.url == "https://koios-otg.tosidrop.io/"
+        assert kp_custom_server.url == "https://koios-otg.tosidrop.io/api/v0/"
 
 
 
 
 # test network switching by trying to switch back to mainnet
 def test_network_switch():
+        
         kp_test = kp.URLs(network='testnet')
         genesis_info_testnet = kp_test.get_genesis()
+        # check if we are on testnet
         assert genesis_info_testnet[0]['networkid'] == 'Testnet'
-        kp_test.network = 'mainnet'
+        # switch back to mainnet
+        kp_test = kp.URLs(network='mainnet')
         genesis_info_mainnet = kp_test.get_genesis()
-        assert genesis_info_mainnet[0]['networkid'] != 'Mainnet'
+        # check if we are on mainnet
+        assert genesis_info_mainnet[0]['networkid'] == 'Mainnet'
 
 
 ##############################################################################
@@ -46,62 +62,88 @@ def test_network_switch():
 
 # get account list
 def test_get_account_list():
-
+        # get account list from custom server
         account_list_custom = kp_custom_server.get_account_list()
+        # check if we got a non empty list
+        assert len(account_list_custom) > 0
+        # Check for error code in response
         assert 'code' not in account_list_custom[0]
         
+        # get account list from mainnet server
         account_list_mainnet = kp_mainnet_server.get_account_list()
+        assert len(account_list_mainnet) > 0
         assert 'code' not in account_list_mainnet[0]
         
+        # get account list from testnet server
         account_list_testnet = kp_testnet_server.get_account_list()
+        assert len(account_list_testnet) > 0
         assert 'code' not in account_list_testnet[0]
-
 
 # get account info
 def test_get_account_info():
-
+        # get account info from custom server
         account_info_custom = kp_custom_server.get_account_info("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
-        assert 'code' not in account_info_custom[0]
+        if len(account_info_custom) > 0:
+                assert 'code' not in account_info_custom[0]
+        assert len(account_info_custom) > 0
         
+        # get account info from mainnet server
         account_info_mainnet = kp_mainnet_server.get_account_info("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
-        assert 'code' not in account_info_mainnet[0]
+        if len(account_info_mainnet) > 0:
+                assert 'code' not in account_info_mainnet[0]
+        assert len(account_info_mainnet) > 0
         
+        # get account info from testnet server
         account_info_testnet = kp_testnet_server.get_account_info("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj")
-        assert 'code' not in account_info_testnet[0]
+        if len(account_info_testnet) > 0:
+                assert 'code' not in account_info_testnet[0]
+        assert len(account_info_testnet) > 0
 
 # get account rewards
 def test_get_account_rewards():
-
+        # get account rewards from custom server
         account_rewards_custom = kp_custom_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
-        assert 'code' not in account_rewards_custom[0]
-        
-        account_rewards_mainnet = kp_mainnet_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
-        assert 'code' not in account_rewards_mainnet[0]
-        
-        account_rewards_testnet = kp_testnet_server.get_account_rewards("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj")
-        assert 'code' not in account_rewards_testnet[0]
+        # get account rewards by epoch
+        account_rewards_custom_epoch = kp_custom_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", 350)
+        # Check for error code in response and empty list
+        if len(account_rewards_custom) > 0 and len(account_rewards_custom_epoch) > 0:
+                assert 'code' not in account_rewards_custom[0] and 'code' not in account_rewards_custom_epoch[0]
+        assert len(account_rewards_custom) > 0 and len(account_rewards_custom_epoch) > 0
 
-        account_rewards_custom = kp_custom_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", 350)
-        assert 'code' not in account_rewards_custom[0]
+        # get account rewards from mainnet server
+        account_rewards_mainnet = kp_mainnet_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+        # get account rewards by epoch
+        account_rewards_mainnet_epoch = kp_mainnet_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", 350)
+        # Check for error code in response and empty list
+        if len(account_rewards_mainnet) > 0 and len(account_rewards_mainnet_epoch) > 0:
+                assert 'code' not in account_rewards_mainnet[0] and 'code' not in account_rewards_mainnet_epoch[0]
+        assert len(account_rewards_mainnet) > 0 and len(account_rewards_mainnet_epoch) > 0
         
-        account_rewards_mainnet = kp_mainnet_server.get_account_rewards("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", 350)
-        assert 'code' not in account_rewards_mainnet[0]
-        
-        account_rewards_testnet = kp_testnet_server.get_account_rewards("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj", 180)
-        assert 'code' not in account_rewards_testnet[0]
-        
+        # get account rewards from testnet server
+        account_rewards_testnet = kp_testnet_server.get_account_rewards("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj")
+        # get account rewards by epoch
+        account_rewards_testnet_epoch = kp_testnet_server.get_account_rewards("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj", 200)
+        # Check for error code in response and empty list
+        if len(account_rewards_testnet) > 0 and len(account_rewards_testnet_epoch) > 0:
+                assert 'code' not in account_rewards_testnet[0] and 'code' not in account_rewards_testnet_epoch[0]
+       
 # get account updates
 def test_get_account_updates():
 
         account_updates_custom = kp_custom_server.get_account_updates("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
-        assert 'code' not in account_updates_custom[0]
+        if len(account_updates_custom) > 0:
+                assert 'code' not in account_updates_custom[0]
+        assert len(account_updates_custom) > 0
         
         account_updates_mainnet = kp_mainnet_server.get_account_updates("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
-        assert 'code' not in account_updates_mainnet[0]
-        
+        if len(account_updates_mainnet) > 0:
+                assert 'code' not in account_updates_mainnet[0]
+        assert len(account_updates_mainnet) > 0
+                
         account_updates_testnet = kp_testnet_server.get_account_updates("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj")
-        assert 'code' not in account_updates_testnet[0]
-
+        if len(account_updates_testnet) > 0:
+                assert 'code' not in account_updates_testnet[0]
+        
 # get account assets
 def test_get_account_assets():
 
@@ -136,8 +178,8 @@ def test_get_account_history():
         account_history_testnet = kp_testnet_server.get_account_history(["stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj",
                                                                          "stake_test1uq7g7kqeucnqfweqzgxk3dw34e8zg4swnc7nagysug2mm4cm77jrx"])
         if len(account_history_testnet) > 0:
-                assert 'code' not in account_history_testnet[0] 
- 
+                assert 'code' not in account_history_testnet[0]
+
 ##############################################################################
 # ADDRESS FUNCTIONS
 

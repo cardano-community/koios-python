@@ -11,25 +11,24 @@ import koios_python # We need to install and import koios_python library
 
 # Some examples:
 
-kp = koios_python.URLs("https://koios-otg.tosidrop.io/")
-print(kp.url)
+# kp = koios_python.URLs("https://koios-otg.tosidrop.io/api/v0/") # We need to create an instance of the class URLs
+# print(kp.get_account_list()) # We can use the methods of the class URLs
+# print(kp.url)
 
-kp_mainnet = koios_python.URLs()
-print(kp_mainnet.url)
+# kp_mainnet = koios_python.URLs()
+# print(kp_mainnet.url)
 
 kp_test = koios_python.URLs(network="testnet")
-print(kp_test.GENESIS_URL)
 print(kp_test.url, kp_test.network)
-print(kp_test.get_genesis())
+print(kp_test.get_account_info("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj"))
 
-kp_test = koios_python.URLs(network="mainnet")
-print(kp_test.GENESIS_URL)
-print(kp_test.url, kp_test.network)
-print(kp_test.get_genesis())
+# kp_test = koios_python.URLs(network="mainnet")
+# print(kp_test.GENESIS_URL)
+# print(kp_test.url, kp_test.network)
+# print(kp_test.get_genesis())
 
 # print(genesis_info_testnet)
 
-# assert genesis_info_testnet[0]['networkid'] == 'Testnet'
 
 # pprint.pp(kp.get_epoch_info(370))
 
