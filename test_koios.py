@@ -686,10 +686,10 @@ def test_get_pool_metadata():
 # get list of native scripts on the network
 def test_get_native_script_list():
         
-        # script_list_custom = kp_custom_server.get_native_script_list()
-        # script_list_custom_range = kp_custom_server.get_native_script_list('0-10')
-        # if len(script_list_custom) > 0 and len(script_list_custom_range) > 0:
-        #         assert 'code' not in script_list_custom[0] and 'code' not in script_list_custom_range[0]
+        script_list_custom = kp_custom_server.get_native_script_list()
+        script_list_custom_range = kp_custom_server.get_native_script_list('0-10')
+        if len(script_list_custom) > 0 and len(script_list_custom_range) > 0:
+                assert 'code' not in script_list_custom[0] and 'code' not in script_list_custom_range[0]
         
         script_list_mainnet = kp_mainnet_server.get_native_script_list()
         script_list_mainnet_range = kp_mainnet_server.get_native_script_list('0-10')
@@ -704,10 +704,10 @@ def test_get_native_script_list():
 # get plutus script list
 def test_get_plutus_script_list():
         
-        # script_list_custom = kp_custom_server.get_plutus_script_list()
-        # script_list_custom_range = kp_custom_server.get_plutus_script_list('0-10')
-        # if len(script_list_custom) > 0 and len(script_list_custom_range) > 0:
-        #         assert 'code' not in script_list_custom[0] and 'code' not in script_list_custom_range[0]
+        script_list_custom = kp_custom_server.get_plutus_script_list()
+        script_list_custom_range = kp_custom_server.get_plutus_script_list('0-10')
+        if len(script_list_custom) > 0 and len(script_list_custom_range) > 0:
+                assert 'code' not in script_list_custom[0] and 'code' not in script_list_custom_range[0]
                 
         script_list_mainnet = kp_mainnet_server.get_plutus_script_list()
         script_list_mainnet_range = kp_mainnet_server.get_plutus_script_list('0-10')
