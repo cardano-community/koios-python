@@ -41,6 +41,7 @@ import koios_python as kp
     
 ## TODO
 
+- [ ] Adding OOP architecture to be more flexible
 - [ ] Adding custom endpoint / network
 - [ ] AddingPpagination for all queries where makes sense (At the moment, there are a bunch with this feature)
     - [ ] get_pool_delegators()
