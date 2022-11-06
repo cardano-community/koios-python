@@ -4,11 +4,10 @@ Provides all transactions functions
 """
 import json
 import requests
-from .urls import SUBMIT_TX_URL, TX_INFO_URL, TX_METADATA_URL, TX_METALABELS_URL, TX_STATUS_URL, \
-TX_UTXOS_URL
 
 
-def get_tx_info(*args):
+
+def get_tx_info(self, *args):
     """
     Get detailed information about transaction(s).
 
@@ -17,12 +16,12 @@ def get_tx_info(*args):
     :rtype: list.
     """
     get_format = {"_tx_hashes": [args]}
-    tx_info = requests.post(TX_INFO_URL, json = get_format, timeout=10)
+    tx_info = requests.post(self.TX_INFO_URL, json = get_format, timeout=10)
     tx_info  = json.loads(tx_info.content)
     return tx_info
 
 
-def get_tx_utxos(*args):
+def get_tx_utxos(self, *args):
     """
     Get UTxO set (inputs/outputs) of transactions.
 
@@ -31,12 +30,12 @@ def get_tx_utxos(*args):
     :rtype: list.
     """
     get_format = {"_tx_hashes": [args]}
-    tx_utxos = requests.post(TX_UTXOS_URL, json = get_format, timeout=10)
+    tx_utxos = requests.post(self.TX_UTXOS_URL, json = get_format, timeout=10)
     tx_utxos  = json.loads(tx_utxos.content)
     return tx_utxos
 
 
-def get_tx_metadata(*args):
+def get_tx_metadata(self, *args):
     """
     Get metadata information (if any) for given transaction(s).
 
@@ -45,12 +44,12 @@ def get_tx_metadata(*args):
     :rtype: list.
     """
     get_format = {"_tx_hashes": [args]}
-    tx_metadata = requests.post(TX_METADATA_URL, json = get_format, timeout=10)
+    tx_metadata = requests.post(self.TX_METADATA_URL, json = get_format, timeout=10)
     tx_metadata  = json.loads(tx_metadata.content)
     return tx_metadata
 
 
-def get_tx_metalabels(content_range="0-999"):
+def get_tx_metalabels(self, content_range="0-999"):
     """
     Get a list of all transaction metalabels.
 
@@ -58,13 +57,13 @@ def get_tx_metalabels(content_range="0-999"):
     :return: list of metalabels transactions
     """
     custom_headers = {"Range": str(content_range)}
-    tx_metalabels = requests.get(TX_METALABELS_URL, headers \
+    tx_metalabels = requests.get(self.TX_METALABELS_URL, headers \
     = custom_headers, timeout=10)
     tx_metalabels  = json.loads(tx_metalabels.content)
     return tx_metalabels
 
 
-def submit_tx(file):
+def submit_tx(self, file):
     """
     Submit an already serialized transaction to the network. You have to serialized the transaction
     file with: xxd -r -p <<< $(jq .cborHex signed.txt) > signed.cbor
@@ -75,13 +74,13 @@ def submit_tx(file):
     with open(file, "rb") as cbor_tx:
         cbor_tx = cbor_tx.read()
     cbor_header = {'Content-Type': 'application/cbor'}
-    submit = requests.post( SUBMIT_TX_URL, headers = cbor_header, \
+    submit = requests.post(self.SUBMIT_TX_URL, headers = cbor_header, \
         data = cbor_tx, timeout=25)
     submit  = json.loads(submit.content)
     return submit
 
 
-def get_tx_status(*args):
+def get_tx_status(self, *args):
     """
     Get the number of block confirmations for a given transaction hash list.
 
@@ -90,7 +89,7 @@ def get_tx_status(*args):
     :rtype: list.
     """
     get_format = {"_tx_hashes": [args]}
-    tx_status = requests.post( TX_STATUS_URL, json = get_format, timeout=10)
+    tx_status = requests.post(self.TX_STATUS_URL, json = get_format, timeout=10)
     tx_status  = json.loads(tx_status.content)
     return tx_status
     

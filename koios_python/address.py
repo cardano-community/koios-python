@@ -5,10 +5,8 @@ Provides all address functions
 import json
 import requests
 
-from koios_python.urls import ADDRESS_ASSETS_URL, ADDRESS_INFO_URL, ADDRESS_TXS_URL, \
-    CREDENTIAL_TXS_URL
 
-def get_address_info(*args):
+def get_address_info(self, *args):
     """
     Get address info - balance, associated stake address (if any) and UTxO set.
 
@@ -17,12 +15,12 @@ def get_address_info(*args):
     :rtype: list.
     """
     get_format = {"_addresses": [args] }
-    addresses = requests.post(ADDRESS_INFO_URL, json= get_format, timeout=10)
+    addresses = requests.post(self.ADDRESS_INFO_URL, json= get_format, timeout=10)
     addresses = json.loads(addresses.content)
     return addresses
 
 
-def get_address_txs(address_tx, after_block=0):
+def get_address_txs(self, address_tx, after_block=0):
     """
     Get the transaction hash list of input address array, optionally filtering after specified
     block height (inclusive)
@@ -32,12 +30,12 @@ def get_address_txs(address_tx, after_block=0):
     :return: hash list of address transactions
     """
     get_format = {"_addresses": [address_tx], "_after_block_height": str(after_block)}
-    hash_list = requests.post( ADDRESS_TXS_URL, json = get_format, timeout=10)
+    hash_list = requests.post(self.ADDRESS_TXS_URL, json = get_format, timeout=10)
     hash_list  = json.loads(hash_list.content)
     return hash_list
 
 
-def get_address_assets(*args):
+def get_address_assets(self, *args):
     """
     Get the list of all the assets (policy, name and quantity) for a given address.
 
@@ -46,12 +44,12 @@ def get_address_assets(*args):
     :rtype: list.
     """
     get_format = {"_addresses": [args] }
-    addresses = requests.post(ADDRESS_ASSETS_URL, json= get_format , timeout=10)
+    addresses = requests.post(self.ADDRESS_ASSETS_URL, json= get_format , timeout=10)
     addresses = json.loads(addresses.content)
     return addresses
 
 
-def get_credential_txs(payment_credentials, after_block=0):
+def get_credential_txs(self, payment_credentials, after_block=0):
     """
     Get the transaction hash list of input payment credential array (stake key), optionally
     filtering after specified block height (inclusive).
@@ -62,7 +60,7 @@ def get_credential_txs(payment_credentials, after_block=0):
     :rtype: list.
     """
     get_format = {"_payment_credentials":[payment_credentials], "_after_block_height": after_block}
-    hash_list = requests.post( CREDENTIAL_TXS_URL, json = get_format, timeout=10)
+    hash_list = requests.post(self.CREDENTIAL_TXS_URL, json = get_format, timeout=10)
     hash_list  = json.loads(hash_list.content)
     return hash_list
     
