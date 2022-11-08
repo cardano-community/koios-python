@@ -6,7 +6,6 @@ import json
 import requests
 
 
-
 def get_pool_list(self, content_range="0-999"):
     """
     Get a list of all currently registered/retiring (not retired) pools.
@@ -77,7 +76,7 @@ def get_pool_delegators_history(self, pool_bech32, epoch_no=None):
         info = requests.get(self.POOL_DELEGATORS_HISTORY_URL + pool_bech32, timeout=10)
         info = json.loads(info.content)
     else:
-        info = requests.get(self.POOL_DELEGATORS_HISTORY_URL + pool_bech32 + "&_epoch_no=" + str(epoch_no), timeout=10)
+        info = requests.get(f"{self.POOL_DELEGATORS_HISTORY_URL}{pool_bech32}&_epoch_no={epoch_no}", timeout=10)
         info = json.loads(info.content)
     return info
 
@@ -96,7 +95,7 @@ def get_pool_blocks(self, pool_bech32, epoch_no=None):
         info = requests.get(self.POOL_BLOCKS_URL + pool_bech32, timeout=10)
         info = json.loads(info.content)
     else:
-        info = requests.get(self.POOL_BLOCKS_URL + pool_bech32 + "&_epoch_no=" + str(epoch_no), timeout=10)
+        info = requests.get(f"{self.POOL_BLOCKS_URL}{pool_bech32}&_epoch_no={epoch_no}", timeout=10)
         info = json.loads(info.content)
     return info
 
@@ -112,10 +111,10 @@ def get_pool_history(self, pool_bech32, epoch_no="history"):
     :rtype: list.
     """
     if epoch_no == "history":
-        info = requests.get(self.POOL_HISTORY_URL + str(pool_bech32), timeout=10)
+        info = requests.get(f"{self.POOL_HISTORY_URL}{pool_bech32}", timeout=10)
         info = json.loads(info.content)
     else:
-        info = requests.get(self.POOL_HISTORY_URL + str(pool_bech32) + "&_epoch_no=" + str(epoch_no), timeout=10)
+        info = requests.get(f"{self.POOL_HISTORY_URL}{pool_bech32}&_epoch_no={epoch_no}", timeout=10)
         info = json.loads(info.content)
     return info
 
@@ -132,7 +131,7 @@ def get_pool_updates(self, pool_bech32=None):
         pool_list = requests.get(self.POOL_UPDATES_URL, timeout=10)
         pool_list  = json.loads(pool_list.content)
     else:
-        pool_list = requests.get(self.POOL_UPDATES_URL + "?_pool_bech32=" + pool_bech32, timeout=10)
+        pool_list = requests.get(f"{self.POOL_UPDATES_URL}?_pool_bech32={pool_bech32}", timeout=10)
         pool_list  = json.loads(pool_list.content)
     return pool_list
 

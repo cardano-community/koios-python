@@ -43,7 +43,7 @@ def get_totals(self, epoch_no=None):
         totals = requests.get(self.TOTALS_URL, timeout=10)
         totals = json.loads(totals.content)
     else:
-        totals = requests.get(self.TOTALS_URL + "?_epoch_no=" + str(epoch_no), timeout=10)
+        totals = requests.get(f"{self.TOTALS_URL}?_epoch_no={epoch_no}", timeout=10)
         totals = json.loads(totals.content)
     return totals
     

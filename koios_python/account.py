@@ -26,7 +26,7 @@ def get_account_info(self, *args):
     :rtype: list.
     """
     get_format = {"_stake_addresses": [args] }
-    accounts_info = requests.post(self.ACCOUNT_INFO_URL, json= get_format , timeout=10)
+    accounts_info = requests.post(self.ACCOUNT_INFO_URL, json= get_format , timeout=15)
     accounts_info = json.loads(accounts_info.content)
     return accounts_info
 

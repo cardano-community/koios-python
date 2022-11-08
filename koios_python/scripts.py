@@ -15,7 +15,7 @@ def get_native_script_list(self, content_range="0-999"):
     :rtype: list.
     """
     custom_headers = {"Range": str(content_range)}
-    get_format = requests.post(self.NATIVE_SCRIPT_LIST_URL, headers = custom_headers, timeout=30)
+    get_format = requests.post(self.NATIVE_SCRIPT_LIST_URL, headers = custom_headers, timeout=35)
     get_format = json.loads(get_format.content)
     return get_format
 
