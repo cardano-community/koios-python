@@ -30,7 +30,6 @@ def get_account_info(self, *args):
     accounts_info = json.loads(accounts_info.content)
     return accounts_info
 
-
 def get_account_rewards(self, *args):
     """
     Get the full rewards history (including MIR) for given stake addresses (accounts).

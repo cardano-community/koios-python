@@ -29,8 +29,9 @@ class URLs:
             self.url = 'https://' + self.url
         elif self.network == 'mainnet':
             self.url = url
-        
-        
+
+            
+            
         # Network URLs
         self.TIP_URL = self.url + "tip"
         self.GENESIS_URL = self.url + "genesis"
