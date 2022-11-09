@@ -91,6 +91,7 @@ import koios_python as kp
     - [x] Pool
         - Pool List
         - Pool Information
+        - Stake Snapshot
         - Pool Delegators List
         - Pool Blocks
         - Pool Stake, Block and Reward History
