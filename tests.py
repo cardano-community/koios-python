@@ -12,9 +12,10 @@ import koios_python # We need to install and import koios_python library
 # Some examples:
 
 ## Testnet
-#kp_test = koios_python.URLs(network="testnet")
-#print(kp_test.url, kp_test.network)
-#print(kp_test.get_account_info("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj"))
+kp_test = koios_python.URLs(network="testnet")
+# print(kp_test.url, kp_test.network)
+# print(kp_test.get_account_info("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj"))
+# print(kp_test.get_native_script_list())
 
 
 # kp_test = koios_python.URLs(network="mainnet")
@@ -28,8 +29,9 @@ import koios_python # We need to install and import koios_python library
 
 #kp = koios_python.URLs(url="https://koios-otg.tosidrop.io/api/v0/", network='mainnet') # We need to create an instance of the class URLs
 kp = koios_python.URLs("https://api.koios.rest/api/v0/") # We need to create an instance of the class URLs
+print(kp.get_native_script_list())
 #print(kp.get_account_list()) # We can use the methods of the class URLs
-print(kp.url)
+# print(kp.url)
 
 # kp_mainnet = koios_python.URLs()
 # print(kp_mainnet.url)
@@ -45,7 +47,7 @@ print(kp.url)
 #pprint.pp(kp.get_asset_history("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"))
 #pprint.pp(kp.get_asset_summary("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"))
 
-pprint.pp(kp.get_asset_txs("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b",63487))
+# pprint.pp(kp.get_asset_txs("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b",63487))
 
 
 # pprint.pp(kp_mainnet.get_pool_stake_snapshot("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc"))
