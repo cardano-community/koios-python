@@ -34,6 +34,7 @@ Import to your python file this library:
 import koios_python
 ```
 
+You can read all info about how works this library in our [Wiki](https://github.com/cardano-community/koios-python/wiki)
     
 ## TODO
 
