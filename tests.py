@@ -27,9 +27,14 @@ kp_test = koios_python.URLs(network="testnet")
 
 ## MAINNET PARAMETERS
 
+# Default Koios Endpoint
+kp = koios_python.URLs() # We need to create an instance of the class URLs
+
+# Example of yout Custom Endpoint
 #kp = koios_python.URLs(url="https://koios-otg.tosidrop.io/api/v0/", network='mainnet') # We need to create an instance of the class URLs
-kp = koios_python.URLs("https://api.koios.rest/api/v0/") # We need to create an instance of the class URLs
-print(kp.get_native_script_list())
+
+#print(kp.get_native_script_list('0-10'))
+print(len(kp.get_native_script_list('0-10')))
 #print(kp.get_account_list()) # We can use the methods of the class URLs
 # print(kp.url)
 

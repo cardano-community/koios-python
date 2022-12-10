@@ -12,7 +12,7 @@ def get_account_list(self):
     :return: string list of account (stake address: stake1...  bech32 format) IDs.
     :rtype: list.
     """
-    address_list = requests.get(self.ACCOUNT_LIST_URL, timeout=10)
+    address_list = requests.get(self.ACCOUNT_LIST_URL, timeout=20)
     address_list = json.loads(address_list.content)
     return address_list
 
@@ -43,7 +43,7 @@ def get_account_rewards(self, *args):
 
     if not isinstance(epoch, int):
         get_format = {"_stake_addresses": [args] }
-        rewards = requests.post(self.ACCOUNT_REWARDS_URL, json= get_format , timeout=10)
+        rewards = requests.post(self.ACCOUNT_REWARDS_URL, json= get_format , timeout=20)
         rewards = json.loads(rewards.content)
     else:
         get_format = {"_stake_addresses": [args], "_epoch_no": epoch}
