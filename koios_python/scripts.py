@@ -46,6 +46,7 @@ def get_script_redeemers(self, script_hash):
     query  = json.loads(query.content)
     return query
 
+
 def get_datum_info(self, *datum_hash):
     '''
     Get list of datum information for given datum hashes
