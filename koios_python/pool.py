@@ -42,7 +42,6 @@ def get_pool_stake_snapshot(self, pool_bech32):
     :return: Array of pool stake information for 3 snapshots
     :rtype: list.
     """
-    
     snapshot = requests.get(self.POOL_STAKE_SNAPSHOT + pool_bech32, timeout=10)
     snapshot  = json.loads(snapshot.content)
     return snapshot
@@ -79,7 +78,6 @@ def get_pool_delegators_history(self, pool_bech32, epoch_no=None):
         info = requests.get(f"{self.POOL_DELEGATORS_HISTORY_URL}{pool_bech32}&_epoch_no={epoch_no}", timeout=10)
         info = json.loads(info.content)
     return info
-
 
 
 def get_pool_blocks(self, pool_bech32, epoch_no=None):

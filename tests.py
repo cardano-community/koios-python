@@ -47,6 +47,8 @@ print(len(kp.get_native_script_list('0-10')))
 
 # pprint.pp(kp.get_epoch_params(370))
 
+# pprint.pp(kp.get_epoch_block_protocols(380))
+
 #pprint.pp(kp.get_genesis())
 
 #pprint.pp(kp.get_asset_history("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"))
@@ -54,6 +56,8 @@ print(len(kp.get_native_script_list('0-10')))
 
 # pprint.pp(kp.get_asset_txs("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b",63487))
 
+pprint.pp(kp.get_datum_info('818ee3db3bbbd04f9f2ce21778cac3ac605802a4fcb00c8b3a58ee2dafc17d46',
+    "45b0cfc220ceec5b7c1c62c4d4193d38e4eba48e8815729ce75f9c0ab0e4c1c0"))
 
 # pprint.pp(kp_mainnet.get_pool_stake_snapshot("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc"))
 

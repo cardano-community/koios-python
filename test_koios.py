@@ -52,6 +52,15 @@ def test_get_account_info():
         assert 'code' not in account_info_mainnet[0]
     assert len(account_info_mainnet) > 0
 
+# get account info
+def test_get_account_info_cached():
+
+    # get account info from mainnet server
+    account_info_mainnet = kp.get_account_info_cached("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+    if len(account_info_mainnet) > 0:
+        assert 'code' not in account_info_mainnet[0]
+    assert len(account_info_mainnet) > 0
+
 # get account rewards
 def test_get_account_rewards():
 
@@ -358,6 +367,12 @@ def test_get_script_redeemers():
     if len(script_redeemers_mainnet) > 0:
         assert 'code' not in script_redeemers_mainnet[0]
 
+def test_get_datum_info():
+
+    datum_info = kp.get_datum_info('818ee3db3bbbd04f9f2ce21778cac3ac605802a4fcb00c8b3a58ee2dafc17d46',
+    "45b0cfc220ceec5b7c1c62c4d4193d38e4eba48e8815729ce75f9c0ab0e4c1c0")
+    if len(datum_info) > 0:
+        assert 'code' not in datum_info[0]
 
 
 ##############################################################################

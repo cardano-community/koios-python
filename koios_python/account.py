@@ -30,6 +30,20 @@ def get_account_info(self, *args):
     accounts_info = json.loads(accounts_info.content)
     return accounts_info
 
+def get_account_info_cached(self, *args):
+    """
+    Get the account information for given stake addresses (accounts).
+
+    :param str args: staking address/es in bech32 format (stake1...).
+    :return: list with all address data.
+    :rtype: list.
+    """
+    get_format = {"_stake_addresses": [args] }
+    accounts_info = requests.post(self.ACCOUNT_INFO_URL_CACHED, json= get_format , timeout=15)
+    accounts_info = json.loads(accounts_info.content)
+    return accounts_info
+    
+
 def get_account_rewards(self, *args):
     """
     Get the full rewards history (including MIR) for given stake addresses (accounts).
@@ -79,6 +93,7 @@ def get_account_addresses(self, *args):
     addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, timeout=10)
     addresses = json.loads(addresses.content)
     return addresses
+
 
 def get_account_assets(self, *args):
     """

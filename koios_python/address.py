@@ -63,4 +63,3 @@ def get_credential_txs(self, payment_credentials, after_block=0):
     hash_list = requests.post(self.CREDENTIAL_TXS_URL, json = get_format, timeout=10)
     hash_list  = json.loads(hash_list.content)
     return hash_list
-    

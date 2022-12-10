@@ -46,4 +46,3 @@ def get_block_txs(self,*block_hash):
     txs = requests.post(self.BLOCK_TXS_URL, json = get_format, timeout=10)
     txs = json.loads(txs.content)
     return txs
-
