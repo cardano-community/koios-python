@@ -5,16 +5,17 @@ from setuptools import setup, find_packages
 
 HERE = pathlib.Path(__file__).parent
 LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf-8')
-LONG_DESC_TYPE = "text/markdown"
 
 setup(
-    version = '0.3.0',
+    version = '1.0.1',
     name = 'koios-python',
     author = 'Quixote Stake Pool',
     author_email = 'quixotepool@proton.me',
     url = 'https://github.com/QuixoteSystems',
     license = 'MIT',
     description = 'Python wrapper Library using Koios API for accessing information stored on the Cardano Blockchain',
+    long_description= LONG_DESCRIPTION,
+    long_description_content_type= 'text/markdown',
     keywords = ['koios', 'blockchain', 'cardano', 'API', 'REST', 'RESTful'],
     include_package_data = True,
     packages = find_packages(include=['koios_python']),
