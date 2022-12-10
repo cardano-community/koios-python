@@ -38,7 +38,7 @@ You can read all info about how works this library in our [Wiki](https://github.
     
 ## TODO
 
-- [ ] AddingPpagination for all queries where makes sense (At the moment, there are a bunch with this feature)
+- [ ] Adding Pagination for all queries where makes sense (At the moment, there are a bunch with this feature)
     - [ ] get_pool_delegators()
     - [ ] ...
     
