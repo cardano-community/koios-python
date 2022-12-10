@@ -6,7 +6,6 @@ import json
 import requests
 
 
-
 def get_tx_info(self, *args):
     """
     Get detailed information about transaction(s).
