@@ -33,9 +33,11 @@ kp = koios_python.URLs() # We need to create an instance of the class URLs
 # Example of yout Custom Endpoint
 #kp = koios_python.URLs(url="https://koios-otg.tosidrop.io/api/v0/", network='mainnet') # We need to create an instance of the class URLs
 
+# Get Native Script List, first 11 scripts
 #print(kp.get_native_script_list('0-10'))
-print(len(kp.get_native_script_list('0-10')))
-#print(kp.get_account_list()) # We can use the methods of the class URLs
+#print(len(kp.get_native_script_list('0-10')))
+
+pprint.pp(kp.get_account_list("2000-2999")) # We can use the methods of the class URLs
 # print(kp.url)
 
 # kp_mainnet = koios_python.URLs()
@@ -57,8 +59,8 @@ print(len(kp.get_native_script_list('0-10')))
 # pprint.pp(kp.get_asset_txs("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b",63487))
 
 # Get Datum information for given datum hashes of a Plutus Contracts
-pprint.pp(kp.get_datum_info('818ee3db3bbbd04f9f2ce21778cac3ac605802a4fcb00c8b3a58ee2dafc17d46',
-    "45b0cfc220ceec5b7c1c62c4d4193d38e4eba48e8815729ce75f9c0ab0e4c1c0"))
+#pprint.pp(kp.get_datum_info('818ee3db3bbbd04f9f2ce21778cac3ac605802a4fcb00c8b3a58ee2dafc17d46',
+#    "45b0cfc220ceec5b7c1c62c4d4193d38e4eba48e8815729ce75f9c0ab0e4c1c0"))
 
 # pprint.pp(kp_mainnet.get_pool_stake_snapshot("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc"))
 
@@ -107,6 +109,14 @@ pprint.pp(kp.get_datum_info('818ee3db3bbbd04f9f2ce21778cac3ac605802a4fcb00c8b3a5
 
 # Get the Pool List from the record 2001 to 3000
 #pprint.pp(koios_python.get_pool_list("2001-3000"))
+
+# Get the Asset List from the record 2001 to 3000
+#pprint.pp(kp.get_asset_list("2001-3000"))
+
+# Get Delegator List from a Pool
+#pprint.pp(kp.get_pool_delegators("pool1x5dfpgp987e4jhxvgczr3wv50nv2pwd873tlx3uthvcasm422q6", "1000-2000"))
+
+#pprint.pp(kp.get_asset_address_list("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", "424f4f4b", "10-20"))
 
 # Get all the information for a specified Stake Pool
 #pprint.pp(koios_python.get_pool_info("pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp"))

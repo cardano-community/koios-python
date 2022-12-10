@@ -47,7 +47,7 @@ def get_pool_stake_snapshot(self, pool_bech32):
     return snapshot
 
 
-def get_pool_delegators(self, pool_bech32):
+def get_pool_delegators(self, pool_bech32, content_range="0-999"):
     """
     Return information about live delegators for a given pool.
 
@@ -56,7 +56,8 @@ def get_pool_delegators(self, pool_bech32):
     :return: list of pool delegators information.
     :rtype: list.
     """
-    info = requests.get(self.POOL_DELEGATORS_URL + pool_bech32, timeout=10)
+    custom_headers = {"Range": str(content_range)}
+    info = requests.get(self.POOL_DELEGATORS_URL + pool_bech32, headers = custom_headers, timeout=10)
     info = json.loads(info.content)
     return info
 

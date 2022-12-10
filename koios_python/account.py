@@ -5,14 +5,15 @@ Provides all account functions
 import json
 import requests
 
-def get_account_list(self):
+def get_account_list(self, content_range="0-999"):
     """
     Get a list of all accounts.
 
     :return: string list of account (stake address: stake1...  bech32 format) IDs.
     :rtype: list.
     """
-    address_list = requests.get(self.ACCOUNT_LIST_URL, timeout=20)
+    custom_headers = {"Range": str(content_range)}
+    address_list = requests.get(self.ACCOUNT_LIST_URL, headers = custom_headers, timeout=20)
     address_list = json.loads(address_list.content)
     return address_list
 

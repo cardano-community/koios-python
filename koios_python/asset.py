@@ -5,20 +5,20 @@ Provides all asset functions
 import json
 import requests
 
-def get_asset_list(self):
+def get_asset_list(self, content_range="0-999"):
     """
     Get the list of all native assets (paginated)
 
     :return: list with all asset list.
     :rtype: list.
     """
-
-    asset_list = requests.get(self.ASSET_LIST_URL, timeout=10)
+    custom_headers = {"Range": str(content_range)}
+    asset_list = requests.get(self.ASSET_LIST_URL, headers = custom_headers, timeout=10)
     asset_list = json.loads(asset_list.content)
     return asset_list
 
 
-def get_asset_address_list(self, asset_policy, asset_name):
+def get_asset_address_list(self, asset_policy, asset_name, content_range="0-999"):
     """
     Get the list of all addresses holding a given asset.
 
@@ -27,8 +27,8 @@ def get_asset_address_list(self, asset_policy, asset_name):
     :return: list of all addresses.
     :rtype: list.
     """
-
-    info = requests.get(f"{self.ASSET_ADDRESS_LIST_URL}{asset_policy}&_asset_name={asset_name}", timeout=10)
+    custom_headers = {"Range": str(content_range)}
+    info = requests.get(f"{self.ASSET_ADDRESS_LIST_URL}{asset_policy}&_asset_name={asset_name}", headers = custom_headers, timeout=10)
     info = json.loads(info.content)
     return info
 
