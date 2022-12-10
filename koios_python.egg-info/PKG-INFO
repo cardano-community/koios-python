@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: koios-python
-Version: 1.0.1
+Version: 1.0.0
 Summary: Python wrapper Library using Koios API for accessing information stored on the Cardano Blockchain
 Home-page: https://github.com/QuixoteSystems
 Author: Quixote Stake Pool
@@ -54,10 +54,11 @@ Import to your python file this library:
 import koios_python
 ```
 
+You can read all info about how works this library in our [Wiki](https://github.com/cardano-community/koios-python/wiki)
     
 ## TODO
 
-- [ ] AddingPpagination for all queries where makes sense (At the moment, there are a bunch with this feature)
+- [ ] Adding Pagination for all queries where makes sense (At the moment, there are a bunch with this feature)
     - [ ] get_pool_delegators()
     - [ ] ...
     

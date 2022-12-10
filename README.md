@@ -51,6 +51,7 @@ You can read all info about how works this library in our [Wiki](https://github.
     - [x] Epoch
         - Epoch Information
         - Epoch's Protocol Parameters
+        - Epoch Blocks Protocol
     - [x] Block
         - Block List
         - Block Information
@@ -70,6 +71,7 @@ You can read all info about how works this library in our [Wiki](https://github.
     - [x] Account
         - Account List
         - Account Information
+        - Account Information Cached
         - Account Rewards
         - Account Updates (History)
         - Account Addresses
@@ -97,4 +99,5 @@ You can read all info about how works this library in our [Wiki](https://github.
         - Native Script List
         - Plutus Script List
         - Script Redeemers
+        - Datum Information
 
