@@ -40,6 +40,7 @@ You can read all info about how works this library in our [Wiki](https://github.
 
 - [ ] Adding Pagination for all queries where makes sense (At the moment, there are a bunch with this feature)
 - [ ] Managing errors inside functions 
+- [ ] Adding Async methods
 
 
 
