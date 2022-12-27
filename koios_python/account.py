@@ -12,10 +12,15 @@ def get_account_list(self, content_range="0-999"):
     :return: string list of account (stake address: stake1...  bech32 format) IDs.
     :rtype: list.
     """
-    custom_headers = {"Range": str(content_range)}
-    address_list = requests.get(self.ACCOUNT_LIST_URL, headers = custom_headers, timeout=20)
-    address_list = json.loads(address_list.content)
-    return address_list
+    
+    try: 
+        custom_headers = {"Range": str(content_range)}
+        address_list = requests.get(self.ACCOUNT_LIST_URL, headers = custom_headers, timeout=20)
+        address_list = json.loads(address_list.content)
+        return address_list
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
 
 
 def get_account_info(self, *args):
@@ -26,10 +31,15 @@ def get_account_info(self, *args):
     :return: list with all address data.
     :rtype: list.
     """
-    get_format = {"_stake_addresses": [args] }
-    accounts_info = requests.post(self.ACCOUNT_INFO_URL, json= get_format , timeout=15)
-    accounts_info = json.loads(accounts_info.content)
-    return accounts_info
+    
+    try:
+        get_format = {"_stake_addresses": [args] }
+        accounts_info = requests.post(self.ACCOUNT_INFO_URL, json= get_format , timeout=15)
+        accounts_info = json.loads(accounts_info.content)
+        return accounts_info
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
 
 def get_account_info_cached(self, *args):
     """
@@ -39,10 +49,15 @@ def get_account_info_cached(self, *args):
     :return: list with all address data.
     :rtype: list.
     """
-    get_format = {"_stake_addresses": [args] }
-    accounts_info = requests.post(self.ACCOUNT_INFO_URL_CACHED, json= get_format , timeout=15)
-    accounts_info = json.loads(accounts_info.content)
-    return accounts_info
+    
+    try:
+        get_format = {"_stake_addresses": [args] }
+        accounts_info = requests.post(self.ACCOUNT_INFO_URL_CACHED, json= get_format , timeout=15)
+        accounts_info = json.loads(accounts_info.content)
+        return accounts_info
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
     
 
 def get_account_rewards(self, *args):
@@ -55,16 +70,20 @@ def get_account_rewards(self, *args):
     :rtype: list.
     """
     epoch = args[len(args)-1]
-
-    if not isinstance(epoch, int):
-        get_format = {"_stake_addresses": [args] }
-        rewards = requests.post(self.ACCOUNT_REWARDS_URL, json= get_format , timeout=20)
-        rewards = json.loads(rewards.content)
-    else:
-        get_format = {"_stake_addresses": [args], "_epoch_no": epoch}
-        rewards = requests.post(self.ACCOUNT_REWARDS_URL, json= get_format , timeout=10)
-        rewards = json.loads(rewards.content)
-    return rewards
+    
+    try:
+        if not isinstance(epoch, int):
+            get_format = {"_stake_addresses": [args] }
+            rewards = requests.post(self.ACCOUNT_REWARDS_URL, json= get_format , timeout=20)
+            rewards = json.loads(rewards.content)
+        else:
+            get_format = {"_stake_addresses": [args], "_epoch_no": epoch}
+            rewards = requests.post(self.ACCOUNT_REWARDS_URL, json= get_format , timeout=10)
+            rewards = json.loads(rewards.content)
+        return rewards
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
 
 
 def get_account_updates(self, *args):
@@ -76,10 +95,15 @@ def get_account_updates(self, *args):
     :return: list with all account updates.
     :rtype: list.
     """
-    get_format = {"_stake_addresses": [args]}
-    updates = requests.post(self.ACCOUNT_UPDATES_URL, json= get_format, timeout=10)
-    updates = json.loads(updates.content)
-    return updates
+    
+    try:
+        get_format = {"_stake_addresses": [args]}
+        updates = requests.post(self.ACCOUNT_UPDATES_URL, json= get_format, timeout=10)
+        updates = json.loads(updates.content)
+        return updates
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
 
 
 def get_account_addresses(self, *args):
@@ -90,11 +114,15 @@ def get_account_addresses(self, *args):
     :return: list with all account addresses.
     :rtype: list.
     """
-    get_format = {"_stake_addresses": [args]}
-    addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, timeout=10)
-    addresses = json.loads(addresses.content)
-    return addresses
-
+    
+    try:
+        get_format = {"_stake_addresses": [args]}
+        addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, timeout=10)
+        addresses = json.loads(addresses.content)
+        return addresses
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
 
 def get_account_assets(self, *args):
     """
@@ -104,11 +132,15 @@ def get_account_assets(self, *args):
     :return: list with all account assets.
     :rtype: list.
     """
-    get_format = {"_stake_addresses": [args]}
-    assets = requests.post(self.ACCOUNT_ASSETS_URL, json= get_format, timeout=10)
-    assets = json.loads(assets.content)
-    return assets
+    
+    try:
+        get_format = {"_stake_addresses": [args]}
+        assets = requests.post(self.ACCOUNT_ASSETS_URL, json= get_format, timeout=10)
+        assets = json.loads(assets.content)
+        return assets
 
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
 
 def get_account_history(self, *args):
     """
@@ -120,12 +152,16 @@ def get_account_history(self, *args):
     """
     epoch = args[len(args)-1]
 
-    if not isinstance(epoch, int):
-        get_format = {"_stake_addresses": [args] }
-        history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format , timeout=10)
-        history = json.loads(history.content)
-    else:
-        get_format = {"_stake_addresses": [args], "_epoch_no": epoch}
-        history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format , timeout=10)
-        history = json.loads(history.content)
-    return history
+    try:
+        if not isinstance(epoch, int):
+            get_format = {"_stake_addresses": [args] }
+            history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format , timeout=10)
+            history = json.loads(history.content)
+        else:
+            get_format = {"_stake_addresses": [args], "_epoch_no": epoch}
+            history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format , timeout=10)
+            history = json.loads(history.content)
+        return history
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
