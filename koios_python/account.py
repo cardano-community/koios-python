@@ -136,10 +136,9 @@ def get_account_assets(self, *args):
             print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
         except json.decoder.JSONDecodeError as decode_error:
             print(f"Exception: {decode_error}")
-            print(f"Retriyng...")
+            print("Retriyng...")
     return assets
 
-‰
 def get_account_history(self, *args):
     """
     Get the staking history of given stake addresses (accounts).
