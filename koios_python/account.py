@@ -90,9 +90,22 @@ def get_account_addresses(self, *args):
     :return: list with all account addresses.
     :rtype: list.
     """
-    get_format = {"_stake_addresses": [args]}
-    addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, timeout=10)
-    addresses = json.loads(addresses.content)
+    timeout=10
+    while True:
+        try:
+            get_format = {"_stake_addresses": [args]}
+            addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json=get_format, timeout=timeout)
+            addresses = json.loads(addresses.content)
+            break
+
+        except requests.exceptions.ReadTimeout as except_timeout:
+            print(f"Exception: {except_timeout}")
+            if timeout < 60:
+                timeout= timeout + 10
+            else: 
+                print("Reach Limit Timeout= 60 seconds")
+                break
+            print(f"Retriyng with longer timeout (10 seconds more). Total Timeout= {timeout} ")
     return addresses
 
 
