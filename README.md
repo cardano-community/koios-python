@@ -39,7 +39,11 @@ You can read all info about how works this library in our [Wiki](https://github.
 ## TODO
 
 - [ ] Adding Pagination for all queries where makes sense (At the moment, there are a bunch with this feature)
-- [ ] Managing errors inside functions 
+- [ ] Managing errors 
+    - [ ] Inside functions 
+    - [ ] Pagination
+    - [ ] User Inputs
+    - [ ] Timeouts
 - [ ] Adding Async methods
 
 
