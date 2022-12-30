@@ -4,6 +4,7 @@ Provides all account functions
 """
 import json
 import requests
+from .enviroment import BASE_TIMEOUT, LIMIT_TIMEOUT
 
 def get_account_list(self, content_range="0-999"):
     """
@@ -90,7 +91,7 @@ def get_account_addresses(self, *args):
     :return: list with all account addresses.
     :rtype: list.
     """
-    timeout=10
+    timeout = BASE_TIMEOUT
     while True:
         try:
             get_format = {"_stake_addresses": [args]}
@@ -98,14 +99,14 @@ def get_account_addresses(self, *args):
             addresses = json.loads(addresses.content)
             break
 
-        except requests.exceptions.ReadTimeout as except_timeout:
-            print(f"Exception: {except_timeout}")
-            if timeout < 60:
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
                 timeout= timeout + 10
-            else: 
-                print("Reach Limit Timeout= 60 seconds")
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
                 break
-            print(f"Retriyng with longer timeout (10 seconds more). Total Timeout= {timeout} ")
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
     return addresses
 
 
@@ -117,12 +118,28 @@ def get_account_assets(self, *args):
     :return: list with all account assets.
     :rtype: list.
     """
-    get_format = {"_stake_addresses": [args]}
-    assets = requests.post(self.ACCOUNT_ASSETS_URL, json= get_format, timeout=10)
-    assets = json.loads(assets.content)
+    timeout = BASE_TIMEOUT
+    while True:
+        try:
+            get_format = {"_stake_addresses": [args]}
+            assets = requests.post(self.ACCOUNT_ASSETS_URL, json= get_format, timeout=timeout)
+            assets = json.loads(assets.content)
+            break
+
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+        except json.decoder.JSONDecodeError as decode_error:
+            print(f"Exception: {decode_error}")
+            print(f"Retriyng...")
     return assets
 
-
+‰
 def get_account_history(self, *args):
     """
     Get the staking history of given stake addresses (accounts).

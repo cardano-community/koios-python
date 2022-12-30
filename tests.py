@@ -37,7 +37,13 @@ kp = koios_python.URLs() # We need to create an instance of the class URLs
 #print(kp.get_native_script_list('0-10'))
 #print(len(kp.get_native_script_list('0-10')))
 
-pprint.pp(kp.get_account_list("2000-2999")) # We can use the methods of the class URLs
+# Heavy Account with large results
+pprint.pp(kp.get_account_assets("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"))
+
+# Heavy Account with large results
+#pprint.pp(kp.get_account_addresses("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"))
+
+#pprint.pp(kp.get_account_list("2000-2999")) # We can use the methods of the class URLs
 # print(kp.url)
 
 # kp_mainnet = koios_python.URLs()

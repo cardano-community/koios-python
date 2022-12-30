@@ -44,7 +44,9 @@ You can read all info about how works this library in our [Wiki](https://github.
     - [ ] Pagination
     - [ ] User Inputs
     - [ ] Timeouts
+- [ ] Adding Vertical Filtering
 - [ ] Adding Async methods
+
 
 
 
