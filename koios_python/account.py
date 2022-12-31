@@ -16,12 +16,11 @@ def get_account_list(self, content_range="0-999"):
     :rtype: list.
     """
     timeout = BASE_TIMEOUT
-    offset = OFFSET
 
     while True:
         try:
             custom_headers = {"Range": str(content_range)}
-            address_list = requests.get(self.ACCOUNT_LIST_URL + str(offset), headers = custom_headers, timeout=timeout)
+            address_list = requests.get(self.ACCOUNT_LIST_URL, headers = custom_headers, timeout=timeout)
             address_list = json.loads(address_list.content)
             break
 
@@ -264,5 +263,5 @@ def get_account_history(self, *args):
                 print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
                 break
             print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
-            
+
     return history
