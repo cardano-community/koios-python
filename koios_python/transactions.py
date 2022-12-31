@@ -4,7 +4,7 @@ Provides all transactions functions
 """
 import json
 import requests
-
+from .enviroment import BASE_TIMEOUT, LIMIT_TIMEOUT
 
 def get_tx_info(self, *args):
     """
@@ -14,9 +14,24 @@ def get_tx_info(self, *args):
     :return: list of all info about transaction(s).
     :rtype: list.
     """
-    get_format = {"_tx_hashes": [args]}
-    tx_info = requests.post(self.TX_INFO_URL, json = get_format, timeout=10)
-    tx_info  = json.loads(tx_info.content)
+    timeout = BASE_TIMEOUT
+
+    while True:
+        try:
+            get_format = {"_tx_hashes": [args]}
+            tx_info = requests.post(self.TX_INFO_URL, json = get_format, timeout=timeout)
+            tx_info  = json.loads(tx_info.content)
+            break
+
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
     return tx_info
 
 
@@ -28,9 +43,24 @@ def get_tx_utxos(self, *args):
     :return: all info about utxos in transaction(s)
     :rtype: list.
     """
-    get_format = {"_tx_hashes": [args]}
-    tx_utxos = requests.post(self.TX_UTXOS_URL, json = get_format, timeout=10)
-    tx_utxos  = json.loads(tx_utxos.content)
+    timeout = BASE_TIMEOUT
+
+    while True:
+        try:
+            get_format = {"_tx_hashes": [args]}
+            tx_utxos = requests.post(self.TX_UTXOS_URL, json = get_format, timeout=timeout)
+            tx_utxos  = json.loads(tx_utxos.content)
+            break
+
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
     return tx_utxos
 
 
@@ -42,9 +72,23 @@ def get_tx_metadata(self, *args):
     :return: list of all info about utxos in transaction(s)
     :rtype: list.
     """
-    get_format = {"_tx_hashes": [args]}
-    tx_metadata = requests.post(self.TX_METADATA_URL, json = get_format, timeout=10)
-    tx_metadata  = json.loads(tx_metadata.content)
+    timeout = BASE_TIMEOUT
+
+    while True:
+        try:
+            get_format = {"_tx_hashes": [args]}
+            tx_metadata = requests.post(self.TX_METADATA_URL, json = get_format, timeout=timeout)
+            tx_metadata  = json.loads(tx_metadata.content)
+            break
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
     return tx_metadata
 
 
@@ -55,10 +99,25 @@ def get_tx_metalabels(self, content_range="0-999"):
     :param str range: paginated content range, up to  1000 records.
     :return: list of metalabels transactions
     """
-    custom_headers = {"Range": str(content_range)}
-    tx_metalabels = requests.get(self.TX_METALABELS_URL, headers \
-    = custom_headers, timeout=10)
-    tx_metalabels  = json.loads(tx_metalabels.content)
+    timeout = BASE_TIMEOUT
+
+    while True:
+        try:
+            custom_headers = {"Range": str(content_range)}
+            tx_metalabels = requests.get(self.TX_METALABELS_URL, headers \
+            = custom_headers, timeout=timeout)
+            tx_metalabels  = json.loads(tx_metalabels.content)
+            break
+
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
     return tx_metalabels
 
 
@@ -87,8 +146,23 @@ def get_tx_status(self, *args):
     :return: list of all info about utxos in transaction(s)
     :rtype: list.
     """
-    get_format = {"_tx_hashes": [args]}
-    tx_status = requests.post(self.TX_STATUS_URL, json = get_format, timeout=10)
-    tx_status  = json.loads(tx_status.content)
+    timeout = BASE_TIMEOUT
+
+    while True:
+        try:
+            get_format = {"_tx_hashes": [args]}
+            tx_status = requests.post(self.TX_STATUS_URL, json = get_format, timeout=timeout)
+            tx_status  = json.loads(tx_status.content)
+            break
+
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
     return tx_status
     

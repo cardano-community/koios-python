@@ -30,7 +30,7 @@ kp_test = koios_python.URLs(network="testnet")
 # Default Koios Endpoint
 kp = koios_python.URLs() # We need to create an instance of the class URLs
 
-pprint.pp(kp.get_epoch_block_protocols(380))
+#pprint.pp(kp.get_tx_info("f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"))
 
 # Example of yout Custom Endpoint
 #kp = koios_python.URLs(url="https://koios-otg.tosidrop.io/api/v0/", network='mainnet') # We need to create an instance of the class URLs
