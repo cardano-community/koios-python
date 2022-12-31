@@ -88,7 +88,7 @@ def get_account_info_cached(self, *args):
             else:
                 print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
                 break
-            print(f"Retriyng with longer timeout: Total Timeout= {timeout}/s")
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
 
     return accounts_info
 
@@ -217,7 +217,7 @@ def get_account_assets(self, *args):
             except json.decoder.JSONDecodeError as decode_error:
                 print(f"Exception Decode: Payload too heavy. {decode_error}")
                 sleep(SLEEP_TIME)
-                print(f"Retriyng one more time...({retriyng_time} time)")
+                print(f"Retriyng one more time...({retriyng_time} time/s)")
                 retriyng_time += 1
                 if retriyng_time >= LIMIT_RETRYING_TIMES:
                     print("Reached limit of attempts")
