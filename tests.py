@@ -40,7 +40,7 @@ pprint.pp(kp.get_epoch_block_protocols(380))
 #print(len(kp.get_native_script_list('0-10')))
 
 # Crazy Heavy Account with large number of assets
-#pprint.pp(kp.get_account_assets("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"))
+pprint.pp(kp.get_account_assets("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"))
 
 # Example to count number of assets in a Stake Address
 #a=kp.get_account_assets("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6")

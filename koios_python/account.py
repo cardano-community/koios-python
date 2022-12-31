@@ -5,7 +5,7 @@ Provides all account functions
 import json
 from time import sleep
 import requests
-from .enviroment import BASE_TIMEOUT, LIMIT_TIMEOUT, SLEEP_TIME, OFFSET
+from .enviroment import BASE_TIMEOUT, LIMIT_TIMEOUT, SLEEP_TIME, OFFSET, RETRYING_TIME, LIMIT_RETRYING_TIMES
 
 
 def get_account_list(self, content_range="0-999"):
@@ -196,6 +196,7 @@ def get_account_assets(self, *args):
     """
     timeout = BASE_TIMEOUT
     offset= OFFSET
+    retriyng_time = RETRYING_TIME
     total_assets= []
 
     while True:
@@ -216,9 +217,13 @@ def get_account_assets(self, *args):
                 print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
 
             except json.decoder.JSONDecodeError as decode_error:
-                print(f"Exception Decode: {decode_error}")
+                print(f"Exception Decode: Payload too heavy. {decode_error}")
                 sleep(SLEEP_TIME)
-                print("Retriyng one more time...")
+                print(f"Retriyng one more time...({retriyng_time} time)")
+                retriyng_time += 1
+                if retriyng_time >= LIMIT_RETRYING_TIMES:
+                    print("Reached limit of attempts")
+                    break
 
         total_assets += assets
         if len(total_assets) < 1000:
