@@ -56,13 +56,13 @@ class URLs:
         self.ADDRESS_ASSETS_URL = self.url + "address_assets"
         self.CREDENTIAL_TXS_URL = self.url + "credential_txs"
         # Account URLs
-        self.ACCOUNT_LIST_URL = self.url + "account_list"
+        self.ACCOUNT_LIST_URL = self.url + "account_list?offset="
         self.ACCOUNT_INFO_URL = self.url + "account_info"
         self.ACCOUNT_INFO_URL_CACHED = self.url + "account_info_cached"
         self.ACCOUNT_REWARDS_URL = self.url + "account_rewards"
         self.ACCOUNT_UPDATES_URL = self.url + "account_updates"
         self.ACCOUNT_ADDRESSES_URL = self.url + "account_addresses"
-        self.ACCOUNT_ASSETS_URL = self.url + "account_assets"
+        self.ACCOUNT_ASSETS_URL = self.url + "account_assets?offset="
         self.ACCOUNT_HISTORY_URL = self.url + "account_history"
         # Asset URLs
         self.ASSET_LIST_URL = self.url + "asset_list"

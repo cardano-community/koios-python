@@ -3,7 +3,9 @@
 Provides all scripts functions
 """
 import json
+from time import sleep
 import requests
+from .enviroment import BASE_TIMEOUT, LIMIT_TIMEOUT, SLEEP_TIME
 
 
 def get_native_script_list(self, content_range="0-999"):
@@ -14,9 +16,29 @@ def get_native_script_list(self, content_range="0-999"):
     return: list of native script and creation tx hash pairs.
     :rtype: list.
     """
-    custom_headers = {"Range": str(content_range)}
-    get_format = requests.post(self.NATIVE_SCRIPT_LIST_URL, headers = custom_headers, timeout=35)
-    get_format = json.loads(get_format.content)
+    timeout = BASE_TIMEOUT
+
+    while True:
+        try:
+            custom_headers = {"Range": str(content_range)}
+            get_format = requests.post(self.NATIVE_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
+            get_format = json.loads(get_format.content)
+            break
+
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
+        except json.decoder.JSONDecodeError as decode_error:
+            print(f"Exception Decode: {decode_error}")
+            sleep(SLEEP_TIME)
+            print("Retriyng one more time...")
+
     return get_format
 
 
@@ -28,9 +50,29 @@ def get_plutus_script_list(self, content_range="0-999"):
     return: list of Plutus script and creation tx hash pairs.
     :rtype: list.
     """
-    custom_headers = {"Range": str(content_range)}
-    get_format = requests.post(self.PLUTUS_SCRIPT_LIST_URL, headers = custom_headers, timeout=30)
-    get_format = json.loads(get_format.content)
+    timeout = BASE_TIMEOUT
+
+    while True:
+        try:
+            custom_headers = {"Range": str(content_range)}
+            get_format = requests.post(self.PLUTUS_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
+            get_format = json.loads(get_format.content)
+            break
+
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
+        except json.decoder.JSONDecodeError as decode_error:
+            print(f"Exception Decode: {decode_error}")
+            sleep(SLEEP_TIME)
+            print("Retriyng one more time...")
+
     return get_format
 
 
@@ -42,8 +84,23 @@ def get_script_redeemers(self, script_hash):
     :return: list of all redeemers for a given script hash.
     :rtype: list.
     """
-    query = requests.get(self.SCRIPT_REDEEMERS_URL + script_hash, timeout=30)
-    query  = json.loads(query.content)
+    timeout = BASE_TIMEOUT
+
+    while True:
+        try:
+            query = requests.get(self.SCRIPT_REDEEMERS_URL + script_hash, timeout=timeout)
+            query  = json.loads(query.content)
+            break
+
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
     return query
 
 
@@ -55,7 +112,22 @@ def get_datum_info(self, *datum_hash):
     :return: the actual data in json form.
     :rtype: list.
     '''
-    custom_headers = {"_datum_hashes": [datum_hash]}
-    get_format = requests.post(self.DATUM_INFO_URL, json = custom_headers, timeout=30)
-    get_format = json.loads(get_format.content)
+    timeout = BASE_TIMEOUT
+
+    while True:
+        try:
+            custom_headers = {"_datum_hashes": [datum_hash]}
+            get_format = requests.post(self.DATUM_INFO_URL, json = custom_headers, timeout=timeout)
+            get_format = json.loads(get_format.content)
+            break
+        
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
     return get_format
