@@ -5,7 +5,7 @@ Provides all account functions
 import json
 from time import sleep
 import requests
-from .enviroment import BASE_TIMEOUT, LIMIT_TIMEOUT, SLEEP_TIME, OFFSET, RETRYING_TIME, LIMIT_RETRYING_TIMES
+from .environment import BASE_TIMEOUT, LIMIT_TIMEOUT, SLEEP_TIME, OFFSET, RETRYING_TIME, LIMIT_RETRYING_TIMES
 
 def get_account_list(self, content_range="0-999"):
     """
