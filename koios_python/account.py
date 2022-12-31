@@ -88,7 +88,7 @@ def get_account_info_cached(self, *args):
             else:
                 print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
                 break
-            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}/s")
 
     return accounts_info
 

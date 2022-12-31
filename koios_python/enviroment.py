@@ -9,7 +9,7 @@ BASE_TIMEOUT= 10
 SLEEP_TIME= 10
 OFFSET= 0
 RETRYING_TIME= 1
-LIMIT_RETRYING_TIMES= 6
+LIMIT_RETRYING_TIMES= 7
 
 # Exceptions Functions
 def handle_timeout_exceptions(timeout, timeout_error):
