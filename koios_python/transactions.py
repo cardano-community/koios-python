@@ -4,7 +4,7 @@ Provides all transactions functions
 """
 import json
 import requests
-from .enviroment import BASE_TIMEOUT, LIMIT_TIMEOUT
+from .environment import BASE_TIMEOUT, LIMIT_TIMEOUT
 
 def get_tx_info(self, *args):
     """

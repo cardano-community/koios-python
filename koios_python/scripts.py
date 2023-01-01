@@ -5,7 +5,7 @@ Provides all scripts functions
 import json
 from time import sleep
 import requests
-from .enviroment import BASE_TIMEOUT, LIMIT_TIMEOUT, SLEEP_TIME
+from .environment import BASE_TIMEOUT, LIMIT_TIMEOUT, SLEEP_TIME
 
 
 def get_native_script_list(self, content_range="0-999"):
