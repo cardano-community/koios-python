@@ -4,7 +4,7 @@ Provides all network functions
 """
 import json
 import requests
-# from .urls import GENESIS_URL, TIP_URL, TOTALS_URL
+from .environment import BASE_TIMEOUT, LIMIT_TIMEOUT
 
 def get_tip(self):
     """
@@ -13,8 +13,23 @@ def get_tip(self):
     :return: list of block summary (limit+paginated).
     :rtype: list.
     """
-    tip = requests.get(self.TIP_URL, timeout=10)
-    tip = json.loads(tip.content)
+    timeout = BASE_TIMEOUT
+
+    while True:
+        try:
+            tip = requests.get(self.TIP_URL, timeout=timeout)
+            tip = json.loads(tip.content)
+            break
+
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
     return tip
 
 
@@ -25,8 +40,23 @@ def get_genesis(self):
     :return: list of genesis parameters used to start each era on chain.
     :rtype: list.
     """
-    genesis = requests.get(self.GENESIS_URL, timeout=10)
-    genesis = json.loads(genesis.content)
+    timeout = BASE_TIMEOUT
+
+    while True:
+        try:
+            genesis = requests.get(self.GENESIS_URL, timeout=timeout)
+            genesis = json.loads(genesis.content)
+            break
+
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
     return genesis
 
 
@@ -39,11 +69,26 @@ def get_totals(self, epoch_no=None):
     :return: list of of supply/reserves/utxo/fees/treasury stats.
     :rtype: list.
     """
-    if epoch_no is None:
-        totals = requests.get(self.TOTALS_URL, timeout=10)
-        totals = json.loads(totals.content)
-    else:
-        totals = requests.get(f"{self.TOTALS_URL}?_epoch_no={epoch_no}", timeout=10)
-        totals = json.loads(totals.content)
+    timeout = BASE_TIMEOUT
+
+    while True:
+        try:
+            if epoch_no is None:
+                totals = requests.get(self.TOTALS_URL, timeout=10)
+                totals = json.loads(totals.content)
+            else:
+                totals = requests.get(f"{self.TOTALS_URL}?_epoch_no={epoch_no}", timeout=timeout)
+                totals = json.loads(totals.content)
+            break
+
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
     return totals
     
