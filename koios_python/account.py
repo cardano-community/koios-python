@@ -193,6 +193,44 @@ def get_account_assets(self, *args):
     :rtype: list.
     """
     timeout = BASE_TIMEOUT
+    retriyng_time = RETRYING_TIME
+
+    while True:
+        try:
+            get_format = {"_stake_addresses": [args]}
+            assets = requests.post(self.ACCOUNT_ASSETS_URL, json= get_format, timeout=timeout)
+            assets = json.loads(assets.content)
+            break
+
+        except requests.exceptions.ReadTimeout as timeout_error:
+            print(f"Exception: {timeout_error}")
+            if timeout < LIMIT_TIMEOUT:
+                timeout= timeout + 10
+            else:
+                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
+                break
+            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+
+        except json.decoder.JSONDecodeError as decode_error:
+            print(f"Exception Decode: Payload too heavy. {decode_error}")
+            sleep(SLEEP_TIME)
+            retriyng_time += 1
+            print(f"Retriyng one more time...({retriyng_time} times)")
+            if retriyng_time >= LIMIT_RETRYING_TIMES:
+                print("Reached limit of attempts")
+                break
+
+    return assets
+
+## Alternative to Paginate all list automately
+def get_account_assets_2(self, *args):
+    """
+    Get the native asset balance of given accounts.
+    :param str args: staking address/es in bech32 format (stake1...)
+    :return: list with all account assets.
+    :rtype: list.
+    """
+    timeout = BASE_TIMEOUT
     offset= OFFSET
     retriyng_time = RETRYING_TIME
     total_assets= []
@@ -217,8 +255,8 @@ def get_account_assets(self, *args):
             except json.decoder.JSONDecodeError as decode_error:
                 print(f"Exception Decode: Payload too heavy. {decode_error}")
                 sleep(SLEEP_TIME)
-                print(f"Retriyng one more time...({retriyng_time} time/s)")
                 retriyng_time += 1
+                print(f"Retriyng one more time...({retriyng_time} times)")
                 if retriyng_time >= LIMIT_RETRYING_TIMES:
                     print("Reached limit of attempts")
                     break
