@@ -4,7 +4,7 @@ Examples to check how works Koios-Python Library
 """
 import pprint # We recommend use pprint library to show your outputs
 import koios_python # We need to install and import koios_python library
-
+import time
 
 #alternative if we just need some functions
 #from koios_python import block, epochs
@@ -29,28 +29,49 @@ kp_test = koios_python.URLs(network="testnet")
 
 # Default Koios Endpoint
 kp = koios_python.URLs() # We need to create an instance of the class URLs
-
-#pprint.pp(kp.get_tx_info("f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e"))
-
 # Example of yout Custom Endpoint
 #kp = koios_python.URLs(url="https://koios-otg.tosidrop.io/api/v0/", network='mainnet') # We need to create an instance of the class URLs
 
+## MESASUMENT TOOLS
+# To measure the speed of a function:
+'''
+total=0
+times=3
+for i in range(times):
+    start = time.time()
+    kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz")
+    #kp.get_account_assets_2("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz")
+    #kp.get_account_assets_2("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz", "1000-1999")
+    end = time.time()
+    loop= end - start
+    total += loop
+total= total / times
+print('Average Time: '+ str(total) + ' s')
+'''
+# To count number of assets in a Stake Address
+
+query=kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz")
+#query=kp.get_account_addresses("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg")
+d=query[0]
+print(sum([len(d[x]) for x in d if isinstance(d[x], list)]))
+
+########################
+
+
+#pprint.pp(kp.get_account_assets_2("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz", "0-999"))
+#pprint.pp(kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz"))
 # Get Native Script List, first 11 scripts
-#print(kp.get_native_script_list('0-10'))
+#pprint.pp(kp.get_native_script_list())
+
 #print(len(kp.get_native_script_list('0-10')))
 
 # Crazy Heavy Account with large number of assets
 #pprint.pp(kp.get_account_assets("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"))
 
-pprint.pp(kp.get_asset_address_list("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", "424f4f4b", "0-999"))
-
-# Example to count number of assets in a Stake Address
-#a=kp.get_account_assets("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6")
-#d=a[0]
-#print(sum([len(d[x]) for x in d if isinstance(d[x], list)]))
+#pprint.pp(kp.get_account_assets_2("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6", "0-999"))
 
 # Heavy Account with large number of assets
-#pprint.pp(kp.get_account_assets("stake1uxttvx739dt505d6sxvdykj8336utdq2q92jk3sv253zp5qalcz84"))
+#pprint.pp(kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz"))
 
 # Address of a Stake Address Account
 #pprint.pp(kp.get_account_addresses("stake1uxttvx739dt505d6sxvdykj8336utdq2q92jk3sv253zp5qalcz84"))
