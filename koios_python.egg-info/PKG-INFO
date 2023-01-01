@@ -1,6 +1,26 @@
+Metadata-Version: 2.1
+Name: koios-python
+Version: 1.1.0
+Summary: Python wrapper Library using Koios API for accessing information stored on the Cardano Blockchain
+Home-page: https://github.com/QuixoteSystems
+Author: Quixote Stake Pool
+Author-email: quixotepool@proton.me
+License: MIT
+Keywords: koios,blockchain,cardano,API,REST,RESTful
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3 :: Only
+Description-Content-Type: text/markdown
+License-File: LICENSE.md
+
 ![koios-python](https://user-images.githubusercontent.com/82296005/194378368-6d2de904-8eec-48bf-a0d9-37118f299470.png)
 
-# Koios Python ![PyPI - Python Version](https://img.shields.io/badge/python-%3E%3D3.8-blue) [![PyPI - Python Version](https://img.shields.io/badge/pypi%20package-v1.1.0-green)](https://pypi.org/project/koios-python/)
+# Koios Python ![PyPI - Python Version](https://img.shields.io/badge/python-%3E%3D3.8-blue) [![PyPI - Python Version](https://img.shields.io/badge/pypi%20package-v1.0.2-green)](https://pypi.org/project/koios-python/)
 
 ## Overview
 **Koios Python** is Python wrapper which allow interacting with all information and parameters stored on the Cardano blockchain using [Koios REST API](https://api.koios.rest/)
