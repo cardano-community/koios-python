@@ -55,6 +55,10 @@ query=kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemn
 d=query[0]
 print(sum([len(d[x]) for x in d if isinstance(d[x], list)]))
 
+
+check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
+print(check_big_account)
+
 ########################
 
 
