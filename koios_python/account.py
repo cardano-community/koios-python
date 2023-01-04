@@ -181,6 +181,15 @@ def get_account_addresses(self, *args):
                 print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
                 break
             print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+            
+        except json.decoder.JSONDecodeError as decode_error:
+            print(f"Exception Decode: Payload too heavy. {decode_error}")
+            sleep(SLEEP_TIME)
+            retriyng_time += 1
+            print(f"Retriyng one more time...({retriyng_time} times)")
+            if retriyng_time >= LIMIT_RETRYING_TIMES:
+                print("Reached limit of attempts")
+                break
 
     return addresses
 
