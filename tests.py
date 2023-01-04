@@ -21,7 +21,7 @@ kp_test = koios_python.URLs(network="testnet")
 # kp_test = koios_python.URLs(network="mainnet")
 # print(kp_test.GENESIS_URL)
 # print(kp_test.url, kp_test.network)
-# print(kp_test.get_genesis())
+print(kp_test.get_tip())
 
 
 
@@ -29,8 +29,10 @@ kp_test = koios_python.URLs(network="testnet")
 
 # Default Koios Endpoint
 kp = koios_python.URLs() # We need to create an instance of the class URLs
-# Example of yout Custom Endpoint
-#kp = koios_python.URLs(url="https://koios-otg.tosidrop.io/api/v0/", network='mainnet') # We need to create an instance of the class URLs
+print(kp.get_tip())
+
+kp_custom_endpoint = koios_python.URLs(url="https://koios-otg.tosidrop.io/api/v0/",) # We need to create an instance of the class URLs and can specify the network if needed
+print(kp_custom_endpoint.get_tip())
 
 ## MESASUMENT TOOLS
 # To measure the speed of a function:
@@ -50,14 +52,14 @@ print('Average Time: '+ str(total) + ' s')
 '''
 # To count number of assets in a Stake Address
 
-query=kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz")
-#query=kp.get_account_addresses("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg")
-d=query[0]
-print(sum([len(d[x]) for x in d if isinstance(d[x], list)]))
+# query=kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz")
+# #query=kp.get_account_addresses("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg")
+# d=query[0]
+# print(sum([len(d[x]) for x in d if isinstance(d[x], list)]))
 
 
-check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
-print(check_big_account)
+# check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
+# print(check_big_account)
 
 ########################
 

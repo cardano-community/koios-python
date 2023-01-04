@@ -20,7 +20,23 @@ def get_tip(self):
             tip = requests.get(self.TIP_URL, timeout=timeout)
             tip = json.loads(tip.content)
             break
-
+        
+        # Bad Url error
+        except requests.exceptions.InvalidURL as url_error:
+            print(f"Exception: {url_error} \n ! PLEASE CHECK YOUR URL ENDPOINT OR NETWORK ARE CORRECT BEFORE LOOKING INTO OTHER ERRORS !")
+            break
+        
+        # Bad server connection error
+        except requests.exceptions.ConnectionError as url_error:
+            print(f"Exception: {url_error} \n ! PLEASE CHECK YOUR URL ENDPOINT OR NETWORK ARE CORRECT BEFORE LOOKING INTO OTHER ERRORS !")
+            break
+        
+         # Bad JSON error
+        except json.decoder.JSONDecodeError as json_error:
+            print(f"JSON Exception: {json_error}. PLEASE CHECK URL/ENDPOINT & NETWORK FOR YOUR KOIOS SERVER IS FORMATTED CORRECT/EXISTS/ONLINE!")
+            break
+        
+        # Timeout error
         except requests.exceptions.ReadTimeout as timeout_error:
             print(f"Exception: {timeout_error}")
             if timeout < LIMIT_TIMEOUT:
@@ -29,8 +45,15 @@ def get_tip(self):
                 print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
                 break
             print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
-
-    return tip
+        
+    # Return tip if defined
+    try:
+        return tip
+        # If tip is not defined/ out of scope, return error
+    except UnboundLocalError as error:
+        return "UNABLE TO RETURN TIP DUE TO ONE OF THE EXCEPTIONS ABOVE"
+        
+  
 
 
 def get_genesis(self):
@@ -47,6 +70,18 @@ def get_genesis(self):
             genesis = requests.get(self.GENESIS_URL, timeout=timeout)
             genesis = json.loads(genesis.content)
             break
+        
+        except requests.exceptions.InvalidURL as url_error:
+            print(f"Exception: {url_error} \n ! PLEASE CHECK YOUR URL ENDPOINT OR NETWORK ARE CORRECT BEFORE LOOKING INTO OTHER ERRORS !")
+            break
+        
+        except requests.exceptions.ConnectionError as url_error:
+            print(f"Exception: {url_error} \n ! PLEASE CHECK YOUR URL ENDPOINT OR NETWORK ARE CORRECT BEFORE LOOKING INTO OTHER ERRORS !")
+            break
+        
+        except json.decoder.JSONDecodeError as json_error:
+            print(f"JSON Exception: {json_error}. PLEASE CHECK URL/ENDPOINT & NETWORK FOR YOUR KOIOS SERVER IS FORMATTED CORRECT/EXISTS/ONLINE!")
+            break
 
         except requests.exceptions.ReadTimeout as timeout_error:
             print(f"Exception: {timeout_error}")
@@ -57,7 +92,11 @@ def get_genesis(self):
                 break
             print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
 
-    return genesis
+    try:
+        return genesis
+    
+    except UnboundLocalError as error:
+        return None, (f"UNABLE TO RETURN GENESIS DUE TO ONE OF THE EXCEPTIONS ABOVE")
 
 
 def get_totals(self, epoch_no=None):
