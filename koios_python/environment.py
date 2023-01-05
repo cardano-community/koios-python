@@ -73,18 +73,3 @@ def Exception_Handler(func):
                 
             
     return inner_function
-                
-
-            
-
-# def handle_timeout_exceptions(timeout, timeout_error):
-#     """
-#     Handle the timeout exceptions
-#     """
-#     print(f"Exception: {timeout_error}")
-#     if timeout < LIMIT_TIMEOUT:
-#         timeout= timeout + 10
-#     else:
-#         print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
-#         return
-#     print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
