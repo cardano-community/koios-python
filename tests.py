@@ -30,20 +30,20 @@ import time
 kp = koios_python.URLs() # We need to create an instance of the class URLs
 print(kp.get_tip())
 
-print('------------------------------------------------------------------')
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
 print(kp.get_genesis())
 
-print('------------------------------------------------------------------')
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
 print(kp.get_totals())
 
-print('------------------------------------------------------------------')
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
 check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
 print(check_big_account)
 
-print('------------------------------------------------------------------')
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
 
 
@@ -83,16 +83,18 @@ print('Average Time: '+ str(total) + ' s')
 
 
 #pprint.pp(kp.get_account_assets_2("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz", "0-999"))
-#pprint.pp(kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz"))
+# pprint.pp(kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz"))
 # Get Native Script List, first 11 scripts
 #pprint.pp(kp.get_native_script_list())
 
 #print(len(kp.get_native_script_list('0-10')))
 
 # Crazy Heavy Account with large number of assets
-#pprint.pp(kp.get_account_assets("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"))
+pprint.pp(kp.get_account_assets("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"))
 
-#pprint.pp(kp.get_account_assets_2("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6", "0-999"))
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+
+# pprint.pp(kp.get_account_assets_2("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6", "0-999"))
 
 # Heavy Account with large number of assets
 #pprint.pp(kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz"))

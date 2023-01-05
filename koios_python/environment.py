@@ -2,6 +2,7 @@
 """
 Provides all enviroment variables and constants used in the library
 """
+from time import sleep
 import requests
 import json
 
@@ -20,6 +21,7 @@ def Exception_Handler(func):
     def inner_function(*args, **kwargs):
         
         timeout = BASE_TIMEOUT
+        retrying_time = RETRYING_TIME
         
         while True:
             try:
@@ -35,29 +37,40 @@ def Exception_Handler(func):
                 print(f"Exception: {error} ! PLEASE CHECK YOUR URL ENDPOINT OR NETWORK ARE CORRECT BEFORE LOOKING INTO OTHER ERRORS !")
                 break
 
-             # Bad JSON error
-            except json.decoder.JSONDecodeError as json_error:
-                print(f"JSON Exception: {json_error}. PLEASE CHECK URL/ENDPOINT & NETWORK FOR YOUR KOIOS SERVER IS FORMATTED CORRECT/EXISTS/ONLINE!")
-                break
-            # Timeout error
             
+            # Timeout error
             except requests.exceptions.ReadTimeout as timeout_error:
+                print(f"Exception: {timeout_error}")
                 if timeout < LIMIT_TIMEOUT:
                     timeout= timeout + 10
                 else:
                     print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
                     break
-                print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
-            
+                print(f"Retrying with longer timeout: Total Timeout= {timeout}s")
+                
+            # Bad JSON error
+            except json.decoder.JSONDecodeError as decode_error:
+                print(f"Exception Decode: Payload too heavy....bad JSON returned. {decode_error}")
+                sleep(SLEEP_TIME)
+                try:
+                    retrying_time += 1
+                except UnboundLocalError as error:
+                    print(f"Something went wrong XD: {error}")
+                    
+                print(f"Retrying one more time...({retrying_time} times)")
+                if retrying_time >= LIMIT_RETRYING_TIMES:
+                    print("Reached limit of attempts")
+                    break
+                      
             # UnboundLocalError
             except UnboundLocalError as error:
                 print(f"Exception: {error}")
-                break
-                
+            
+ 
             # All other exceptions
             except Exception as e:
                 print(f"Exception: {e}")
-                break
+                
             
     return inner_function
                 
