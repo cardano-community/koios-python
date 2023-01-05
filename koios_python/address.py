@@ -104,7 +104,7 @@ def get_address_assets(self, *args):
     :rtype: list.
     """
     get_format = {"_addresses": [args] }
-    addresses = requests.post(self.ADDRESS_ASSETS_URL, json= get_format )
+    addresses = requests.post(self.ADDRESS_ASSETS_URL, json= get_format)
     addresses = json.loads(addresses.content)
 
     return addresses

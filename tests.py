@@ -90,9 +90,9 @@ print('Average Time: '+ str(total) + ' s')
 #print(len(kp.get_native_script_list('0-10')))
 
 # Crazy Heavy Account with large number of assets
-pprint.pp(kp.get_account_assets("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"))
+# pprint.pp(kp.get_account_assets("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"))
 
-print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
 # pprint.pp(kp.get_account_assets_2("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6", "0-999"))
 
@@ -194,7 +194,7 @@ print('-------------------------------------------------------------------------
 # List of all redeemers for a given script hash.
 #pprint.pp(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
 
-#pprint.pp(koios_python.get_address_assets("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"))
+pprint.pp(kp.get_address_assets("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"))
 
 
 # Get the staking history of given stake addresses (accounts), you can add as last parameter epoch number
