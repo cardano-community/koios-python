@@ -5,7 +5,7 @@ Provides all account functions
 import json
 from time import sleep
 import requests
-from .environment import BASE_TIMEOUT, LIMIT_TIMEOUT, SLEEP_TIME, OFFSET, RETRYING_TIME, LIMIT_RETRYING_TIMES
+from .environment import *
 
 def get_account_list(self, content_range="0-999"):
     """
@@ -192,6 +192,14 @@ def get_account_addresses(self, *args):
                 break
 
     return addresses
+
+@Exception_Handler
+def get_account_addresses_test_version(self, *args):
+            get_format = {"_stake_addresses": [args]}
+            addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json=get_format, timeout=timeout)
+            addresses = json.loads(addresses.content)
+            return addresses
+    
 
 
 def get_account_assets(self, *args):

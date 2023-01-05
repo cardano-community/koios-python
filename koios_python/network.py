@@ -4,9 +4,23 @@ Provides all network functions
 """
 import json
 import requests
-from .environment import BASE_TIMEOUT, LIMIT_TIMEOUT
+from .environment import *
 
+@Exception_Handler
 def get_tip(self):
+    """
+    Get the tip info about the latest block seen by chain.
+
+    :return: list of block summary (limit+paginated).
+    :rtype: list.
+    """
+    
+    tip = requests.get(self.TIP_URL)
+    tip = json.loads(tip.content)
+    return tip
+    
+
+#def get_tip(self):
     """
     Get the tip info about the latest block seen by chain.
 
@@ -51,12 +65,10 @@ def get_tip(self):
         return tip
         # If tip is not defined/ out of scope, return error
     except UnboundLocalError as error:
-        return "UNABLE TO RETURN TIP DUE TO ONE OF THE EXCEPTIONS ABOVE"
-        
-  
+        return "UNABLE TO RETURN TIP DUE TO ONE OF THE EXCEPTIONS ABOVE" 
 
 
-def get_genesis(self):
+#def get_genesis(self):
     """
     Get the Genesis parameters used to start specific era on chain.
 
@@ -96,10 +108,41 @@ def get_genesis(self):
         return genesis
     
     except UnboundLocalError as error:
-        return None, (f"UNABLE TO RETURN GENESIS DUE TO ONE OF THE EXCEPTIONS ABOVE")
+        return f"UNABLE TO RETURN GENESIS DUE TO ONE OF THE EXCEPTIONS ABOVE"
 
+@Exception_Handler
+def get_genesis(self):
+    """
+    Get the Genesis parameters used to start specific era on chain.
 
+    :return: list of genesis parameters used to start each era on chain.
+    :rtype: list.
+    """
+    
+    genesis = requests.get(self.GENESIS_URL)
+    genesis = json.loads(genesis.content)
+    return genesis
+
+@Exception_Handler
 def get_totals(self, epoch_no=None):
+    """
+    Get the circulating utxo, treasury, rewards, supply and reserves in lovelace for specified
+    epoch, all epochs if empty.
+
+    :param int epoch_no: Epoch Number to fetch details for.
+    :return: list of of supply/reserves/utxo/fees/treasury stats.
+    :rtype: list.
+    """
+    if epoch_no is None:
+        totals = requests.get(self.TOTALS_URL)
+        totals = json.loads(totals.content)
+    else:
+        totals = requests.get(f"{self.TOTALS_URL}?_epoch_no={epoch_no}")
+        totals = json.loads(totals.content)
+    return totals
+
+
+#def get_totals(self, epoch_no=None):
     """
     Get the circulating utxo, treasury, rewards, supply and reserves in lovelace for specified
     epoch, all epochs if empty.
