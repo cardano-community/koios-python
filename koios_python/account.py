@@ -230,8 +230,20 @@ def get_account_updates(self, *args):
 
     return updates
 
-
+@Exception_Handler
 def get_account_addresses(self, *args):
+    """
+    Get all addresses associated with given staking accounts.
+    :param str args: staking address/es in bech32 format (stake1...)
+    :return: list with all account addresses.
+    :rtype: list.
+    """
+    get_format = {"_stake_addresses": [args]}
+    addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format )
+    addresses = json.loads(addresses.content)
+    return addresses
+
+# def get_account_addresses(self, *args):
     """
     Get all addresses associated with given staking accounts.
     :param str args: staking address/es in bech32 format (stake1...)
