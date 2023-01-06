@@ -239,7 +239,7 @@ def get_account_addresses(self, *args):
     :rtype: list.
     """
     get_format = {"_stake_addresses": [args]}
-    addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format )
+    addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format)
     addresses = json.loads(addresses.content)
     return addresses
 
