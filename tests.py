@@ -4,7 +4,7 @@ Examples to check how works Koios-Python Library
 """
 import pprint # We recommend use pprint library to show your outputs
 import koios_python # We need to install and import koios_python library
-
+import time
 
 #alternative if we just need some functions
 #from koios_python import block, epochs
@@ -12,7 +12,7 @@ import koios_python # We need to install and import koios_python library
 # Some examples:
 
 ## TESTENET PARAMETERS
-kp_test = koios_python.URLs(network="testnet")
+# kp_test = koios_python.URLs(network="testnet")
 # print(kp_test.url, kp_test.network)
 # print(kp_test.get_account_info("stake_test1uqrw9tjymlm8wrwq7jk68n6v7fs9qz8z0tkdkve26dylmfc2ux2hj"))
 # print(kp_test.get_native_script_list())
@@ -21,32 +21,84 @@ kp_test = koios_python.URLs(network="testnet")
 # kp_test = koios_python.URLs(network="mainnet")
 # print(kp_test.GENESIS_URL)
 # print(kp_test.url, kp_test.network)
-# print(kp_test.get_genesis())
+# print(kp_test.get_tip_test_version())
 
 
-
+############################################################
 ## MAINNET PARAMETERS
-
 # Default Koios Endpoint
 kp = koios_python.URLs() # We need to create an instance of the class URLs
+#print(kp.get_tip())
 
-# Example of yout Custom Endpoint
-#kp = koios_python.URLs(url="https://koios-otg.tosidrop.io/api/v0/", network='mainnet') # We need to create an instance of the class URLs
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
+#print(kp.get_genesis())
+
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+
+#print(kp.get_totals())
+
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+
+check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
+pprint.pp(check_big_account)
+
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+
+check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
+pprint.pp(check_big_account)
+
+
+############################################################
+# Custom Koios Endpoint
+# kp_custom_endpoint = koios_python.URLs(url="https://koios-otg.tosidrop.io/api/v0/",) # We need to create an instance of the class URLs and can specify the network if needed
+# print(kp_custom_endpoint.get_tip_test_version())
+
+
+############################################################
+## MESASUMENT TOOLS
+# To measure the speed of a function:
+'''
+total=0
+times=3
+for i in range(times):
+    start = time.time()
+    kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz")
+    #kp.get_account_assets_2("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz")
+    #kp.get_account_assets_2("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz", "1000-1999")
+    end = time.time()
+    loop= end - start
+    total += loop
+total= total / times
+print('Average Time: '+ str(total) + ' s')
+'''
+# To count number of assets in a Stake Address
+
+# query=kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz")
+# #query=kp.get_account_addresses("stake1u8jm3v2q8h46q485j8e8uxqmj33f4cy4xvadkuq5g2c27ls44jflg")
+# d=query[0]
+# print(sum([len(d[x]) for x in d if isinstance(d[x], list)]))
+
+
+############################################################
+
+
+#pprint.pp(kp.get_account_assets_2("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz", "0-999"))
+# pprint.pp(kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz"))
 # Get Native Script List, first 11 scripts
-#print(kp.get_native_script_list('0-10'))
+#pprint.pp(kp.get_native_script_list())
+
 #print(len(kp.get_native_script_list('0-10')))
 
 # Crazy Heavy Account with large number of assets
 #pprint.pp(kp.get_account_assets("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"))
 
-# Example to count number of assets in a Stake Address
-#a=kp.get_account_assets("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6")
-#d=a[0]
-#print(sum([len(d[x]) for x in d if isinstance(d[x], list)]))
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+
+# pprint.pp(kp.get_account_assets_2("stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6", "0-999"))
 
 # Heavy Account with large number of assets
-#pprint.pp(kp.get_account_assets("stake1uxttvx739dt505d6sxvdykj8336utdq2q92jk3sv253zp5qalcz84"))
+#pprint.pp(kp.get_account_assets("stake1u9f9v0z5zzlldgx58n8tklphu8mf7h4jvp2j2gddluemnssjfnkzz"))
 
 # Address of a Stake Address Account
 #pprint.pp(kp.get_account_addresses("stake1uxttvx739dt505d6sxvdykj8336utdq2q92jk3sv253zp5qalcz84"))
@@ -141,11 +193,11 @@ kp = koios_python.URLs() # We need to create an instance of the class URLs
 #pprint.pp(koios_python.get_pool_info("pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp"))
 
 # List of all redeemers for a given script hash.
-#pprint.pp(koios_python.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
+#pprint.pp(kp.get_script_redeemers("d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8"))
 
-#pprint.pp(koios_python.get_address_assets("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"))
+#pprint.pp(kp.get_address_assets("addr1qyp9kz50sh9c53hpmk3l4ewj9ur794t2hdqpngsjn3wkc5sztv9glpwt3frwrhdrltjaytc8ut2k4w6qrx3p98zad3fq07xe9g"))
 
 
 # Get the staking history of given stake addresses (accounts), you can add as last parameter epoch number
-#pprint.pp(koios_python.get_account_history("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",
-#    "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy", 350))
+#pprint.pp(kp.get_account_history("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",
+#   "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy", 350))

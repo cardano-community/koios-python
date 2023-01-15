@@ -9,7 +9,7 @@ class URLs:
     from .network import get_tip, get_genesis, get_totals
     from .block import get_blocks, get_block_info, get_block_txs
     from .address import get_address_info, get_address_txs, get_address_assets, get_credential_txs
-    from .account import get_account_info, get_account_info_cached, get_account_list, get_account_rewards, get_account_updates, get_account_addresses, get_account_assets, get_account_history
+    from .account import get_account_info, get_account_info_cached, get_account_list, get_account_rewards, get_account_updates, get_account_addresses, get_account_assets, get_account_history, get_account_assets_2
     from .asset import get_asset_list, get_asset_address_list, get_asset_info, get_asset_history, get_asset_policy_info, get_asset_summary, get_asset_txs
     from .pool import get_pool_list, get_pool_info, get_pool_stake_snapshot, get_pool_delegators, get_pool_delegators_history, get_pool_blocks, get_pool_history, get_pool_updates, get_pool_relays, get_pool_metadata
     from .scripts import get_native_script_list, get_plutus_script_list, get_script_redeemers, get_datum_info
@@ -20,7 +20,7 @@ class URLs:
         
         self.url = url
         self.network = network
-        
+
         # change subdomain to network name then change the rest of urls to use the new subdomain
         if self.network == 'testnet':
             # replace mainnet subdomain with "testnet" subdomain
@@ -62,7 +62,8 @@ class URLs:
         self.ACCOUNT_REWARDS_URL = self.url + "account_rewards"
         self.ACCOUNT_UPDATES_URL = self.url + "account_updates"
         self.ACCOUNT_ADDRESSES_URL = self.url + "account_addresses"
-        self.ACCOUNT_ASSETS_URL = self.url + "account_assets?offset="
+        #self.ACCOUNT_ASSETS_URL = self.url + "account_assets?offset="
+        self.ACCOUNT_ASSETS_URL = self.url + "account_assets"
         self.ACCOUNT_HISTORY_URL = self.url + "account_history"
         # Asset URLs
         self.ASSET_LIST_URL = self.url + "asset_list"
