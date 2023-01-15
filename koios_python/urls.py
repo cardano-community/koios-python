@@ -20,7 +20,7 @@ class URLs:
         
         self.url = url
         self.network = network
-        
+
         # change subdomain to network name then change the rest of urls to use the new subdomain
         if self.network == 'testnet':
             # replace mainnet subdomain with "testnet" subdomain
