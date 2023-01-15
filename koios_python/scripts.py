@@ -16,8 +16,9 @@ def get_native_script_list(self, content_range="0-999"):
     return: list of native script and creation tx hash pairs.
     :rtype: list.
     """
+    timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    get_format = requests.post(self.NATIVE_SCRIPT_LIST_URL, headers = custom_headers)
+    get_format = requests.post(self.NATIVE_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
     get_format = json.loads(get_format.content)
     return get_format
 
@@ -64,8 +65,9 @@ def get_plutus_script_list(self, content_range="0-999"):
     return: list of Plutus script and creation tx hash pairs.
     :rtype: list.
     """
+    timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    get_format = requests.post(self.PLUTUS_SCRIPT_LIST_URL, headers = custom_headers)
+    get_format = requests.post(self.PLUTUS_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
     get_format = json.loads(get_format.content)
     return get_format
 
@@ -111,7 +113,8 @@ def get_script_redeemers(self, script_hash):
     :return: list of all redeemers for a given script hash.
     :rtype: list.
     """
-    query = requests.get(self.SCRIPT_REDEEMERS_URL + script_hash)
+    timeout = get_timeout()
+    query = requests.get(self.SCRIPT_REDEEMERS_URL + script_hash, timeout=timeout)
     query  = json.loads(query.content)
     return query
 
@@ -151,8 +154,9 @@ def get_datum_info(self, *datum_hash):
     :return: the actual data in json form.
     :rtype: list.
     '''
+    timeout = get_timeout()
     custom_headers = {"_datum_hashes": [datum_hash]}
-    get_format = requests.post(self.DATUM_INFO_URL, json = custom_headers)
+    get_format = requests.post(self.DATUM_INFO_URL, json = custom_headers, timeout=timeout)
     get_format = json.loads(get_format.content)
     return get_format
 

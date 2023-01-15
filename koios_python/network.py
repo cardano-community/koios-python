@@ -14,8 +14,8 @@ def get_tip(self):
     :return: list of block summary (limit+paginated).
     :rtype: list.
     """
-    
-    tip = requests.get(self.TIP_URL)
+    timeout = get_timeout()
+    tip = requests.get(self.TIP_URL, timeout=timeout)
     tip = json.loads(tip.content)
     return tip
     
@@ -118,8 +118,8 @@ def get_genesis(self):
     :return: list of genesis parameters used to start each era on chain.
     :rtype: list.
     """
-    
-    genesis = requests.get(self.GENESIS_URL)
+    timeout = get_timeout()
+    genesis = requests.get(self.GENESIS_URL, timeout=timeout)
     genesis = json.loads(genesis.content)
     return genesis
 
@@ -133,11 +133,12 @@ def get_totals(self, epoch_no=None):
     :return: list of of supply/reserves/utxo/fees/treasury stats.
     :rtype: list.
     """
+    timeout = get_timeout()
     if epoch_no is None:
-        totals = requests.get(self.TOTALS_URL)
+        totals = requests.get(self.TOTALS_URL, timeout=timeout)
         totals = json.loads(totals.content)
     else:
-        totals = requests.get(f"{self.TOTALS_URL}?_epoch_no={epoch_no}")
+        totals = requests.get(f"{self.TOTALS_URL}?_epoch_no={epoch_no}", timeout=timeout)
         totals = json.loads(totals.content)
     return totals
 

@@ -15,8 +15,9 @@ def get_tx_info(self, *args):
     :return: list of all info about transaction(s).
     :rtype: list.
     """
+    timeout = get_timeout()
     get_format = {"_tx_hashes": [args]}
-    tx_info = requests.post(self.TX_INFO_URL, json = get_format)
+    tx_info = requests.post(self.TX_INFO_URL, json = get_format, timeout=timeout)
     tx_info  = json.loads(tx_info.content)
     return tx_info 
 
@@ -57,8 +58,9 @@ def get_tx_utxos(self, *args):
     :return: all info about utxos in transaction(s)
     :rtype: list.
     """
+    timeout = get_timeout()
     get_format = {"_tx_hashes": [args]}
-    tx_utxos = requests.post(self.TX_UTXOS_URL, json = get_format)
+    tx_utxos = requests.post(self.TX_UTXOS_URL, json = get_format, timeout=timeout)
     tx_utxos  = json.loads(tx_utxos.content)
     return tx_utxos
 
@@ -99,8 +101,9 @@ def get_tx_metadata(self, *args):
     :return: list of all info about utxos in transaction(s)
     :rtype: list.
     """
+    timeout = get_timeout()
     get_format = {"_tx_hashes": [args]}
-    tx_metadata = requests.post(self.TX_METADATA_URL, json = get_format)
+    tx_metadata = requests.post(self.TX_METADATA_URL, json = get_format, timeout=timeout)
     tx_metadata  = json.loads(tx_metadata.content)
     return tx_metadata
 
@@ -139,9 +142,10 @@ def get_tx_metalabels(self, content_range="0-999"):
     :param str range: paginated content range, up to  1000 records.
     :return: list of metalabels transactions
     """
+    timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
     tx_metalabels = requests.get(self.TX_METALABELS_URL, headers \
-    = custom_headers)
+    = custom_headers, timeout=timeout)
     tx_metalabels  = json.loads(tx_metalabels.content)
     return tx_metalabels
 
@@ -182,11 +186,12 @@ def submit_tx(self, file):
     :param file: a file with raw binary serialized transaction on the file-system.
     :return: hex transaction ID (if is successful )
     """
+    timeout = get_timeout()
     with open(file, "rb") as cbor_tx:
         cbor_tx = cbor_tx.read()
     cbor_header = {'Content-Type': 'application/cbor'}
     submit = requests.post(self.SUBMIT_TX_URL, headers = cbor_header, \
-        data = cbor_tx, timeout=25)
+        data = cbor_tx, timeout=timeout)
     submit  = json.loads(submit.content)
     return submit
     
@@ -216,8 +221,9 @@ def get_tx_status(self, *args):
     :return: list of all info about utxos in transaction(s)
     :rtype: list.
     """
+    timeout = get_timeout()
     get_format = {"_tx_hashes": [args]}
-    tx_status = requests.post(self.TX_STATUS_URL, json = get_format)
+    tx_status = requests.post(self.TX_STATUS_URL, json = get_format, timeout=timeout)
     tx_status  = json.loads(tx_status.content)
     return tx_status
 

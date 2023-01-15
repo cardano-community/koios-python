@@ -15,9 +15,10 @@ def get_pool_list(self, content_range="0-999"):
     :return: list of all registered/retiring pools.
     :rtype: list.
     """
-    
+    timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    pool_list = requests.get(self.POOL_LIST_URL, headers = custom_headers)
+    pool_list = requests.get(self.POOL_LIST_URL, headers = custom_headers, timeout=timeout)
+    pool_list = json.loads(pool_list.content)
     return pool_list
 
 # def get_pool_list(self, content_range="0-999"):
@@ -57,8 +58,10 @@ def get_pool_info(self, *args):
     :return: list of pool information.
     :rtype: list.
     """
+    timeout = get_timeout()
     get_format = {"_pool_bech32_ids": [args] }
-    pool_list = requests.post(self.POOL_INFO_URL, json = get_format)
+    pool_list = requests.post(self.POOL_INFO_URL, json = get_format, timeout=timeout)
+    pool_list  = json.loads(pool_list.content)
     return pool_list
 
 # def get_pool_info(self, *args):
@@ -98,7 +101,8 @@ def get_pool_stake_snapshot(self, pool_bech32):
     :return: Array of pool stake information for 3 snapshots
     :rtype: list.
     """
-    snapshot = requests.get(self.POOL_STAKE_SNAPSHOT + pool_bech32)
+    timeout = get_timeout()
+    snapshot = requests.get(self.POOL_STAKE_SNAPSHOT + pool_bech32, timeout=timeout)
     snapshot = json.loads(snapshot.content)
     return snapshot
     
@@ -140,8 +144,9 @@ def get_pool_delegators(self, pool_bech32, content_range="0-999"):
     :return: list of pool delegators information.
     :rtype: list.
     """
+    timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    info = requests
+    info = requests.get(self.POOL_DELEGATORS_URL + pool_bech32, headers = custom_headers, timeout=timeout)
     info = json.loads(info.content)
     return info
 
@@ -186,11 +191,12 @@ def get_pool_delegators_history(self, pool_bech32, epoch_no=None):
     :return: list of pool delegators information.
     :rtype: list.
     """
+    timeout = get_timeout()
     if epoch_no is None:
-        info = requests.get(self.POOL_DELEGATORS_HISTORY_URL + pool_bech32)
+        info = requests.get(self.POOL_DELEGATORS_HISTORY_URL + pool_bech32, timeout=timeout)
         info = json.loads(info.content)
     else:
-        info = requests.get(f"{self.POOL_DELEGATORS_HISTORY_URL}{pool_bech32}&_epoch={epoch_no}")
+        info = requests.get(f"{self.POOL_DELEGATORS_HISTORY_URL}{pool_bech32}&_epoch={epoch_no}", timeout=timeout)
         info = json.loads(info.content)
     return info
 
@@ -237,11 +243,12 @@ def get_pool_blocks(self, pool_bech32, epoch_no=None):
     :return: list of blocks created by pool.
     :rtype: list.s
     """
+    timeout = get_timeout()
     if epoch_no is None:
-        info = requests.get(self.POOL_BLOCKS_URL + pool_bech32)
+        info = requests.get(self.POOL_BLOCKS_URL + pool_bech32, timeout=timeout)
         info = json.loads(info.content)
     else:
-        info = requests.get(f"{self.POOL_BLOCKS_URL}{pool_bech32}&_epoch_no={epoch_no}")
+        info = requests.get(f"{self.POOL_BLOCKS_URL}{pool_bech32}&_epoch_no={epoch_no}", timeout=timeout)
         info = json.loads(info.content)
     return info
 
@@ -288,11 +295,12 @@ def get_pool_history(self, pool_bech32, epoch_no="history"):
     :return: list of blocks created by pool.
     :rtype: list.
     """
+    timeout = get_timeout()
     if epoch_no == "history":
-        info = requests.get(self.POOL_HISTORY_URL + pool_bech32)
+        info = requests.get(self.POOL_HISTORY_URL + pool_bech32, timeout=timeout)
         info = json.loads(info.content)
     else:
-        info = requests.get(f"{self.POOL_HISTORY_URL}{pool_bech32}&_epoch_no={epoch_no}")
+        info = requests.get(f"{self.POOL_HISTORY_URL}{pool_bech32}&_epoch_no={epoch_no}", timeout=timeout)
         info = json.loads(info.content)
     return info
 
@@ -338,11 +346,12 @@ def get_pool_updates(self, pool_bech32=None):
     :return: list of historical pool updates.
     :rtype: list.
     """
+    timeout = get_timeout()
     if pool_bech32 is None:
-        pool_list = requests.get(self.POOL_UPDATES_URL)
+        pool_list = requests.get(self.POOL_UPDATES_URL, timeout=timeout)
         pool_list  = json.loads(pool_list.content)
     else:
-        pool_list = requests.get(f"{self.POOL_UPDATES_URL}?_pool_bech32={pool_bech32}")
+        pool_list = requests.get(f"{self.POOL_UPDATES_URL}?_pool_bech32={pool_bech32}", timeout=timeout)
         pool_list  = json.loads(pool_list.content)
     return pool_list
 
@@ -386,8 +395,9 @@ def get_pool_relays(self, content_range="0-999"):
     :return: list of pool relay information.
     :rtype: list.
     """
+    timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    pool_list = requests.get(self.POOL_RELAYS_URL, headers = custom_headers)
+    pool_list = requests.get(self.POOL_RELAYS_URL, headers = custom_headers, timeout=timeout)
     pool_list  = json.loads(pool_list.content)
     return pool_list
 
@@ -428,12 +438,13 @@ def get_pool_metadata(self, *args):
     :return: list of pool metadata.
     :rtype: list.
     """
+    timeout = get_timeout()
     if len(args) == 0:
-        pool_list = requests.post(self.POOL_METADATA_URL)
+        pool_list = requests.post(self.POOL_METADATA_URL, timeout=timeout)
         pool_list  = json.loads(pool_list.content)
     else:
         get_format = {"_pool_bech32_ids": [args]}
-        pool_list = requests.post(self.POOL_METADATA_URL, json = get_format)
+        pool_list = requests.post(self.POOL_METADATA_URL, json = get_format, timeout=timeout)
         pool_list  = json.loads(pool_list.content)
     return pool_list
 
