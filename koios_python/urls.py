@@ -22,7 +22,7 @@ class URLs:
         self.network = network
 
         # change subdomain to network name then change the rest of urls to use the new subdomain
-        if self.network == 'testnet':
+        if self.network == 'preview' or self.network == 'preprod':
             # replace mainnet subdomain with "testnet" subdomain
             self.url = self.url.replace(self.url.split('.')[0], self.network)
             # add https:// to the url

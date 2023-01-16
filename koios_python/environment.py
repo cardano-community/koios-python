@@ -26,7 +26,7 @@ def init_timeout():
 def get_timeout():
     return timeout
 
-# Function to update a new timeout dynamicly
+# Function to update a new timeout dynamically
 def set_timeout(new_timeout):
     global timeout
     timeout = new_timeout
