@@ -84,11 +84,10 @@ def Exception_Handler(func):
                       
             # UnboundLocalError
             except UnboundLocalError as error:
-                print(f"Exception 1: {error}")
+                print(f"Exception: {error}")
             
- 
             # All other exceptions
             except Exception as e:
-                print(f"Exception 2: {e}")
+                print(f"Exception: {e}")
                 
     return inner_function
