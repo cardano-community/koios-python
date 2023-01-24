@@ -40,7 +40,6 @@ def Exception_Handler(func):
         retrying_time = RETRYING_TIME
         init_timeout()
         timeout = get_timeout()
-        print('timeout '+str(timeout))
         while True:
 
             try:
