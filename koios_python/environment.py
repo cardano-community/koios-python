@@ -87,7 +87,7 @@ def Exception_Handler(func):
                 print(f"Exception: {error}")
             
             # All other exceptions
-            except Exception as e:
-                print(f"Exception: {e}")
+            except Exception as error:
+                print(f"Exception: {error}")
                 
     return inner_function
