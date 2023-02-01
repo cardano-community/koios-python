@@ -71,7 +71,7 @@ def get_pool_delegators(self, pool_bech32, content_range="0-999"):
 
 
 @Exception_Handler
-def get_pool_delegators_history(self, pool_bech32, epoch_no=None):
+def get_pool_delegators_history(self, pool_bech32, epoch_no=None, content_range="0-999"):
     """
     Return information about active delegators (incl. history) for a given pool and epoch number \
     (all epochs if not specified).
@@ -82,11 +82,12 @@ def get_pool_delegators_history(self, pool_bech32, epoch_no=None):
     :rtype: list.
     """
     timeout = get_timeout()
+    custom_headers = {"Range": str(content_range)}
     if epoch_no is None:
-        info = requests.get(self.POOL_DELEGATORS_HISTORY_URL + pool_bech32, timeout=timeout)
+        info = requests.get(self.POOL_DELEGATORS_HISTORY_URL + pool_bech32, headers=custom_headers, timeout=timeout)
         info = json.loads(info.content)
     else:
-        info = requests.get(f"{self.POOL_DELEGATORS_HISTORY_URL}{pool_bech32}&_epoch={epoch_no}", timeout=timeout)
+        info = requests.get(f"{self.POOL_DELEGATORS_HISTORY_URL}{pool_bech32}&_epoch_no={epoch_no}", headers=custom_headers, timeout=timeout)
         info = json.loads(info.content)
     return info
 
