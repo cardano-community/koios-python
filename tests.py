@@ -30,23 +30,24 @@ import time
 kp = koios_python.URLs() # We need to create an instance of the class URLs
 #print(kp.get_tip())
 
-print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
-#print(kp.get_genesis())
+# #print(kp.get_genesis())
 
-print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
 #print(kp.get_totals())
+# pprint.pp(kp.get_pool_delegators_history("pool1hrv8gtrm0dgjg6zyss5uwa4nkruzfnh5vrdkr2sayj7x2nw6mjc", 391))
 
-print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
-check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
-pprint.pp(check_big_account)
+# check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
+# pprint.pp(check_big_account)
 
-print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
-check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
-pprint.pp(check_big_account)
+# check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
+# pprint.pp(check_big_account)
 
 
 ############################################################
