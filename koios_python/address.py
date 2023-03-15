@@ -76,3 +76,20 @@ def get_credential_txs(self, payment_credentials, after_block=0):
     hash_list  = json.loads(hash_list.content)
 
     return hash_list
+
+@Exception_Handler
+def get_credential_utxos(self, payment_credentials, content_range="0-5"):
+    """
+    Get a list of UTxO against input payment credential array including their balances.
+    
+    :param str payment_credentials
+    :return: list of utxos
+    :rtype: list.
+    """
+    timeout = get_timeout()
+    custom_headers = {"Range": str(content_range)}
+    get_format = {"_payment_credentials":[payment_credentials]}
+    utxos = requests.post(self.CREDENTIAL_UTXOS_URL, json = get_format, headers = custom_headers, timeout=timeout)
+    utxos = json.loads(utxos.content)
+    
+    return utxos

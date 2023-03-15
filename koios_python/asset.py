@@ -55,6 +55,21 @@ def get_asset_info(self, asset_policy, asset_name):
     info = json.loads(info.content)
     return info
 
+@Exception_Handler
+def get_asset_info_bulk(self, asset_list):
+    """
+    Get the information of a list of assets including first minting & token registry metadata.
+    :param list asset_list: list of assets to query.
+    :return: list of all asset info.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+    get_format = {"_asset_list": [asset_list]}
+    asset_info = requests.post(self.ASSET_INFO_BULK_URL, json= get_format, timeout=timeout)
+    asset_info = json.loads(asset_info.content)
+
+    return asset_info
+
 
 @Exception_Handler
 def get_asset_history(self, asset_policy, asset_name):
@@ -119,3 +134,17 @@ def get_asset_txs(self, asset_policy, asset_name, after_block_height=0):
     txs = requests.get(f"{self.ASSET_TXS_URL}{asset_policy}&_asset_name={asset_name}&_after_block_height={after_block_height}", timeout=timeout)
     txs = json.loads(txs.content)
     return txs
+
+@Exception_Handler
+def get_asset_token_registry(self, content_range="0-999"):
+    """
+    Get a list of assets registered via token registry on github
+
+    :return: list of all asset token registry.
+    :rtype: list.    
+    """
+    timeout = get_timeout()
+    custom_headers = {"Range": str(content_range)}
+    token_registry = requests.get(self.ASSET_TOKEN_REGISTRY_URL, headers = custom_headers, timeout=timeout)
+    token_registry = json.loads(token_registry.content)
+    return token_registry

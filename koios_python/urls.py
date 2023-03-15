@@ -35,14 +35,17 @@ class URLs:
         self.TIP_URL = self.url + "tip"
         self.GENESIS_URL = self.url + "genesis"
         self.TOTALS_URL = self.url + "totals"
+        
         # Epoch URLs
         self.EPOCH_INFO_URL = self.url + "epoch_info"
         self.EPOCH_PARAMS_URL = self.url + "epoch_params"
         self.EPOCH_BLOCKS_URL = self.url + "epoch_block_protocols"
+        
         # Block URLs
         self.BLOCKS_URL = self.url + "blocks"
         self.BLOCK_INFO_URL = self.url + "block_info"
         self.BLOCK_TXS_URL = self.url + "block_txs"
+        
         # Transaction URLs
         self.TX_INFO_URL = self.url + "tx_info"
         self.TX_UTXOS_URL = self.url + "tx_utxos"
@@ -50,11 +53,14 @@ class URLs:
         self.TX_METALABELS_URL = self.url + "tx_metalabels"
         self.SUBMIT_TX_URL = self.url + "submittx"
         self.TX_STATUS_URL = self.url + "tx_status"
+        
         # Address URLs
         self.ADDRESS_INFO_URL = self.url + "address_info"
         self.ADDRESS_TXS_URL = self.url + "address_txs"
         self.ADDRESS_ASSETS_URL = self.url + "address_assets"
         self.CREDENTIAL_TXS_URL = self.url + "credential_txs"
+        self.CREDENTIAL_UTXOS_URL = self.url + "credential_utxos"
+        
         # Account URLs
         self.ACCOUNT_LIST_URL = self.url + "account_list?offset="
         self.ACCOUNT_INFO_URL = self.url + "account_info"
@@ -65,6 +71,8 @@ class URLs:
         #self.ACCOUNT_ASSETS_URL = self.url + "account_assets?offset="
         self.ACCOUNT_ASSETS_URL = self.url + "account_assets"
         self.ACCOUNT_HISTORY_URL = self.url + "account_history"
+        self.ACCOUNT_UTXOS_URL = self.url + "account_utxos"
+        
         # Asset URLs
         self.ASSET_LIST_URL = self.url + "asset_list"
         self.ASSET_ADDRESSES_URL = self.url +  "asset_addresses?_asset_policy="
@@ -73,6 +81,9 @@ class URLs:
         self.POLICY_ASSET_INFO_URL = self.url + "policy_asset_info?_asset_policy="
         self.ASSET_SUMMARY_URL = self.url + "asset_summary?_asset_policy="
         self.ASSET_TXS_URL = self.url + "asset_txs?_asset_policy="
+        self.ASSET_NFT_ADDRESS = self.url + "asset_nft_address?_asset_policy="
+        self.ASSET_INFO_BULK_URL = self.url + "asset_info"
+        self.ASSET_TOKEN_REGISTRY_URL = self.url + "asset_token_registry"
 
         # Pool URLs
         self.POOL_LIST_URL = self.url + "pool_list"
