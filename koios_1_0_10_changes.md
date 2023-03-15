@@ -1,4 +1,6 @@
-## Changes for API
+## Changes for KOIOS API
+
+- In this file you will find the changes we need to complete to koios_python before next release to match the current version of KOIOS API. All tasks that have been completed are the ones crossed out by a line.
 
 ### Deprecations
 
