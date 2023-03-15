@@ -23,7 +23,7 @@ def get_asset_list(self, content_range="0-999"):
 
 
 @Exception_Handler
-def get_asset_address_list(self, asset_policy, asset_name, content_range="0-999"):
+def get_asset_addresses(self, asset_policy, asset_name, content_range="0-999"):
     """
     Get the list of all addresses holding a given asset.
 
@@ -34,7 +34,7 @@ def get_asset_address_list(self, asset_policy, asset_name, content_range="0-999"
     """
     timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    info = requests.get(f"{self.ASSET_ADDRESS_LIST_URL}{asset_policy}&_asset_name={asset_name}", \
+    info = requests.get(f"{self.ASSET_ADDRESSES_URL}{asset_policy}&_asset_name={asset_name}", \
         headers = custom_headers, timeout=timeout)
     info = json.loads(info.content)
     return info
@@ -73,7 +73,7 @@ def get_asset_history(self, asset_policy, asset_name):
 
 
 @Exception_Handler
-def get_asset_policy_info(self, asset_policy):
+def get_policy_asset_info(self, asset_policy):
     """
     Get the information for all assets under the same policy.
 
@@ -82,7 +82,7 @@ def get_asset_policy_info(self, asset_policy):
     :rtype: list.
     """
     timeout = get_timeout()
-    info = requests.get(f"{self.ASSET_POLICY_INFO_URL}{asset_policy}", timeout=timeout)
+    info = requests.get(f"{self.POLICY_ASSET_INFO_URL}{asset_policy}", timeout=timeout)
     info = json.loads(info.content)
     return info
 
