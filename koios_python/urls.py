@@ -60,8 +60,8 @@ class URLs:
         self.ADDRESS_INFO_URL = self.url + "address_info"
         self.ADDRESS_TXS_URL = self.url + "address_txs"
         self.ADDRESS_ASSETS_URL = self.url + "address_assets"
-        self.CREDENTIAL_TXS_URL = self.url + "credential_txs"
-        self.CREDENTIAL_UTXOS_URL = self.url + "credential_utxos"
+        self.ADDRESS_CREDENTIAL_TXS_URL = self.url + "credential_txs"
+        self.ADDRESS_CREDENTIAL_UTXOS_URL = self.url + "credential_utxos"
         
         # Account URLs
         self.ACCOUNT_LIST_URL = self.url + "account_list?offset="

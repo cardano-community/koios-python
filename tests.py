@@ -83,9 +83,61 @@ kp = koios_python.URLs() # We need to create an instance of the class URLs
 # get_asset_summary = kp.get_asset_summary(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b')
 # pprint.pp(get_asset_summary)
 
-print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-get_asset_txs = kp.get_asset_txs(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b', after_block_height=50000, history=False, content_range="0-99")
-pprint.pp(get_asset_txs)
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_asset_txs = kp.get_asset_txs(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b', after_block_height=50000, history=False, content_range="0-99")
+# pprint.pp(get_asset_txs)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_address_info = kp.get_address_info("addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv","addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y")
+# pprint.pp(get_address_info)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_address_txs = kp.get_address_txs("addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv","addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y",after_block=6238675)
+# pprint.pp(get_address_txs)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_address_credential_utxos = kp.get_credential_utxos("025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52","025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52")
+# pprint.pp(get_address_credential_utxos)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_address_assets =  kp.get_address_assets("addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv","addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y")
+# pprint.pp(get_address_assets)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_address_credential_txs = kp.get_credential_txs("025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52", "13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555", after_block=6238675)
+# pprint.pp(get_address_credential_txs)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
