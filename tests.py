@@ -49,6 +49,46 @@ kp = koios_python.URLs() # We need to create an instance of the class URLs
 # check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
 # pprint.pp(check_big_account)
 
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+
+# get_asset_list = kp.get_asset_list(content_range="999-1999")
+# print(get_asset_list)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_asset_addresses = kp.get_asset_addresses(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501',asset_name='424f4f4b',content_range="0-99")
+# pprint.pp(get_asset_addresses)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_asset_nft_address = kp.get_asset_nft_address(asset_policy='f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a',
+#                                                asset_name='68616e646c65')
+# pprint.pp(get_asset_nft_address)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_asset_info_bulk = kp.get_asset_info_bulk(["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"],["1d7f33bd23d85e1a25d87d86fac4f199c3197a2f7afeb662a0f34e1e","776f726c646d6f62696c65746f6b656e"])
+# pprint.pp(get_asset_info_bulk)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_policy_asset_addresses = kp.get_policy_asset_addresses(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', content_range="0-99")
+# pprint.pp(get_policy_asset_addresses)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_policy_asset_info = kp.get_policy_asset_info(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501')
+# pprint.pp(get_policy_asset_info)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_policy_asset_list = kp.get_policy_asset_list(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501')
+# pprint.pp(get_policy_asset_list)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_asset_summary = kp.get_asset_summary(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b')
+# pprint.pp(get_asset_summary)
+
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_asset_txs = kp.get_asset_txs(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b', after_block_height=50000, history=False, content_range="0-99")
+pprint.pp(get_asset_txs)
+
+
+
 
 ############################################################
 # Custom Koios Endpoint

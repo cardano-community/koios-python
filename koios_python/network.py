@@ -51,3 +51,18 @@ def get_totals(self, epoch_no=None):
         totals = requests.get(f"{self.TOTALS_URL}?_epoch_no={epoch_no}", timeout=timeout)
         totals = json.loads(totals.content)
     return totals
+
+@Exception_Handler
+def get_network_param_updates(self, content_range="0-57"):
+    """
+    Get all parameter update proposals submitted to the chain starting Shelley era
+
+    :return: list of protocol parameters starting from Shelley era.
+    :rtype: list
+    """
+    timeout = get_timeout()
+    custom_headers = {"Range": str(content_range)}
+    network_params = requests.get(self.NETWORK_PARAM_UPDATES_URL, headers=custom_headers, timeout=timeout)
+    network_params = json.loads(network_params.content)
+    return network_params
+    

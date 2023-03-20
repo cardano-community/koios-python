@@ -18,9 +18,9 @@ def get_account_list(self, content_range="0-999"):
     """
     timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    address_list = requests.get(self.ACCOUNT_LIST_URL, headers = custom_headers, timeout=timeout)
-    address_list = json.loads(address_list.content)
-    return address_list
+    account_list = requests.get(self.ACCOUNT_LIST_URL, headers = custom_headers, timeout=timeout)
+    account_list = json.loads(account_list.content)
+    return account_list
 
 
 @Exception_Handler
