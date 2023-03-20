@@ -6,7 +6,7 @@ Provides all urls used in the library
 class URLs:
     # imported like class methods
     from .epoch import get_epoch_info, get_epoch_params, get_epoch_block_protocols
-    from .network import get_tip, get_genesis, get_totals, get_network_param_updates
+    from .network import get_tip, get_genesis, get_totals, get_param_updates
     from .block import get_blocks, get_block_info, get_block_txs
     from .address import get_address_info, get_address_txs, get_address_assets, get_credential_txs, get_credential_utxos
     from .account import get_account_info, get_account_info_cached, get_account_list, get_account_rewards, get_account_updates, get_account_addresses, get_account_assets, get_account_history, get_account_assets_2

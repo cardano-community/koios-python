@@ -188,6 +188,13 @@ def get_asset_txs(self, asset_policy, asset_name, after_block_height=0, history=
     """
     timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    txs = requests.get(f"{self.ASSET_TXS_URL}{asset_policy}&_asset_name={asset_name}&_after_block_height={after_block_height}&_history{history}", headers=custom_headers, timeout=timeout)
-    txs = json.loads(txs.content)
+    
+    if history == True:
+        history = "true"
+        txs = requests.get(f"{self.ASSET_TXS_URL}{asset_policy}&_asset_name={asset_name}&_after_block_height={after_block_height}&_history={history}", headers=custom_headers, timeout=timeout)
+        txs = json.loads(txs.content)
+    if history == False:
+        history = "false"
+        txs = requests.get(f"{self.ASSET_TXS_URL}{asset_policy}&_asset_name={asset_name}&_after_block_height={after_block_height}&_history={history}", headers=custom_headers, timeout=timeout)
+        txs = json.loads(txs.content)
     return txs

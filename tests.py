@@ -87,6 +87,9 @@ kp = koios_python.URLs() # We need to create an instance of the class URLs
 # get_asset_txs = kp.get_asset_txs(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b', after_block_height=50000, history=False, content_range="0-99")
 # pprint.pp(get_asset_txs)
 
+# get_asset_txs_hist_true = kp.get_asset_txs(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b', after_block_height=50000, history=True, content_range="0-99")
+# pprint.pp(get_asset_txs_hist_true)
+
 # print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 # get_address_info = kp.get_address_info("addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv","addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y")
 # pprint.pp(get_address_info)
@@ -108,6 +111,15 @@ kp = koios_python.URLs() # We need to create an instance of the class URLs
 # pprint.pp(get_address_credential_txs)
 
 # print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_network_params = kp.get_param_updates()
+# pprint.pp(get_network_params)
+
+# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+# get_epoch_320_info = kp.get_epoch_info(epoch_no=320, include_next_epoch=True)
+# pprint.pp(get_epoch_320_info)
+
+# get_epoch_320_info_false = kp.get_epoch_info(epoch_no=320, include_next_epoch=False)
+# pprint.pp(get_epoch_320_info_false)
 
 
 

@@ -7,7 +7,7 @@ import requests
 from .environment import *
 
 @Exception_Handler
-def get_epoch_info(self, epoch_no=None):
+def get_epoch_info(self, epoch_no=None, include_next_epoch=False):
     """
     Get the epoch information, all epochs if no epoch specified.
 
@@ -16,15 +16,23 @@ def get_epoch_info(self, epoch_no=None):
     :rtype: list
     """
     timeout = get_timeout()
-    if epoch_no is None:
-        info = requests.get(self.EPOCH_INFO_URL)
+    if epoch_no is None and include_next_epoch is False:
+        info = requests.get(f"{self.EPOCH_INFO_URL}?_include_next_epoch=false")
         print(self.EPOCH_INFO_URL)
         info = json.loads(info.content)
-    else:
-        info = requests.get(f"{self.EPOCH_INFO_URL}?_epoch_no={epoch_no}", timeout=timeout)
+    if epoch_no is None and include_next_epoch is True:
+        info = requests.get(f"{self.EPOCH_INFO_URL}?_include_next_epoch=true")
         print(self.EPOCH_INFO_URL)
         info = json.loads(info.content)
-    return info 
+    if epoch_no is not None and include_next_epoch is False:
+        info = requests.get(f"{self.EPOCH_INFO_URL}?_epoch_no={epoch_no}&_include_next_epoch=false", timeout=timeout)
+        print(self.EPOCH_INFO_URL)
+        info = json.loads(info.content)
+    if epoch_no is not None and include_next_epoch is True:
+        info = requests.get(f"{self.EPOCH_INFO_URL}?_epoch_no={epoch_no}&_include_next_epoch=true", timeout=timeout)
+        print(self.EPOCH_INFO_URL)
+        info = json.loads(info.content)
+    return info
 
 
 @Exception_Handler

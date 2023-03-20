@@ -14,8 +14,8 @@
 - ~~`/account_utxos` - Returns brief details on non-empty UTxOs associated with a given stake address #149~~
 - ~~`/asset_info_bulk` - Bulk version of /asset_info #142~~
 - ~~`/asset_token_registry` - Returns assets registered via token registry on github #145~~
-- `/credential_utxos` - Returns UTxOs associated with a payment credential #149
-- `/param_updates` - Returns list of parameter update proposals applied to the network #149
+- ~~`/credential_utxos` - Returns UTxOs associated with a payment credential #149~~
+- ~~`/param_updates` - Returns list of parameter update proposals applied to the network #149~~
 - ~~`/policy_asset_addresses` - Returns addresses with quantity for each asset on a given policy #149~~
 - ~~`/policy_asset_info` - Equivalent of deprecated /asset_policy_info but with more details in output #149~~
 - ~~`/policy_asset_list` - Returns list of asset under the given policy (including supply) #142, #149~~
