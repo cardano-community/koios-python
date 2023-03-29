@@ -21,36 +21,23 @@ def get_asset_list(self, content_range="0-999"):
     asset_list = json.loads(asset_list.content)
     return asset_list
 
-
-# def get_asset_list(self, content_range="0-999"):
+@Exception_Handler
+def get_asset_token_registry(self, content_range="0-999"):
     """
-    Get the list of all native assets (paginated)
+    Get a list of assets registered via token registry on github
 
-    :return: list with all asset list.
-    :rtype: list.
+    :return: list of all asset token registry.
+    :rtype: list.    
     """
-    timeout = BASE_TIMEOUT
+    timeout = get_timeout()
+    custom_headers = {"Range": str(content_range)}
+    token_registry = requests.get(self.ASSET_TOKEN_REGISTRY_URL, headers = custom_headers, timeout=timeout)
+    token_registry = json.loads(token_registry.content)
+    return token_registry
 
-    while True:
-        try:
-            custom_headers = {"Range": str(content_range)}
-            asset_list = requests.get(self.ASSET_LIST_URL, headers = custom_headers, timeout=timeout)
-            asset_list = json.loads(asset_list.content)
-            break
-
-        except requests.exceptions.ReadTimeout as timeout_error:
-            print(f"Exception: {timeout_error}")
-            if timeout < LIMIT_TIMEOUT:
-                timeout= timeout + 10
-            else:
-                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
-                break
-            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
-
-    return asset_list
 
 @Exception_Handler
-def get_asset_address_list(self, asset_policy, asset_name, content_range="0-999"):
+def get_asset_addresses(self, asset_policy, asset_name, content_range="0-999"):
     """
     Get the list of all addresses holding a given asset.
 
@@ -61,40 +48,27 @@ def get_asset_address_list(self, asset_policy, asset_name, content_range="0-999"
     """
     timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    info = requests.get(f"{self.ASSET_ADDRESS_LIST_URL}{asset_policy}&_asset_name={asset_name}", \
+    info = requests.get(f"{self.ASSET_ADDRESSES_URL}{asset_policy}&_asset_name={asset_name}", \
         headers = custom_headers, timeout=timeout)
     info = json.loads(info.content)
     return info
 
-# def get_asset_address_list(self, asset_policy, asset_name, content_range="0-999"):
+
+@Exception_Handler
+def get_asset_nft_address(self, asset_policy, asset_name):
     """
-    Get the list of all addresses holding a given asset.
+    Get the address where specified NFT currently reside on.
 
     :param str asset_policy: asset Policy ID in hexadecimal format (hex).
     :param str asset_name: string with Asset Name in hexadecimal format (hex).
-    :return: list of all addresses.
+    :return: list with payment addresses.
     :rtype: list.
     """
-    timeout = BASE_TIMEOUT
-
-    while True:
-        try:
-            custom_headers = {"Range": str(content_range)}
-            info = requests.get(f"{self.ASSET_ADDRESS_LIST_URL}{asset_policy}&_asset_name={asset_name}", \
-                headers = custom_headers, timeout=timeout)
-            info = json.loads(info.content)
-            break
-
-        except requests.exceptions.ReadTimeout as timeout_error:
-            print(f"Exception: {timeout_error}")
-            if timeout < LIMIT_TIMEOUT:
-                timeout= timeout + 10
-            else:
-                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
-                break
-            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
-
+    timeout = get_timeout()
+    info = requests.get(f"{self.ASSET_NFT_ADDRESS_URL}{asset_policy}&_asset_name={asset_name}", timeout=timeout)
+    info = json.loads(info.content)
     return info
+
 
 @Exception_Handler
 def get_asset_info(self, asset_policy, asset_name):
@@ -111,33 +85,24 @@ def get_asset_info(self, asset_policy, asset_name):
     info = json.loads(info.content)
     return info
 
-# def get_asset_info(self, asset_policy, asset_name):
-    """
-    Get the information of an asset including first minting & token registry metadata.
 
-    :param str asset_policy: asset Policy ID in hexadecimal format (hex).
-    :param str asset_name: string with Asset Name in hexadecimal format (hex).
+@Exception_Handler
+def get_asset_info_bulk(self, asset_list):
+    """
+    Get the information of a list of assets including first minting & token registry metadata.
+    :param list asset_list: list of assets to query.
     :return: list of all asset info.
     :rtype: list.
     """
-    timeout = BASE_TIMEOUT
+ 
+    timeout = get_timeout()
 
-    while True:
-        try:
-            info = requests.get(f"{self.ASSET_INFO_URL}{asset_policy}&_asset_name={asset_name}", timeout=timeout)
-            info = json.loads(info.content)
-            break
+    get_format = {"_asset_list": asset_list}
+    asset_info = requests.post(self.ASSET_INFO_BULK_URL, json= get_format, timeout=timeout)
+    asset_info = json.loads(asset_info.content)
 
-        except requests.exceptions.ReadTimeout as timeout_error:
-            print(f"Exception: {timeout_error}")
-            if timeout < LIMIT_TIMEOUT:
-                timeout= timeout + 10
-            else:
-                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
-                break
-            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
+    return asset_info
 
-    return info
 
 @Exception_Handler
 def get_asset_history(self, asset_policy, asset_name):
@@ -155,36 +120,24 @@ def get_asset_history(self, asset_policy, asset_name):
     return history
 
 
-# def get_asset_history(self, asset_policy, asset_name):
+@Exception_Handler
+def get_policy_asset_addresses(self, asset_policy, content_range="0-420"):
     """
-    Get the mint/burn history of an asset.
+   Get the list of addresses with quantity for each asset on the given policy
 
     :param str asset_policy: asset Policy ID in hexadecimal format (hex).
-    :param str asset_name: string with Asset Name in hexadecimal format (hex).
-    :return: list of asset mint/burn history.
+    :return: list of all addresses.
     :rtype: list.
     """
-    timeout = BASE_TIMEOUT
+    timeout = get_timeout()
+    custom_headers = {"Range": str(content_range)}
+    info = requests.get(f"{self.POLICY_ASSET_ADDRESSES_LIST_URL}{asset_policy}", headers=custom_headers, timeout=timeout)
+    info = json.loads(info.content)
+    return info
 
-    while True:
-        try:
-            history = requests.get(f"{self.ASSET_HISTORY_URL}{asset_policy}&_asset_name={asset_name}", timeout=timeout)
-            history = json.loads(history.content)
-            break
-
-        except requests.exceptions.ReadTimeout as timeout_error:
-            print(f"Exception: {timeout_error}")
-            if timeout < LIMIT_TIMEOUT:
-                timeout= timeout + 10
-            else:
-                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
-                break
-            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
-
-    return history
 
 @Exception_Handler
-def get_asset_policy_info(self, asset_policy):
+def get_policy_asset_info(self, asset_policy):
     """
     Get the information for all assets under the same policy.
 
@@ -193,35 +146,25 @@ def get_asset_policy_info(self, asset_policy):
     :rtype: list.
     """
     timeout = get_timeout()
-    info = requests.get(f"{self.ASSET_POLICY_INFO_URL}{asset_policy}", timeout=timeout)
+    info = requests.get(f"{self.POLICY_ASSET_INFO_URL}{asset_policy}", timeout=timeout)
     info = json.loads(info.content)
     return info
 
-# def get_asset_policy_info(self, asset_policy):
+
+@Exception_Handler
+def get_policy_asset_list(self, asset_policy):
     """
-    Get the information for all assets under the same policy.
+    Get the list of asset under the given policy (including balances)
 
     :param str asset_policy: asset Policy ID in hexadecimal format (hex).
-    :return: list of all mint/burn transactions for an asset
+    :return: list of all assets under the same policy.
     :rtype: list.
     """
-    timeout = BASE_TIMEOUT
-
-    while True:
-        try:
-            info = requests.get(f"{self.ASSET_POLICY_INFO_URL}{asset_policy}", timeout=timeout)
-            info = json.loads(info.content)
-            break
-        except requests.exceptions.ReadTimeout as timeout_error:
-            print(f"Exception: {timeout_error}")
-            if timeout < LIMIT_TIMEOUT:
-                timeout= timeout + 10
-            else:
-                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
-                break
-            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
-
+    timeout = get_timeout()
+    info = requests.get(f"{self.POLICY_ASSET_LIST_URL}{asset_policy}", timeout=timeout)
+    info = json.loads(info.content)
     return info
+
 
 @Exception_Handler
 def get_asset_summary(self, asset_policy, asset_name):
@@ -239,37 +182,9 @@ def get_asset_summary(self, asset_policy, asset_name):
     summary = json.loads(summary.content)
     return summary
 
-# def get_asset_summary(self, asset_policy, asset_name):
-    """
-    Get the summary of an asset (total transactions exclude minting/total wallets include only
-    wallets with asset balance).
-
-    :param str asset_policy: asset Policy ID in hexadecimal format (hex).
-    :param str asset_name: string with Asset Name in hexadecimal format (hex).
-    :return: list of asset summary information.
-    :rtype: list.
-    """
-    timeout = BASE_TIMEOUT
-
-    while True:
-        try:
-            summary = requests.get(f"{self.ASSET_SUMMARY_URL}{asset_policy}&_asset_name={asset_name}", timeout=timeout)
-            summary = json.loads(summary.content)
-            break
-
-        except requests.exceptions.ReadTimeout as timeout_error:
-            print(f"Exception: {timeout_error}")
-            if timeout < LIMIT_TIMEOUT:
-                timeout= timeout + 10
-            else:
-                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
-                break
-            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
-
-    return summary
 
 @Exception_Handler
-def get_asset_txs(self, asset_policy, asset_name, after_block_height=0):
+def get_asset_txs(self, asset_policy, asset_name, after_block_height=0, history=False, content_range="0-515"):
     """
     Get the list of all asset transaction hashes (newest first).
 
@@ -280,36 +195,14 @@ def get_asset_txs(self, asset_policy, asset_name, after_block_height=0):
     :rtype: list.
     """
     timeout = get_timeout()
-    txs = requests.get(f"{self.ASSET_TXS_URL}{asset_policy}&_asset_name={asset_name}&_after_block_height={after_block_height}", timeout=timeout)
-    txs = json.loads(txs.content)
-    return txs
-
-# def get_asset_txs(self, asset_policy, asset_name, after_block_height=0):
-    """
-    Get the list of all asset transaction hashes (newest first).
-
-    :param str asset_policy: asset Policy ID in hexadecimal format (hex).
-    :param str asset_name: string with Asset Name in hexadecimal format (hex).
-    :param int after_block_height: Block height for specifying time delta, if not data start from 0
-    :return: list of all asset hashes transactions.
-    :rtype: list.
-    """
-    timeout = BASE_TIMEOUT
-
-    while True:
-        try:
-            txs = requests.get(f"{self.ASSET_TXS_URL}{asset_policy}&_asset_name={asset_name}&_after_block_height={after_block_height}", timeout=timeout)
-            txs = json.loads(txs.content)
-            break
-
-        except requests.exceptions.ReadTimeout as timeout_error:
-            print(f"Exception: {timeout_error}")
-            if timeout < LIMIT_TIMEOUT:
-                timeout= timeout + 10
-            else:
-                print(f"Reach Limit Timeout= {LIMIT_TIMEOUT} seconds")
-                break
-            print(f"Retriyng with longer timeout: Total Timeout= {timeout}s")
-
-    return txs
+    custom_headers = {"Range": str(content_range)}
     
+    if history == True:
+        history = "true"
+        txs = requests.get(f"{self.ASSET_TXS_URL}{asset_policy}&_asset_name={asset_name}&_after_block_height={after_block_height}&_history={history}", headers=custom_headers, timeout=timeout)
+        txs = json.loads(txs.content)
+    if history == False:
+        history = "false"
+        txs = requests.get(f"{self.ASSET_TXS_URL}{asset_policy}&_asset_name={asset_name}&_after_block_height={after_block_height}&_history={history}", headers=custom_headers, timeout=timeout)
+        txs = json.loads(txs.content)
+    return txs

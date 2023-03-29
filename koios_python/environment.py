@@ -17,30 +17,42 @@ RETRYING_TIME= 1
 LIMIT_RETRYING_TIMES= 10
 
 
-# Function to initialize timeout
+
 def init_timeout():
+    '''
+    Function to initialize timeout
+    '''
     global timeout
     timeout = BASE_TIMEOUT
 
-# Function to Get alive timeout
+
 def get_timeout():
+    '''
+    Function to Get alive timeout
+    '''
     return timeout
 
-# Function to update a new timeout dynamicly
+
 def set_timeout(new_timeout):
+    '''
+    Function to update a new timeout dynamically
+    '''
     global timeout
     timeout = new_timeout
 
 
-# Exceptions Functions
 def Exception_Handler(func):
+    '''
+    Exceptions Functions to use as Decorator
+    '''
 
-    # Inner function handles exceptions
     def inner_function(*args, **kwargs):
+        '''
+        Inner function handles exceptions
+        '''
         retrying_time = RETRYING_TIME
         init_timeout()
         timeout = get_timeout()
-        print('timeout '+str(timeout))
         while True:
 
             try:
@@ -50,12 +62,12 @@ def Exception_Handler(func):
             except requests.exceptions.InvalidURL as url_error:
                 print(f"Exception: {url_error} ! PLEASE CHECK YOUR URL ENDPOINT OR NETWORK ARE CORRECT BEFORE LOOKING INTO OTHER ERRORS !")
                 break
-            
+
             # Bad server connection error
-            except requests.exceptions.ConnectionError as error:
-                print(f"Exception: {error} ! PLEASE CHECK YOUR URL ENDPOINT OR NETWORK ARE CORRECT BEFORE LOOKING INTO OTHER ERRORS !")
+            except requests.exceptions.ConnectionError as connection_error:
+                print(f"Exception: {connection_error} ! PLEASE CHECK YOUR URL ENDPOINT OR NETWORK ARE CORRECT BEFORE LOOKING INTO OTHER ERRORS !")
                 break
-            
+
             # Timeout error
             except requests.exceptions.ReadTimeout as timeout_error:
                 print(f"Exception: {timeout_error}")
@@ -75,21 +87,20 @@ def Exception_Handler(func):
                 sleep(SLEEP_TIME)
                 try:
                     retrying_time += 1
-                except UnboundLocalError as error:
-                    print(f"Something went wrong XD: {error}")
-                    
+                except UnboundLocalError as unbound_error:
+                    print(f"Something went wrong XD: {unbound_error}")
+
                 print(f"Retrying one more time...({retrying_time} times)")
                 if retrying_time >= LIMIT_RETRYING_TIMES:
                     print("Reached limit of attempts")
                     break
-                      
+   
             # UnboundLocalError
-            except UnboundLocalError as error:
-                print(f"Exception 1: {error}")
-            
- 
+            except UnboundLocalError as unbound_error:
+                print(f"Exception: {unbound_error}")
+
             # All other exceptions
-            except Exception as e:
-                print(f"Exception 2: {e}")
-                
+            except Exception as general_error:
+                print(f"Exception: {general_error}")
+
     return inner_function
