@@ -68,6 +68,7 @@ def get_asset_nft_address(self, asset_policy, asset_name):
     info = json.loads(info.content)
     return info
 
+
 @Exception_Handler
 def get_asset_info(self, asset_policy, asset_name):
     """
@@ -146,6 +147,21 @@ def get_policy_asset_info(self, asset_policy):
 
 
 @Exception_Handler
+def get_policy_asset_list(self, asset_policy):
+    """
+    Get the list of asset under the given policy (including balances)
+
+    :param str asset_policy: asset Policy ID in hexadecimal format (hex).
+    :return: list of all assets under the same policy.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+    info = requests.get(f"{self.POLICY_ASSET_LIST_URL}{asset_policy}", timeout=timeout)
+    info = json.loads(info.content)
+    return info
+
+
+@Exception_Handler
 def get_asset_summary(self, asset_policy, asset_name):
     """
     Get the summary of an asset (total transactions exclude minting/total wallets include only
@@ -161,29 +177,14 @@ def get_asset_summary(self, asset_policy, asset_name):
     summary = json.loads(summary.content)
     return summary
 
+
 @Exception_Handler
-def get_policy_asset_list(self, asset_policy):
+def get_asset_txs(self, asset_policy, asset_name, after_block_height=0, history=False, content_range="0-515"):
     """
     Get the list of asset under the given policy (including balances)
 
     :param str asset_policy: asset Policy ID in hexadecimal format (hex).
     :return: list of all assets under the same policy.
-    :rtype: list.
-    """
-    timeout = get_timeout()
-    info = requests.get(f"{self.POLICY_ASSET_LIST_URL}{asset_policy}", timeout=timeout)
-    info = json.loads(info.content)
-    return info
-
-@Exception_Handler
-def get_asset_txs(self, asset_policy, asset_name, after_block_height=0, history=False, content_range="0-515"):
-    """
-    Get the list of all asset transaction hashes (newest first).
-
-    :param str asset_policy: asset Policy ID in hexadecimal format (hex).
-    :param str asset_name: string with Asset Name in hexadecimal format (hex).
-    :param int after_block_height: Block height for specifying time delta, if not data start from 0
-    :return: list of all asset hashes transactions.
     :rtype: list.
     """
     timeout = get_timeout()

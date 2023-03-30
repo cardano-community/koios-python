@@ -89,7 +89,7 @@ def get_credential_txs(self, *payment_credentials, after_block=0, content_range=
     """
     timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    get_format = {"_payment_credentials":[payment_credentials], "_after_block_height": after_block}
+    get_format = {"_payment_credentials": [payment_credentials], "_after_block_height": after_block}
     hash_list = requests.post(self.ADDRESS_CREDENTIAL_TXS_URL, json = get_format, headers=custom_headers, timeout=timeout)
     hash_list  = json.loads(hash_list.content)
 
