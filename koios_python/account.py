@@ -40,6 +40,20 @@ def get_account_info(self, *args):
 
 
 @Exception_Handler
+def get_account_utxos(self, stake):
+    """
+    Get a list of all UTxOs for a given stake address (account)
+
+    :return: string list Array of account UTxOs associated with stake address.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+    account_utxos = requests.get(f"{self.ACCOUNT_UTXOS_URL}{stake}", timeout=timeout)
+    account_utxos = json.loads(account_utxos.content)
+    return account_utxos
+
+
+@Exception_Handler
 def get_account_info_cached(self, *args):
     """
     Get the account information for given stake addresses (accounts).
