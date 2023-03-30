@@ -33,6 +33,7 @@ def get_genesis(self):
     genesis = json.loads(genesis.content)
     return genesis
 
+
 @Exception_Handler
 def get_totals(self, epoch_no=None):
     """

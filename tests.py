@@ -2,7 +2,7 @@
 """
 Examples to check how works Koios-Python Library
 """
-import pprint # We recommend use pprint library to show your outputs
+import pprint as pp # We recommend use pprint library to show your outputs
 import koios_python # We need to install and import koios_python library
 import time
 
@@ -28,6 +28,7 @@ import time
 ## MAINNET PARAMETERS
 # Default Koios Endpoint
 kp = koios_python.URLs() # We need to create an instance of the class URLs
+
 #print(kp.get_tip())
 
 # print('------------------------------------------------------------------------------------------------------------------------------------------------------')

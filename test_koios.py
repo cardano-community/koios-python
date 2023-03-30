@@ -33,7 +33,8 @@ kp = koios_python.URLs()
 # START OF TESTS FOR KOIOS_PYTHON
 
 ##############################################################################
-# ACCOUNT FUNCTIONS
+# STAKE ACCOUNT FUNCTIONS
+##############################################################################
 
 # get account list
 def test_get_account_list():
@@ -52,14 +53,22 @@ def test_get_account_info():
         assert 'code' not in account_info_mainnet[0]
     assert len(account_info_mainnet) > 0
 
+# get account utxos
+def test_get_account_utxos():
+
+    account_utxos_mainnet = kp.get_account_utxos("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+    if len(account_utxos_mainnet) > 0:
+        assert 'code' not in account_utxos_mainnet[0]
+    assert len(account_utxos_mainnet) > 0
+
 # get account info
 def test_get_account_info_cached():
 
     # get account info from mainnet server
-    account_info_mainnet = kp.get_account_info_cached("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
-    if len(account_info_mainnet) > 0:
-        assert 'code' not in account_info_mainnet[0]
-    assert len(account_info_mainnet) > 0
+    account_info_cached_mainnet = kp.get_account_info_cached("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+    if len(account_info_cached_mainnet) > 0:
+        assert 'code' not in account_info_cached_mainnet[0]
+    assert len(account_info_cached_mainnet) > 0
 
 # get account rewards
 def test_get_account_rewards():
@@ -80,7 +89,16 @@ def test_get_account_updates():
     if len(account_updates_mainnet) > 0:
         assert 'code' not in account_updates_mainnet[0]
     assert len(account_updates_mainnet) > 0
- 
+
+# get account addresses
+def get_account_addresses():
+
+    account_addresses_mainnet = kp.get_account_updates(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",\
+                                                        "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"])
+    if len(account_addresses_mainnet) > 0:
+        assert 'code' not in account_addresses_mainnet[0]
+    assert len(account_addresses_mainnet) > 0
+
 # get account assets
 def test_get_account_assets():
 
@@ -96,8 +114,10 @@ def test_get_account_history():
     if len(account_history_mainnet) > 0:
         assert 'code' not in account_history_mainnet[0]
 
+
 ##############################################################################
 # ADDRESS FUNCTIONS
+##############################################################################
 
 # get address info
 def test_get_address_info():
@@ -125,6 +145,14 @@ def test_get_address_assets():
     if len(address_assets_mainnet) >0:
         assert 'code' not in address_assets_mainnet[0]
 
+# Get a list of UTxO against input payment credential  
+def test_get_credential_utxos():
+
+    credentials_utxos_mainnet = kp.get_credential_utxos(["025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52",\
+                                                      "13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555"])
+    if len(credentials_utxos_mainnet) > 0:
+        assert 'code' not in credentials_utxos_mainnet[0]
+
 # get payment credentials hash
 def test_get_credentials():
 
@@ -136,8 +164,10 @@ def test_get_credentials():
     if len(credentials_after_block) > 0:
         assert 'code' not in credentials_after_block[0]
 
+
 ##############################################################################
 # ASSET FUNCTIONS
+##############################################################################
 
 # get asset list of all native tokens
 def test_get_asset_list():
@@ -149,16 +179,34 @@ def test_get_asset_list():
 # get asset address list
 def test_get_asset_address_list():
 
-    asset_addr_list_mainnet = kp.get_asset_address_list("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b")
+    asset_addr_list_mainnet = kp.get_asset_addresses("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b")
     if len(asset_addr_list_mainnet) > 0:
         assert 'code' not in asset_addr_list_mainnet[0]
+
+# get asset address nft address
+def test_get_asset_nft_address():
+
+    asset_nft_address_mainnet = kp.get_asset_nft_address("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b")
+    if len(asset_nft_address_mainnet) > 0:
+        assert 'code' not in asset_nft_address_mainnet[0]
 
 # get asset info
 def test_get_asset_info():
         
         asset_info_mainnet = kp.get_asset_info("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b")
         if len(asset_info_mainnet) > 0:
-                assert 'code' not in asset_info_mainnet[0]
+            assert 'code' not in asset_info_mainnet[0]
+
+# get asset info list of assets (bulk)
+def test_get_asset_info_bulk():
+
+    asset_info_bulk_mainnet = kp.get_asset_info_bulk([["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"],["1d7f33bd23d85e1a25d87d86fac4f199c3197a2f7afeb662a0f34e1e","776f726c646d6f62696c65746f6b656e"]])
+    if len(asset_info_bulk_mainnet) > 0:
+        assert 'code' not in asset_info_bulk_mainnet[0]
+
+    asset_info_bulk_mainnet = kp.get_asset_info_bulk([["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"]])
+    if len(asset_info_bulk_mainnet) > 0:
+        assert 'code' not in asset_info_bulk_mainnet[0]
 
 # get asset history
 def test_get_asset_history():
@@ -167,20 +215,33 @@ def test_get_asset_history():
     if len(asset_history_mainnet) > 0:
         assert 'code' not in asset_history_mainnet[0]
 
-# get asset policy info
-def test_get_asset_policy_info():
+# get policy asset addresses
+def test_get_policy_asset_addresses():
 
-    asset_policy_info_mainnet = kp.get_asset_policy_info("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501")
-    if len(asset_policy_info_mainnet) > 0:
-        assert 'code' not in asset_policy_info_mainnet[0]
-        
+    asset_policy_asset_addresses_mainnet = kp.get_policy_asset_addresses("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501")
+    if len(asset_policy_asset_addresses_mainnet) > 0:
+        assert 'code' not in asset_policy_asset_addresses_mainnet[0]
+
+# get policy asset information
+def test_get_policy_asset_info():
+
+    asset_policy_asset_info_mainnet = kp.get_policy_asset_addresses("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501")
+    if len(asset_policy_asset_info_mainnet) > 0:
+        assert 'code' not in asset_policy_asset_info_mainnet[0]
+
+def test_get_policy_asset_list():
+
+    asset_policy_asset_list_mainnet = kp.get_policy_asset_addresses("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501")
+    if len(asset_policy_asset_list_mainnet) > 0:
+        assert 'code' not in asset_policy_asset_list_mainnet[0]
+
 # get asset summary
-def test_get_asset_summary():     
+def test_get_asset_summary():
 
     asset_summary_mainnet = kp.get_asset_summary('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', '424f4f4b')
     if len(asset_summary_mainnet) > 0:
         assert 'code' not in asset_summary_mainnet[0]
-
+        
 # get asset transaction history
 def test_get_asset_txs_history():
 
@@ -188,9 +249,10 @@ def test_get_asset_txs_history():
     if len(asset_txs_history_mainnet) > 0:
         assert 'code' not in asset_txs_history_mainnet[0]
 
-##############################################################################
 
+##############################################################################
 # BLOCK FUNCTIONS
+##############################################################################
 
 # get list of blocks
 def test_get_blocks():
@@ -215,9 +277,9 @@ def test_get_block_txs():
         assert 'code' not in block_txs_mainnet[0]
 
 
-
 ##############################################################################
 # EPOCH FUNCTIONS
+##############################################################################
 
 # get epoch info
 def test_get_epoch_info():
@@ -231,10 +293,15 @@ def test_get_epoch_params():
     epoch_params_mainnet = kp.get_epoch_params()
     assert 'code' not in epoch_params_mainnet[0]
 
+def test_get_epoch_block_protocols():
+
+    epoch_block_protocols_mainnet = kp.get_epoch_block_protocols()
+    assert 'code' not in epoch_block_protocols_mainnet[0]
 
 
 ##############################################################################
 # NETWORK FUNCTIONS
+##############################################################################
 
 # check tip
 def test_get_tip():
@@ -254,9 +321,9 @@ def test_get_totals():
     assert 'code' not in epoch_totals_mainnet[0]
 
 
-
 ##############################################################################
 # POOL FUNCTIONS
+##############################################################################
 
 # get list of pools on the network
 def test_get_pool_list():
@@ -340,9 +407,9 @@ def test_get_pool_metadata():
         assert 'code' not in pool_metadata_mainnet[0] and 'code' not in pool_metadata_mainnet_pool[0] and 'code' not in pool_metadata_mainnet_pool_list[0]
 
 
-
 ##############################################################################
 # SCRIPT FUNCTIONS
+##############################################################################
 
 # get list of native scripts on the network
 def test_get_native_script_list():
@@ -377,6 +444,7 @@ def test_get_datum_info():
 
 ##############################################################################
 # TRANSACTION FUNCTIONS
+##############################################################################
 
 # get transaction(s) info
 def test_tx_info():
@@ -429,3 +497,4 @@ def test_get_tx_status():
                                                                 'f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e'])
     if len(tx_status_mainnet) > 0 and len(tx_status_mainnet_list) > 0:
         assert 'code' not in tx_status_mainnet[0] and 'code' not in tx_status_mainnet_list[0]
+

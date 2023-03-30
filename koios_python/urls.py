@@ -9,9 +9,11 @@ class URLs:
     from .network import get_tip, get_genesis, get_totals, get_param_updates
     from .block import get_blocks, get_block_info, get_block_txs
     from .address import get_address_info, get_address_txs, get_address_assets, get_credential_txs, get_credential_utxos
-    from .account import get_account_info, get_account_info_cached, get_account_list, get_account_rewards, get_account_updates, get_account_addresses, get_account_assets, get_account_history, get_account_assets_2
-    from .asset import get_asset_list, get_asset_addresses, get_asset_info, get_asset_history, get_policy_asset_info, get_asset_summary, get_asset_txs, get_asset_info_bulk, get_asset_token_registry, get_asset_nft_address\
-        ,get_policy_asset_addresses, get_policy_asset_list
+    from .account import get_account_info, get_account_info_cached, get_account_list, get_account_utxos, get_account_rewards,\
+          get_account_updates, get_account_addresses, get_account_assets, get_account_history, get_account_assets_paginated
+    from .asset import get_asset_list, get_asset_addresses, get_asset_info, get_asset_history, get_policy_asset_info, \
+        get_asset_summary, get_asset_txs, get_asset_info_bulk, get_asset_token_registry, get_asset_nft_address,\
+        get_policy_asset_addresses, get_policy_asset_list
     from .pool import get_pool_list, get_pool_info, get_pool_stake_snapshot, get_pool_delegators, get_pool_delegators_history, get_pool_blocks, get_pool_history, get_pool_updates, get_pool_relays, get_pool_metadata
     from .scripts import get_native_script_list, get_plutus_script_list, get_script_redeemers, get_datum_info
     from .transactions import get_tx_info, get_tx_utxos, get_tx_metadata, get_tx_metalabels, submit_tx, get_tx_status
@@ -63,10 +65,11 @@ class URLs:
         self.ADDRESS_CREDENTIAL_TXS_URL = self.url + "credential_txs"
         self.ADDRESS_CREDENTIAL_UTXOS_URL = self.url + "credential_utxos"
         
-        # Account URLs
+        # Stake Account URLs
         self.ACCOUNT_LIST_URL = self.url + "account_list?offset="
         self.ACCOUNT_INFO_URL = self.url + "account_info"
-        self.ACCOUNT_INFO_URL_CACHED = self.url + "account_info_cached"
+        self.ACCOUNT_UTXOS_URL = self.url + "account_utxos?_stake_address="
+        self.ACCOUNT_INFO_CACHED_URL = self.url + "account_info_cached"
         self.ACCOUNT_REWARDS_URL = self.url + "account_rewards"
         self.ACCOUNT_UPDATES_URL = self.url + "account_updates"
         self.ACCOUNT_ADDRESSES_URL = self.url + "account_addresses"

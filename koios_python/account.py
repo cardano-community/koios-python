@@ -40,6 +40,20 @@ def get_account_info(self, *args):
 
 
 @Exception_Handler
+def get_account_utxos(self, stake):
+    """
+    Get a list of all UTxOs for a given stake address (account)
+
+    :return: string list Array of account UTxOs associated with stake address.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+    account_utxos = requests.get(f"{self.ACCOUNT_UTXOS_URL}{stake}", timeout=timeout)
+    account_utxos = json.loads(account_utxos.content)
+    return account_utxos
+
+
+@Exception_Handler
 def get_account_info_cached(self, *args):
     """
     Get the account information for given stake addresses (accounts).
@@ -50,7 +64,7 @@ def get_account_info_cached(self, *args):
     """
     timeout = get_timeout()
     get_format = {"_stake_addresses": [args] }
-    accounts_info = requests.post(self.ACCOUNT_INFO_URL_CACHED, json= get_format,timeout=timeout)
+    accounts_info = requests.post(self.ACCOUNT_INFO_CACHED_URL, json=get_format, timeout=timeout)
     accounts_info = json.loads(accounts_info.content)
     return accounts_info
 
@@ -126,7 +140,7 @@ def get_account_assets(self, *args):
 
 
 ## Alternative to Paginate all list automatically
-def get_account_assets_2(self, *args):
+def get_account_assets_paginated(self, *args):
     """
     Get the native asset balance of given accounts.
     :param str args: staking address/es in bech32 format (stake1...)
