@@ -9,7 +9,7 @@ class URLs:
     from .network import get_tip, get_genesis, get_totals, get_param_updates
     from .block import get_blocks, get_block_info, get_block_txs
     from .address import get_address_info, get_address_txs, get_address_assets, get_credential_txs, get_credential_utxos
-    from .account import get_account_info, get_account_info_cached, get_account_list, get_account_utxos, get_account_rewards,\
+    from .account import get_account_info, get_account_info_cached, get_account_list, get_account_rewards, get_account_utxos,\
           get_account_updates, get_account_addresses, get_account_assets, get_account_history, get_account_assets_paginated
     from .asset import get_asset_list, get_asset_addresses, get_asset_info, get_asset_history, get_policy_asset_info, \
         get_asset_summary, get_asset_txs, get_asset_info_bulk, get_asset_token_registry, get_asset_nft_address,\
@@ -76,7 +76,6 @@ class URLs:
         #self.ACCOUNT_ASSETS_URL = self.url + "account_assets?offset="
         self.ACCOUNT_ASSETS_URL = self.url + "account_assets"
         self.ACCOUNT_HISTORY_URL = self.url + "account_history"
-        self.ACCOUNT_UTXOS_URL = self.url + "account_utxos"
         
         # Asset URLs
         self.ASSET_LIST_URL = self.url + "asset_list"

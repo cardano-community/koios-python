@@ -29,130 +29,97 @@ import time
 # Default Koios Endpoint
 kp = koios_python.URLs() # We need to create an instance of the class URLs
 
-#print(kp.get_tip())
+print(kp.get_tip())
 
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
-# #print(kp.get_genesis())
+pp.pprint(kp.get_credential_txs(['025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52','13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555'],after_block=6238675))
 
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+#print(kp.get_genesis())
+'''
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
-#print(kp.get_totals())
-# pprint.pp(kp.get_pool_delegators_history("pool1hrv8gtrm0dgjg6zyss5uwa4nkruzfnh5vrdkr2sayj7x2nw6mjc", 391))
+print(kp.get_totals())
+pp.pprint(kp.get_pool_delegators_history("pool1hrv8gtrm0dgjg6zyss5uwa4nkruzfnh5vrdkr2sayj7x2nw6mjc", 391))
 
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-
-# check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
-# pprint.pp(check_big_account)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
 # check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
-# pprint.pp(check_big_account)
+# pp.pprint(check_big_account)
 
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
-# get_asset_list = kp.get_asset_list(content_range="999-1999")
-# print(get_asset_list)
+get_asset_list = kp.get_asset_list(content_range="999-1999")
+print(get_asset_list)
 
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_asset_addresses = kp.get_asset_addresses(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501',asset_name='424f4f4b',content_range="0-99")
-# pprint.pp(get_asset_addresses)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_asset_nft_address = kp.get_asset_nft_address(asset_policy='f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a',
-#                                                asset_name='68616e646c65')
-# pprint.pp(get_asset_nft_address)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_asset_info_bulk = kp.get_asset_info_bulk(["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"],["1d7f33bd23d85e1a25d87d86fac4f199c3197a2f7afeb662a0f34e1e","776f726c646d6f62696c65746f6b656e"])
-# pprint.pp(get_asset_info_bulk)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_policy_asset_addresses = kp.get_policy_asset_addresses(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', content_range="0-99")
-# pprint.pp(get_policy_asset_addresses)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_policy_asset_info = kp.get_policy_asset_info(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501')
-# pprint.pp(get_policy_asset_info)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_policy_asset_list = kp.get_policy_asset_list(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501')
-# pprint.pp(get_policy_asset_list)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_asset_summary = kp.get_asset_summary(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b')
-# pprint.pp(get_asset_summary)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_asset_txs = kp.get_asset_txs(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b', after_block_height=50000, history=False, content_range="0-99")
-# pprint.pp(get_asset_txs)
-
-# get_asset_txs_hist_true = kp.get_asset_txs(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b', after_block_height=50000, history=True, content_range="0-99")
-# pprint.pp(get_asset_txs_hist_true)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_address_info = kp.get_address_info("addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv","addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y")
-# pprint.pp(get_address_info)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_address_txs = kp.get_address_txs("addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv","addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y",after_block=6238675)
-# pprint.pp(get_address_txs)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_address_credential_utxos = kp.get_credential_utxos("025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52","025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52")
-# pprint.pp(get_address_credential_utxos)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_address_assets =  kp.get_address_assets("addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv","addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y")
-# pprint.pp(get_address_assets)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_address_credential_txs = kp.get_credential_txs("025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52", "13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555", after_block=6238675)
-# pprint.pp(get_address_credential_txs)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_network_params = kp.get_param_updates()
-# pprint.pp(get_network_params)
-
-# print('------------------------------------------------------------------------------------------------------------------------------------------------------')
-# get_epoch_320_info = kp.get_epoch_info(epoch_no=320, include_next_epoch=True)
-# pprint.pp(get_epoch_320_info)
-
-# get_epoch_320_info_false = kp.get_epoch_info(epoch_no=320, include_next_epoch=False)
-# pprint.pp(get_epoch_320_info_false)
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_asset_addresses = kp.get_asset_addresses(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501',asset_name='424f4f4b',content_range="0-99")
+pp.pprint(get_asset_addresses)
 
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_asset_nft_address = kp.get_asset_nft_address(asset_policy='f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a',
+                                               asset_name='68616e646c65')
+pp.pprint(get_asset_nft_address)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_asset_info_bulk = kp.get_asset_info_bulk(["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"],["1d7f33bd23d85e1a25d87d86fac4f199c3197a2f7afeb662a0f34e1e","776f726c646d6f62696c65746f6b656e"])
+pp.pprint(get_asset_info_bulk)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_policy_asset_addresses = kp.get_policy_asset_addresses(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', content_range="0-99")
+pp.pprint(get_policy_asset_addresses)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_policy_asset_info = kp.get_policy_asset_info(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501')
+pp.pprint(get_policy_asset_info)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_policy_asset_list = kp.get_policy_asset_list(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501')
+pp.pprint(get_policy_asset_list)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_asset_summary = kp.get_asset_summary(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b')
+pp.pprint(get_asset_summary)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_asset_txs = kp.get_asset_txs(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b', after_block_height=50000, history=False, content_range="0-99")
+pp.pprint(get_asset_txs)
 
+get_asset_txs_hist_true = kp.get_asset_txs(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b', after_block_height=50000, history=True, content_range="0-99")
+pp.pprint(get_asset_txs_hist_true)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_address_info = kp.get_address_info("addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv","addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y")
+pp.pprint(get_address_info)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_address_txs = kp.get_address_txs("addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv","addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y",after_block=6238675)
+pp.pprint(get_address_txs)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_address_credential_utxos = kp.get_credential_utxos("025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52","025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52")
+pp.pprint(get_address_credential_utxos)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_address_assets =  kp.get_address_assets("addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv","addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y")
+pp.pprint(get_address_assets)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_address_credential_txs = kp.get_credential_txs("025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52", "13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555", after_block=6238675)
+pp.pprint(get_address_credential_txs)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_network_params = kp.get_param_updates()
+pp.pprint(get_network_params)
 
+print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+get_epoch_320_info = kp.get_epoch_info(epoch_no=320, include_next_epoch=True)
+pp.pprint(get_epoch_320_info)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+get_epoch_320_info_false = kp.get_epoch_info(epoch_no=320, include_next_epoch=False)
+pp.pprint(get_epoch_320_info_false)
+'''
 
 
 ############################################################

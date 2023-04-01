@@ -56,7 +56,7 @@ def test_get_account_info():
 # get account utxos
 def test_get_account_utxos():
 
-    account_utxos_mainnet = kp.get_account_utxos("stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250")
+    account_utxos_mainnet = kp.get_account_utxos("stake1u8yxtugdv63wxafy9d00nuz6hjyyp4qnggvc9a3vxh8yl0ckml2uz")
     if len(account_utxos_mainnet) > 0:
         assert 'code' not in account_utxos_mainnet[0]
     assert len(account_utxos_mainnet) > 0
@@ -156,11 +156,11 @@ def test_get_credential_utxos():
 # get payment credentials hash
 def test_get_credentials():
 
-    credentials_mainnet = kp.get_credential_txs('025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52')
+    credentials_mainnet = kp.get_credential_txs(['025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52','13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555'])
     if len(credentials_mainnet) > 0:
         assert 'code' not in credentials_mainnet[0]
     
-    credentials_after_block = kp.get_credential_txs('025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52',6238675)
+    credentials_after_block = kp.get_credential_txs(['025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52','13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555'],after_block=6238675)
     if len(credentials_after_block) > 0:
         assert 'code' not in credentials_after_block[0]
 
@@ -200,11 +200,11 @@ def test_get_asset_info():
 # get asset info list of assets (bulk)
 def test_get_asset_info_bulk():
 
-    asset_info_bulk_mainnet = kp.get_asset_info_bulk([["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"],["1d7f33bd23d85e1a25d87d86fac4f199c3197a2f7afeb662a0f34e1e","776f726c646d6f62696c65746f6b656e"]])
+    asset_info_bulk_mainnet = kp.get_asset_info_bulk(["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"],["1d7f33bd23d85e1a25d87d86fac4f199c3197a2f7afeb662a0f34e1e","776f726c646d6f62696c65746f6b656e"])
     if len(asset_info_bulk_mainnet) > 0:
         assert 'code' not in asset_info_bulk_mainnet[0]
 
-    asset_info_bulk_mainnet = kp.get_asset_info_bulk([["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"]])
+    asset_info_bulk_mainnet = kp.get_asset_info_bulk("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b")
     if len(asset_info_bulk_mainnet) > 0:
         assert 'code' not in asset_info_bulk_mainnet[0]
 
