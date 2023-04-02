@@ -77,7 +77,7 @@ def get_address_assets(self, *args):
 
 
 @Exception_Handler
-def get_credential_txs(self, *payment_credentials, after_block=0, content_range="0-15"):
+def get_credential_txs(self, *payment_credentials, after_block_height=0, content_range="0-15"):
     """
     Get the transaction hash list of input payment credential array (stake key), optionally
     filtering after specified block height (inclusive).
@@ -89,8 +89,8 @@ def get_credential_txs(self, *payment_credentials, after_block=0, content_range=
     """
     timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    get_format = {"_payment_credentials": [payment_credentials], "_after_block_height": after_block}
-    hash_list = requests.post(self.ADDRESS_CREDENTIAL_TXS_URL, json = get_format, headers=custom_headers, timeout=timeout)
-    hash_list  = json.loads(hash_list.content)
+    get_format = {"_payment_credentials": [payment_credentials], "_after_block_height": after_block_height}
+    txs_list = requests.post(self.ADDRESS_CREDENTIAL_TXS_URL, json = get_format, headers=custom_headers, timeout=timeout)
+    txs_list  = json.loads(txs_list.content)
 
-    return hash_list
+    return txs_list

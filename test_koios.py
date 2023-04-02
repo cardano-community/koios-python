@@ -160,9 +160,9 @@ def test_get_credentials():
     if len(credentials_mainnet) > 0:
         assert 'code' not in credentials_mainnet[0]
     
-    credentials_after_block = kp.get_credential_txs(['025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52','13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555'],after_block=6238675)
-    if len(credentials_after_block) > 0:
-        assert 'code' not in credentials_after_block[0]
+    credentials_after_block_height = kp.get_credential_txs(['025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52','13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555'],after_block_height=6238675)
+    if len(credentials_after_block_height) > 0:
+        assert 'code' not in credentials_after_block_height[0]
 
 
 ##############################################################################

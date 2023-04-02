@@ -21,6 +21,7 @@ class URLs:
 
     def __init__(self, url='https://api.koios.rest/api/v0/', network='mainnet'):
         
+        self.version = 'koios-python v1.3.0'
         self.url = url
         self.network = network
 
