@@ -29,19 +29,18 @@ import time
 # Default Koios Endpoint
 kp = koios_python.URLs() # We need to create an instance of the class URLs
 
-print(kp.get_tip())
-
 print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
 print(kp.version)
-pp.pp(kp.get_credential_utxos(["025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52","13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555"]))
 
-pp.pp(kp.get_credential_txs(["025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52","13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555"], after_block_height=6238675))
-#print(kp.get_genesis())
-'''
 print('------------------------------------------------------------------------------------------------------------------------------------------------------')
 
-print(kp.get_totals())
+'''
+pp.pp(kp.get_tip())
+
+print(kp.get_genesis())
+
+pp.pp(kp.get_totals())
 pp.pp(kp.get_pool_delegators_history("pool1hrv8gtrm0dgjg6zyss5uwa4nkruzfnh5vrdkr2sayj7x2nw6mjc", 391))
 
 print('------------------------------------------------------------------------------------------------------------------------------------------------------')
