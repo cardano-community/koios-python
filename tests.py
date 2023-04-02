@@ -29,16 +29,16 @@ import time
 # Default Koios Endpoint
 kp = koios_python.URLs() # We need to create an instance of the class URLs
 
-print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+print('------------------------------------------------------------------------------------------')
 
 print(kp.version)
 
-print('------------------------------------------------------------------------------------------------------------------------------------------------------')
+print('------------------------------------------------------------------------------------------')
 
 '''
 pp.pp(kp.get_tip())
 
-print(kp.get_genesis())
+pp.pp(kp.get_genesis())
 
 pp.pp(kp.get_totals())
 pp.pp(kp.get_pool_delegators_history("pool1hrv8gtrm0dgjg6zyss5uwa4nkruzfnh5vrdkr2sayj7x2nw6mjc", 391))
