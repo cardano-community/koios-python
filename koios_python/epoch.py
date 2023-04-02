@@ -7,7 +7,7 @@ import requests
 from .environment import *
 
 @Exception_Handler
-def get_epoch_info(self, epoch_no=None):
+def get_epoch_info(self, epoch_no=None, include_next_epoch=False):
     """
     Get the epoch information, all epochs if no epoch specified.
 
@@ -16,15 +16,21 @@ def get_epoch_info(self, epoch_no=None):
     :rtype: list
     """
     timeout = get_timeout()
-    if epoch_no is None:
-        info = requests.get(self.EPOCH_INFO_URL)
-        print(self.EPOCH_INFO_URL)
+    if epoch_no is None and include_next_epoch is False:
+        info = requests.get(f"{self.EPOCH_INFO_URL}?_include_next_epoch=false", timeout=timeout)
         info = json.loads(info.content)
-    else:
-        info = requests.get(f"{self.EPOCH_INFO_URL}?_epoch_no={epoch_no}", timeout=timeout)
-        print(self.EPOCH_INFO_URL)
+    if epoch_no is None and include_next_epoch is True:
+        info = requests.get(f"{self.EPOCH_INFO_URL}?_include_next_epoch=true", timeout=timeout)
         info = json.loads(info.content)
-    return info 
+    if epoch_no is not None and include_next_epoch is False:
+        info = requests.get(f"{self.EPOCH_INFO_URL}?_epoch_no={epoch_no}&_include_next_epoch=false",\
+                            timeout=timeout)
+        info = json.loads(info.content)
+    if epoch_no is not None and include_next_epoch is True:
+        info = requests.get(f"{self.EPOCH_INFO_URL}?_epoch_no={epoch_no}&_include_next_epoch=true",\
+                             timeout=timeout)
+        info = json.loads(info.content)
+    return info
 
 
 @Exception_Handler
@@ -39,7 +45,7 @@ def get_epoch_params(self, epoch_no=None):
     """
     timeout = get_timeout()
     if epoch_no is None:
-        info = requests.get(self.EPOCH_PARAMS_URL)
+        info = requests.get(self.EPOCH_PARAMS_URL, timeout=timeout)
         info = json.loads(info.content)
     else:
         info = requests.get(f"{self.EPOCH_PARAMS_URL}?_epoch_no={epoch_no}", timeout=timeout)
@@ -58,7 +64,7 @@ def get_epoch_block_protocols(self, epoch_no=None):
     """
     timeout = get_timeout()
     if epoch_no is None:
-        info = requests.get(self.EPOCH_BLOCKS_URL)
+        info = requests.get(self.EPOCH_BLOCKS_URL, timeout=timeout)
         info = json.loads(info.content)
     else:
         info = requests.get(f"{self.EPOCH_BLOCKS_URL}?_epoch_no={epoch_no}", timeout=timeout)
