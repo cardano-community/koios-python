@@ -10,14 +10,15 @@ from .environment import *
 @Exception_Handler
 def get_asset_list(self, content_range="0-999"):
     """
-    Get the list of all native assets (paginated)
+    Get the list of all native assets (paginated, sorted)
 
     :return: list with all asset list.
     :rtype: list.
     """
     timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    asset_list = requests.get(self.ASSET_LIST_URL, headers = custom_headers, timeout=timeout)
+    custom_params = {"order": "asset_name.asc"}
+    asset_list = requests.get(self.ASSET_LIST_URL, headers = custom_headers, params = custom_params, timeout=timeout)
     asset_list = json.loads(asset_list.content)
     return asset_list
 
@@ -48,8 +49,9 @@ def get_asset_addresses(self, asset_policy, asset_name, content_range="0-999"):
     """
     timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
+    custom_params = {"order": "payment_address.asc"}
     info = requests.get(f"{self.ASSET_ADDRESSES_URL}{asset_policy}&_asset_name={asset_name}", \
-        headers = custom_headers, timeout=timeout)
+        headers = custom_headers, params = custom_params, timeout=timeout)
     info = json.loads(info.content)
     return info
 
@@ -118,7 +120,7 @@ def get_asset_history(self, asset_policy, asset_name):
 @Exception_Handler
 def get_policy_asset_addresses(self, asset_policy, content_range="0-420"):
     """
-   Get the list of addresses with quantity for each asset on the given policy
+    Get the list of addresses with quantity for each asset on the given policy
 
     :param str asset_policy: asset Policy ID in hexadecimal format (hex).
     :return: list of all addresses.
@@ -126,7 +128,9 @@ def get_policy_asset_addresses(self, asset_policy, content_range="0-420"):
     """
     timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    info = requests.get(f"{self.POLICY_ASSET_ADDRESSES_LIST_URL}{asset_policy}", headers=custom_headers, timeout=timeout)
+    custom_params = {"order": "asset_name.asc"}
+    info = requests.get(f"{self.POLICY_ASSET_ADDRESSES_LIST_URL}{asset_policy}",
+            headers = custom_headers, params = custom_params, timeout = timeout)
     info = json.loads(info.content)
     return info
 
@@ -156,7 +160,10 @@ def get_policy_asset_list(self, asset_policy):
     :rtype: list.
     """
     timeout = get_timeout()
-    info = requests.get(f"{self.POLICY_ASSET_LIST_URL}{asset_policy}", timeout=timeout)
+    custom_headers = {"Range": str(content_range)}
+    custom_params = {"order": "asset_name.asc"}
+    info = requests.get(f"{self.POLICY_ASSET_LIST_URL}{asset_policy}",
+            headers = custom_headers, params = custom_params, timeout = timeout)
     info = json.loads(info.content)
     return info
 
