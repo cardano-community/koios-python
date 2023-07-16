@@ -252,7 +252,7 @@ def test_get_asset_summary():
 # get asset transaction history
 def test_get_asset_txs():
 
-    asset_txs_history_mainnet = kp.get_asset_txs('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b', True, "0-99")
+    asset_txs_history_mainnet = kp.get_asset_txs('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', '424f4f4b', 5000000, True, "0-99")
     if len(asset_txs_history_mainnet) > 0:
         assert 'code' not in asset_txs_history_mainnet[0]
 

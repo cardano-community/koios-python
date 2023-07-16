@@ -79,7 +79,7 @@ get_policy_asset_info = kp.get_policy_asset_info(asset_policy='750900e4999ebe0d5
 pp.pprint(get_policy_asset_info)
 
 print('------------------------------------------------------------------------------------------')
-get_policy_asset_list = kp.get_policy_asset_list(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501')
+get_policy_asset_list = kp.get_policy_asset_list(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', content_range="0-99")
 pp.pprint(get_policy_asset_list)
 
 print('------------------------------------------------------------------------------------------')
