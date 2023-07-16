@@ -1,6 +1,6 @@
 ![koios-python](https://user-images.githubusercontent.com/82296005/194378368-6d2de904-8eec-48bf-a0d9-37118f299470.png)
 
-# Koios Python ![PyPI - Python Version](https://img.shields.io/badge/python-%3E%3D3.8-blue) [![PyPI - Python Version](https://img.shields.io/badge/pypi%20package-v1.3.0-green)](https://pypi.org/project/koios-python/)
+# Koios Python ![PyPI - Python Version](https://img.shields.io/badge/python-%3E%3D3.8-blue) [![PyPI - Python Version](https://img.shields.io/badge/pypi%20package-v1.3.1-green)](https://pypi.org/project/koios-python/)
 
 ## Overview
 **Koios Python** is Python wrapper which allow interacting with all information and parameters stored on the Cardano blockchain using [Koios REST API](https://api.koios.rest/)
@@ -37,34 +37,34 @@ import koios_python
 You can read all info about how works this library in our [Wiki](https://github.com/cardano-community/koios-python/wiki)
     
 ## TODO
-
-- [ ] Adding Pagination for all queries where makes sense (At the moment, there are a bunch with this feature)
 - [x] Managing errors 
-    - [x] Inside functions 
-    - [ ] Pagination
-    - [x] User Inputs
-    - [x] Timeouts
+- [x] Inside functions 
+- [ ] Pagination (most functions have it added)
+- [x] User Inputs
+- [x] Timeouts
+- [ ] Ordering (added to assets)
 - [ ] Adding Vertical Filtering
 - [ ] Adding Async methods
 
 
 
-
-    
 ## Features  
 - Supported REST Services:
     - [x] Network
         - Chain Tip
         - Genesis Info
         - Historical Tokenomic Statistics
+          
     - [x] Epoch
         - Epoch Information
         - Epoch's Protocol Parameters
         - Epoch Blocks Protocol
+          
     - [x] Block
         - Block List
         - Block Information
         - Block Transactions
+          
     - [x] Transactions
         - Transaction Information
         - Transaction UTxOs
@@ -72,11 +72,13 @@ You can read all info about how works this library in our [Wiki](https://github.
         - Transaction Metadata Labels
         - Transaction Submission
         - Transaction Status (Block Confirmations)
+          
     - [x] Address
         - Address Information
         - Address Transactions
         - Transactions from Payment Credentials
         - Address Assets
+          
     - [x] Account
         - Account List
         - Account Information
@@ -86,14 +88,23 @@ You can read all info about how works this library in our [Wiki](https://github.
         - Account Addresses
         - Account Assets
         - Account History
+          
     - [x] Asset
         - Asset List
-        - Asset Address List
+        - Asset Token Registry
+        - Asset Addresses
+        - Asset Address List [DEPRECATED]
+        - NFT Address
         - Asset Information
+        - Asset Information (Bulk)
         - Asset History
-        - Asset Policy Information
+        - Policy Asset Address List
+        - Policy Asset Information
+        - Asset Policy Information [DEPRECATED]
+        - Policy Asset List
         - Asset Summary
-        - Asset Transaction History
+        - Asset Transaction (History)
+
     - [x] Pool
         - Pool List
         - Pool Information
@@ -104,6 +115,7 @@ You can read all info about how works this library in our [Wiki](https://github.
         - Pool Updates (History)
         - Pool Relays
         - Pool Metadata
+          
     - [x] Script
         - Native Script List
         - Plutus Script List
