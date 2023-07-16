@@ -7,7 +7,7 @@ HERE = pathlib.Path(__file__).parent
 LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf-8')
 
 setup(
-    version = '1.3.0',
+    version = '1.3.1',
     name = 'koios-python',
     author = 'Quixote Stake Pool',
     author_email = 'quixotepool@proton.me',

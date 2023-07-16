@@ -176,6 +176,13 @@ def test_get_asset_list():
     if len(asset_list_mainnet) > 0:
         assert 'code' not in asset_list_mainnet[0]
 
+# Get a list of assets registered via token registry on Github
+def test_get_asset_token_registry():
+
+    asset_token_registry = kp.get_asset_token_registry()
+    if len(asset_token_registry) > 0:
+        assert 'code' not in asset_token_registry[0]
+
 # get asset address list
 def test_get_asset_address_list():
 
@@ -218,7 +225,7 @@ def test_get_asset_history():
 # get policy asset addresses
 def test_get_policy_asset_addresses():
 
-    asset_policy_asset_addresses_mainnet = kp.get_policy_asset_addresses("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501")
+    asset_policy_asset_addresses_mainnet = kp.get_policy_asset_addresses("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", "0-50")
     if len(asset_policy_asset_addresses_mainnet) > 0:
         assert 'code' not in asset_policy_asset_addresses_mainnet[0]
 
@@ -231,7 +238,7 @@ def test_get_policy_asset_info():
 
 def test_get_policy_asset_list():
 
-    asset_policy_asset_list_mainnet = kp.get_policy_asset_addresses("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501")
+    asset_policy_asset_list_mainnet = kp.get_policy_asset_addresses("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", "0-99")
     if len(asset_policy_asset_list_mainnet) > 0:
         assert 'code' not in asset_policy_asset_list_mainnet[0]
 
@@ -243,9 +250,9 @@ def test_get_asset_summary():
         assert 'code' not in asset_summary_mainnet[0]
         
 # get asset transaction history
-def test_get_asset_txs_history():
+def test_get_asset_txs():
 
-    asset_txs_history_mainnet = kp.get_asset_txs('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b')
+    asset_txs_history_mainnet = kp.get_asset_txs('750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501','424f4f4b', True, "0-99")
     if len(asset_txs_history_mainnet) > 0:
         assert 'code' not in asset_txs_history_mainnet[0]
 
