@@ -1,5 +1,6 @@
 
-![Logo-Python-Koios-png](https://github.com/cardano-community/koios-python/assets/82296005/8c96fc44-ba7d-4d16-a9b3-581b2fbb4fb8)
+![Logo-Python-Koios](https://github.com/cardano-community/koios-python/assets/82296005/46656e85-e292-4975-99df-e03dd1f4f9ae)
+
 
 # Koios Python ![PyPI - Python Version](https://img.shields.io/badge/python-%3E%3D3.8-blue) [![PyPI - Python Version](https://img.shields.io/badge/pypi%20package-v1.3.1-green)](https://pypi.org/project/koios-python/)
 
