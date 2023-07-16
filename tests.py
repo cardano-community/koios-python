@@ -43,8 +43,7 @@ pp.pp(kp.get_genesis())
 pp.pp(kp.get_totals())
 pp.pp(kp.get_pool_delegators_history("pool1hrv8gtrm0dgjg6zyss5uwa4nkruzfnh5vrdkr2sayj7x2nw6mjc", 391))
 
-print('------------------------------------------------------------------------------------------')
-
+# print('----------------------------------------------------------------------------------------')
 # check_big_account = kp.get_account_addresses(["stake1uxqh9rn76n8nynsnyvf4ulndjv0srcc8jtvumut3989cqmgjt49h6"])
 # pp.pp(check_big_account)
 
@@ -53,6 +52,7 @@ print('-------------------------------------------------------------------------
 get_asset_list = kp.get_asset_list(content_range="999-1999")
 print(get_asset_list)
 
+print('------------------------------------------------------------------------------------------')
 get_asset_token_registry = kp.get_asset_token_registry("0-5")
 pp.pp(get_asset_token_registry)
 
@@ -90,6 +90,7 @@ print('-------------------------------------------------------------------------
 get_asset_txs = kp.get_asset_txs(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b', after_block_height=500000, history=False, content_range="0-99")
 pp.pprint(get_asset_txs)
 
+print('------------------------------------------------------------------------------------------')
 get_asset_txs_hist_true = kp.get_asset_txs(asset_policy='750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501', asset_name='424f4f4b', after_block_height=50000, history=True, content_range="0-99")
 pp.pprint(get_asset_txs_hist_true)
 
@@ -110,7 +111,7 @@ get_address_assets =  kp.get_address_assets("addr1qy2jt0qpqz2z2z9zx5w4xemekkce7y
 pp.pprint(get_address_assets)
 
 print('------------------------------------------------------------------------------------------')
-get_address_credential_txs = kp.get_credential_txs("025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52", "13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555", after_block=6238675)
+get_address_credential_txs = kp.get_credential_txs("025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52", "13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555", after_block_height=6238675)
 pp.pprint(get_address_credential_txs)
 
 print('------------------------------------------------------------------------------------------')
