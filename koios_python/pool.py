@@ -186,3 +186,37 @@ def get_pool_metadata(self, *args):
         pool_list = requests.post(self.POOL_METADATA_URL, json = get_format, timeout=timeout)
         pool_list  = json.loads(pool_list.content)
     return pool_list
+
+@Exception_Handler
+def get_pool_registrations(self, epoch_no=None):
+    """
+    Get all pool registrations for all epochs (or _epoch_no if provided)
+
+    :param str epoch_no: epoch number to get info (from the beginning if omitted).
+    :return: list of pool registrations.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+    if epoch_no is None:
+        print(f"WARNING: epoch_no is required")
+    else:
+        pool_list = requests.get(f"{self.POOL_REGISTRATIONS_URL}{epoch_no}", timeout=timeout)
+        pool_list  = json.loads(pool_list.content)
+    return pool_list
+
+@Exception_Handler
+def get_pool_retirements(self, epoch_no=None):
+    """
+    Get all pool retirements for all epochs (or _epoch_no if provided)
+
+    :param str epoch_no: epoch number to get info (from the beginning if omitted).
+    :return: list of pool retirements.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+    if epoch_no is None:
+        print(f"WARNING: epoch_no is required")
+    else:
+        pool_list = requests.get(f"{self.POOL_RETIREMENTS_URL}{epoch_no}", timeout=timeout)
+        pool_list  = json.loads(pool_list.content)
+    return pool_list
