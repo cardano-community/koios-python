@@ -204,3 +204,26 @@ def get_account_history(self, *args):
         history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format, timeout=timeout)
         history = json.loads(history.content)
     return history
+
+@Exception_Handler
+def get_account_txs(self, stake_address, after_block=None):
+    """
+    Get the transaction hash list of input payment credential array (stake key), optionally
+    filtering after specified block height (inclusive).
+
+    :param str stake_address: str stake address (stake1...)
+    :param int after_block: filtering after block (inclusive) defaul is None, from the beginning
+    :return: list of address transactions.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+
+    if after_block is None:
+        get_format = {"_stake_address": stake_address}
+        txs_list = requests.post(self.ACCOUNT_TX_URL, json = get_format, timeout=timeout)
+        txs_list = json.loads(txs_list.content)
+    else:
+        get_format = {"_stake_address": stake_address, "_after_block_height": after_block}
+        txs_list = requests.post(self.ACCOUNT_TXS_URL, json = get_format, timeout=timeout)
+        txs_list = json.loads(txs_list.content)
+    return txs_list

@@ -18,9 +18,9 @@ def get_native_script_list(self, content_range="0-999"):
     """
     timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    get_format = requests.post(self.NATIVE_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
-    get_format = json.loads(get_format.content)
-    return get_format
+    script_list = requests.post(self.NATIVE_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
+    script_list = json.loads(script_list.content)
+    return script_list
 
 
 @Exception_Handler
@@ -34,9 +34,9 @@ def get_plutus_script_list(self, content_range="0-999"):
     """
     timeout = get_timeout()
     custom_headers = {"Range": str(content_range)}
-    get_format = requests.post(self.PLUTUS_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
-    get_format = json.loads(get_format.content)
-    return get_format
+    script_list = requests.post(self.PLUTUS_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
+    script_list = json.loads(script_list.content)
+    return script_list
 
 
 @Exception_Handler
@@ -49,9 +49,9 @@ def get_script_redeemers(self, script_hash):
     :rtype: list.
     """
     timeout = get_timeout()
-    query = requests.get(self.SCRIPT_REDEEMERS_URL + script_hash, timeout=timeout)
-    query  = json.loads(query.content)
-    return query
+    script_redeemers = requests.get(self.SCRIPT_REDEEMERS_URL + script_hash, timeout=timeout)
+    script_redeemers = json.loads(script_redeemers.content)
+    return script_redeemers
 
 
 @Exception_Handler
@@ -64,7 +64,48 @@ def get_datum_info(self, *datum_hash):
     :rtype: list.
     '''
     timeout = get_timeout()
-    custom_headers = {"_datum_hashes": [datum_hash]}
-    get_format = requests.post(self.DATUM_INFO_URL, json = custom_headers, timeout=timeout)
-    get_format = json.loads(get_format.content)
-    return get_format
+    get_format = {"_datum_hashes": [datum_hash]}
+    datum_info = requests.post(self.DATUM_INFO_URL, json = get_format, timeout=timeout)
+    datum_info = json.loads(datum_info.content)
+    return datum_info
+
+@Exception_Handler
+def get_script_utxos(self, script_hash, extended=False, content_range="0-999"):
+    """
+    Get list of all UTxOs for a given script hash
+
+    :params string script_hash: script hash in hexadecimal format (hex) to search and read data.
+    :params bool extended: extended output format, default is False.
+    :return: list of all UTxOs for a given script hash.
+    :rtype: list.
+    """
+    if extended is True:
+        extended = "true"
+        timeout = get_timeout()
+        custom_headers = {"Range": str(content_range)}
+        utxos_list = requests.get(f"{self.SCRIPT_UTXOS_URL}{script_hash}&_extended={extended}", timeout=timeout, headers = custom_headers)
+        utxos_list  = json.loads(utxos_list.content)
+    else:
+        extended = "false"
+        timeout = get_timeout()
+        custom_headers = {"Range": str(content_range)}
+        utxos_list = requests.get(f"{self.SCRIPT_UTXOS_URL}{script_hash}&_extended={extended}", timeout=timeout, headers=custom_headers)
+        utxos_list  = json.loads(utxos_list.content)
+
+    return utxos_list
+
+@Exception_Handler
+def get_script_info(self, *script_hashes, content_range="0-999"):
+    """
+    Get list of script information for given script hashes
+
+    :params list script_hashes: Array of script hashes in hexadecimal format (hex) to search and read data.
+    :return: list of script information for given script hashes.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+    custom_headers = {"Range": str(content_range)}
+    get_format = {"_script_hashes": [script_hashes]}
+    script_info = requests.post(self.SCRIPT_INFO_URL, json = get_format, timeout=timeout, headers=custom_headers)
+    script_info = json.loads(script_info.content)
+    return script_info

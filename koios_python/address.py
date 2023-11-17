@@ -42,7 +42,7 @@ def get_address_txs(self, *address_tx, after_block=0):
     return hash_list
 
 @Exception_Handler
-def get_credential_utxos(self, *payment_credentials, content_range="0-5"):
+def get_credential_utxos(self, *payment_credentials, content_range="0-999"):
     """
     Get a list of UTxO against input payment credential array including their balances.
     
@@ -77,7 +77,7 @@ def get_address_assets(self, *args):
 
 
 @Exception_Handler
-def get_credential_txs(self, *payment_credentials, after_block_height=0, content_range="0-15"):
+def get_credential_txs(self, *payment_credentials, after_block_height=0, content_range="0-999"):
     """
     Get the transaction hash list of input payment credential array (stake key), optionally
     filtering after specified block height (inclusive).
@@ -94,3 +94,31 @@ def get_credential_txs(self, *payment_credentials, after_block_height=0, content
     txs_list  = json.loads(txs_list.content)
 
     return txs_list
+
+@Exception_Handler
+def get_address_utxos(self, *addresses, extended=False, content_range="0-999"):
+    """
+    Get the UTxO set for a given address.
+
+    :param list address: Array of Cardano payment address(es)
+    :param bool extended: extended flag to toggle additional fields (optional, default is False)
+    return: list of utxos
+    :rtype: list.
+    """
+
+    if extended is True:
+        extended = "true"
+        timeout = get_timeout()
+        custom_headers = {"Range": str(content_range)}
+        get_format = {"_addresses": [addresses], "_extended": extended}
+        utxos = requests.post(self.ADDRESS_UTXOS_URL, json = get_format, headers=custom_headers, timeout=timeout)
+        utxos = json.loads(utxos.content)
+    if extended is False:
+        extended = "false"
+        timeout = get_timeout()
+        custom_headers = {"Range": str(content_range)}
+        get_format = {"_addresses": [addresses], "_extended": extended}
+        utxos = requests.post(self.ADDRESS_UTXOS_URL, json = get_format, headers=custom_headers, timeout=timeout)
+        utxos = json.loads(utxos.content)
+        
+    return utxos

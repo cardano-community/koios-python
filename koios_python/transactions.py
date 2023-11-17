@@ -103,3 +103,19 @@ def get_tx_status(self, *args):
     tx_status = requests.post(self.TX_STATUS_URL, json = get_format, timeout=timeout)
     tx_status  = json.loads(tx_status.content)
     return tx_status
+
+@Exception_Handler
+def get_utxo_info(self, *args, extended=False, content_range="0-999"):
+    """
+    Get UTxO set for requested UTxO references.
+
+    :param list utxo_hash: Array of Cardano utxo references in the form "hash#index"
+    :return: list of all info about UTxO(s).
+    :rtype: list.
+    """
+    timeout = get_timeout()
+    custom_headers = {"Range": str(content_range)}
+    get_format = {"_utxo_refs": [args], "_extended": extended}
+    utxo_info = requests.post(self.UTXO_INFO_URL, json = get_format, timeout=timeout, headers = custom_headers)
+    utxo_info  = json.loads(utxo_info.content)
+    return utxo_info

@@ -25,7 +25,7 @@ import time
 
 
 ############################################################
-## MAINNET PARAMETERS
+## MAINNET PARAMETERS (simple TESTS)
 # Default Koios Endpoint
 kp = koios_python.URLs() # We need to create an instance of the class URLs
 
@@ -54,9 +54,48 @@ print(kp.version)
 
 # pp.pp(kp.get_reserve_withdrawals())
 
+# print('------------------------------------------------------------------------------------------')
+
+# pp.pp(kp.get_account_txs('stake1u8yxtugdv63wxafy9d00nuz6hjyyp4qnggvc9a3vxh8yl0ckml2uz', after_block=7981396))
+
+# print('------------------------------------------------------------------------------------------')
+
+# pp.pp(kp.get_address_utxos(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",
+#                             "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"],
+#                             extended=False))
+
+# print('------------------------------------------------------------------------------------------')
+
+# pp.pp(kp.get_asset_list(content_range="0-2"))
+
+# pp.pp(kp.get_asset_utxos(["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"],
+#                           ["f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a","6b6f696f732e72657374"],
+#                           extended=False))
+
+# print('------------------------------------------------------------------------------------------')
+
+# pp.pp(kp.get_script_utxos(script_hash="d8480dc869b94b80e81ec91b0abe307279311fe0e7001a9488f61ff8", extended=True))
+
+# print('------------------------------------------------------------------------------------------')
+
+# pp.pp(kp.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0",
+#                         "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"
+#                         ], extended=True))
+
+# print('------------------------------------------------------------------------------------------')
+# pp.pp(kp.get_script_info( [
+#     "bd2119ee2bfb8c8d7c427e8af3c35d537534281e09e23013bca5b138",
+#     "c0c671fba483641a71bb92d3a8b7c52c90bf1c01e2b83116ad7d4536"
+#   ]))
+
 print('------------------------------------------------------------------------------------------')
 
-pp.pp(kp.get_account_txs('stake1u8yxtugdv63wxafy9d00nuz6hjyyp4qnggvc9a3vxh8yl0ckml2uz', after_block=50000))
+kp_ogmios = koios_python.URLs(server="ogmios")
+print(kp_ogmios.url, kp_ogmios.server)
+pp.pp(kp_ogmios.query_tip(query="queryLedgerState/tip"))
+
+
+
 
 '''
 pp.pp(kp.get_tip())
@@ -148,6 +187,8 @@ pp.pprint(get_epoch_320_info)
 get_epoch_320_info_false = kp.get_epoch_info(epoch_no=320, include_next_epoch=False)
 pp.pprint(get_epoch_320_info_false)
 '''
+
+############################################################
 
 
 ############################################################

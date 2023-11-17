@@ -234,3 +234,30 @@ def get_asset_txs(self, asset_policy, asset_name, after_block_height=0, history=
         txs = json.loads(txs.content)
 
     return txs
+
+@Exception_Handler
+def get_asset_utxos(self, *asset_list, extended=False, content_range="0-999"):
+    """
+    Get the UTXO information of a list of assets including
+    
+    :param list of assets
+    :param bool extended: extended UTXO information
+    :return: list of utxos
+    :rtype: list.
+    """
+    if extended is True:
+        extended = "true"
+        timeout = get_timeout()
+        custom_headers = {"Range": str(content_range),}
+        get_format = {"_asset_list": asset_list, "_extended": extended}
+        utxos = requests.post(self.ASSET_UTXOS_URL, json = get_format, headers = custom_headers, timeout=timeout)
+        utxos = json.loads(utxos.content)
+    if extended is False:
+        extended = "false"
+        timeout = get_timeout()
+        custom_headers = {"Range": str(content_range),}
+        get_format = {"_asset_list": asset_list, "_extended": extended}
+        utxos = requests.post(self.ASSET_UTXOS_URL, json = get_format, headers = custom_headers, timeout=timeout)
+        utxos = json.loads(utxos.content)
+    
+    return utxos
