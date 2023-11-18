@@ -19,7 +19,7 @@ class URLs:
         get_pool_history, get_pool_updates, get_pool_relays, get_pool_metadata, get_pool_registrations, get_pool_retirements
     from .scripts import get_native_script_list, get_plutus_script_list, get_script_redeemers, get_datum_info, get_script_utxos, get_script_info
     from .transactions import get_tx_info, get_tx_utxos, get_tx_metadata, get_tx_metalabels, submit_tx, get_tx_status, get_utxo_info
-    from .ogmios import query_tip
+    from .ogmios import query
 
 
     def __init__(self, url='https://api.koios.rest/api/v1/', network='mainnet', server='koios'):

@@ -8,7 +8,7 @@ from .environment import *
 
 
 @Exception_Handler
-def query_tip(self, query, *params):
+def query(self, query, *params):
     """
     Query the current tip of the Network.
 

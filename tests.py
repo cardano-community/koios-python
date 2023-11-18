@@ -92,7 +92,7 @@ print('-------------------------------------------------------------------------
 
 kp_ogmios = koios_python.URLs(server="ogmios")
 print(kp_ogmios.url, kp_ogmios.server)
-pp.pp(kp_ogmios.query_tip(query="queryLedgerState/tip"))
+pp.pp(kp_ogmios.query(query="queryLedgerState/tip"))
 
 
 
