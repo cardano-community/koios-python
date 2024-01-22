@@ -54,7 +54,7 @@ def get_totals(self, epoch_no=None):
     return totals
 
 @Exception_Handler
-def get_param_updates(self, content_range="0-57"):
+def get_param_updates(self, content_range="0-999"):
     """
     Get all parameter update proposals submitted to the chain starting Shelley era
 

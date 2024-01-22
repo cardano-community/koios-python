@@ -1,4 +1,5 @@
 test_koios_nets.py
+test_koios.py
 build
 dist
 koios_python.egg-info
