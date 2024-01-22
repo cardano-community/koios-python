@@ -3,7 +3,7 @@
 Examples to check how works Koios-Python Library
 """
 import pprint as pp # We recommend use pprint library to show your outputs
-import koios_python # We need to install and import koios_python library
+from koios_python  import * # We need to install and import koios_python library
 import time
 
 #alternative if we just need some functions
@@ -27,11 +27,11 @@ import time
 ############################################################
 ## MAINNET PARAMETERS (simple TESTS)
 # Default Koios Endpoint
-kp = koios_python.URLs() # We need to create an instance of the class URLs
+kp = URLs() # We need to create an instance of the class URLs
 
 print('------------------------------------------------------------------------------------------')
 
-print(kp.version)
+# print(kp.version)
 
 # print('------------------------------------------------------------------------------------------')
 
@@ -88,16 +88,16 @@ print(kp.version)
 #     "c0c671fba483641a71bb92d3a8b7c52c90bf1c01e2b83116ad7d4536"
 #   ]))
 
-print('------------------------------------------------------------------------------------------')
+# print('------------------------------------------------------------------------------------------')
 
-kp_ogmios = koios_python.URLs(server="ogmios")
-print(kp_ogmios.url, kp_ogmios.server)
-pp.pp(kp_ogmios.query(query="queryLedgerState/tip"))
-
-
+# kp_ogmios = URLs(server="ogmios")
+# print(kp_ogmios.url, kp_ogmios.server)
+# pp.pp(kp_ogmios.query(query="queryLedgerState/tip"))
 
 
-'''
+
+
+
 pp.pp(kp.get_tip())
 
 pp.pp(kp.get_genesis())
@@ -186,7 +186,6 @@ pp.pprint(get_epoch_320_info)
 
 get_epoch_320_info_false = kp.get_epoch_info(epoch_no=320, include_next_epoch=False)
 pp.pprint(get_epoch_320_info_false)
-'''
 
 ############################################################
 
