@@ -17,9 +17,16 @@ def get_address_info(self, *args):
     :rtype: list.
     """
     timeout = get_timeout()
-    get_format = {"_addresses": [args] }
-    addresses = requests.post(self.ADDRESS_INFO_URL, json= get_format, timeout=timeout)
-    addresses = json.loads(addresses.content)
+
+    if self.BEARER is None:
+        get_format = {"_addresses": [args] }
+        addresses = requests.post(self.ADDRESS_INFO_URL, json= get_format, timeout=timeout)
+        addresses = json.loads(addresses.content)
+    else:
+        get_format = {"_addresses": [args] }
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        addresses = requests.post(self.ADDRESS_INFO_URL, json= get_format, timeout=timeout, headers=custom_headers)
+        addresses = json.loads(addresses.content)
 
     return addresses
 

@@ -4,34 +4,211 @@ Examples to check how works Koios-Python Library
 """
 import pprint as pp # We recommend use pprint library to show your outputs
 from koios_python  import * # We need to install and import koios_python library
+# from koios_python import block, epochs # alternative if we just need some functions
 import time
-# alternative if we just need some functions
-# from koios_python import block, epochs
+import os
+from dotenv import load_dotenv
+# load the environment variables
+load_dotenv()
+# Get api token
+token = os.getenv("TOKEN")
+
+
 
 ##########################################################################################
 ## MAINNET PARAMETERS (simple TESTS)
 # Default Koios Endpoint
-kp = URLs() # We need to create an instance of the class URLs
+kp = URLs() # We need to create an instance of the class URLs (no bearer token)
+
+kp_token = URLs(bearer=token) # We need to create an instance of the class URLs (with bearer token)
+# pp.pprint(kp_token.BEARER)
 
 ##########################################################################################
 # Network Endpoint Tests
 ##########################################################################################
+# # Get tip (no bearer token)
+# pp.pprint(kp.get_tip())
 
-pp.pprint(kp.get_tip())
+# # Get tip (with bearer token)
+# pp.pprint(kp_token.get_tip())
 
+# # Get Genesis (no bearer token)
+# pp.pprint(kp.get_genesis())
 
+# # Get Genesis (with bearer token)
+# pp.pprint(kp_token.get_genesis())
 
+# # Get Totals (no bearer token)
+# pp.pprint(kp.get_totals())
+# pp.pprint(kp.get_totals(epoch_no=320))
 
+# # Get Totals (with bearer token)
+# pp.pprint(kp_token.get_totals())
+# pp.pprint(kp_token.get_totals(epoch_no=320))
 
+# Get Network Param Updates (no bearer token)
+# pp.pprint(kp.get_param_updates())
 
+# # Get Network Param Updates (with bearer token)
+# pp.pprint(kp_token.get_param_updates())
 
+# # Get Reserve Withdrawals (no bearer token)
+# pp.pprint(kp.get_reserve_withdrawals())
 
+# # Get Reserve Withdrawals (with bearer token)
+# pp.pprint(kp_token.get_reserve_withdrawals())
 
+# # Get Treasury Withdrawals (no bearer token)
+# pp.pprint(kp.get_treasury_withdrawals())
 
+# # Get Treasury Withdrawals (with bearer token)
+# pp.pprint(kp_token.get_treasury_withdrawals())
+
+##########################################################################################
+# Epoch Endpoint Tests
+##########################################################################################
+
+# # Get Epoch Info (no bearer token)
+# get_epoch_320_info = kp.get_epoch_info(epoch_no=320, include_next_epoch=True)
+# pp.pprint(get_epoch_320_info)
+
+# get_epoch_320_info_false = kp.get_epoch_info(epoch_no=320, include_next_epoch=False)
+# pp.pprint(get_epoch_320_info_false)
+
+# # Get Epoch Info (with bearer token)
+# get_epoch_320_info = kp_token.get_epoch_info(epoch_no=320, include_next_epoch=True)
+# pp.pprint(get_epoch_320_info)
+
+# get_epoch_320_info_false = kp_token.get_epoch_info(epoch_no=320, include_next_epoch=False)
+# pp.pprint(get_epoch_320_info_false)
+
+# # Get Epoch Params (no bearer token)
+# pp.pprint(kp.get_epoch_params(320))
+
+# # Get Epoch Params (with bearer token)
+# pp.pprint(kp_token.get_epoch_params(320))
+
+# # Get Epoch Block Protocols (no bearer token)
+# pp.pprint(kp.get_epoch_block_protocols(320))
+
+# # Get Epoch Block Protocols (with bearer token)
+# pp.pprint(kp_token.get_epoch_block_protocols(320))
+
+##########################################################################################
+# Block Endpoint Tests
+##########################################################################################
+
+# Get Block List (no bearer token)
+# pp.pprint(kp.get_blocks("0-10"))
+
+# # Get Block List (with bearer token)
+# pp.pprint(kp_token.get_blocks("0-10"))
+
+# # Get Block Info (no bearer token)
+# pp.pprint(kp.get_block_info(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30", \
+# "60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a", \
+# "c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"]))
+
+# # Get Block Info (with bearer token)
+# pp.pprint(kp_token.get_block_info(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30", \
+# "60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a", \
+# "c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"]))
+
+# # Get Block Txs (no bearer token)
+# pp.pprint(kp.get_block_txs(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30", \
+# "60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a", \
+# "c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"]))
+
+# # Get Block Txs (with bearer token)
+# pp.pprint(kp_token.get_block_txs(["fb9087c9f1408a7bbd7b022fd294ab565fec8dd3a8ef091567482722a1fa4e30", \
+# "60188a8dcb6db0d80628815be2cf626c4d17cb3e826cebfca84adaff93ad492a", \
+# "c6646214a1f377aa461a0163c213fc6b86a559a2d6ebd647d54c4eb00aaab015"]))
 
 
 
 ##########################################################################################
+# Transaction Endpoint Tests
+##########################################################################################
+
+# # Get UTxO info (no bearer token)
+# pp.pprint(kp.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"]))
+
+# # Get UTxO info (no bearer token, extended)
+# pp.pprint(kp.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"], extended=True, content_range="0-9"))
+# pp.pprint(kp.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"], extended=False, content_range="0-9"))
+
+# # Get UTxO info (with bearer token)
+# pp.pprint(kp_token.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"]))
+
+# # Get UTxO info (with bearer token, extended)
+# pp.pprint(kp_token.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"], extended=True, content_range="0-9"))
+# pp.pprint(kp_token.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"], extended=False, content_range="0-9"))
+
+# # Get Tx Info (no bearer token)
+# pp.pprint(kp.get_tx_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
+
+# # Get Tx Info (with bearer token)
+# pp.pprint(kp_token.get_tx_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
+
+# # Get Tx Metadata (no bearer token)
+# pp.pprint(kp.get_tx_metadata(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
+
+# # Get Tx Metadata (with bearer token)
+# pp.pprint(kp_token.get_tx_metadata(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
+
+# # Get Tx Metalabels (no bearer token)
+# pp.pprint(kp.get_tx_metalabels(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
+
+# # Get Tx Metalabels (with bearer token)
+# pp.pprint(kp_token.get_tx_metalabels(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
+
+# # Submit Tx (no bearer token)
+# Testing soon
+
+# # Submit Tx (with bearer token)
+# Testing soon
+
+# # Get Tx Status (no bearer token)
+# pp.pprint(kp.get_tx_status(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
+
+# # Get Tx Status (with bearer token)
+# pp.pprint(kp_token.get_tx_status(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"]))
+
+# # Get Tx Utxos (no bearer token)
+# pp.pprint(kp.get_tx_utxos("f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"))
+
+# # Get Tx Utxos (with bearer token)
+# pp.pprint(kp_token.get_tx_utxos("f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e", \
+# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94"))
+
+##########################################################################################
+# Address Endpoint Tests
+##########################################################################################
+
+# Get Address Info (no bearer token)
+pp.pprint(kp.get_address_info(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
+"addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"]))
+
+# Get Address Info (with bearer token)
+pp.pprint(kp_token.get_address_info(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
+"addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"]))
+
+
 # print('------------------------------------------------------------------------------------------')
 
 # print(kp.version)

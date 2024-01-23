@@ -19,7 +19,14 @@ def query(self, query, *params):
     """
     print(f"Querying {self.url}...")
     timeout = get_timeout()
-    get_format = {"jsonrpc": "2.0", "method": query}
-    tip = requests.post(self.url, json = get_format, timeout=timeout)
-    tip  = json.loads(tip.content)
+
+    if self.BEARER is None:
+        get_format = {"jsonrpc": "2.0", "method": query}
+        tip = requests.post(self.url, json = get_format, timeout=timeout)
+        tip  = json.loads(tip.content)
+    else:
+        get_format = {"jsonrpc": "2.0", "method": query}
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        tip = requests.post(self.url, json = get_format, timeout=timeout, headers=custom_headers)
+
     return tip

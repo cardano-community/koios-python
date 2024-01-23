@@ -22,12 +22,13 @@ class URLs:
     from .ogmios import query
 
 
-    def __init__(self, url='https://api.koios.rest/api/v1/', network='mainnet', server='koios'):
+    def __init__(self, url='https://api.koios.rest/api/v1/', network='mainnet', server='koios', bearer=None):
         
         self.version = 'koios-python v1.3.1'
         self.url = url
         self.network = network
         self.server = server
+        self.BEARER = bearer
 
         # change subdomain to network name then change the rest of urls to use the new subdomain
         if self.network == 'preview' or self.network == 'preprod':
