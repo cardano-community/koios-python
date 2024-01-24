@@ -17,9 +17,16 @@ def get_account_list(self, content_range="0-999"):
     :rtype: list.
     """
     timeout = get_timeout()
-    custom_headers = {"Range": str(content_range)}
-    account_list = requests.get(self.ACCOUNT_LIST_URL, headers = custom_headers, timeout=timeout)
-    account_list = json.loads(account_list.content)
+
+    if self.BEARER is None:
+        custom_headers = {"Range": str(content_range)}
+        account_list = requests.get(self.ACCOUNT_LIST_URL, headers = custom_headers, timeout=timeout)
+        account_list = json.loads(account_list.content)    
+    else:
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        account_list = requests.get(self.ACCOUNT_LIST_URL, headers = custom_headers, timeout=timeout)
+        account_list = json.loads(account_list.content)
+        
     return account_list
 
 

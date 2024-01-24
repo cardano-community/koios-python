@@ -98,7 +98,7 @@ class URLs:
         # Asset URLs
         self.ASSET_LIST_URL = self.url + "asset_list"
         self.ASSET_ADDRESSES_URL = self.url +  "asset_addresses?_asset_policy="
-        self.ASSET_INFO_URL = self.url + "asset_info?_asset_policy="
+        self.ASSET_INFO_URL = self.url + "asset_info?_asset_policy=" #DEPRECATED
         self.ASSET_HISTORY_URL = self.url + "asset_history?_asset_policy="
         self.POLICY_ASSET_INFO_URL = self.url + "policy_asset_info?_asset_policy="
         self.ASSET_SUMMARY_URL = self.url + "asset_summary?_asset_policy="
