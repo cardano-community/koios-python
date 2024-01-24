@@ -200,13 +200,203 @@ kp_token = URLs(bearer=token) # We need to create an instance of the class URLs 
 # Address Endpoint Tests
 ##########################################################################################
 
-# Get Address Info (no bearer token)
-pp.pprint(kp.get_address_info(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
-"addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"]))
+# # Get Address Info (no bearer token)
+# pp.pprint(kp.get_address_info(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
+# "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"]))
 
-# Get Address Info (with bearer token)
-pp.pprint(kp_token.get_address_info(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
-"addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"]))
+# # Get Address Info (with bearer token)
+# pp.pprint(kp_token.get_address_info(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
+# "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"]))
+
+# # Get Address UTxOs (no bearer token)
+# pp.pprint(kp.get_address_utxos(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
+# "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"]))
+
+# # Get Address UTxOs (no bearer token, extended)
+# pp.pprint(kp.get_address_utxos(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
+# "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"], extended=True, content_range="0-9"))
+# pp.pprint(kp.get_address_utxos(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
+# "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"], extended=False, content_range="0-9"))
+
+# # Get Address UTxOs (with bearer token)
+# pp.pprint(kp_token.get_address_utxos(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
+# "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"]))
+
+# # Get Address UTxOs (with bearer token, extended)
+# pp.pprint(kp_token.get_address_utxos(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
+# "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"], extended=True, content_range="0-9"))
+# pp.pprint(kp_token.get_address_utxos(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
+# "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"], extended=False, content_range="0-9"))
+
+# # Get Address Txs (no bearer token)
+# pp.pprint(kp.get_address_txs(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
+# "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"],
+# after_block=6238675))
+
+# # Get Address Txs (with bearer token)
+# pp.pprint(kp_token.get_address_txs(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv",\
+# "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"],
+# after_block=6238675))
+
+# # Get Address Assets (no bearer token)
+# pp.pprint(kp.get_address_assets(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv", \
+# "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"]))
+
+# # Get Address Assets (with bearer token)
+# pp.pprint(kp_token.get_address_assets(["addr1qy2jt0qpqz2z2z9zx5w4xemekkce7yderz53kjue53lpqv90lkfa9sgrfjuz6uvt4uqtrqhl2kj0a9lnr9ndzutx32gqleeckv", \
+# "addr1q9xvgr4ehvu5k5tmaly7ugpnvekpqvnxj8xy50pa7kyetlnhel389pa4rnq6fmkzwsaynmw0mnldhlmchn2sfd589fgsz9dd0y"]))
+
+# # Get UTxOs from payment credentials (no bearer token)
+# pp.pprint(kp.get_credential_utxos(["025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52", \
+# "13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555"], extended=True, content_range="0-9"))
+
+# # Get UTxOs from payment credentials (with bearer token)
+# pp.pprint(kp_token.get_credential_utxos(["025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52",
+# "13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555"], extended=False, content_range="0-9"))
+
+# # Get Credential TXs (no bearer token)
+# pp.pprint(kp.get_credential_txs("025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52", \
+# "13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555", after_block=6238675))
+
+# # Get Credential TXs (with bearer token)
+# pp.pprint(kp_token.get_credential_txs("025b0a8f85cb8a46e1dda3fae5d22f07e2d56abb4019a2129c5d6c52", \
+# "13f6870c5e4f3b242463e4dc1f2f56b02a032d3797d933816f15e555", after_block=6238675))
+
+##########################################################################################
+# Pool Endpoint Tests
+##########################################################################################
+
+# # Get Pool List (no bearer token)
+# pp.pprint(kp.get_pool_list())
+
+# # Get Pool List (with bearer token)
+# pp.pprint(kp_token.get_pool_list())
+
+# # Get Pool Info (no bearer token)
+# pp.pprint(kp.get_pool_info(["pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp",
+# "pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m",
+# "pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"]))
+
+# # Get Pool Info (with bearer token)
+# pp.pprint(kp_token.get_pool_info(["pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp",
+# "pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m",
+# "pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"]))
+
+# # Get Pool Stake Snapshot (no bearer token)
+# pp.pprint(kp.get_pool_stake_snapshot("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc"))
+
+# # Get Pool Stake Snapshot (with bearer token)
+# pp.pprint(kp_token.get_pool_stake_snapshot("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc"))
+
+# # Get Pool Delegators (no bearer token)
+# pp.pprint(kp.get_pool_delegators("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", content_range="0-9"))
+
+# # Get Pool Delegators (with bearer token)
+# pp.pprint(kp_token.get_pool_delegators("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", content_range="0-9"))
+
+# # Get Pool Delegators History (no bearer token)
+# pp.pprint(kp.get_pool_delegators_history("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", epoch_no=320))
+
+# # Get Pool Delegators History (with bearer token)
+# pp.pprint(kp_token.get_pool_delegators_history("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", epoch_no=320))
+
+##########################################################################################
+# Asset Endpoint Tests
+##########################################################################################
+
+# # Get Asset List (no bearer token)
+# pp.pprint(kp.get_asset_list(content_range="0-9"))
+
+# # Get Asset List (with bearer token)
+# pp.pprint(kp_token.get_asset_list(content_range="0-9"))
+
+# # Get Policy Asset List (no bearer token)
+# pp.pprint(kp.get_policy_asset_list("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","0-9"))
+
+# # Get Policy Asset List (with bearer token)
+# pp.pprint(kp_token.get_policy_asset_list("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","0-9"))
+
+# # Get Asset Token Registry (no bearer token)
+# pp.pprint(kp.get_asset_token_registry("0-9"))
+
+# # Get Asset Token Registry (with bearer token)
+# pp.pprint(kp_token.get_asset_token_registry("0-9"))
+
+# # Get Asset Information (Bulk) (no bearer token)
+# pp.pprint(kp.get_asset_info_bulk(["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"], \
+# ["f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a","6b6f696f732e72657374"]))
+
+# # Get Asset Information (Bulk) (with bearer token)
+# pp.pprint(kp_token.get_asset_info_bulk(["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"], \
+# ["f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a","6b6f696f732e72657374"]))
+
+# # Get Asset UTxOs (no bearer token, extended=False)
+# pp.pprint(kp.get_asset_utxos(["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"], \
+# ["f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a","6b6f696f732e72657374"], extended=False))
+
+# # Get Asset UTxOs (no bearer token, extended=True)
+# pp.pprint(kp.get_asset_utxos(["750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501","424f4f4b"], \
+# ["f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a","6b6f696f732e72657374"], extended=True, content_range="0-9"))
+
+# # Get Asset History (no bearer token)
+# pp.pprint(kp.get_asset_history("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", "424f4f4b" \
+# , content_range="0-9"))
+
+# # Get Asset History (with bearer token)
+# pp.pprint(kp_token.get_asset_history("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", "424f4f4b" \
+# , content_range="0-9"))
+
+# # Get Asset Addresses (no bearer token)
+# pp.pprint(kp.get_asset_addresses("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", "424f4f4b" \
+# , content_range="0-9"))
+
+# # Get Asset Addresses (with bearer token)
+# pp.pprint(kp_token.get_asset_addresses("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", "424f4f4b" \
+# , content_range="0-9"))
+
+# # Get Asset NFT Address (no bearer token)
+# pp.pprint(kp.get_asset_nft_address("f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a", "68616e646c65"))
+
+# # Get Asset NFT Address (with bearer token)
+# pp.pprint(kp_token.get_asset_nft_address("f0ff48bbb7bbe9d59a40f1ce90e9e9d0ff5002ec48f232b49ca0fb9a", "68616e646c65"))
+
+# # Get Policy Asset Adress List (no bearer token)
+# pp.pprint(kp.get_policy_asset_addresses("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", content_range="0-9"))
+
+# # Get Policy Asset Adress List (with bearer token)
+# pp.pprint(kp_token.get_policy_asset_addresses("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", content_range="0-9"))
+
+# # Get Policy Asset Info (no bearer token)
+# pp.pprint(kp.get_policy_asset_info("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501"))
+
+# # Get Policy Asset Info (with bearer token)
+# pp.pprint(kp_token.get_policy_asset_info("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501"))
+
+# # Get Asset Summary (no bearer token)
+# pp.pprint(kp.get_asset_summary("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", "424f4f4b"))
+
+# # Get Asset Summary (with bearer token)
+# pp.pprint(kp_token.get_asset_summary("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", "424f4f4b"))
+
+# # Get Asset Transactions (no bearer token)
+# pp.pprint(kp.get_asset_txs("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", "424f4f4b", after_block=50000,\
+# content_range="0-9"))
+
+# # Get Asset Transactions (with bearer token)
+# pp.pprint(kp_token.get_asset_txs("750900e4999ebe0d58f19b634768ba25e525aaf12403bfe8fe130501", "424f4f4b", after_block=50000,\
+# content_range="0-9"))
+
+##########################################################################################
+# Account Endpoint Tests
+##########################################################################################
+
+# # Get Account List (no bearer token)
+
+
+
+
+
+
 
 
 # print('------------------------------------------------------------------------------------------')
