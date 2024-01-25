@@ -17,9 +17,16 @@ def get_native_script_list(self, content_range="0-999"):
     :rtype: list.
     """
     timeout = get_timeout()
-    custom_headers = {"Range": str(content_range)}
-    script_list = requests.post(self.NATIVE_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
-    script_list = json.loads(script_list.content)
+
+    if self.BEARER is None:    
+        custom_headers = {"Range": str(content_range)}
+        script_list = requests.post(self.NATIVE_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
+        script_list = json.loads(script_list.content)
+    else:
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        script_list = requests.post(self.NATIVE_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
+        script_list = json.loads(script_list.content)
+    
     return script_list
 
 
@@ -33,14 +40,21 @@ def get_plutus_script_list(self, content_range="0-999"):
     :rtype: list.
     """
     timeout = get_timeout()
-    custom_headers = {"Range": str(content_range)}
-    script_list = requests.post(self.PLUTUS_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
-    script_list = json.loads(script_list.content)
+
+    if self.BEARER is None:
+        custom_headers = {"Range": str(content_range)}
+        script_list = requests.post(self.PLUTUS_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
+        script_list = json.loads(script_list.content)
+    else:
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        script_list = requests.post(self.PLUTUS_SCRIPT_LIST_URL, headers = custom_headers, timeout=timeout)
+        script_list = json.loads(script_list.content)
+
     return script_list
 
 
 @Exception_Handler
-def get_script_redeemers(self, script_hash):
+def get_script_redeemers(self, script_hash, content_range="0-999"):
     """
     Get list of all redeemers for a given script hash.
 
@@ -49,8 +63,16 @@ def get_script_redeemers(self, script_hash):
     :rtype: list.
     """
     timeout = get_timeout()
-    script_redeemers = requests.get(self.SCRIPT_REDEEMERS_URL + script_hash, timeout=timeout)
-    script_redeemers = json.loads(script_redeemers.content)
+
+    if self.BEARER is None:
+        custom_headers = {"Range": str(content_range)}
+        script_redeemers = requests.get(self.SCRIPT_REDEEMERS_URL + script_hash, timeout=timeout, headers = custom_headers)
+        script_redeemers = json.loads(script_redeemers.content)
+    else:
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        script_redeemers = requests.get(self.SCRIPT_REDEEMERS_URL + script_hash, headers = custom_headers, timeout=timeout)
+        script_redeemers = json.loads(script_redeemers.content)
+
     return script_redeemers
 
 
@@ -64,9 +86,17 @@ def get_datum_info(self, *datum_hash):
     :rtype: list.
     '''
     timeout = get_timeout()
-    get_format = {"_datum_hashes": [datum_hash]}
-    datum_info = requests.post(self.DATUM_INFO_URL, json = get_format, timeout=timeout)
-    datum_info = json.loads(datum_info.content)
+
+    if self.BEARER is None:
+        get_format = {"_datum_hashes": [datum_hash]}
+        datum_info = requests.post(self.DATUM_INFO_URL, json = get_format, timeout=timeout)
+        datum_info = json.loads(datum_info.content)
+    else:
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        get_format = {"_datum_hashes": [datum_hash]}
+        datum_info = requests.post(self.DATUM_INFO_URL, json = get_format, headers = custom_headers, timeout=timeout)
+        datum_info = json.loads(datum_info.content)
+
     return datum_info
 
 @Exception_Handler
@@ -79,18 +109,36 @@ def get_script_utxos(self, script_hash, extended=False, content_range="0-999"):
     :return: list of all UTxOs for a given script hash.
     :rtype: list.
     """
-    if extended is True:
+
+    if self.BEARER is None and extended is False:
+        extended = "false"
+        timeout = get_timeout()
+        custom_headers = {"Range": str(content_range)}
+        utxos_list = requests.get(f"{self.SCRIPT_UTXOS_URL}{script_hash}&_extended={extended}", timeout=timeout, headers = custom_headers)
+        utxos_list  = json.loads(utxos_list.content)
+
+
+    if self.BEARER is None and extended is True:
         extended = "true"
         timeout = get_timeout()
         custom_headers = {"Range": str(content_range)}
         utxos_list = requests.get(f"{self.SCRIPT_UTXOS_URL}{script_hash}&_extended={extended}", timeout=timeout, headers = custom_headers)
         utxos_list  = json.loads(utxos_list.content)
-    else:
+
+    if self.BEARER is not None and extended is False:
         extended = "false"
         timeout = get_timeout()
-        custom_headers = {"Range": str(content_range)}
-        utxos_list = requests.get(f"{self.SCRIPT_UTXOS_URL}{script_hash}&_extended={extended}", timeout=timeout, headers=custom_headers)
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        utxos_list = requests.get(f"{self.SCRIPT_UTXOS_URL}{script_hash}&_extended={extended}", timeout=timeout, headers = custom_headers)
         utxos_list  = json.loads(utxos_list.content)
+
+    if self.BEARER is not None and extended is True:
+        extended = "true"
+        timeout = get_timeout()
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        utxos_list = requests.get(f"{self.SCRIPT_UTXOS_URL}{script_hash}&_extended={extended}", timeout=timeout, headers = custom_headers)
+        utxos_list  = json.loads(utxos_list.content)
+
 
     return utxos_list
 
@@ -104,8 +152,16 @@ def get_script_info(self, *script_hashes, content_range="0-999"):
     :rtype: list.
     """
     timeout = get_timeout()
-    custom_headers = {"Range": str(content_range)}
-    get_format = {"_script_hashes": [script_hashes]}
-    script_info = requests.post(self.SCRIPT_INFO_URL, json = get_format, timeout=timeout, headers=custom_headers)
-    script_info = json.loads(script_info.content)
+
+    if self.BEARER is None:
+        custom_headers = {"Range": str(content_range)}
+        get_format = {"_script_hashes": [script_hashes]}
+        script_info = requests.post(self.SCRIPT_INFO_URL, json = get_format, timeout=timeout, headers=custom_headers)
+        script_info = json.loads(script_info.content)
+    else:
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        get_format = {"_script_hashes": [script_hashes]}
+        script_info = requests.post(self.SCRIPT_INFO_URL, json = get_format, headers = custom_headers, timeout=timeout)
+        script_info = json.loads(script_info.content)
+
     return script_info
