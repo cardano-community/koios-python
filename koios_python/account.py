@@ -26,7 +26,7 @@ def get_account_list(self, content_range="0-999"):
         custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
         account_list = requests.get(self.ACCOUNT_LIST_URL, headers = custom_headers, timeout=timeout)
         account_list = json.loads(account_list.content)
-        
+
     return account_list
 
 
@@ -40,14 +40,22 @@ def get_account_info(self, *args):
     :rtype: list.
     """
     timeout = get_timeout()
-    get_format = {"_stake_addresses": [args] }
-    accounts_info = requests.post(self.ACCOUNT_INFO_URL, json= get_format, timeout=timeout )
-    accounts_info = json.loads(accounts_info.content)
+
+    if self.BEARER is None:
+        get_format = {"_stake_addresses": [args] }
+        accounts_info = requests.post(self.ACCOUNT_INFO_URL, json= get_format, timeout=timeout )
+        accounts_info = json.loads(accounts_info.content)
+    else:
+        get_format = {"_stake_addresses": [args] }
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        accounts_info = requests.post(self.ACCOUNT_INFO_URL, json= get_format, headers = custom_headers, timeout=timeout )
+        accounts_info = json.loads(accounts_info.content)
+
     return accounts_info
 
 
 @Exception_Handler
-def get_account_utxos(self, stake):
+def get_account_utxos(self, *args, content_range="0-999", extended=False):
     """
     Get a list of all UTxOs for a given stake address (account)
 
@@ -55,8 +63,31 @@ def get_account_utxos(self, stake):
     :rtype: list.
     """
     timeout = get_timeout()
-    account_utxos = requests.get(f"{self.ACCOUNT_UTXOS_URL}{stake}", timeout=timeout)
-    account_utxos = json.loads(account_utxos.content)
+
+    if self.BEARER is None and extended is False:
+        custom_headers = {"Range": str(content_range)}
+        get_format = {"_stake_addresses": [args], "_extended": "false"}
+        account_utxos = requests.post(f"{self.ACCOUNT_UTXOS_URL}", timeout=timeout, json=get_format, headers=custom_headers)
+        account_utxos = json.loads(account_utxos.content)
+
+    if self.BEARER is None and extended is True:
+        custom_headers = {"Range": str(content_range)}
+        get_format = {"_stake_addresses": [args], "_extended": "true"}
+        account_utxos = requests.post(f"{self.ACCOUNT_UTXOS_URL}", timeout=timeout, json=get_format, headers=custom_headers)
+        account_utxos = json.loads(account_utxos.content)
+    
+    if self.BEARER is not None and extended is False:
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}" }
+        get_format = {"_stake_addresses": [args], "_extended": "false"}
+        account_utxos = requests.post(f"{self.ACCOUNT_UTXOS_URL}", headers = custom_headers, timeout=timeout, json=get_format)
+        account_utxos = json.loads(account_utxos.content)
+
+    if self.BEARER is not None and extended is True:
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}" }
+        get_format = {"_stake_addresses": [args], "_extended": "true"}
+        account_utxos = requests.post(f"{self.ACCOUNT_UTXOS_URL}", headers = custom_headers, timeout=timeout, json=get_format)
+        account_utxos = json.loads(account_utxos.content)
+
     return account_utxos
 
 
@@ -70,14 +101,22 @@ def get_account_info_cached(self, *args):
     :rtype: list.
     """
     timeout = get_timeout()
-    get_format = {"_stake_addresses": [args] }
-    accounts_info = requests.post(self.ACCOUNT_INFO_CACHED_URL, json=get_format, timeout=timeout)
-    accounts_info = json.loads(accounts_info.content)
+    
+    if self.BEARER is None:
+        get_format = {"_stake_addresses": [args] }
+        accounts_info = requests.post(self.ACCOUNT_INFO_CACHED_URL, json=get_format, timeout=timeout)
+        accounts_info = json.loads(accounts_info.content)
+    else:
+        get_format = {"_stake_addresses": [args] }
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        accounts_info = requests.post(self.ACCOUNT_INFO_CACHED_URL, json=get_format, headers = custom_headers, timeout=timeout)
+        accounts_info = json.loads(accounts_info.content)
+
     return accounts_info
 
 
 @Exception_Handler
-def get_account_rewards(self, *args):
+def get_account_rewards(self, *args, epoch_no=None):
     """
     Get the full rewards history (including MIR) for given stake addresses (accounts).
 
@@ -87,15 +126,29 @@ def get_account_rewards(self, *args):
     :rtype: list.
     """
     timeout = get_timeout()
-    epoch = args[len(args)-1]
-    if not isinstance(epoch, int):
+
+    if self.BEARER is None and epoch_no is None:
         get_format = {"_stake_addresses": [args] }
         rewards = requests.post(self.ACCOUNT_REWARDS_URL, json= get_format, timeout=timeout)
         rewards = json.loads(rewards.content)
-    else:
-        get_format = {"_stake_addresses": [args], "_epoch_no": epoch}
+    
+    if self.BEARER is None and epoch_no is not None:
+        get_format = {"_stake_addresses": [args], "_epoch_no": str(epoch_no)}
         rewards = requests.post(self.ACCOUNT_REWARDS_URL, json= get_format, timeout=timeout)
         rewards = json.loads(rewards.content)
+
+    if self.BEARER is not None and epoch_no is None:
+        get_format = {"_stake_addresses": [args] }
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        rewards = requests.post(self.ACCOUNT_REWARDS_URL, json= get_format, headers = custom_headers, timeout=timeout)
+        rewards = json.loads(rewards.content)
+
+    if self.BEARER is not None and epoch_no is not None:
+        get_format = {"_stake_addresses": [args], "_epoch_no": str(epoch_no)}
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        rewards = requests.post(self.ACCOUNT_REWARDS_URL, json= get_format, headers = custom_headers, timeout=timeout)
+        rewards = json.loads(rewards.content)
+
     return rewards
 
 
@@ -110,24 +163,79 @@ def get_account_updates(self, *args):
     :rtype: list.
     """
     timeout = get_timeout()
-    get_format = {"_stake_addresses": [args]}
-    updates = requests.post(self.ACCOUNT_UPDATES_URL, json= get_format, timeout=timeout)
-    updates = json.loads(updates.content)
+
+    if self.BEARER is None:
+        get_format = {"_stake_addresses": [args]}
+        updates = requests.post(self.ACCOUNT_UPDATES_URL, json= get_format, timeout=timeout)
+        updates = json.loads(updates.content)
+    else:
+        get_format = {"_stake_addresses": [args]}
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        updates = requests.post(self.ACCOUNT_UPDATES_URL, json= get_format, headers = custom_headers, timeout=timeout)
+        updates = json.loads(updates.content)
+
     return updates
 
 
 @Exception_Handler
-def get_account_addresses(self, *args):
+def get_account_addresses(self, *args, content_range="0-999", first_only=False, empty=False):
     """
     Get all addresses associated with given staking accounts.
     :param str args: staking address/es in bech32 format (stake1...)
     :return: list with all account addresses.
     :rtype: list.
     """
+
     timeout = get_timeout()
-    get_format = {"_stake_addresses": [args]}
-    addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, timeout=timeout)
-    addresses = json.loads(addresses.content)
+
+    if self.BEARER is None and first_only is False and empty is False:
+        custom_headers = {"Range": str(content_range)}
+        get_format = {"_stake_addresses": [args], "_first_only": "false", "_empty": "false"}
+        addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, timeout=timeout, headers=custom_headers)
+        addresses = json.loads(addresses.content)
+
+    if self.BEARER is None and first_only is True and empty is False:
+        custom_headers = {"Range": str(content_range)}
+        get_format = {"_stake_addresses": [args], "_first_only": "true", "_empty": "false"}
+        addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, timeout=timeout, headers=custom_headers)
+        addresses = json.loads(addresses.content)
+
+    if self.BEARER is None and first_only is False and empty is True:
+        custom_headers = {"Range": str(content_range)}
+        get_format = {"_stake_addresses": [args], "_first_only": "false", "_empty": "true"}
+        addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, timeout=timeout, headers=custom_headers)
+        addresses = json.loads(addresses.content)
+
+    if self.BEARER is None and first_only is True and empty is True:
+        custom_headers = {"Range": str(content_range)}
+        get_format = {"_stake_addresses": [args], "_first_only": "true", "_empty": "true"}
+        addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, timeout=timeout, headers=custom_headers)
+        addresses = json.loads(addresses.content)
+
+    if self.BEARER is not None and first_only is False and empty is False:
+        get_format = {"_stake_addresses": [args], "_first_only": "false", "_empty": "false"}
+        custom_headers = {"Range": str(content_range) ,"Authorization": f"Bearer {self.BEARER}"}
+        addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, headers = custom_headers, timeout=timeout)
+        addresses = json.loads(addresses.content)
+
+    if self.BEARER is not None and first_only is True and empty is False:
+        get_format = {"_stake_addresses": [args], "_first_only": "true", "_empty": "false"}
+        custom_headers = {"Range": str(content_range) ,"Authorization": f"Bearer {self.BEARER}"}
+        addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, headers = custom_headers, timeout=timeout)
+        addresses = json.loads(addresses.content)
+
+    if self.BEARER is not None and first_only is False and empty is True:
+        get_format = {"_stake_addresses": [args], "_first_only": "false", "_empty": "true"}
+        custom_headers = {"Range": str(content_range) ,"Authorization": f"Bearer {self.BEARER}"}
+        addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, headers = custom_headers, timeout=timeout)
+        addresses = json.loads(addresses.content)
+
+    if self.BEARER is not None and first_only is True and empty is True:
+        get_format = {"_stake_addresses": [args], "_first_only": "true", "_empty": "true"}
+        custom_headers = {"Range": str(content_range) ,"Authorization": f"Bearer {self.BEARER}"}
+        addresses = requests.post(self.ACCOUNT_ADDRESSES_URL, json= get_format, headers = custom_headers, timeout=timeout)
+        addresses = json.loads(addresses.content)
+
     return addresses
 
 
@@ -140,9 +248,17 @@ def get_account_assets(self, *args):
     :rtype: list.
     """
     timeout = get_timeout()
-    get_format = {"_stake_addresses": [args]}
-    assets = requests.post(self.ACCOUNT_ASSETS_URL, json= get_format, timeout=timeout)
-    assets = json.loads(assets.content)
+
+    if self.BEARER is None:
+        get_format = {"_stake_addresses": [args]}
+        assets = requests.post(self.ACCOUNT_ASSETS_URL, json= get_format, timeout=timeout)
+        assets = json.loads(assets.content)
+    else:
+        get_format = {"_stake_addresses": [args]}
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        assets = requests.post(self.ACCOUNT_ASSETS_URL, json= get_format, headers = custom_headers, timeout=timeout)
+        assets = json.loads(assets.content)
+        
     return assets
 
 
@@ -193,7 +309,7 @@ def get_account_assets_paginated(self, *args):
     return total_assets
 
 @Exception_Handler
-def get_account_history(self, *args):
+def get_account_history(self, *args, epoch_no=None, content_range="0-999"):
     """
     Get the staking history of given stake addresses (accounts).
     :param str address: staking address in bech32 format (stake1...)
@@ -201,15 +317,31 @@ def get_account_history(self, *args):
     :rtype: list.
     """
     timeout = get_timeout()
-    epoch = args[len(args)-1]
-    if not isinstance(epoch, int):
+
+    if self.BEARER is None and epoch_no is None:
         get_format = {"_stake_addresses": [args] }
-        history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format, timeout=timeout)
+        custom_headers = {"Range": str(content_range)}
+        history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format, timeout=timeout, headers=custom_headers)
         history = json.loads(history.content)
-    else:
-        get_format = {"_stake_addresses": [args], "_epoch_no": epoch}
-        history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format, timeout=timeout)
+    
+    if self.BEARER is None and epoch_no is not None:
+        get_format = {"_stake_addresses": [args], "_epoch_no": str(epoch_no)}
+        custom_headers = {"Range": str(content_range)}
+        history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format, timeout=timeout, headers=custom_headers)
         history = json.loads(history.content)
+
+    if self.BEARER is not None and epoch_no is None:
+        get_format = {"_stake_addresses": [args] }
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format, headers = custom_headers, timeout=timeout)
+        history = json.loads(history.content)
+    
+    if self.BEARER is not None and epoch_no is not None:
+        get_format = {"_stake_addresses": [args], "_epoch_no": str(epoch_no)}
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        history = requests.post(self.ACCOUNT_HISTORY_URL, json= get_format, headers = custom_headers, timeout=timeout)
+        history = json.loads(history.content)
+
     return history
 
 @Exception_Handler
@@ -225,12 +357,26 @@ def get_account_txs(self, stake_address, after_block=None):
     """
     timeout = get_timeout()
 
-    if after_block is None:
+    if self.BEARER is None and after_block is None:
         get_format = {"_stake_address": stake_address}
         txs_list = requests.post(self.ACCOUNT_TX_URL, json = get_format, timeout=timeout)
         txs_list = json.loads(txs_list.content)
-    else:
+
+    if self.BEARER is None and after_block is not None:
         get_format = {"_stake_address": stake_address, "_after_block_height": after_block}
         txs_list = requests.post(self.ACCOUNT_TXS_URL, json = get_format, timeout=timeout)
         txs_list = json.loads(txs_list.content)
+
+    if self.BEARER is not None and after_block is None:
+        get_format = {"_stake_address": stake_address}
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        txs_list = requests.post(self.ACCOUNT_TX_URL, json = get_format, headers = custom_headers, timeout=timeout)
+        txs_list = json.loads(txs_list.content)
+
+    if self.BEARER is not None and after_block is not None:
+        get_format = {"_stake_address": stake_address, "_after_block_height": after_block}
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        txs_list = requests.post(self.ACCOUNT_TXS_URL, json = get_format, headers = custom_headers, timeout=timeout)
+        txs_list = json.loads(txs_list.content)
+
     return txs_list

@@ -85,7 +85,7 @@ class URLs:
         # Stake Account URLs
         self.ACCOUNT_LIST_URL = self.url + "account_list?offset="
         self.ACCOUNT_INFO_URL = self.url + "account_info"
-        self.ACCOUNT_UTXOS_URL = self.url + "account_utxos?_stake_address="
+        self.ACCOUNT_UTXOS_URL = self.url + "account_utxos?"
         self.ACCOUNT_INFO_CACHED_URL = self.url + "account_info_cached"
         self.ACCOUNT_REWARDS_URL = self.url + "account_rewards"
         self.ACCOUNT_UPDATES_URL = self.url + "account_updates"

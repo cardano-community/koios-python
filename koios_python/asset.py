@@ -107,29 +107,29 @@ def get_asset_nft_address(self, asset_policy, asset_name):
 
     return info
 
-#DEPRECATED ENDPOINT REMOVE IN FUTURE VERSIONS
-# @Exception_Handler
-# def get_asset_info(self, asset_policy, asset_name):
-#     """
-#     Get the information of an asset including first minting & token registry metadata.
+# DEPRECATED ENDPOINT REMOVE IN FUTURE VERSIONS
+@Exception_Handler
+def get_asset_info(self, asset_policy, asset_name):
+    """
+    Get the information of an asset including first minting & token registry metadata.
 
-#     :param str asset_policy: asset Policy ID in hexadecimal format (hex).
-#     :param str asset_name: string with Asset Name in hexadecimal format (hex).
-#     :return: list of all asset info.
-#     :rtype: list.
-#     """
-#     timeout = get_timeout()
+    :param str asset_policy: asset Policy ID in hexadecimal format (hex).
+    :param str asset_name: string with Asset Name in hexadecimal format (hex).
+    :return: list of all asset info.
+    :rtype: list.
+    """
+    timeout = get_timeout()
 
-#     if self.BEARER is None:
-#         info = requests.get(f"{self.ASSET_INFO_URL}{asset_policy}&_asset_name={asset_name}", timeout=timeout)
-#         info = json.loads(info.content)
-#     else:
-#         custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
-#         info = requests.get(f"{self.ASSET_INFO_URL}{asset_policy}&_asset_name={asset_name}", \
-#             headers = custom_headers, timeout=timeout)
-#         info = json.loads(info.content)
+    if self.BEARER is None:
+        info = requests.get(f"{self.ASSET_INFO_URL}{asset_policy}&_asset_name={asset_name}", timeout=timeout)
+        info = json.loads(info.content)
+    else:
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        info = requests.get(f"{self.ASSET_INFO_URL}{asset_policy}&_asset_name={asset_name}", \
+            headers = custom_headers, timeout=timeout)
+        info = json.loads(info.content)
 
-#     return info
+    return info
 
 
 @Exception_Handler

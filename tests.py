@@ -391,11 +391,82 @@ kp_token = URLs(bearer=token) # We need to create an instance of the class URLs 
 ##########################################################################################
 
 # # Get Account List (no bearer token)
+# pp.pprint(kp.get_account_list(content_range="0-9"))
 
+# # Get Account List (with bearer token)
+# pp.pprint(kp_token.get_account_list(content_range="0-9"))
 
+# # Get Account Info (no bearer token)
+# pp.pprint(kp.get_account_info(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",\
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"]))
 
+# # Get Account Info (with bearer token)
+# pp.pprint(kp_token.get_account_info(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",\
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"]))
 
+# # Get Account Info Cached (no bearer token)
+# pp.pprint(kp.get_account_info_cached(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",\
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"]))
 
+# # Get Account Info Cached (with bearer token)
+# pp.pprint(kp_token.get_account_info_cached(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",\
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"]))
+
+# # Get UTxOs from Stake Addresses/Accounts (no bearer token)
+# pp.pprint(kp.get_account_utxos(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",\
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"], extended=False, content_range="0-9"))
+
+# # Get UTxOs from Stake Addresses/Accounts (with bearer token)
+# pp.pprint(kp_token.get_account_utxos(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",\
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"], extended=True, content_range="0-9"))
+
+# # Get Account Txs (no bearer token)
+# pp.pprint(kp.get_account_txs("stake1u8yxtugdv63wxafy9d00nuz6hjyyp4qnggvc9a3vxh8yl0ckml2uz", after_block=50000))
+
+# # Get Account Txs (with bearer token)
+# pp.pprint(kp_token.get_account_txs("stake1u8yxtugdv63wxafy9d00nuz6hjyyp4qnggvc9a3vxh8yl0ckml2uz", after_block=50000))
+
+# # Get Account Rewards (no bearer token)
+# pp.pprint(kp.get_account_rewards(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"], epoch_no=409))
+
+# # Get Account Rewards (with bearer token)
+# pp.pprint(kp_token.get_account_rewards(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"], epoch_no=409))
+
+# # Get Account Updates (no bearer token)
+# pp.pprint(kp.get_account_updates(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",\
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"]))
+
+# # Get Account Updates (with bearer token)
+# pp.pprint(kp_token.get_account_updates(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", \
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"]))
+
+# # Get Account Addresses (no bearer token)
+# pp.pprint(kp.get_account_addresses(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", \
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"], content_range="0-9", first_only=False, 
+# empty=False))
+
+# # Get Account Addresses (with bearer token)
+# pp.pprint(kp_token.get_account_addresses(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250", \
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"], content_range="0-9", first_only=False,
+# empty=False))
+
+# # Get Account Assets (no bearer token)
+# pp.pprint(kp.get_account_assets(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",\
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"]))
+
+# # Get Account Assets (with bearer token)
+# pp.pprint(kp_token.get_account_assets(["stake1uyrx65wjqjgeeksd8hptmcgl5jfyrqkfq0xe8xlp367kphsckq250",\
+# "stake1uxpdrerp9wrxunfh6ukyv5267j70fzxgw0fr3z8zeac5vyqhf9jhy"]))
+
+# # Get Account History (no bearer token)
+# pp.pprint(kp.get_account_history("stake1u8yxtugdv63wxafy9d00nuz6hjyyp4qnggvc9a3vxh8yl0ckml2uz", \
+# content_range="0-9", epoch_no=409))
+
+# # Get Account History (with bearer token)
+# pp.pprint(kp_token.get_account_history("stake1u8yxtugdv63wxafy9d00nuz6hjyyp4qnggvc9a3vxh8yl0ckml2uz", \
+# content_range="0-9", epoch_no=409))
 
 
 
