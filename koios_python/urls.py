@@ -24,7 +24,7 @@ class URLs:
 
     def __init__(self, url='https://api.koios.rest/api/v1/', network='mainnet', server='koios', bearer=None):
         
-        self.version = 'koios-python v1.3.1'
+        self.version = 'koios-python v2.0.0'
         self.url = url
         self.network = network
         self.server = server
@@ -52,8 +52,8 @@ class URLs:
         self.GENESIS_URL = self.url + "genesis"
         self.TOTALS_URL = self.url + "totals"
         self.NETWORK_PARAM_UPDATES_URL = self.url + "param_updates"
-        self.TREASURY_WITHDRAWALS_URL = self.url + "treasury_withdrawals"
         self.RESERVE_WITHDRAWALS_URL = self.url + "reserve_withdrawals"
+        self.TREASURY_WITHDRAWALS_URL = self.url + "treasury_withdrawals"
         
         # Epoch URLs
         self.EPOCH_INFO_URL = self.url + "epoch_info"
@@ -66,13 +66,14 @@ class URLs:
         self.BLOCK_TXS_URL = self.url + "block_txs"
         
         # Transaction URLs
+        self.UTXO_INFO_URL = self.url + "utxo_info"
         self.TX_INFO_URL = self.url + "tx_info"
         self.TX_UTXOS_URL = self.url + "tx_utxos"
         self.TX_METADATA_URL = self.url + "tx_metadata"
         self.TX_METALABELS_URL = self.url + "tx_metalabels"
         self.SUBMIT_TX_URL = self.url + "submittx"
         self.TX_STATUS_URL = self.url + "tx_status"
-        self.UTXO_INFO_URL = self.url + "utxo_info"
+        
         
         # Address URLs
         self.ADDRESS_INFO_URL = self.url + "address_info"

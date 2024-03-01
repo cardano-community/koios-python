@@ -33,6 +33,7 @@ def get_epoch_info(self, epoch_no=None, include_next_epoch=False):
             info = requests.get(f"{self.EPOCH_INFO_URL}?_epoch_no={epoch_no}&_include_next_epoch=true",\
                                  timeout=timeout)
             info = json.loads(info.content)
+    
     else:
 
         if epoch_no is None and include_next_epoch is False:

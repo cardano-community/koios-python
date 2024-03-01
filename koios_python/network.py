@@ -96,7 +96,30 @@ def get_param_updates(self, content_range="0-999"):
         network_params = json.loads(network_params.content)
 
     return network_params
+
+
+@Exception_Handler
+def get_reserve_withdrawals(self, content_range="0-999"):
+    """
+    Get all reserve withdrawals from the chain starting Shelley era
+
+    :return: list of reserve withdrawals starting from Shelley era.
+    :rtype: list
+    """
+    timeout = get_timeout()
+
+    if self.BEARER is None:
+        custom_headers = {"Range": str(content_range)}
+        reserve_withdrawals = requests.get(self.RESERVE_WITHDRAWALS_URL, headers=custom_headers, timeout=timeout)
+        reserve_withdrawals = json.loads(reserve_withdrawals.content)
+    else:
+        custom_headers = {"Range": str(content_range), "Authorizatoin": f"Bearer {self.BEARER}"}
+        reserve_withdrawals = requests.get(self.RESERVE_WITHDRAWALS_URL, timeout=timeout, headers=custom_headers)
+        reserve_withdrawals = json.loads(reserve_withdrawals.content)
     
+    return reserve_withdrawals
+
+
 @Exception_Handler
 def get_treasury_withdrawals(self, content_range="0-999"):
     """
@@ -118,23 +141,3 @@ def get_treasury_withdrawals(self, content_range="0-999"):
 
     return treasury_withdrawals
 
-@Exception_Handler
-def get_reserve_withdrawals(self, content_range="0-999"):
-    """
-    Get all reserve withdrawals from the chain starting Shelley era
-
-    :return: list of reserve withdrawals starting from Shelley era.
-    :rtype: list
-    """
-    timeout = get_timeout()
-
-    if self.BEARER is None:
-        custom_headers = {"Range": str(content_range)}
-        reserve_withdrawals = requests.get(self.RESERVE_WITHDRAWALS_URL, timeout=timeout)
-        reserve_withdrawals = json.loads(reserve_withdrawals.content)
-    else:
-        custom_headers = {"Range": str(content_range), "Authorizatoin": f"Bearer {self.BEARER}"}
-        reserve_withdrawals = requests.get(self.RESERVE_WITHDRAWALS_URL, timeout=timeout, headers=custom_headers)
-        reserve_withdrawals = json.loads(reserve_withdrawals.content)
-    
-    return reserve_withdrawals

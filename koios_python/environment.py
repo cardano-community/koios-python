@@ -17,7 +17,6 @@ RETRYING_TIME= 1
 LIMIT_RETRYING_TIMES= 10
 
 
-
 def init_timeout():
     '''
     Function to initialize timeout

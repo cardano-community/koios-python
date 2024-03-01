@@ -21,7 +21,7 @@ def get_account_list(self, content_range="0-999"):
     if self.BEARER is None:
         custom_headers = {"Range": str(content_range)}
         account_list = requests.get(self.ACCOUNT_LIST_URL, headers = custom_headers, timeout=timeout)
-        account_list = json.loads(account_list.content)    
+        account_list = json.loads(account_list.content)
     else:
         custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
         account_list = requests.get(self.ACCOUNT_LIST_URL, headers = custom_headers, timeout=timeout)
@@ -49,6 +49,30 @@ def get_account_info(self, *args):
         get_format = {"_stake_addresses": [args] }
         custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
         accounts_info = requests.post(self.ACCOUNT_INFO_URL, json= get_format, headers = custom_headers, timeout=timeout )
+        accounts_info = json.loads(accounts_info.content)
+
+    return accounts_info
+
+
+@Exception_Handler
+def get_account_info_cached(self, *args):
+    """
+    Get the account information for given stake addresses (accounts).
+
+    :param str args: staking address/es in bech32 format (stake1...).
+    :return: list with all address data.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+
+    if self.BEARER is None:
+        get_format = {"_stake_addresses": [args] }
+        accounts_info = requests.post(self.ACCOUNT_INFO_CACHED_URL, json=get_format, timeout=timeout)
+        accounts_info = json.loads(accounts_info.content)
+    else:
+        get_format = {"_stake_addresses": [args] }
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        accounts_info = requests.post(self.ACCOUNT_INFO_CACHED_URL, json=get_format, headers = custom_headers, timeout=timeout)
         accounts_info = json.loads(accounts_info.content)
 
     return accounts_info
@@ -92,27 +116,41 @@ def get_account_utxos(self, *args, content_range="0-999", extended=False):
 
 
 @Exception_Handler
-def get_account_info_cached(self, *args):
+def get_account_txs(self, stake_address, after_block=None):
     """
-    Get the account information for given stake addresses (accounts).
+    Get the transaction hash list of input payment credential array (stake key), optionally
+    filtering after specified block height (inclusive).
 
-    :param str args: staking address/es in bech32 format (stake1...).
-    :return: list with all address data.
+    :param str stake_address: str stake address (stake1...)
+    :param int after_block: filtering after block (inclusive) defaul is None, from the beginning
+    :return: list of address transactions.
     :rtype: list.
     """
     timeout = get_timeout()
-    
-    if self.BEARER is None:
-        get_format = {"_stake_addresses": [args] }
-        accounts_info = requests.post(self.ACCOUNT_INFO_CACHED_URL, json=get_format, timeout=timeout)
-        accounts_info = json.loads(accounts_info.content)
-    else:
-        get_format = {"_stake_addresses": [args] }
-        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
-        accounts_info = requests.post(self.ACCOUNT_INFO_CACHED_URL, json=get_format, headers = custom_headers, timeout=timeout)
-        accounts_info = json.loads(accounts_info.content)
 
-    return accounts_info
+    if self.BEARER is None and after_block is None:
+        get_format = {"_stake_address": stake_address}
+        txs_list = requests.post(self.ACCOUNT_TX_URL, json = get_format, timeout=timeout)
+        txs_list = json.loads(txs_list.content)
+
+    if self.BEARER is None and after_block is not None:
+        get_format = {"_stake_address": stake_address, "_after_block_height": after_block}
+        txs_list = requests.post(self.ACCOUNT_TXS_URL, json = get_format, timeout=timeout)
+        txs_list = json.loads(txs_list.content)
+
+    if self.BEARER is not None and after_block is None:
+        get_format = {"_stake_address": stake_address}
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        txs_list = requests.post(self.ACCOUNT_TX_URL, json = get_format, headers = custom_headers, timeout=timeout)
+        txs_list = json.loads(txs_list.content)
+
+    if self.BEARER is not None and after_block is not None:
+        get_format = {"_stake_address": stake_address, "_after_block_height": after_block}
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        txs_list = requests.post(self.ACCOUNT_TXS_URL, json = get_format, headers = custom_headers, timeout=timeout)
+        txs_list = json.loads(txs_list.content)
+
+    return txs_list
 
 
 @Exception_Handler
@@ -185,7 +223,6 @@ def get_account_addresses(self, *args, content_range="0-999", first_only=False, 
     :return: list with all account addresses.
     :rtype: list.
     """
-
     timeout = get_timeout()
 
     if self.BEARER is None and first_only is False and empty is False:
@@ -308,6 +345,7 @@ def get_account_assets_paginated(self, *args):
 
     return total_assets
 
+
 @Exception_Handler
 def get_account_history(self, *args, epoch_no=None, content_range="0-999"):
     """
@@ -344,39 +382,3 @@ def get_account_history(self, *args, epoch_no=None, content_range="0-999"):
 
     return history
 
-@Exception_Handler
-def get_account_txs(self, stake_address, after_block=None):
-    """
-    Get the transaction hash list of input payment credential array (stake key), optionally
-    filtering after specified block height (inclusive).
-
-    :param str stake_address: str stake address (stake1...)
-    :param int after_block: filtering after block (inclusive) defaul is None, from the beginning
-    :return: list of address transactions.
-    :rtype: list.
-    """
-    timeout = get_timeout()
-
-    if self.BEARER is None and after_block is None:
-        get_format = {"_stake_address": stake_address}
-        txs_list = requests.post(self.ACCOUNT_TX_URL, json = get_format, timeout=timeout)
-        txs_list = json.loads(txs_list.content)
-
-    if self.BEARER is None and after_block is not None:
-        get_format = {"_stake_address": stake_address, "_after_block_height": after_block}
-        txs_list = requests.post(self.ACCOUNT_TXS_URL, json = get_format, timeout=timeout)
-        txs_list = json.loads(txs_list.content)
-
-    if self.BEARER is not None and after_block is None:
-        get_format = {"_stake_address": stake_address}
-        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
-        txs_list = requests.post(self.ACCOUNT_TX_URL, json = get_format, headers = custom_headers, timeout=timeout)
-        txs_list = json.loads(txs_list.content)
-
-    if self.BEARER is not None and after_block is not None:
-        get_format = {"_stake_address": stake_address, "_after_block_height": after_block}
-        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
-        txs_list = requests.post(self.ACCOUNT_TXS_URL, json = get_format, headers = custom_headers, timeout=timeout)
-        txs_list = json.loads(txs_list.content)
-
-    return txs_list

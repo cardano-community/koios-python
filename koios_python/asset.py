@@ -33,6 +33,34 @@ def get_asset_list(self, content_range="0-999"):
 
 
 @Exception_Handler
+def get_policy_asset_list(self, asset_policy, content_range="0-999"):
+    """
+    Get the list of asset under the given policy (including balances)
+
+    :param str asset_policy: asset Policy ID in hexadecimal format (hex).
+    :param str content_range: number of selected elements to return
+    :return: list of all assets under the same policy.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+
+    if self.BEARER is None:
+        custom_headers = {"Range": str(content_range)}
+        custom_params = {"order": "asset_name.asc"}
+        info = requests.get(f"{self.POLICY_ASSET_LIST_URL}{asset_policy}",
+                headers = custom_headers, params = custom_params, timeout = timeout)
+        info = json.loads(info.content)
+    else:
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        custom_params = {"order": "asset_name.asc"}
+        info = requests.get(f"{self.POLICY_ASSET_LIST_URL}{asset_policy}",
+                headers = custom_headers, params = custom_params, timeout = timeout)
+        info = json.loads(info.content)
+        
+    return info
+
+
+@Exception_Handler
 def get_asset_token_registry(self, content_range="0-999"):
     """
     Get a list of assets registered via token registry on Github
@@ -53,6 +81,124 @@ def get_asset_token_registry(self, content_range="0-999"):
         token_registry = json.loads(token_registry.content)
 
     return token_registry
+
+
+@Exception_Handler
+def get_asset_info(self, asset_policy, asset_name):
+    """
+    Get the information of an asset including first minting & token registry metadata.
+
+    :param str asset_policy: asset Policy ID in hexadecimal format (hex).
+    :param str asset_name: string with Asset Name in hexadecimal format (hex).
+    :return: list of all asset info.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+
+    if self.BEARER is None:
+        info = requests.get(f"{self.ASSET_INFO_URL}{asset_policy}&_asset_name={asset_name}", timeout=timeout)
+        info = json.loads(info.content)
+    else:
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        info = requests.get(f"{self.ASSET_INFO_URL}{asset_policy}&_asset_name={asset_name}", \
+            headers = custom_headers, timeout=timeout)
+        info = json.loads(info.content)
+
+    return info
+
+
+@Exception_Handler
+def get_asset_info_bulk(self, *asset_list):
+    """
+    Get the information of a list of assets including first minting & token registry metadata.
+    :param list asset_list: list of assets to query.
+    :return: list of all asset info.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+
+    if self.BEARER is None:
+        get_format = {"_asset_list": asset_list}
+        asset_info = requests.post(self.ASSET_INFO_BULK_URL, json= get_format, timeout=timeout)
+        asset_info = json.loads(asset_info.content)
+    else:
+        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
+        get_format = {"_asset_list": asset_list}
+        asset_info = requests.post(self.ASSET_INFO_BULK_URL, json= get_format, headers=custom_headers, timeout=timeout)
+        asset_info = json.loads(asset_info.content)
+
+    return asset_info
+
+
+@Exception_Handler
+def get_asset_utxos(self, *asset_list, extended=False, content_range="0-999"):
+    """
+    Get the UTXO information of a list of assets including
+    
+    :param list of assets
+    :param bool extended: extended UTXO information
+    :return: list of utxos
+    :rtype: list.
+    """
+    if self.BEARER is None and extended is True:
+        extended = "true"
+        timeout = get_timeout()
+        custom_headers = {"Range": str(content_range),}
+        get_format = {"_asset_list": asset_list, "_extended": extended}
+        utxos = requests.post(self.ASSET_UTXOS_URL, json = get_format, headers = custom_headers, timeout=timeout)
+        utxos = json.loads(utxos.content)
+
+    if self.BEARER is None and extended is False:
+        extended = "false"
+        timeout = get_timeout()
+        custom_headers = {"Range": str(content_range),}
+        get_format = {"_asset_list": asset_list, "_extended": extended}
+        utxos = requests.post(self.ASSET_UTXOS_URL, json = get_format, headers = custom_headers, timeout=timeout)
+        utxos = json.loads(utxos.content)
+
+    if self.BEARER is not None and extended is True:
+        extended = "true"
+        timeout = get_timeout()
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        get_format = {"_asset_list": asset_list, "_extended": extended}
+        utxos = requests.post(self.ASSET_UTXOS_URL, json = get_format, headers = custom_headers, timeout=timeout)
+        utxos = json.loads(utxos.content)
+
+    if self.BEARER is not None and extended is False:
+        extended = "false"
+        timeout = get_timeout()
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        get_format = {"_asset_list": asset_list, "_extended": extended}
+        utxos = requests.post(self.ASSET_UTXOS_URL, json = get_format, headers = custom_headers, timeout=timeout)
+        utxos = json.loads(utxos.content)
+
+    return utxos
+
+
+@Exception_Handler
+def get_asset_history(self, asset_policy, asset_name, content_range="0-999"):
+    """
+    Get the mint/burn history of an asset.
+
+    :param str asset_policy: asset Policy ID in hexadecimal format (hex).
+    :param str asset_name: string with Asset Name in hexadecimal format (hex).
+    :return: list of asset mint/burn history.
+    :rtype: list.
+    """
+    timeout = get_timeout()
+
+    if self.BEARER is None:
+        custom_headers = {"Range": str(content_range)}
+        history = requests.get(f"{self.ASSET_HISTORY_URL}{asset_policy}&_asset_name={asset_name}",
+                                headers=custom_headers, timeout=timeout)
+        history = json.loads(history.content)
+    else:
+        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
+        history = requests.get(f"{self.ASSET_HISTORY_URL}{asset_policy}&_asset_name={asset_name}",
+                                headers=custom_headers, timeout=timeout)
+        history = json.loads(history.content)
+
+    return history
 
 
 @Exception_Handler
@@ -107,79 +253,6 @@ def get_asset_nft_address(self, asset_policy, asset_name):
 
     return info
 
-# DEPRECATED ENDPOINT REMOVE IN FUTURE VERSIONS
-@Exception_Handler
-def get_asset_info(self, asset_policy, asset_name):
-    """
-    Get the information of an asset including first minting & token registry metadata.
-
-    :param str asset_policy: asset Policy ID in hexadecimal format (hex).
-    :param str asset_name: string with Asset Name in hexadecimal format (hex).
-    :return: list of all asset info.
-    :rtype: list.
-    """
-    timeout = get_timeout()
-
-    if self.BEARER is None:
-        info = requests.get(f"{self.ASSET_INFO_URL}{asset_policy}&_asset_name={asset_name}", timeout=timeout)
-        info = json.loads(info.content)
-    else:
-        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
-        info = requests.get(f"{self.ASSET_INFO_URL}{asset_policy}&_asset_name={asset_name}", \
-            headers = custom_headers, timeout=timeout)
-        info = json.loads(info.content)
-
-    return info
-
-
-@Exception_Handler
-def get_asset_info_bulk(self, *asset_list):
-    """
-    Get the information of a list of assets including first minting & token registry metadata.
-    :param list asset_list: list of assets to query.
-    :return: list of all asset info.
-    :rtype: list.
-    """
-    timeout = get_timeout()
-
-    if self.BEARER is None:
-        get_format = {"_asset_list": asset_list}
-        asset_info = requests.post(self.ASSET_INFO_BULK_URL, json= get_format, timeout=timeout)
-        asset_info = json.loads(asset_info.content)
-    else:
-        custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
-        get_format = {"_asset_list": asset_list}
-        asset_info = requests.post(self.ASSET_INFO_BULK_URL, json= get_format, headers=custom_headers, timeout=timeout)
-        asset_info = json.loads(asset_info.content)
-
-    return asset_info
-
-
-@Exception_Handler
-def get_asset_history(self, asset_policy, asset_name, content_range="0-999"):
-    """
-    Get the mint/burn history of an asset.
-
-    :param str asset_policy: asset Policy ID in hexadecimal format (hex).
-    :param str asset_name: string with Asset Name in hexadecimal format (hex).
-    :return: list of asset mint/burn history.
-    :rtype: list.
-    """
-    timeout = get_timeout()
-
-    if self.BEARER is None:
-        custom_headers = {"Range": str(content_range)}
-        history = requests.get(f"{self.ASSET_HISTORY_URL}{asset_policy}&_asset_name={asset_name}",
-                                headers=custom_headers, timeout=timeout)
-        history = json.loads(history.content)
-    else:
-        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
-        history = requests.get(f"{self.ASSET_HISTORY_URL}{asset_policy}&_asset_name={asset_name}",
-                                headers=custom_headers, timeout=timeout)
-        history = json.loads(history.content)
-
-    return history
-
 
 @Exception_Handler
 def get_policy_asset_addresses(self, asset_policy, content_range="0-999"):
@@ -229,34 +302,6 @@ def get_policy_asset_info(self, asset_policy):
             headers = custom_headers, timeout=timeout)
         info = json.loads(info.content)
 
-    return info
-
-
-@Exception_Handler
-def get_policy_asset_list(self, asset_policy, content_range="0-999"):
-    """
-    Get the list of asset under the given policy (including balances)
-
-    :param str asset_policy: asset Policy ID in hexadecimal format (hex).
-    :param str content_range: number of selected elements to return
-    :return: list of all assets under the same policy.
-    :rtype: list.
-    """
-    timeout = get_timeout()
-
-    if self.BEARER is None:
-        custom_headers = {"Range": str(content_range)}
-        custom_params = {"order": "asset_name.asc"}
-        info = requests.get(f"{self.POLICY_ASSET_LIST_URL}{asset_policy}",
-                headers = custom_headers, params = custom_params, timeout = timeout)
-        info = json.loads(info.content)
-    else:
-        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
-        custom_params = {"order": "asset_name.asc"}
-        info = requests.get(f"{self.POLICY_ASSET_LIST_URL}{asset_policy}",
-                headers = custom_headers, params = custom_params, timeout = timeout)
-        info = json.loads(info.content)
-        
     return info
 
 
@@ -333,45 +378,3 @@ def get_asset_txs(self, asset_policy, asset_name, after_block=0, history=False, 
         txs = json.loads(txs.content)
 
     return txs
-
-@Exception_Handler
-def get_asset_utxos(self, *asset_list, extended=False, content_range="0-999"):
-    """
-    Get the UTXO information of a list of assets including
-    
-    :param list of assets
-    :param bool extended: extended UTXO information
-    :return: list of utxos
-    :rtype: list.
-    """
-    if self.BEARER is None and extended is True:
-        extended = "true"
-        timeout = get_timeout()
-        custom_headers = {"Range": str(content_range),}
-        get_format = {"_asset_list": asset_list, "_extended": extended}
-        utxos = requests.post(self.ASSET_UTXOS_URL, json = get_format, headers = custom_headers, timeout=timeout)
-        utxos = json.loads(utxos.content)
-    if self.BEARER is None and extended is False:
-        extended = "false"
-        timeout = get_timeout()
-        custom_headers = {"Range": str(content_range),}
-        get_format = {"_asset_list": asset_list, "_extended": extended}
-        utxos = requests.post(self.ASSET_UTXOS_URL, json = get_format, headers = custom_headers, timeout=timeout)
-        utxos = json.loads(utxos.content)
-
-    if self.BEARER is not None and extended is True:
-        extended = "true"
-        timeout = get_timeout()
-        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
-        get_format = {"_asset_list": asset_list, "_extended": extended}
-        utxos = requests.post(self.ASSET_UTXOS_URL, json = get_format, headers = custom_headers, timeout=timeout)
-        utxos = json.loads(utxos.content)
-    if self.BEARER is not None and extended is False:
-        extended = "false"
-        timeout = get_timeout()
-        custom_headers = {"Range": str(content_range), "Authorization": f"Bearer {self.BEARER}"}
-        get_format = {"_asset_list": asset_list, "_extended": extended}
-        utxos = requests.post(self.ASSET_UTXOS_URL, json = get_format, headers = custom_headers, timeout=timeout)
-        utxos = json.loads(utxos.content)
-    
-    return utxos

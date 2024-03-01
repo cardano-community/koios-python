@@ -14,20 +14,20 @@ load_dotenv()
 token = os.getenv("TOKEN")
 
 
-
 ##########################################################################################
 ## MAINNET PARAMETERS (simple TESTS)
-# Default Koios Endpoint
-kp = URLs() # We need to create an instance of the class URLs (no bearer token)
+# Public Tier with Default Koios Endpoint
+#kp = URLs() # We need to create an instance of the class URLs (no bearer token) FREE TIER
 
-kp_token = URLs(bearer=token) # We need to create an instance of the class URLs (with bearer token)
-# pp.pprint(kp_token.BEARER)
+# Select this if you are usinf Bearer Token. We need to create an instance of the class URLs (with bearer token)
+kp = URLs(bearer=token)
+#pp.pprint(kp.BEARER)
 
 ##########################################################################################
 # Network Endpoint Tests
 ##########################################################################################
 # # Get tip (no bearer token)
-# pp.pprint(kp.get_tip())
+#pp.pprint(kp.get_tip())
 
 # # Get tip (with bearer token)
 # pp.pprint(kp_token.get_tip())
@@ -130,24 +130,16 @@ kp_token = URLs(bearer=token) # We need to create an instance of the class URLs 
 # Transaction Endpoint Tests
 ##########################################################################################
 
-# # Get UTxO info (no bearer token)
+# # Get UTxO info
+# pp.pprint(kp.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0"]))
+
 # pp.pprint(kp.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0", \
 # "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"]))
 
-# # Get UTxO info (no bearer token, extended)
+# # Get UTxO info ( extended)
 # pp.pprint(kp.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0", \
 # "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"], extended=True, content_range="0-9"))
 # pp.pprint(kp.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0", \
-# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"], extended=False, content_range="0-9"))
-
-# # Get UTxO info (with bearer token)
-# pp.pprint(kp_token.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0", \
-# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"]))
-
-# # Get UTxO info (with bearer token, extended)
-# pp.pprint(kp_token.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0", \
-# "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"], extended=True, content_range="0-9"))
-# pp.pprint(kp_token.get_utxo_info(["f144a8264acf4bdfe2e1241170969c930d64ab6b0996a4a45237b623f1dd670e#0", \
 # "0b8ba3bed976fa4913f19adc9f6dd9063138db5b4dd29cecde369456b5155e94#0"], extended=False, content_range="0-9"))
 
 # # Get Tx Info (no bearer token)
@@ -266,39 +258,33 @@ kp_token = URLs(bearer=token) # We need to create an instance of the class URLs 
 # Pool Endpoint Tests
 ##########################################################################################
 
-# # Get Pool List (no bearer token)
-# pp.pprint(kp.get_pool_list())
+# # Get Pool List
+# pp.pprint(kp.get_pool_list('0-10'))
 
-# # Get Pool List (with bearer token)
-# pp.pprint(kp_token.get_pool_list())
-
-# # Get Pool Info (no bearer token)
+# # Get Pool Info
 # pp.pprint(kp.get_pool_info(["pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp",
 # "pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m",
 # "pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"]))
 
-# # Get Pool Info (with bearer token)
-# pp.pprint(kp_token.get_pool_info(["pool100wj94uzf54vup2hdzk0afng4dhjaqggt7j434mtgm8v2gfvfgp",
-# "pool102s2nqtea2hf5q0s4amj0evysmfnhrn4apyyhd4azcmsclzm96m",
-# "pool102vsulhfx8ua2j9fwl2u7gv57fhhutc3tp6juzaefgrn7ae35wm"]))
-
-# # Get Pool Stake Snapshot (no bearer token)
+# # Get Pool Stake Snapshot
 # pp.pprint(kp.get_pool_stake_snapshot("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc"))
 
-# # Get Pool Stake Snapshot (with bearer token)
-# pp.pprint(kp_token.get_pool_stake_snapshot("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc"))
-
-# # Get Pool Delegators (no bearer token)
+# # Get Pool Delegators
 # pp.pprint(kp.get_pool_delegators("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", content_range="0-9"))
 
-# # Get Pool Delegators (with bearer token)
-# pp.pprint(kp_token.get_pool_delegators("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", content_range="0-9"))
-
-# # Get Pool Delegators History (no bearer token)
+# # Get Pool Delegators History
 # pp.pprint(kp.get_pool_delegators_history("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", epoch_no=320))
 
-# # Get Pool Delegators History (with bearer token)
-# pp.pprint(kp_token.get_pool_delegators_history("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc", epoch_no=320))
+# # Get Pool Metadata
+# pp.pprint(kp.get_pool_metadata())
+# pp.pprint(kp.get_pool_metadata("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc"))
+
+# # Get Pool Relays
+# pp.pprint(kp.get_pool_relays())
+# pp.pprint(kp.get_pool_relays('0-70'))
+
+# # Get Pool Updates
+# pp.pprint(kp.get_pool_updates("pool155efqn9xpcf73pphkk88cmlkdwx4ulkg606tne970qswczg3asc"))
 
 ##########################################################################################
 # Asset Endpoint Tests

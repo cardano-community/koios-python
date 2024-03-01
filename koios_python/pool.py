@@ -280,6 +280,9 @@ def get_pool_metadata(self, *args):
         pool_list = requests.get(self.POOL_METADATA_URL, headers = custom_headers, timeout=timeout)
         pool_list  = json.loads(pool_list.content)
 
+    if len(args) == 0:
+        pool_list = args
+
     return pool_list
 
 @Exception_Handler
