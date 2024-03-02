@@ -275,13 +275,13 @@ def get_pool_metadata(self, *args):
         pool_list = requests.post(self.POOL_METADATA_URL, json = get_format, timeout=timeout)
         pool_list  = json.loads(pool_list.content)
 
-    if self.BEARER is not None and len(args) == 0:
+    if self.BEARER is not None and len(args) != 0:
+        get_format = {"_pool_bech32_ids": [args] }
         custom_headers = {"Authorization": f"Bearer {self.BEARER}"}
-        pool_list = requests.get(self.POOL_METADATA_URL, headers = custom_headers, timeout=timeout)
+        pool_list = requests.get(self.POOL_METADATA_URL, headers = custom_headers, json = get_format, timeout=timeout)
         pool_list  = json.loads(pool_list.content)
-
-    if len(args) == 0:
-        pool_list = args
+    else:
+        pool_list = None
 
     return pool_list
 

@@ -7,9 +7,9 @@ from koios_python  import * # We need to install and import koios_python library
 # from koios_python import block, epochs # alternative if we just need some functions
 import time
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 # load the environment variables
-load_dotenv()
+#load_dotenv()
 # Get api token
 token = os.getenv("TOKEN")
 
@@ -20,7 +20,7 @@ token = os.getenv("TOKEN")
 #kp = URLs() # We need to create an instance of the class URLs (no bearer token) FREE TIER
 
 # Select this if you are usinf Bearer Token. We need to create an instance of the class URLs (with bearer token)
-kp = URLs(bearer=token)
+#kp = URLs(bearer=token)
 #pp.pprint(kp.BEARER)
 
 ##########################################################################################
