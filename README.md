@@ -19,7 +19,7 @@ Required Python Modules
 --------------
 * https://pypi.python.org/pypi/requests
 
-## Installation [![PyPI Latest Release](https://img.shields.io/pypi/v/koios-python.svg)](https://pypi.org/project/koios-python/)
+## Installation [![PyPI Latest Release](https://img.shields.io/badge/pypi%20package-v2.0.0-green)](https://pypi.org/project/koios-python/)
 ```python
 pip install koios_python
 ```
