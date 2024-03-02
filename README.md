@@ -41,10 +41,10 @@ You can read all info about how works this library in our [Wiki](https://github.
 ## TODO
 - [x] Managing errors 
 - [x] Inside functions 
-- [ ] Pagination (most functions have it added)
+- [x] Pagination (most functions have it added)
 - [x] User Inputs
 - [x] Timeouts
-- [ ] Ordering (added to assets)
+- [x] Ordering
 - [ ] Adding Vertical Filtering
 - [ ] Adding Async methods
 
@@ -56,6 +56,9 @@ You can read all info about how works this library in our [Wiki](https://github.
         - Chain Tip
         - Genesis Info
         - Historical Tokenomic Statistics
+        - Param Update Proposals
+        - Reserve Withdrawals
+        - Treasury Withdrawals
           
     - [x] Epoch
         - Epoch Information
@@ -68,59 +71,72 @@ You can read all info about how works this library in our [Wiki](https://github.
         - Block Transactions
           
     - [x] Transactions
+        - UTxO Information
         - Transaction Information
-        - Transaction UTxOs
+        - Transaction UTxOs [Deprecated]
         - Transaction Metadata
         - Transaction Metadata Labels
-        - Transaction Submission
+        - Transaction Submit
         - Transaction Status (Block Confirmations)
           
-    - [x] Address
-        - Address Information
-        - Address Transactions
-        - Transactions from Payment Credentials
-        - Address Assets
-          
-    - [x] Account
+    - [x] Stake Account
         - Account List
         - Account Information
         - Account Information Cached
+        - UTxOs for Stake Addresses (accounts)
+        - Account Transactions
         - Account Rewards
         - Account Updates (History)
         - Account Addresses
         - Account Assets
         - Account History
+
+    - [x] Address
+        - Address Information
+        - Address UTxOs
+        - Address Transactions
+        - Transactions from Payment Credentials
+        - Address Assets
           
     - [x] Asset
         - Asset List
+        - Policy Asset List
         - Asset Token Registry
-        - Asset Addresses
-        - Asset Address List [DEPRECATED]
-        - NFT Address
-        - Asset Information
         - Asset Information (Bulk)
+        - Asset Information
+        - Asset UTxOs
         - Asset History
+        - Asset Addresses
+        - NFT Address
         - Policy Asset Address List
         - Policy Asset Information
-        - Asset Policy Information [DEPRECATED]
-        - Policy Asset List
         - Asset Summary
-        - Asset Transaction (History)
+        - Asset Transactions
+        - Asset Policy Information [DEPRECATED]
+        - Asset Address List [DEPRECATED]
 
     - [x] Pool
         - Pool List
         - Pool Information
-        - Stake Snapshot
+        - Pool Stake Snapshot
         - Pool Delegators List
+        - Pool Delegators History
         - Pool Blocks
         - Pool Stake, Block and Reward History
         - Pool Updates (History)
+        - Pool Registrations
+        - Pool Retirements
         - Pool Relays
         - Pool Metadata
           
     - [x] Script
+        - Script Information
         - Native Script List
         - Plutus Script List
         - Script Redeemers
+        - Script UTxOs
         - Datum Information
+
+    - [x] Ogmios
+        - Query
 
