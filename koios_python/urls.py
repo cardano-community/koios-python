@@ -19,6 +19,10 @@ class URLs:
         get_pool_history, get_pool_updates, get_pool_relays, get_pool_metadata, get_pool_registrations, get_pool_retirements
     from .scripts import get_native_script_list, get_plutus_script_list, get_script_redeemers, get_datum_info, get_script_utxos, get_script_info
     from .transactions import get_tx_info, get_tx_utxos, get_tx_metadata, get_tx_metalabels, submit_tx, get_tx_status, get_utxo_info
+    from .governance import get_drep_epoch_summary, get_drep_list, get_drep_info, get_drep_metadata, \
+        get_drep_updates, get_drep_history, get_drep_voting_power_history, get_drep_votes, get_drep_delegators, \
+        get_committee_info, get_committee_votes, get_proposal_list, get_voter_proposal_list, \
+        get_proposal_voting_summary, get_proposal_votes, get_vote_list, get_pool_voting_power_history, get_pool_votes
     from .ogmios import query
 
 
@@ -132,3 +136,23 @@ class URLs:
         self.DATUM_INFO_URL = self.url + "datum_info"
         self.SCRIPT_UTXOS_URL = self.url + "script_utxos?_script_hash="
         self.SCRIPT_INFO_URL = self.url + "script_info"
+
+        # Governance URLs
+        self.DREP_EPOCH_SUMMARY_URL = self.url + "drep_epoch_summary"
+        self.DREP_LIST_URL = self.url + "drep_list"
+        self.DREP_INFO_URL = self.url + "drep_info"
+        self.DREP_METADATA_URL = self.url + "drep_metadata"
+        self.DREP_UPDATES_URL = self.url + "drep_updates"
+        self.DREP_HISTORY_URL = self.url + "drep_history"
+        self.DREP_VOTING_POWER_HISTORY_URL = self.url + "drep_voting_power_history"
+        self.DREP_VOTES_URL = self.url + "drep_votes?_drep_id="
+        self.DREP_DELEGATORS_URL = self.url + "drep_delegators?_drep_id="
+        self.COMMITTEE_INFO_URL = self.url + "committee_info"
+        self.COMMITTEE_VOTES_URL = self.url + "committee_votes"
+        self.PROPOSAL_LIST_URL = self.url + "proposal_list"
+        self.VOTER_PROPOSAL_LIST_URL = self.url + "voter_proposal_list"
+        self.PROPOSAL_VOTING_SUMMARY_URL = self.url + "proposal_voting_summary?_proposal_id="
+        self.PROPOSAL_VOTES_URL = self.url + "proposal_votes?_proposal_id="
+        self.VOTE_LIST_URL = self.url + "vote_list"
+        self.POOL_VOTING_POWER_HISTORY_URL = self.url + "pool_voting_power_history"
+        self.POOL_VOTES_URL = self.url + "pool_votes?_pool_bech32="
